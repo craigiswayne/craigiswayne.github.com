@@ -1,1 +1,96 @@
+<style>
+table, table * 
+{border:1px solid black;}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded",function()
+{
+var table_data =
+[
+    {
+        "approach":"iFrame srcdoc",
+        "file":{"css":true,"js":true,"markup":true},
+        "hosted":{"markup":null,"css":null,"js":null},
+        "extension":{"css":true,"markup":true,"js":false}
+    },
+    {
+        "approach":"iFrame srcdoc",
+        "file":{"css":true,"js":true,"markup":true},
+        "hosted":{"markup":null,"css":null,"js":null},
+        "extension":{"css":true,"markup":true,"js":false}
+    }
+];
+
+var table = document.createElement("table");
+
+for(var i=0; i<Object.keys(table_data).length; i++)
+{
+var approach = document.createElement("td");
+approach.innerHTML= table_data[i].approach;
+approach.setAttribute("rowspan","3");
+
+var file = document.createElement("td");
+file.innerHTML = "file";
+
+var file_markup = document.createElement("td");
+file_markup.innerHTML = table_data[i].markup;
+var file_css = document.createElement("td");
+file_css.innerHTML = table_data[i].file.css;
+var file_js = document.createElement("td");
+file_js.innerHTML = table_data[i].file.js
+
+var notes = document.createElement("td");
+notes.innerHTML = table_data[i].notes || ""; 
+notes.setAttribute("rowspan","3");
+
+var row1 = document.createElement("tr");
+var index = document.createElement("td");
+index.setAttribute("rowspan","3");
+index.innerHTML = i+1;
+row1.appendChild(index);
+
+row1.appendChild(approach);
+row1.appendChild(file);
+row1.appendChild(file_markup);
+row1.appendChild(file_css);
+row1.appendChild(file_js);
+row1.appendChild(notes);
+table.appendChild(row1);
+
+var hosted = document.createElement("td");
+hosted.innerHTML = "hosted";
+var hosted_markup = document.createElement("td");
+hosted_markup.innerHTML = table_data[i].hosted.markup;
+var hosted_css= document.createElement("td");
+hosted_css.innerHTML = table_data[i].hosted.css;
+var hosted_js = document.createElement("td");
+hosted_js.innerHTML = table_data[i].hosted.js;
+var row2 = document.createElement("tr");
+row2.appendChild(hosted);
+row2.appendChild(hosted_markup);
+row2.appendChild(hosted_css);
+row2.appendChild(hosted_js);
+table.appendChild(row2);
+
+var extension = document.createElement("td");
+extension.innerHTML = "extension";
+var extension_markup = document.createElement("td");
+extension_markup.innerHTML = table_data[i].extension.markup;
+var extension_css= document.createElement("td");
+extension_css.innerHTML = table_data[i].extension.css;
+var extension_js = document.createElement("td");
+extension_js.innerHTML = table_data[i].extension.js;
+var row3 = document.createElement("tr");
+row3.appendChild(extension);
+row3.appendChild(extension_markup);
+row3.appendChild(extension_css);
+row3.appendChild(extension_js);
+table.appendChild(row3);
+}
+
+document.body.appendChild(table);
+},false);
+</script>
 Working In Progress
+
