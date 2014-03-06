@@ -47,7 +47,6 @@ for(var i=0; i<tables.length; i++)
 					cell.innerHTML = bluetooth_mice[j][columns[k]]=bluetooth_mice[j][columns[k]];
 				}
 			}
-			//cell.innerHTML = bluetooth_mice[j][columns[k]]===undefined ? null : bluetooth_mice[j][columns[k]];
 		}
 	}
 }
