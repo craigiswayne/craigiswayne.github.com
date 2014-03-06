@@ -1,0 +1,110 @@
+<html>
+<head>
+<style>
+label.option{
+display:inline-block;
+margin:2px;
+cursor:pointer;
+-webkit-user-select:none;
+user-select:none;
+}
+
+label.option input[type=radio],
+label.option input[type=checkbox]{
+display:none;
+}
+
+label.option div{
+background-color:blue;
+color:white;
+width:200px;
+height:100px;
+border-radius:4px;
+}
+
+label.option input[type=radio]:checked+div,
+label.option input[type=checkbox]:checked+div{
+background-color:green;
+}
+</style>
+</head>
+<body>
+<h3>Toggling Option Areas</h3>
+<caption>the way it should be done</caption>
+
+<fieldset>
+<legend>Single Selection</legend>
+
+<label class=option>
+<input type=radio name=single-selection>
+<div>Option 1</div>
+</label>
+
+<label class=option>
+<input type=radio name=single-selection>
+<div>Option 2</div>
+</label>
+
+<label class=option>
+<input type=radio name=single-selection>
+<div>Option 3</div>
+</label>
+
+
+<label class=option>
+<input type=radio name=single-selection>
+<div>Option 4</div>
+</label>
+
+
+<label class=option>
+<input type=radio name=single-selection>
+<div>Option 5</div>
+</label>
+
+
+<label class=option>
+<input type=radio name=single-selection>
+<div>Option 6</div>
+</label>
+
+</fieldset>
+
+<fieldset>
+<legend>Multiple Selection</legend>
+
+<label class=option>
+<input type=checkbox>
+<div>Option 1</div>
+</label>
+
+<label class=option>
+<input type=checkbox>
+<div>Option 2</div>
+</label>
+
+<label class=option>
+<input type=checkbox>
+<div>Option 3</div>
+</label>
+
+<label class=option>
+<input type=checkbox>
+<div>Option 4</div>
+</label>
+
+<label class=option>
+<input type=checkbox>
+<div>Option 5</div>
+</label>
+
+<label class=option>
+<input type=checkbox>
+<div>Option 6</div>
+</label>
+
+</fieldset>
+
+
+</body>
+</html>
