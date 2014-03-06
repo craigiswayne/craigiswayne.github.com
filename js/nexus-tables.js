@@ -5,9 +5,9 @@ var tables = document.getElementsByTagName("table");
 for(var i=0; i<tables.length; i++)
 {
 	var columns = [];
-	for(var j=0; j<bluetooth_mice.length; j++)
+	for(var j=0; j<window[tables[i].dataset.source].length; j++)
 	{
-		for(column in bluetooth_mice[j])
+		for(column in window[tables[i].dataset.source][j])
 		{columns.indexOf(column)== -1 ? columns.push(column) : null;}
 	}
 	
@@ -20,13 +20,13 @@ for(var i=0; i<tables.length; i++)
 	}
 	
 	var table_body = tables[i].createTBody();
-	for(var j=0; j<bluetooth_mice.length; j++)
+	for(var j=0; j<window[tables[i].dataset.source].length; j++)
 	{
 		var row = tables[i].tBodies[0].insertRow(-1);
 		for(var k=0; k<columns.length; k++)
 		{
 			var cell = row.insertCell(-1);
-			switch(bluetooth_mice[j][columns[k]])
+			switch(window[tables[i].dataset.source][j][columns[k]])
 			{
 				case undefined:
 				{

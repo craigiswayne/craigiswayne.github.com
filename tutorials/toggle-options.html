@@ -30,6 +30,23 @@ label.option input[type=checkbox]:checked+div{
 background-color:green;
 }
 </style>
+
+
+<link rel=stylesheet href=../css/nexus-tables.css />
+<script src=../js/nexus-tables.js></script>
+
+<script>
+var compatibility_list = [
+{
+  "Google Chrome Desktop": true,
+  "Google Chrome Android": true,
+  "FireFox Desktop": true,
+  "Android Browser": true,
+  "Safari": true,
+  "Internet Explorer": true
+}
+];
+</script>
 </head>
 <body>
 <h3>Toggling Option Areas</h3>
@@ -108,6 +125,7 @@ background-color:green;
 
 </fieldset>
 
+<table data-source=compatibility_list data-theme=nexus></table>
 
 </body>
 </html>
