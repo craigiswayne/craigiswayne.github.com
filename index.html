@@ -1,96 +1,135 @@
+<link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
 <style>
-table, table * 
-{border:1px solid black;}
+body{
+background-image:-webkit-linear-gradient(#3FF,#3FE,#3FD,#3FC,#3FB,#3FA,#3F9,#3F8,#3F7,#3F6,#3F5,#3F4,#3F3,#3F2,#3F1,#3F0);
+font-family:Iceland;
+background-image:-webkit-linear-gradient(top,rgb(245, 245, 245) 20%,rgb(205, 205, 205),rgb(195, 195, 195));
+}
+
+
+table[data-theme=nexus]{
+	border-collapse:collapse;
+}
+
+table[data-theme=nexus] thead{
+	text-transform:capitalize;
+	font-weight:bold;
+	background-color:#034769;
+	color:white;
+}
+
+
+table[data-theme=nexus] thead td{
+	padding:5px 10px;
+}
+
+
+table[data-theme=nexus] tbody td{
+	color:whitesmoke;
+	padding:3px 10px;
+}
+
+table[data-theme=nexus] tbody tr:nth-child(even){
+	background-color:#086FA1;
+}
+
+
+table[data-theme=nexus] tbody tr:nth-child(odd){
+	background-color:#63ADD0;
+}
+
+table[data-theme=nexus] tbody td>input[type=checkbox]{
+	display:block;
+	margin:auto;
+}
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded",function()
-{
-var table_data =
-[
-    {
-        "approach":"iFrame srcdoc",
-        "file":{"css":true,"js":true,"markup":true},
-        "hosted":{"markup":null,"css":null,"js":null},
-        "extension":{"css":true,"markup":true,"js":false}
-    },
-    {
-        "approach":"iFrame srcdoc",
-        "file":{"css":true,"js":true,"markup":true},
-        "hosted":{"markup":null,"css":null,"js":null},
-        "extension":{"css":true,"markup":true,"js":false}
-    }
+
+var bluetooth_mice = [
+  {
+    "brand":"Logitech",
+    "name":"Perfomace Mouse MX",
+    "part number":"PN 910-001116",
+    "charge interface": "USB",
+    "batteries":true,
+    "rechargeable":true,
+    "receiver": true,
+    "url": "http://www.logitech.com/en-za/product/performance-mouse-mx#"
+  },
+  {
+    "brand": "Targus",
+    "charge interface": "USB",
+    "four way scrolling":true,
+    "rechargeable":true,
+    "url": "http://bluetooth-mouse-review.toptenreviews.com/targus-rechargeable-bluetooth-laser-mouse-review.html",
+    "price":"$24.99"
+  },
+  {
+  	 "usable on charge":true,
+  	 "buttons":3,
+  	 "price":"$47.99",
+    "url": "http://www.amazon.com/Rechargeable-Bluetooth-Notebook-Mouse-White/dp/B001126PDM"
+  }
 ];
 
-var table = document.createElement("table");
+document.addEventListener("DOMContentLoaded",function(){
 
-for(var i=0; i<Object.keys(table_data).length; i++)
+var tables = document.getElementsByTagName("table");
+
+for(var i=0; i<tables.length; i++)
 {
-var approach = document.createElement("td");
-approach.innerHTML= table_data[i].approach;
-approach.setAttribute("rowspan","3");
-
-var file = document.createElement("td");
-file.innerHTML = "file";
-
-var file_markup = document.createElement("td");
-file_markup.innerHTML = table_data[i].markup;
-var file_css = document.createElement("td");
-file_css.innerHTML = table_data[i].file.css;
-var file_js = document.createElement("td");
-file_js.innerHTML = table_data[i].file.js
-
-var notes = document.createElement("td");
-notes.innerHTML = table_data[i].notes || ""; 
-notes.setAttribute("rowspan","3");
-
-var row1 = document.createElement("tr");
-var index = document.createElement("td");
-index.setAttribute("rowspan","3");
-index.innerHTML = i+1;
-row1.appendChild(index);
-
-row1.appendChild(approach);
-row1.appendChild(file);
-row1.appendChild(file_markup);
-row1.appendChild(file_css);
-row1.appendChild(file_js);
-row1.appendChild(notes);
-table.appendChild(row1);
-
-var hosted = document.createElement("td");
-hosted.innerHTML = "hosted";
-var hosted_markup = document.createElement("td");
-hosted_markup.innerHTML = table_data[i].hosted.markup;
-var hosted_css= document.createElement("td");
-hosted_css.innerHTML = table_data[i].hosted.css;
-var hosted_js = document.createElement("td");
-hosted_js.innerHTML = table_data[i].hosted.js;
-var row2 = document.createElement("tr");
-row2.appendChild(hosted);
-row2.appendChild(hosted_markup);
-row2.appendChild(hosted_css);
-row2.appendChild(hosted_js);
-table.appendChild(row2);
-
-var extension = document.createElement("td");
-extension.innerHTML = "extension";
-var extension_markup = document.createElement("td");
-extension_markup.innerHTML = table_data[i].extension.markup;
-var extension_css= document.createElement("td");
-extension_css.innerHTML = table_data[i].extension.css;
-var extension_js = document.createElement("td");
-extension_js.innerHTML = table_data[i].extension.js;
-var row3 = document.createElement("tr");
-row3.appendChild(extension);
-row3.appendChild(extension_markup);
-row3.appendChild(extension_css);
-row3.appendChild(extension_js);
-table.appendChild(row3);
+	var columns = [];
+	for(var j=0; j<bluetooth_mice.length; j++)
+	{
+		for(column in bluetooth_mice[j])
+		{columns.indexOf(column)== -1 ? columns.push(column) : null;}
+	}
+	
+	var head = tables[i].appendChild(tables[i].createTHead());
+	var head_row = head.insertRow(-1);
+	for(var j=0; j<columns.length; j++)
+	{
+		var cell = head_row.insertCell(-1);
+		cell.innerHTML = columns[j];
+	}
+	
+	var table_body = tables[i].createTBody();
+	for(var j=0; j<bluetooth_mice.length; j++)
+	{
+		var row = tables[i].tBodies[0].insertRow(-1);
+		for(var k=0; k<columns.length; k++)
+		{
+			var cell = row.insertCell(-1);
+			switch(bluetooth_mice[j][columns[k]])
+			{
+				case undefined:
+				{
+					break;
+				}
+				case true:
+				{
+					cell.innerHTML = "<input type=checkbox checked=true disabled>";
+					break;
+				}
+				case false:
+				{
+					cell.innerHTML = "<input type=checkbox checked=false disabled>";
+					break;
+				}
+				default:
+				{
+					cell.innerHTML = bluetooth_mice[j][columns[k]]=bluetooth_mice[j][columns[k]];
+				}
+			}
+			//cell.innerHTML = bluetooth_mice[j][columns[k]]===undefined ? null : bluetooth_mice[j][columns[k]];
+		}
+	}
 }
 
-document.body.appendChild(table);
 },false);
 </script>
-Working In Progress
+
+
+<table data-source=bluetooth_mice data-theme=nexus></table>
 
