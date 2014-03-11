@@ -1,8 +1,10 @@
 <html>
 <head>
-
-
 <style>
+*{
+-webkit-user-select:none;
+user-select:none;
+}
 
 label.option{
 display:inline-block;
@@ -34,15 +36,16 @@ background-color:green;
 <script src=../js/nexus-tables.js></script>
 
 <script>
-var compatibility_list = 
+var compatibility_list = [
 {
-	"Google Chrome Desktop": true,
-	"Google Chrome Android": true,
-	"FireFox Desktop": true,
-	"Android Browser": true,
-	"Safari": true,
-	"Internet Explorer": true
-};
+  "Google Chrome Desktop": true,
+  "Google Chrome Android": true,
+  "FireFox Desktop": true,
+  "Android Browser": true,
+  "Safari": true,
+  "Internet Explorer": true
+}
+];
 </script>
 </head>
 <body>

@@ -1,40 +1,31 @@
-table[data-theme=nexus]
-{
+table[data-theme=nexus]{
 	border-collapse:collapse;
 }
 
-table[data-theme=nexus]>thead
-{
-	background-color:#034769;
-}
-
-table[data-theme=nexus]>thead>tr>th
-{
+table[data-theme=nexus] thead{
 	text-transform:capitalize;
 	font-weight:bold;
+	background-color:#034769;
 	color:white;
 }
 
 
-table[data-theme=nexus]>thead>tr>td
-{
+table[data-theme=nexus] thead td{
 	padding:5px 10px;
 }
 
 
-table[data-theme=nexus]>tbody>tr>td
-{
+table[data-theme=nexus] tbody td{
 	color:whitesmoke;
 	padding:3px 10px;
 }
 
-table[data-theme=nexus]>tbody>tr:nth-child(even)
-{
+table[data-theme=nexus] tbody tr:nth-child(even){
 	background-color:#086FA1;
 }
 
 
-table[data-theme=nexus]>tbody>tr:nth-child(odd){
+table[data-theme=nexus] tbody tr:nth-child(odd){
 	background-color:#63ADD0;
 }
 
@@ -42,9 +33,3 @@ table[data-theme=nexus] tbody td>input[type=checkbox]{
 	display:block;
 	margin:auto;
 }
-
-table[data-theme=nexus] tbody td>a
-{
-	color:white;
-}
-
