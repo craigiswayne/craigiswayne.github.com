@@ -1,0 +1,15 @@
+@import url("http://fonts.googleapis.com/css?family=Iceland");
+
+*
+{
+	-webkit-user-select:none;
+	user-select:none;
+}
+
+
+body
+{
+	background-image:-webkit-linear-gradient(#3FF,#3FE,#3FD,#3FC,#3FB,#3FA,#3F9,#3F8,#3F7,#3F6,#3F5,#3F4,#3F3,#3F2,#3F1,#3F0);
+	font-family:Iceland;
+	background-image:-webkit-linear-gradient(top,rgb(245, 245, 245) 20%,rgb(205, 205, 205),rgb(195, 195, 195));
+}
