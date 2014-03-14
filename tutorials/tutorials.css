@@ -54,7 +54,8 @@ border-radius:10px;
 border:#9b6b2f solid 10px;
 }
 
-body:after {
+body:after
+{
   content:"";
   display:block;
   position:absolute;
@@ -68,6 +69,11 @@ body:after {
     inset 0 -4px 1px rgba(0,0,0,0.3),
     -1px -1px 1px rgba(0,0,0,0.2),
     0 2px 0 rgba(0,0,0,0.3);
+}
+
+a
+{
+	color:yellow;
 }
 
 
