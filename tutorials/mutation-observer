@@ -1,0 +1,33 @@
+<header>
+	<h1>Mutation Observer</h1>
+	<caption>Monitoring Changes to the Page</caption>
+</header>
+
+<ol>
+	<li>
+			Step 1: Initialize the MutationObserver
+			<pre>var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;</pre>
+	</li>
+
+	<li>
+			Step 2: Create the Observer
+			<pre>
+				var observer = new MutationObserver(
+				function(mutations)
+				{  
+   				mutations.forEach(function(mutation){});
+  			});
+			</pre>
+	</li>
+
+	<li>
+			Step 3: Define Properties for the Observer
+			<a href="https://developer.mozilla.org/en/docs/Web/API/MutationObserver#MutationObserverInit" target=_blank>reference</a>
+			<pre>
+				observer.observe(document.body, {
+					attributes: true, 
+					childList: true,
+					subtree:true
+				 });
+			</pre>
+	</li>
