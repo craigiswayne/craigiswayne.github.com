@@ -23,7 +23,7 @@ body
 	color:white;
 }
 
-.nexus-prototype
+#workspace
 {
 	width:100%;
 	height:100%;
@@ -31,14 +31,14 @@ body
 }
 
 
-.nexus-prototype:not([data-resizing=true])>.editor,
-.nexus-prototype:not([data-resizing=true])>.meta
+#workspace:not([data-resizing=true])>#editor,
+#workspace:not([data-resizing=true])>#preview
 {
 	transition:width 0.3s ease;
 }
 
-.nexus-prototype>.editor,
-.nexus-prototype>.meta
+#workspace>#editor,
+#workspace>#preview
 {
 	display:inline-block;
 	float:left;
@@ -46,7 +46,7 @@ body
 	height:100%;
 }
 
-.nexus-prototype>.editor
+#workspace>#editor
 {
 	position:relative;
 	
@@ -91,12 +91,12 @@ background-position:50% 100%, 100%;
   }
 }
 
-.nexus-prototype>.editor:hover
+#workspace>#editor:hover
 {
 background-position:center 100%,center;
 }
 
-.nexus-prototype>.editor>.code-area
+#workspace>#editor>.code-area
 {
 	width:calc(100% - 20px);
 	height:33.3333333333%;
@@ -109,12 +109,12 @@ background-position:center 100%,center;
 }
 
 
-.nexus-prototype>.editor>.code-area[data-showing=false]
+#workspace>#editor>.code-area[data-showing=false]
 {
 	height:0px;
 }
 
-.nexus-prototype>.editor>.code-area>label
+#workspace>#editor>.code-area>label
 {
 	display:block;
 	overflow:hidden;
@@ -135,15 +135,15 @@ background-position:center 100%,center;
 	background-color: rgb(75, 177, 219);
 }
 
-.nexus-prototype>.editor>.code-area>label:before
+#workspace>#editor>.code-area>label:before
 {content:attr(data-language);}
 
-.nexus-prototype>.editor>.code-area>label>input[type=checkbox]
+#workspace>#editor>.code-area>label>input[type=checkbox]
 {
 	float:right;
 }
 
-.nexus-prototype>.editor>.code-area>textarea
+#workspace>#editor>.code-area>textarea
 {
 	-webkit-box-flex:1;
 	display:block;
@@ -156,12 +156,12 @@ background-position:center 100%,center;
 	margin:0px;
 }
 
-.nexus-prototype>.editor>.code-area>textarea:focus
+#workspace>#editor>.code-area>textarea:focus
 {
 	outline:none;
 }
 
-.nexus-prototype>.editor>.resizer
+#workspace>#editor>#resizer
 {
   height:100%;
   width:20px;
@@ -175,7 +175,7 @@ background-position:center 100%,center;
 }
 
 
-.nexus-prototype>.editor>.resizer>a
+#workspace>#editor>#resizer>a
 {
 	text-align:center;
 	padding:5px 0px;
@@ -185,7 +185,7 @@ background-position:center 100%,center;
 	display:block;
 }
 
-.nexus-prototype>.editor>.resizer>.icon
+#workspace>#editor>#resizer>#resizer-icon
 {
 	top:calc(50% - 8px);
 	text-align:center;
@@ -195,8 +195,8 @@ background-position:center 100%,center;
 	font-family:nexus-prototype;
 }
 
-.nexus-prototype>.editor>.resizer>.toggle-design,
-.nexus-prototype>.editor>.resizer>.toggle-preview
+#workspace>#editor>#resizer>#toggle-design,
+#workspace>#editor>#resizer>#toggle-preview
 {
 	color:whitesmoke;
 	transition:all 0.5s ease;
@@ -204,33 +204,33 @@ background-position:center 100%,center;
 	padding:10px 1px;
 }
 
-.nexus-prototype>.editor>.resizer>.toggle-design:hover
+#workspace>#editor>#resizer>#toggle-design:hover
 {text-shadow:20px 0px 1px rgba(0,0,0,0.7);}
 
 
-.nexus-prototype>.editor>.resizer>.toggle-preview:hover
+#workspace>#editor>#resizer>#toggle-preview:hover
 {text-shadow:-20px 0px 1px rgba(0,0,0,0.7);}
 
 
-.nexus-prototype>.editor>.resizer>.toggle-design:before,
-.nexus-prototype>.editor>.resizer>.toggle-preview:before
+#workspace>#editor>#resizer>#toggle-design:before,
+#workspace>#editor>#resizer>#toggle-preview:before
 {content:attr(data-icon);}
 
-.nexus-prototype>.editor>.resizer>.toggle-preview
+#workspace>#editor>#resizer>#toggle-preview
 {
 	position:absolute;
 	bottom:0px;
 }
 
 
-.nexus-prototype>.meta
+#workspace>#preview
 {
 	z-index:1;
 	position:relative;
 	max-width:calc(100% - 20px);
 }
 
-.nexus-prototype>.meta>.preview
+#workspace>#preview>#preview-frame
 {
 	width:100%;
 	height:100%;
@@ -239,10 +239,10 @@ background-position:center 100%,center;
 	transition:margin-top 0.6s ease;
 }
 
-.nexus-prototype[data-loading=false]>.meta>.preview
+#workspace[data-loading=false]>#preview>#preview-frame
 {margin-top:0px;}
 
-.nexus-prototype>.meta>.resize-helper
+#workspace>#preview>.resize-helper
 {
 	position:absolute;
 	width:100%;
@@ -252,7 +252,7 @@ background-position:center 100%,center;
 	display:none;
 }
 
-.nexus-prototype[data-resizing=true]>.meta>.resize-helper
+#workspace[data-resizing=true]>#preview>.resize-helper
 {display:table;}
 
 @-webkit-keyframes spin
@@ -263,25 +263,25 @@ background-position:center 100%,center;
 	{-webkit-transform:rotate(360deg);}
 }
 
-.nexus-prototype[data-loading=false]>.meta> .resize-helper
+#workspace[data-loading=false]>#preview> .resize-helper
 {	
 	transition:opacity 0.3s ease;
 	opacity:0;
 	background-color:transparent;
 }
 
-.nexus-prototype[data-loading=true]>.meta>.resize-helper
+#workspace[data-loading=true]>#preview>.resize-helper
 {
 	opacity:1;
 }
 
-.nexus-prototype[data-loading=false]>.meta>.preview
+#workspace[data-loading=false]>#preview>#preview-frame
 {
 	
 }
 
 
-.nexus-prototype>.meta>.resize-helper>.loading-status
+#workspace>#preview>.resize-helper>.loading-status
 {
 	color:rgba(255,255,255,0.7);
 	display:table-cell;
