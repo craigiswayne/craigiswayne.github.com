@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded",function()
 	for(var i=0; i<code_areas.length; i++)
 	{
 		code_areas[i].getElementsByTagName("textarea")[0].addEventListener("keyup",show_preview,false);
-		var toggle = code_areas[i].getElementsByClassName("toggle")[0];
-		toggle.addEventListener("change",resize_code_areas);
+		code_areas[i].getElementsByTagName("textarea")[0].addEventListener("scroll",function(){this.style.backgroundPositionY = 0-this.scrollTop;},false);		
+		code_areas[i].getElementsByClassName("toggle")[0].addEventListener("change",resize_code_areas);
 	}
 	
 	var editor 	= document.getElementById("editor");

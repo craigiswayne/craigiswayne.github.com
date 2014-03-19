@@ -3,26 +3,27 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Nexus Prototype v0.6</title>
+	<link rel="icon" type="image/png" href="nexus-prototype.svg">
 	<link rel="stylesheet" href=nexus-prototype.css>
 	<script src=nexus-prototype.js></script>
 </head>
 
-<body>
+<body trial>
 
 <nav><a id="save-code-link" target=_blank href="" download="prototype.html">Save Code</a></nav>
 
 <div id=workspace data-loading="false">
 
 	<form id="editor">
-	
-		<div data-showing="true" class="code-area" id="css-area" data-tag="style">
-			<label data-language="CSS"><input class="toggle" type="checkbox" checked></label>
-			<textarea id="css-textarea" spellcheck="false"></textarea>	
-		</div>
 		
 		<div data-showing="true" class="code-area" id="js-area" data-tag="script">
 			<label data-language="JavaScript"><input class="toggle" type="checkbox" checked></label>
 			<textarea id="js-textarea" spellcheck="false" name="js-textarea"></textarea>
+		</div>
+		
+		<div data-showing="true" class="code-area" id="css-area" data-tag="style">
+			<label data-language="CSS"><input class="toggle" type="checkbox" checked></label>
+			<textarea id="css-textarea" spellcheck="false"></textarea>	
 		</div>
 		
 		<div data-showing="true" class="code-area" id="markup-area" data-tag="body">
