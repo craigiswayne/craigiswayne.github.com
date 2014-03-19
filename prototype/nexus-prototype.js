@@ -1,4 +1,4 @@
-var workspace, code_areas;
+var workspace, code_areas, preview_doc;
 document.addEventListener("DOMContentLoaded",function()
 {
 	window.onbeforeunload = function(){return "All your work will be erased!";}
@@ -58,8 +58,25 @@ document.addEventListener("DOMContentLoaded",function()
 			preview.style.width	= "calc(100% - "+editor.style.width+")";
 		}
 	},false);
+	
+	var preview_frame = document.getElementById("preview-frame");
+	preview_doc = preview_frame.contentDocument || preview_frame.contentWindow.document;
+	
+	
+	document.getElementById("save-code-link").addEventListener("click",function(){save_code_as();},false);
+	
 
 },false);
+
+function save_code_as()
+{
+	var html = "<style>\n"+document.getElementById("css-area").getElementsByTagName("textarea")[0].value+"\n</style>\n\n";
+	html += "<script>\n" + document.getElementById("js-area").getElementsByTagName("textarea")[0].value+"\n<\/script>\n\n";
+	html += "<body>\n"+document.getElementById("markup-area").getElementsByTagName("textarea")[0].value+"\n</body>\n\n";
+	
+	var data = 'data:application/xml;charset=utf-8,' + encodeURIComponent(html);
+	document.getElementById("save-code-link").href = data;
+}
 
 function resize_code_areas()
 {
@@ -82,23 +99,52 @@ function resize_code_areas()
 	{
 		showing_code_areas[i].style.height = "calc((100% - 22px*"+not_showing+")/"+showing_code_areas.length+")";
 	}
-	
 }
-
 
 function show_preview()
 {
-	var preview_frame = document.getElementById("preview-frame");
+	console.clear();
+	
 	workspace.dataset.loading = true;
+	
+	//console.log("Step 1: Get the updated tag:");
+	var updated_tag = event.srcElement.parentNode.dataset.tag;
+	console.log(updated_tag);
+	
+	//console.log("\nStep 2: Get access to the iframe's document:");
+	preview_doc.open();
+	console.log(preview_doc);
+	
+	//console.log("\nStep 3: Check if the updated tag exists in the preview frame's document:");
+	var target_tag = preview_doc.getElementsByTagName(updated_tag);
+	/*setTimeout(function(value)
+	{
+		console.log(target_tag[0]);
+		console.log("\nStep 4: If it exists in the preview frame, update the tag, else, create a new one and set it's innerHTML to that:");
+		if(target_tag[0])
+		{
+			console.log("exists! and value to be used is:");
+			console.log(value);
+			target_tag[0].innerHTML = value;
+		}
+		else
+		{
+			console.log("no target tag found, creating a new one with the value:");
+			console.log(value);
+			target_tag = preview_doc.body.appendChild(document.createElement(updated_tag));
+			target_tag.innerHTML = value;
+		}
+		
+		console.log(preview_doc);
+	}.bind(this,event.srcElement.value),0);*/
+	
 	var html = "<style>\n"+document.getElementById("css-area").getElementsByTagName("textarea")[0].value+"\n</style>\n\n";
 	html += "<script>\n" + document.getElementById("js-area").getElementsByTagName("textarea")[0].value+"\n<\/script>\n\n";
 	html += "<body>\n"+document.getElementById("markup-area").getElementsByTagName("textarea")[0].value+"\n</body>\n\n";
 
-	preview_frame.removeAttribute("src");
-	preview_doc = preview_frame.contentDocument || preview_frame.contentWindow.document;
-	//preview_doc.open();
-	//preview_doc.write(html);
-	//preview_doc.close();
-	preview_frame.srcdoc = html; //in beta atm
+	//preview_frame.removeAttribute("src");
+	preview_doc.write(html);
+	preview_doc.close();
+	//preview_frame.srcdoc = html; //in beta atm
 	workspace.dataset.loading = false;
-} 
+}
