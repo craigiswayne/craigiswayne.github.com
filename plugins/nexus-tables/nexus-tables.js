@@ -25,7 +25,7 @@ for(var i=0; i<tables.length; i++)
 			cell.dataset.column = columns[j];
 		}
 		
-		var table_body = tables[i].createTBody();
+		var table_body = tables[i].appendChild(document.createElement("tbody"));
 		
 		for(var j=0; j<window[tables[i].dataset.source].length; j++)
 		{
