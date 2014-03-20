@@ -1,0 +1,124 @@
+@font-face {
+	font-family: 'nexus-prototype';
+	src:url('fonts/nexus-prototype.eot?-lq596c');
+	src:url('fonts/nexus-prototype.eot?#iefix-lq596c') format('embedded-opentype'),
+		url('fonts/nexus-prototype.woff?-lq596c') format('woff'),
+		url('fonts/nexus-prototype.ttf?-lq596c') format('truetype'),
+		url('fonts/nexus-prototype.svg?-lq596c#nexus-prototype') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'nexus-prototype';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-uniF013:before {
+	content: "\f013";
+}
+.icon-uniF019:before {
+	content: "\f019";
+}
+.icon-uniF039:before {
+	content: "\f039";
+}
+.icon-uniF083:before {
+	content: "\f083";
+}
+.icon-uniF0AC:before {
+	content: "\f0ac";
+}
+.icon-uniF0C9:before {
+	content: "\f0c9";
+}
+.icon-uniF0DD:before {
+	content: "\f0dd";
+}
+.icon-uniF142:before {
+	content: "\f142";
+}
+.icon-image:before {
+	content: "\e608";
+}
+.icon-camera:before {
+	content: "\e609";
+}
+.icon-file:before {
+	content: "\e60a";
+}
+.icon-file2:before {
+	content: "\e614";
+}
+.icon-download:before {
+	content: "\e615";
+}
+.icon-disk:before {
+	content: "\e616";
+}
+.icon-settings:before {
+	content: "\e60f";
+}
+.icon-equalizer:before {
+	content: "\e60e";
+}
+.icon-cog:before {
+	content: "\e60d";
+}
+.icon-cog2:before {
+	content: "\e610";
+}
+.icon-rocket:before {
+	content: "\e600";
+}
+.icon-remove:before {
+	content: "\e617";
+}
+.icon-previous:before {
+	content: "\e602";
+}
+.icon-next:before {
+	content: "\e601";
+}
+.icon-loop:before {
+	content: "\e603";
+}
+.icon-arrow-down:before {
+	content: "\e60c";
+}
+.icon-paragraph-justify:before {
+	content: "\e604";
+}
+.icon-embed:before {
+	content: "\e60b";
+}
+.icon-file-xml:before {
+	content: "\e618";
+}
+.icon-chrome:before {
+	content: "\e605";
+}
+.icon-settings2:before {
+	content: "\e611";
+}
+.icon-paperplane:before {
+	content: "\e606";
+}
+.icon-params:before {
+	content: "\e612";
+}
+.icon-tools:before {
+	content: "\e613";
+}
+.icon-list:before {
+	content: "\e607";
+}

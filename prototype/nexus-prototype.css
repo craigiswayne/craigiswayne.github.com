@@ -11,6 +11,13 @@
 	font-family:nexus-prototype;
 	content:attr(data-icon);
 	color:white;
+	font-weight:normal;
+}
+
+[data-icon=download]:before
+{
+	content:"\E615";
+	margin-right:4px;
 }
 
 body
@@ -35,6 +42,7 @@ nav>a
 {
 	color:white;
 	text-decoration:none;
+	margin:2px;
 }
 
 #workspace
