@@ -1,0 +1,27 @@
+<script>
+function t1(){
+	var XFoo = document.registerElement('x-foo', {
+	  prototype: Object.create(HTMLElement.prototype)
+	});
+	document.body.appendChild(new XFoo());
+	
+	var MegaButton = document.registerElement('mega-button', {
+	  prototype: Object.create(HTMLButtonElement.prototype),
+	  extends: 'button'
+	});
+	
+	document.body.appendChild(new MegaButton());
+	
+	
+	var nexus_code_area = document.registerElement('nexus-code-area', {
+	  prototype: Object.create(HTMLInputElement.prototype),
+	  extends: 'input'
+	});
+	nexus_code_area.value = "radio";
+	
+	document.body.appendChild(new nexus_code_area());
+}
+</script>
+
+<body onload="t1()">
+</body>

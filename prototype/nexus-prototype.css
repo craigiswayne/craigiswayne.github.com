@@ -9,16 +9,31 @@
 [data-icon]:before
 {
 	font-family:nexus-prototype;
-	content:attr(data-icon);
 	color:white;
 	font-weight:normal;
 }
 
+[data-icon=settings]:before
+{content:"\E60b";}
+
 [data-icon=download]:before
 {
-	content:"\E615";
+	content:"\E602";
+	content:"\E614";
 	margin-right:4px;
 }
+
+[data-icon=forward]:before
+{content:"\E617";}
+
+
+[data-icon=backward]:before
+{content:"\E616";}
+
+
+[data-icon=ellipsis-vertical]:before
+{content:"\E615";}
+
 
 body
 {
@@ -84,21 +99,21 @@ nav>a
 
 @-webkit-keyframes glow
 {
-from
-{
-background-size: 100% 100%, auto;
-background-position:50% 100%,100%;
-}
+	from
+	{
+		background-size: 100% 100%, auto;
+		background-position:50% 100%,100%;
+	}
 
-to
-  {
-background-size: 50% 50%, auto;
-background-position:50% 100%, 100%;
+	to
+	{
+		background-size: 50% 50%, auto;
+		background-position:50% 100%, 100%;
   }
 }
 
 
-#workspace>#editor>.code-area
+#workspace>#editor>.code-box
 {
 	width:calc(100% - 20px);
 	height:33.3333333333%;
@@ -110,12 +125,12 @@ background-position:50% 100%, 100%;
 	margin:0px;
 }
 
-#workspace>#editor>.code-area[data-showing=false]
+#workspace>#editor>.code-box[data-showing=false]
 {
 	height:0px;
 }
 
-#workspace>#editor>.code-area>label
+#workspace>#editor>.code-box>label
 {
 	display:block;
 	overflow:hidden;
@@ -136,34 +151,37 @@ background-position:50% 100%, 100%;
 	background-color: rgb(75, 177, 219);
 }
 
-#workspace>#editor>.code-area>label:before
+#workspace>#editor>.code-box>label:after
 {content:attr(data-language);}
 
-#workspace>#editor>.code-area>label>input[type=checkbox]
-{
-	float:right;
-}
+#workspace>#editor>.code-box>label>input[type=checkbox]
+{float:right;}
 
-#workspace>#editor>.code-area>textarea
+#workspace>#editor>.code-box>.code-area
 {
 	-webkit-box-flex:1;
 	display:block;
 	border:none;
-	background:repeating-linear-gradient(0deg, transparent, transparent 17px, skyblue 18px);
-	background-color:rgb(252,252,252);;
-	background-size:100% 18px;
 	line-height:18px;
 	resize:none;
 	margin:0px;
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
-	padding-bottom:10px;
+	padding:2px 0px 10px 17px;
+	font-size:11px;
+	list-style-type:decimal;
+	background-color:transparent;
+	overflow:auto;
+	
+	
+	
+	background:repeating-linear-gradient(0deg, transparent, transparent 17px, skyblue 18px);
+	background-color:rgb(252,252,252);
+	background-size:100% 18px;
 }
 
-#workspace>#editor>.code-area>textarea:focus
-{
-	outline:none;
-}
+#workspace>#editor>.code-box>.code-area:focus
+{outline:none;}
 
 #workspace>#editor>#resizer
 {
@@ -215,10 +233,6 @@ background-position:50% 100%, 100%;
 #workspace>#editor>#resizer>#toggle-preview:hover
 {text-shadow:-20px 0px 1px rgba(0,0,0,0.7);}
 
-
-#workspace>#editor>#resizer>#toggle-design:before,
-#workspace>#editor>#resizer>#toggle-preview:before
-{content:attr(data-icon);}
 
 #workspace>#editor>#resizer>#toggle-preview
 {

@@ -1,15 +1,21 @@
-var workspace, code_areas, preview_doc;
+var workspace, code_boxes, preview_doc;
 document.addEventListener("DOMContentLoaded",function()
 {
 	window.onbeforeunload = function(){return "All your work will be erased!";}
 	
-	code_areas = document.getElementsByClassName("code-area");
+	code_boxes = document.getElementsByClassName("code-box");
 	
-	for(var i=0; i<code_areas.length; i++)
+	for(var i=0; i<code_boxes.length; i++)
 	{
-		code_areas[i].getElementsByTagName("textarea")[0].addEventListener("keyup",show_preview,false);
-		code_areas[i].getElementsByTagName("textarea")[0].addEventListener("scroll",function(){this.style.backgroundPositionY = 0-this.scrollTop;},false);		
-		code_areas[i].getElementsByClassName("toggle")[0].addEventListener("change",resize_code_areas);
+		if(code_boxes[i].getElementsByClassName("code-area")[0].getElementsByTagName("li")[0])
+		{
+			console.log("found in:" +  code_boxes[i].getElementsByClassName("code-area")[0].parentNode.id);
+			code_boxes[i].getElementsByClassName("code-area")[0].getElementsByTagName("li")[0].addEventListener("keydown",retain_first_line,false);
+		}
+	
+		code_boxes[i].getElementsByClassName("code-area")[0].addEventListener("keyup",show_preview,false);
+		code_boxes[i].getElementsByClassName("code-area")[0].addEventListener("scroll",function(){this.style.backgroundPositionY = 0-this.scrollTop;},false);		
+		code_boxes[i].getElementsByClassName("toggle")[0].addEventListener("change",resize_code_boxes);
 	}
 	
 	var editor 	= document.getElementById("editor");
@@ -70,34 +76,30 @@ document.addEventListener("DOMContentLoaded",function()
 
 function save_code_as()
 {
-	var html = "<style>\n"+document.getElementById("css-area").getElementsByTagName("textarea")[0].value+"\n</style>\n\n";
-	html += "<script>\n" + document.getElementById("js-area").getElementsByTagName("textarea")[0].value+"\n<\/script>\n\n";
-	html += "<body>\n"+document.getElementById("markup-area").getElementsByTagName("textarea")[0].value+"\n</body>\n\n";
-	
-	var data = 'data:application/xml;charset=utf-8,' + encodeURIComponent(html);
+	var data = 'data:application/xml;charset=utf-8,' + encodeURIComponent(get_preview_code());
 	document.getElementById("save-code-link").href = data;
 }
 
-function resize_code_areas()
+function resize_code_boxes()
 {
-	var showing_code_areas = new Array();
-	for(var i=0; i<code_areas.length; i++)
+	var showing_code_boxes = new Array();
+	for(var i=0; i<code_boxes.length; i++)
 	{
-		if(!code_areas[i].getElementsByClassName("toggle")[0].checked)
+		if(!code_boxes[i].getElementsByClassName("toggle")[0].checked)
 		{
-			code_areas[i].dataset.showing = false;
-			code_areas[i].style.height = "";
+			code_boxes[i].dataset.showing = false;
+			code_boxes[i].style.height = "";
 		}
 		else
 		{
-			code_areas[i].dataset.showing = true;
-			showing_code_areas.push(code_areas[i]);
+			code_boxes[i].dataset.showing = true;
+			showing_code_boxes.push(code_boxes[i]);
 		}		
 	}
-	var not_showing = code_areas.length - showing_code_areas.length;
-	for(var i=0; i<showing_code_areas.length; i++)
+	var not_showing = code_boxes.length - showing_code_boxes.length;
+	for(var i=0; i<showing_code_boxes.length; i++)
 	{
-		showing_code_areas[i].style.height = "calc((100% - 22px*"+not_showing+")/"+showing_code_areas.length+")";
+		showing_code_boxes[i].style.height = "calc((100% - 22px*"+not_showing+")/"+showing_code_boxes.length+")";
 	}
 }
 
@@ -108,43 +110,31 @@ function show_preview()
 	workspace.dataset.loading = true;
 	
 	//console.log("Step 1: Get the updated tag:");
-	var updated_tag = event.srcElement.parentNode.dataset.tag;
-	console.log(updated_tag);
+	//var updated_tag = event.srcElement.parentNode.dataset.tag;
+	//console.log(updated_tag);
 	
 	//console.log("\nStep 2: Get access to the iframe's document:");
 	preview_doc.open();
-	console.log(preview_doc);
+	//console.log(preview_doc);
 	
 	//console.log("\nStep 3: Check if the updated tag exists in the preview frame's document:");
-	var target_tag = preview_doc.getElementsByTagName(updated_tag);
-	/*setTimeout(function(value)
-	{
-		console.log(target_tag[0]);
-		console.log("\nStep 4: If it exists in the preview frame, update the tag, else, create a new one and set it's innerHTML to that:");
-		if(target_tag[0])
-		{
-			console.log("exists! and value to be used is:");
-			console.log(value);
-			target_tag[0].innerHTML = value;
-		}
-		else
-		{
-			console.log("no target tag found, creating a new one with the value:");
-			console.log(value);
-			target_tag = preview_doc.body.appendChild(document.createElement(updated_tag));
-			target_tag.innerHTML = value;
-		}
-		
-		console.log(preview_doc);
-	}.bind(this,event.srcElement.value),0);*/
+	//var target_tag = preview_doc.getElementsByTagName(updated_tag);
 	
-	var html = "<style>\n"+document.getElementById("css-area").getElementsByTagName("textarea")[0].value+"\n</style>\n\n";
-	html += "<script>\n" + document.getElementById("js-area").getElementsByTagName("textarea")[0].value+"\n<\/script>\n\n";
-	html += "<body>\n"+document.getElementById("markup-area").getElementsByTagName("textarea")[0].value+"\n</body>\n\n";
-
-	//preview_frame.removeAttribute("src");
-	preview_doc.write(html);
+	preview_doc.write(get_preview_code());
 	preview_doc.close();
-	//preview_frame.srcdoc = html; //in beta atm
 	workspace.dataset.loading = false;
+}
+
+function get_preview_code()
+{
+	var html = "<style>\n"+document.getElementById("css-area").getElementsByClassName("code-area")[0].innerText+"\n</style>\n\n";
+	html += "<script>\n" + document.getElementById("js-area").getElementsByClassName("code-area")[0].innerText+"\n<\/script>\n\n";
+	html += "<body>\n"+document.getElementById("markup-area").getElementsByClassName("code-area")[0].innerText+"\n</body>\n\n";
+	return html;
+}
+
+function retain_first_line()
+{
+	console.log(event);
+	console.log(event.srcElement);
 }

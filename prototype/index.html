@@ -10,42 +10,42 @@
 
 <body trial>
 
-<nav><a id="save-code-link" target=_blank href="" download="prototype.html" data-icon=download>Save Code</a></nav>
+<nav><a id=save-code-link target=_blank href="" download="prototype.html" data-icon=download>Save Code</a></nav>
 
 <div id=workspace data-loading="false">
 
 	<form id="editor">
 		
-		<div data-showing="true" class="code-area" id="js-area" data-tag="script">
-			<label data-language="JavaScript"><input class="toggle" type="checkbox" checked></label>
-			<textarea id="js-textarea" spellcheck="false" name="js-textarea"></textarea>
+		<div data-showing="true" class="code-box" id="js-area" data-tag="script">
+			<label data-language="JavaScript" data-icon="javascript"><input class="toggle" type="checkbox" checked></label>
+			<ol id="js-textarea" spellcheck="false" class="code-area" contenteditable><li></li></ol>
 		</div>
 		
-		<div data-showing="true" class="code-area" id="css-area" data-tag="style">
-			<label data-language="CSS"><input class="toggle" type="checkbox" checked></label>
-			<textarea id="css-textarea" spellcheck="false"></textarea>	
+		<div data-showing="true" class="code-box" id="css-area" data-tag="style">
+			<label data-language="CSS" data-icon="css"><input class="toggle" type="checkbox" checked></label>
+			<ol id="css-textarea" spellcheck="false" class="code-area" contenteditable><li></li></ol>
 		</div>
 		
-		<div data-showing="true" class="code-area" id="markup-area" data-tag="body">
-			<label data-language="Markup"><input class="toggle" type="checkbox" checked></label>
-			<textarea id="markup-textarea" spellcheck="false" name="markup-textarea"></textarea>
+		<div data-showing="true" class="code-box" id="markup-area" data-tag="body">
+			<label data-language="HTML" data-icon="html"><input class="toggle" type="checkbox" checked></label>
+			<ol id="markup-textarea" spellcheck="false" class="code-area" contenteditable><li></li></ol>
 		</div>
 		
 		<div id="resizer">
-			<a id="toggle-settings" data-icon=""></a>
-			<a id="toggle-design" data-icon=""></a>
-			<a id="resizer-icon" data-icon="" ></a>
-			<a id="toggle-preview" data-icon=""></a>
+			<a id="toggle-settings" data-icon="settings"></a>
+			<a id="toggle-design" data-icon="forward"></a>
+			<a id="resizer-icon" data-icon=ellipsis-vertical ></a>
+			<a id="toggle-preview" data-icon="backward"></a>
 		</div>
 		
 	</form>
 	
-	<div id="preview">
+	<output id="preview">
 		<iframe id="preview-frame" src="about:blank" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
 		<div id="resize-helper">
 			<div class="loading-status" data-icon=""></div>
 		</div>
-	</div>
+	</output>
 	
 </div>
 </body>
