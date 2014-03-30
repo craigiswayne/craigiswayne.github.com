@@ -165,16 +165,16 @@ document.addEventListener("DOMContentLoaded", function(){
 						for(var i in markers){
 						
 							if(i != (e.target.selectedIndex-1)){
-								markers[i].marker.setVisible(false);
+								markers[i].marker ? markers[i].marker.setVisible(false) : null;
 							}
 							else{
-								markers[i].marker.setVisible(true);
+								markers[i].marker ? markers[i].marker.setVisible(true) : null;
 							}
 						}
 					}
 					else{
 						for(var i in markers){
-							markers[i].marker.setVisible(true);
+								markers[i].marker ? markers[i].marker.setVisible(true) : null;
 						}
 					}
 					

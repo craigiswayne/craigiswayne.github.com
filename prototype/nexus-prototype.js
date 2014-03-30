@@ -127,9 +127,14 @@ function show_preview()
 
 function get_preview_code()
 {
-	var html = "<style>\n"+document.getElementById("css-area").getElementsByClassName("code-area")[0].innerText+"\n</style>\n\n";
+	/*var html = "<style>\n"+document.getElementById("css-area").getElementsByClassName("code-area")[0].innerText+"\n</style>\n\n";
 	html += "<script>\n" + document.getElementById("js-area").getElementsByClassName("code-area")[0].innerText+"\n<\/script>\n\n";
-	html += "<body>\n"+document.getElementById("markup-area").getElementsByClassName("code-area")[0].innerText+"\n</body>\n\n";
+	html += "<body>\n"+document.getElementById("markup-area").getElementsByClassName("code-area")[0].innerText+"\n</body>\n\n";*/
+	
+	var html = "<style>\n"+document.getElementById("css-area").getElementsByClassName("code-area")[0].value+"\n</style>\n\n";
+	html += "<script>\n" + document.getElementById("js-area").getElementsByClassName("code-area")[0].value+"\n<\/script>\n\n";
+	html += "<body>\n"+document.getElementById("markup-area").getElementsByClassName("code-area")[0].value+"\n</body>\n\n";
+	
 	return html;
 }
 
