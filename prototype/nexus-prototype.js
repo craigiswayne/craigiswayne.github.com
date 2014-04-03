@@ -69,15 +69,42 @@ document.addEventListener("DOMContentLoaded",function()
 	preview_doc = preview_frame.contentDocument || preview_frame.contentWindow.document;
 	
 	
-	document.getElementById("save-code-link").addEventListener("click",function(){save_code_as();},false);
+	document.querySelector("nav>a.action[download]").addEventListener("click",function(){save_code_as();},false);
 	
+	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+	
+	document.querySelector("nav>label.action>input[type=file]").onchange = function(e) {
+	var files = this.files;
+	
+	document.querySelector("nav>label.action>input[type=file]").onchange = window.requestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
+		 // Duplicate each file the user selected to the app's fs.
+		 for (var i = 0, file; file = files[i]; ++i) {
+	
+			// Capture current iteration's file in local scope for the getFile() callback.
+			(function(f) {
+			  fs.root.getFile(f.name, {create: true, exclusive: true}, function(fileEntry) {
+				 fileEntry.createWriter(function(fileWriter) {
+					fileWriter.write(f); // Note: write() can take a File or Blob object.
+					
+					console.log("finished writing file");
+				 }, errorHandler);
+			  }, errorHandler);
+			})(file);
+	
+		 }
+	  }, errorHandler);
+	};
 
 },false);
+
+function errorHandler(e){
+	console.log(e);
+}
 
 function save_code_as()
 {
 	var data = 'data:application/xml;charset=utf-8,' + encodeURIComponent(get_preview_code());
-	document.getElementById("save-code-link").href = data;
+	document.querySelector("nav>a[download]").href = data;
 }
 
 function resize_code_boxes()

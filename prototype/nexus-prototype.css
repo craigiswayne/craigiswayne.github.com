@@ -23,6 +23,10 @@
 	margin-right:4px;
 }
 
+[data-icon=upload]:before{
+	content:"";
+}
+
 [data-icon=forward]:before
 {content:"\E617";}
 
@@ -46,18 +50,22 @@ body
 
 nav
 {
-	padding:2px;
 	background-color:rgb(250, 101, 101);
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	height:22px;
 }
 
-nav>a
+nav>.action
 {
 	color:white;
 	text-decoration:none;
-	margin:2px;
+	padding:2px 10px 0px 5px;
+	float:left;
+	height:100%;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	cursor:pointer;
 }
 
 #workspace
