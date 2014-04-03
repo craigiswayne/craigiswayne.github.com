@@ -107,11 +107,21 @@ width:120px;
 display:none;
 }
 
-.google-map .google-maps-infowindow [data-label]:not(:empty){
+.google-map .google-maps-infowindow .google-maps-infowindow-content:empty{
+	min-width:125px;
+}
+
+.google-map .google-maps-infowindow .google-maps-infowindow-content:empty:before{
+	content:"no content defined";
+	text-transform:capitalize;
+	font-style:italic;
+}
+
+.google-map .google-maps-infowindow .google-maps-infowindow-content [data-label]:not(:empty){
 	display:block;
 }
 
-.google-map .google-maps-infowindow [data-label]:not(:empty):before{
+.google-map .google-maps-infowindow .google-maps-infowindow-content [data-label]:not(:empty):before{
 	content:attr(data-label)":";
 	margin-right:10px;
 	font-weight:bold;

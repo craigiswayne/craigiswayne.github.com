@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 					
 					(function(marker_data){
 						var directions_toolbar = '<label class=directions-toolbar data-icon=navigator>get directions<input type=button style=display:none;></label>';
-						var divvedContent = '<div class="google-maps-infowindow">' + marker_data.content + directions_toolbar +'</div>';
+						var divvedContent = '<div class="google-maps-infowindow"><div class=google-maps-infowindow-content>' + (marker_data.content || "") + "</div>" + directions_toolbar +'</div>';
 						if (marker_data.icon) {
 							var image = {
 								url: marker_data.icon,
