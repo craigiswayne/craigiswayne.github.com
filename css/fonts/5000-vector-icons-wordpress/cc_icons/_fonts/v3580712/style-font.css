@@ -1,0 +1,33 @@
+@font-face {
+	font-family: 'v35';
+	src:url('fonts/v35.eot');
+	src:url('fonts/v35.eot?#iefix') format('embedded-opentype'),
+		url('fonts/v35.woff') format('woff'),
+		url('fonts/v35.ttf') format('truetype'),
+		url('fonts/v35.svg#v35') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon-v35]:before {
+	font-family: 'v35';
+	content: attr(data-icon-v35);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+.v35-font {
+	font-family: 'v35';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}

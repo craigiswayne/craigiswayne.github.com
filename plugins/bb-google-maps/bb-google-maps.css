@@ -18,6 +18,9 @@
 .google-map [data-icon=close]:before
 {content:"\F00d";}
 
+.google-map [data-icon=refresh]:before
+{content:"\F021";}
+
 .google-map{
 position:relative;
 min-height:400px;
@@ -104,6 +107,21 @@ width:120px;
 display:none;
 }
 
+.google-map .google-maps-infowindow [data-label]:not(:empty){
+	display:block;
+}
+
+.google-map .google-maps-infowindow [data-label]:not(:empty):before{
+	content:attr(data-label)":";
+	margin-right:10px;
+	font-weight:bold;
+}
+
+.google-map .google-maps-infowindow .google-maps-infowindow-title{
+	font-weight:bold;
+	font-size:110%;
+}
+
 .google-map .google-map-directions-panel{
 	z-index: 1;
 	position: absolute;
@@ -163,5 +181,9 @@ display:none;
 	-moz-box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.5);
 	-webkit-box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.5);
 	text-align:left;
+}
+
+.google-map:not([data-enable-directions="false"]) .google-maps-infowindow-container{
+	min-width:100px;
 }
 

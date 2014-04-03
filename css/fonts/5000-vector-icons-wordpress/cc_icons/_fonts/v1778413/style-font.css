@@ -1,0 +1,33 @@
+@font-face {
+	font-family: 'v17';
+	src:url('fonts/v17.eot');
+	src:url('fonts/v17.eot?#iefix') format('embedded-opentype'),
+		url('fonts/v17.woff') format('woff'),
+		url('fonts/v17.ttf') format('truetype'),
+		url('fonts/v17.svg#v17') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon-v17]:before {
+	font-family: 'v17';
+	content: attr(data-icon-v17);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+.v17-font {
+	font-family: 'v17';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}

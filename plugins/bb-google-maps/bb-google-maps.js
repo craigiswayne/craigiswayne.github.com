@@ -1,15 +1,13 @@
-document.addEventListener("DOMContentLoaded", function(){
-	
-			//var google_maps_api_script = document.head.appendChild(document.createElement("script"));
-			//google_maps_api_script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false";
-			//google_maps_api_script.onreadystatechange = google_maps_api_script.onload = function(){
-				//google.maps.event.addDomListener(window,'load',initialize_google_maps());
-				//console.log(this);
-			//};
-			initialize_google_maps();
-			
-	
-	},false);
+/* TODO
+if the marker is enabled shift the map down slightly, take into account the zoom
+if no map latitude and longitude are set, use the users current position
+store map settings in the map_options object and not separate variables
+loading icon when getting directions
+fix the refresh icon
+*/
+
+
+document.addEventListener("DOMContentLoaded", function(){initialize_google_maps();},false);
 
 	function initialize_google_maps(map_container){
 		
@@ -22,33 +20,39 @@ document.addEventListener("DOMContentLoaded", function(){
 		}
 		for(var i=0; i<map_containers.length; i++){
 			
+			var map = new google.maps.Map(map_containers[i]);
+			
+			navigator.geolocation.getCurrentPosition(function(position){
+				map.user_position = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			});
+			
+			//var map_lat = map_containers[i].dataset.latitude ? parseFloat(map_containers[i].dataset.latitude) : 23.6058696;
+			//var map_long = map_containers[i].dataset.longitude ? parseFloat(map_containers[i].dataset.longitude) : 58.4485435;
+			
 			var map_lat = map_containers[i].dataset.latitude ? parseFloat(map_containers[i].dataset.latitude) : 23.6058696;
 			var map_long = map_containers[i].dataset.longitude ? parseFloat(map_containers[i].dataset.longitude) : 58.4485435;
+			
 			var map_zoom = map_containers[i].dataset.zoom ? parseInt(map_containers[i].dataset.zoom) : 12;
-			var map_showmarkers = map_containers[i].dataset.showmarkers==='false' ? false : true;
-			
-			
+			var map_showmarkers = map_containers[i].dataset.showmarkers === 'false' ? false : true;
 			
 			var lat_long = new google.maps.LatLng(map_lat, map_long);
 			var map_options ={
 				zoom: map_zoom,
-				center: lat_long
+				center: lat_long,
+				show_markers: map_containers[i].dataset.showmarkers
 			};
 			
 			var map_bounds = new google.maps.LatLngBounds();
-			var map = new google.maps.Map(map_containers[i], map_options);
+			map.setOptions(map_options);
+			//var map = new google.maps.Map(map_containers[i], map_options);
 			map_containers[i].id = map_containers[i].id || "google-map-"+Math.random();
 			map.id = map_containers[i].id;
-			
+
 			var info_window = new google.maps.InfoWindow();
 			map.info_window = info_window;
 			
 			map.directions_display = new google.maps.DirectionsRenderer();
 			map.directions_service = new google.maps.DirectionsService();
-
-			navigator.geolocation.getCurrentPosition(function(position){
-				map.user_position = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-			});
 			
 			geocoder = new google.maps.Geocoder();
 			if(window[map_containers[i].dataset.markers] instanceof Array){
@@ -201,12 +205,30 @@ document.addEventListener("DOMContentLoaded", function(){
 			destination:end,
 			travelMode: google.maps.TravelMode.DRIVING
 		};
+		
+		console.log("request");
+		console.log(request);
 
+		console.log("end");
+		console.log(end);
+		console.log("start:");		
+		console.log(start);
+		console.log("user_position:");
+		console.log(map.user_position);
+		console.log("map center:");
+		console.log(map.getCenter());
+		
+		//document.getElementById(map.id).getElementsByClassName("google-map-directions-panel")[0].appendChild();
 		map.directions_service.route(request, function(response, status) {
 				if (status == google.maps.DirectionsStatus.OK){
+					//console.log("found directions");
 					map.directions_display.setMap(map);
 					map.directions_display.setPanel(document.getElementById(map.id).getElementsByClassName("google-map-directions-panel")[0]);
 					map.directions_display.setDirections(response);
+				}
+				else{
+					//console.log("directions not found");
+					console.log(status);
 				}
 		});
 	} 

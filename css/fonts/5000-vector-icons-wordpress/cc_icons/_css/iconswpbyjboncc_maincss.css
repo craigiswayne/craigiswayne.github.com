@@ -1,0 +1,21 @@
+.fadethis{
+-webkit-transition: all 0.4s ease-in-out;    -moz-transition: all 0.4s ease-in-out;    -o-transition: all 0.4s ease-in-out;transition: all 0.4s ease-in-out;-ms-transition: all 0.4s ease-in-out;
+}
+
+.spinthis{
+-webkit-transition: all 0.4s ease-in-out;    -moz-transition: all 0.4s ease-in-out;    -o-transition: all 0.4s ease-in-out;transition: all 0.4s ease-in-out;-ms-transition: all 0.4s ease-in-out;
+float:left;
+}
+
+.spinthis:hover{
+/* Safari */
+-webkit-transform: rotate(360deg);
+/* Firefox */
+-moz-transform: rotate(360deg);
+/* IE */
+-ms-transform: rotate(360deg);
+/* Opera */
+-o-transform: rotate(360deg);
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=12);
+}
