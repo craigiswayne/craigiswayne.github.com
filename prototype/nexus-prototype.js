@@ -65,37 +65,58 @@ document.addEventListener("DOMContentLoaded",function()
 		}
 	},false);
 	
+	
+	
 	var preview_frame = document.getElementById("preview-frame");
 	preview_doc = preview_frame.contentDocument || preview_frame.contentWindow.document;
 	
-	
 	document.querySelector("nav>a.action[download]").addEventListener("click",function(){save_code_as();},false);
+	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;	
+	document.querySelector("nav>label.action>input[type=file]").onchange = upload_files;
 	
-	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+	//functionality for hosted prototype
+	var upload_button = document.querySelector("nav>.action>input[type=file]");
+	if(!document.domain){
+		upload_button.type = "button";
+		upload_button.addEventListener("click",function(){alert("Not available as a local file","test");},false);
+	}
 	
-	document.querySelector("nav>label.action>input[type=file]").onchange = function(e) {
+},false);
+
+function upload_files(){
+	console.log("@line80");
 	var files = this.files;
 	
-	document.querySelector("nav>label.action>input[type=file]").onchange = window.requestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
-		 // Duplicate each file the user selected to the app's fs.
-		 for (var i = 0, file; file = files[i]; ++i) {
-	
-			// Capture current iteration's file in local scope for the getFile() callback.
-			(function(f) {
-			  fs.root.getFile(f.name, {create: true, exclusive: true}, function(fileEntry) {
-				 fileEntry.createWriter(function(fileWriter) {
-					fileWriter.write(f); // Note: write() can take a File or Blob object.
+	window.requestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
+		console.log("@line84");
+		for (var i = 0, file; file = files[i]; ++i) {
+			(function(f){
+				var current_date = new Date();
+				fs.root.getFile("uploaded.html", {create: true, exclusive: false}, function(fileEntry){
+					fileEntry.createWriter(function(fileWriter){
+						fileWriter.write(f); // Note: write() can take a File or Blob object.
+						fs.root.getFile('uploaded.html', {}, function(fileEntry) {
 					
-					console.log("finished writing file");
-				 }, errorHandler);
-			  }, errorHandler);
+							fileEntry.file(function(file){
+								var reader = new FileReader();
+								this.result = "";
+								reader.onloadend = function(e){
+									//console.log("inner text of the uploaded html file:");
+									//console.log(this.result);
+									document.querySelector(".code-box[data-tag=body] textarea").value = this.result;
+									document.querySelector("nav>label.action>input[type=file]").value = null;
+								};
+						
+								reader.readAsText(file);
+							}, errorHandler);
+						}, errorHandler);
+					}, errorHandler);
+				}, errorHandler);
 			})(file);
-	
-		 }
-	  }, errorHandler);
-	};
+		}
+	}, errorHandler);
+}
 
-},false);
 
 function errorHandler(e){
 	console.log(e);
@@ -165,8 +186,10 @@ function get_preview_code()
 	return html;
 }
 
+/*
 function retain_first_line()
 {
 	console.log(event);
 	console.log(event.srcElement);
 }
+*/

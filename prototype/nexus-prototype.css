@@ -16,15 +16,13 @@
 [data-icon=settings]:before
 {content:"\E60b";}
 
-[data-icon=download]:before
-{
-	content:"\E602";
+[data-icon=download]:before{
 	content:"\E614";
-	margin-right:4px;
+	content:"\E602";
 }
 
 [data-icon=upload]:before{
-	content:"";
+content:"\E600";	
 }
 
 [data-icon=forward]:before
@@ -56,16 +54,21 @@ nav
 	height:22px;
 }
 
-nav>.action
-{
+nav>.action{
 	color:white;
 	text-decoration:none;
-	padding:2px 10px 0px 5px;
+	padding:2px 10px 0px 10px;
 	float:left;
 	height:100%;
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	cursor:pointer;
+	border-right:1px solid white;
+}
+
+nav>.action[data-icon]:before{
+	font-size:80%;
+	margin-right:10px;
 }
 
 #workspace
@@ -102,22 +105,6 @@ nav>.action
 	min-width:20px;
 	max-width:100%;
 	z-index:2;
-}
-
-
-@-webkit-keyframes glow
-{
-	from
-	{
-		background-size: 100% 100%, auto;
-		background-position:50% 100%,100%;
-	}
-
-	to
-	{
-		background-size: 50% 50%, auto;
-		background-position:50% 100%, 100%;
-  }
 }
 
 
