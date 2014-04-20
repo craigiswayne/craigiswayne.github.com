@@ -3,53 +3,51 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Nexus Prototype v0.6</title>
-	<link rel="icon" type="image/png" href="nexus-prototype.png">
-	<link rel="stylesheet" href=nexus-prototype.css>
-	<script src=nexus-prototype.js></script>
+	<link rel="icon" type="image/png" href="nexus_prototype.png">
+	<link rel="stylesheet" href=nexus_prototype.css>
+	<script src=nexus_prototype.js></script>
 </head>
 
 <body trial>
 
 <nav>
-	<a class=action target=_blank href="" download="prototype.html" data-icon=download>Download</a>
-	<label class=action data-icon=upload>Upload<input type=file style=display:none; multiple accept=".html"></label>
+	<a class=action target=_blank href="" download="prototype.html" data-icon_name=download>Download</a>
+	<label class=action data-icon_name=upload>Upload<input type=file style=display:none; multiple accept=".html"></label>
+	<label class=action data-icon_name=eraser>Reset<input type=button style=display:none></label>
 </nav>
 
 <div id=workspace data-loading="false">
 
-	<form id="editor">
+	<form>
 		
 		<div data-showing="true" class="code-box" id="js-area" data-tag="script">
-			<label data-language="JavaScript" data-icon="javascript"><input class="toggle" type="checkbox" checked></label>
-			<!--<ol id="js-textarea" spellcheck="false" class="code-area" contenteditable><li></li></ol>-->
-			<textarea id="js-textarea" spellcheck="false" class="code-area"></textarea>
+			<label data-language="JavaScript" data-icon_name="javascript"><input class="toggle" type="checkbox" checked></label>
+			<textarea data-language="javascript" spellcheck="false" class=codearea></textarea>
 		</div>
 		
 		<div data-showing="true" class="code-box" id="css-area" data-tag="style">
-			<label data-language="CSS" data-icon="css"><input class="toggle" type="checkbox" checked></label>
-			<!--<ol id="css-textarea" spellcheck="false" class="code-area" contenteditable><li></li></ol>-->
-			<textarea id="css-textarea" spellcheck="false" class="code-area"></textarea>
+			<label data-language="CSS" data-icon_name="css"><input class="toggle" type="checkbox" checked></label>
+			<textarea data-language="css" spellcheck="false" class=codearea></textarea>
 		</div>
 		
 		<div data-showing="true" class="code-box" id="markup-area" data-tag="body">
-			<label data-language="HTML" data-icon="html"><input class="toggle" type="checkbox" checked></label>
-			<!--<ol id="markup-textarea" spellcheck="false" class="code-area" contenteditable><li></li></ol>-->
-			<textarea id="markup-textarea" spellcheck="false" class="code-area"></textarea>
+			<label data-language="HTML" data-icon_name="html"><input class="toggle" type="checkbox" checked></label>
+			<textarea data-language="html" spellcheck="false" class=codearea></textarea>
 		</div>
 		
 		<div id="resizer">
-			<a id="toggle-settings" data-icon="settings"></a>
-			<a id="toggle-design" data-icon="forward"></a>
-			<a id="resizer-icon" data-icon=ellipsis-vertical ></a>
-			<a id="toggle-preview" data-icon="backward"></a>
+			<a data-icon_name=settings></a>
+			<a data-icon_name=forward></a>
+			<a data-icon_name=ellipsis_vertical ></a>
+			<a data-icon_name=backward></a>
 		</div>
 		
 	</form>
 	
 	<output id="preview">
-		<iframe id="preview-frame" src="about:blank" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+		<iframe src="about:blank" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
 		<div id="resize-helper">
-			<div class="loading-status" data-icon=""></div>
+			<div class="loading-status" data-icon_name=""></div>
 		</div>
 	</output>
 	

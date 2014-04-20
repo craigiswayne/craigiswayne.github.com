@@ -7,32 +7,32 @@ document.addEventListener("DOMContentLoaded",function()
 	
 	for(var i=0; i<code_boxes.length; i++)
 	{
-		if(code_boxes[i].getElementsByClassName("code-area")[0].getElementsByTagName("li")[0])
+		if(code_boxes[i].getElementsByClassName("codearea")[0].getElementsByTagName("li")[0])
 		{
-			console.log("found in:" +  code_boxes[i].getElementsByClassName("code-area")[0].parentNode.id);
-			code_boxes[i].getElementsByClassName("code-area")[0].getElementsByTagName("li")[0].addEventListener("keydown",retain_first_line,false);
+			code_boxes[i].getElementsByClassName("codearea")[0].getElementsByTagName("li")[0].addEventListener("keydown",retain_first_line,false);
 		}
 	
-		code_boxes[i].getElementsByClassName("code-area")[0].addEventListener("keyup",show_preview,false);
-		code_boxes[i].getElementsByClassName("code-area")[0].addEventListener("scroll",function(){this.style.backgroundPositionY = 0-this.scrollTop;},false);		
+		code_boxes[i].getElementsByClassName("codearea")[0].addEventListener("keyup",show_preview,false);
+		code_boxes[i].getElementsByClassName("codearea")[0].addEventListener("scroll",function(){this.style.backgroundPositionY = 0-this.scrollTop;},false);		
 		code_boxes[i].getElementsByClassName("toggle")[0].addEventListener("change",resize_code_boxes);
 	}
 	
-	var editor 	= document.getElementById("editor");
+	var editor 	= document.querySelector("#workspace>form");
 	var preview = document.getElementById("preview");
 	
-	document.getElementById("toggle-design").addEventListener("click",function()
+	
+	document.querySelector("#resizer>[data-icon_name=forward]").addEventListener("click",function()
 	{
 		editor.style.width = window.getComputedStyle(editor).maxWidth;
 		preview.style.width = window.getComputedStyle(preview).minWidth;
 	},false);
 	
-	document.getElementById("toggle-preview").addEventListener("click",function()
+	document.querySelector("#resizer>[data-icon_name=backward]").addEventListener("click",function()
 	{
 		editor.style.width = window.getComputedStyle(editor).minWidth;
 		preview.style.width = window.getComputedStyle(preview).maxWidth;
 	},false);
-	
+
 	
 	//resize events
 	workspace = document.getElementById("workspace");
@@ -67,44 +67,45 @@ document.addEventListener("DOMContentLoaded",function()
 	
 	
 	
-	var preview_frame = document.getElementById("preview-frame");
+	var preview_frame = document.querySelector("#preview>iframe");
 	preview_doc = preview_frame.contentDocument || preview_frame.contentWindow.document;
 	
-	document.querySelector("nav>a.action[download]").addEventListener("click",function(){save_code_as();},false);
+	document.querySelector("body>nav>a.action[download]").addEventListener("click",function(){save_code_as();},false);
 	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;	
-	document.querySelector("nav>label.action>input[type=file]").onchange = upload_files;
-	
-	//functionality for hosted prototype
-	var upload_button = document.querySelector("nav>.action>input[type=file]");
-	if(!document.domain){
-		upload_button.type = "button";
-		upload_button.addEventListener("click",function(){alert("Not available as a local file","test");},false);
-	}
-	
+	document.querySelector("body>nav>label.action>input[type=file]").onchange = upload_files;
+	document.querySelector("body>nav>[data-icon_name=eraser]>input[type=button]").onclick = reset_codeareas;
+	get_functionality();
+	resize_code_boxes();
+	show_preview();
 },false);
 
+function reset_codeareas(){
+	for(var i=0; i<document.querySelectorAll(".codearea").length; i++){
+		document.querySelectorAll(".codearea")[i].value = '';
+	}
+	show_preview();
+}
+
 function upload_files(){
-	console.log("@line80");
 	var files = this.files;
-	
 	window.requestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
-		console.log("@line84");
 		for (var i = 0, file; file = files[i]; ++i) {
+			document.querySelector("body>nav>a.action[download]").download = file.name;
 			(function(f){
-				var current_date = new Date();
+				//var current_date = new Date();
 				fs.root.getFile("uploaded.html", {create: true, exclusive: false}, function(fileEntry){
 					fileEntry.createWriter(function(fileWriter){
-						fileWriter.write(f); // Note: write() can take a File or Blob object.
-						fs.root.getFile('uploaded.html', {}, function(fileEntry) {
-					
+						fileWriter.write(f);
+						fs.root.getFile("uploaded.html", {}, function(fileEntry) {
 							fileEntry.file(function(file){
 								var reader = new FileReader();
 								this.result = "";
 								reader.onloadend = function(e){
-									//console.log("inner text of the uploaded html file:");
-									//console.log(this.result);
+									reset_codeareas();
 									document.querySelector(".code-box[data-tag=body] textarea").value = this.result;
 									document.querySelector("nav>label.action>input[type=file]").value = null;
+									show_preview();
+									console.log(this);
 								};
 						
 								reader.readAsText(file);
@@ -155,19 +156,8 @@ function show_preview()
 {
 	console.clear();
 	
-	workspace.dataset.loading = true;
-	
-	//console.log("Step 1: Get the updated tag:");
-	//var updated_tag = event.srcElement.parentNode.dataset.tag;
-	//console.log(updated_tag);
-	
-	//console.log("\nStep 2: Get access to the iframe's document:");
+	document.querySelector("#workspace").dataset.loading = true;
 	preview_doc.open();
-	//console.log(preview_doc);
-	
-	//console.log("\nStep 3: Check if the updated tag exists in the preview frame's document:");
-	//var target_tag = preview_doc.getElementsByTagName(updated_tag);
-	
 	preview_doc.write(get_preview_code());
 	preview_doc.close();
 	workspace.dataset.loading = false;
@@ -175,21 +165,22 @@ function show_preview()
 
 function get_preview_code()
 {
-	/*var html = "<style>\n"+document.getElementById("css-area").getElementsByClassName("code-area")[0].innerText+"\n</style>\n\n";
-	html += "<script>\n" + document.getElementById("js-area").getElementsByClassName("code-area")[0].innerText+"\n<\/script>\n\n";
-	html += "<body>\n"+document.getElementById("markup-area").getElementsByClassName("code-area")[0].innerText+"\n</body>\n\n";*/
-	
-	var html = "<style>\n"+document.getElementById("css-area").getElementsByClassName("code-area")[0].value+"\n</style>\n\n";
-	html += "<script>\n" + document.getElementById("js-area").getElementsByClassName("code-area")[0].value+"\n<\/script>\n\n";
-	html += "<body>\n"+document.getElementById("markup-area").getElementsByClassName("code-area")[0].value+"\n</body>\n\n";
+	var html = "<html><head>";
+	html += document.getElementById("css-area").getElementsByClassName("codearea")[0].value ? ("<style>"+document.getElementById("css-area").getElementsByClassName("codearea")[0].value+"</style>") : "";
+	html += document.getElementById("js-area").getElementsByClassName("codearea")[0].value ? ("<script>"+document.getElementById("js-area").getElementsByClassName("codearea")[0].value+"</script>") : "";
+	html += "</head><body>";
+	html += document.getElementById("markup-area").getElementsByClassName("codearea")[0].value;
+	html += "</body></html>";
 	
 	return html;
 }
 
-/*
-function retain_first_line()
-{
-	console.log(event);
-	console.log(event.srcElement);
+function get_functionality(){
+	
+	var upload_button = document.querySelector("nav>.action>input[type=file]");
+	if(!document.domain){
+		upload_button.type = "button";
+		upload_button.addEventListener("click",function(){alert("Not available as a local file","test");},false);
+	}
+	
 }
-*/
