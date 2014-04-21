@@ -184,3 +184,16 @@ function get_functionality(){
 	}
 	
 }
+
+function export_to_codepen(){
+	var form=document.querySelector("#workspace>form");
+	form.action = "http://codepen.io/pen/define";
+	form.method = "POST";  
+	//form.target = "_blank";
+	var codepen_data = form.appendChild(document.createElement("input"));
+	codepen_data.type = "hidden";
+	codepen_data.name = "data";
+	codepen_data.value = "{'title':'Exported from Prototype', 'html':'"+document.querySelector("codearea[lang=html]  ")+"', 'js':'', 'css':''}";
+	//form.submit();
+	form.removeChild(codepen_data);
+}
