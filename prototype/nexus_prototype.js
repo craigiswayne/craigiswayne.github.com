@@ -126,7 +126,8 @@ function errorHandler(e){
 function save_code_as()
 {
 	var data = 'data:application/xml;charset=utf-8,' + encodeURIComponent(get_preview_code());
-	document.querySelector("nav>a[download]").href = data;
+	document.querySelector("nav>a[download]").download = "nexus_prototype_export.html";
+	document.querySelector("nav>a[download]").href = data;	
 }
 
 function resize_code_boxes()
@@ -163,37 +164,56 @@ function show_preview()
 	workspace.dataset.loading = false;
 }
 
+function get_markup_code(){
+	return document.getElementById("markup-area").getElementsByClassName("codearea")[0].value;
+}
+
+function get_js_code(){return document.getElementById("js-area").getElementsByClassName("codearea")[0].value;}
+
+function get_css_code(){return document.getElementById("css-area").getElementsByClassName("codearea")[0].value;}
+
 function get_preview_code()
 {
-	var html = "<html><head>";
-	html += document.getElementById("css-area").getElementsByClassName("codearea")[0].value ? ("<style>"+document.getElementById("css-area").getElementsByClassName("codearea")[0].value+"</style>") : "";
-	html += document.getElementById("js-area").getElementsByClassName("codearea")[0].value ? ("<script>"+document.getElementById("js-area").getElementsByClassName("codearea")[0].value+"</script>") : "";
-	html += "</head><body>";
-	html += document.getElementById("markup-area").getElementsByClassName("codearea")[0].value;
-	html += "</body></html>";
-	
+	var html = '';
+	html += "<style>"+get_css_code()+"</style>";
+	html += "<script>"+get_js_code()+"</script>";
+	html += get_markup_code();
 	return html;
 }
 
 function get_functionality(){
 	
 	var upload_button = document.querySelector("nav>.action>input[type=file]");
+	var codepen_export_button = document.querySelector("nav>label.action[data-icon_name=share]>.share_menu>a[onclick='export_to_codepen()']");
 	if(!document.domain){
+		codepen_export_button.setAttribute("onclick","local_functionality_notice()");
 		upload_button.type = "button";
-		upload_button.addEventListener("click",function(){alert("Not available as a local file","test");},false);
+		upload_button.addEventListener("click",local_functionality_notice,false);
 	}
 	
 }
 
+function local_functionality_notice(){alert("Not available as a local file","test");}
+
 function export_to_codepen(){
-	var form=document.querySelector("#workspace>form");
+	var form = document.createElement("form");
+	form.style.display="none";
+	form.target = "_blank";
+	form.method = "POST";
 	form.action = "http://codepen.io/pen/define";
-	form.method = "POST";  
-	//form.target = "_blank";
-	var codepen_data = form.appendChild(document.createElement("input"));
-	codepen_data.type = "hidden";
-	codepen_data.name = "data";
-	codepen_data.value = "{'title':'Exported from Prototype', 'html':'"+document.querySelector("codearea[lang=html]  ")+"', 'js':'', 'css':''}";
-	//form.submit();
-	form.removeChild(codepen_data);
+	
+	var data = form.appendChild(document.createElement("input"));
+	data.type = "hidden";
+	data.name = "data";
+	
+	//set the name as the same name as the download OR! nexus prototype export
+	var data_obj = {
+		"title":"Nexus Prototype Export",
+		"html":get_markup_code(),
+		"css":get_css_code(),
+		"js":get_js_code()
+	}
+	data.value = JSON.stringify(data_obj).replace(/"/g, "&quot;").replace(/'/g,"&apos;");
+	
+	form.submit();
 }
