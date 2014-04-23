@@ -7,11 +7,6 @@ document.addEventListener("DOMContentLoaded",function()
 	
 	for(var i=0; i<code_boxes.length; i++)
 	{
-		if(code_boxes[i].getElementsByClassName("codearea")[0].getElementsByTagName("li")[0])
-		{
-			code_boxes[i].getElementsByClassName("codearea")[0].getElementsByTagName("li")[0].addEventListener("keydown",retain_first_line,false);
-		}
-	
 		code_boxes[i].getElementsByClassName("codearea")[0].addEventListener("keyup",show_preview,false);
 		code_boxes[i].getElementsByClassName("codearea")[0].addEventListener("scroll",function(){this.style.backgroundPositionY = 0-this.scrollTop;},false);		
 		code_boxes[i].getElementsByClassName("toggle")[0].addEventListener("change",resize_code_boxes);
@@ -77,7 +72,51 @@ document.addEventListener("DOMContentLoaded",function()
 	get_functionality();
 	resize_code_boxes();
 	show_preview();
+	
+	catch_save_functions();
+	
+	catch_query_strings();
+	
 },false);
+
+function catch_query_strings(){
+
+	if(get_query_variable("html")){document.querySelector(".code-box>textarea[data-language=html]").value = get_query_variable("html");}
+	if(get_query_variable("js")){document.querySelector(".code-box>textarea[data-language=javascript]").value = get_query_variable("js");}
+	if(get_query_variable("css")){document.querySelector(".code-box>textarea[data-language=css]").value = get_query_variable("css");}
+	history.pushState(null,null,document.location.origin+document.location.pathname);
+	show_preview();
+}
+
+
+//ref:http://css-tricks.com/snippets/javascript/get-url-variables/
+function get_query_variable(variable)
+{
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i=0;i<vars.length;i++)
+		{
+			var pair = vars[i].split("=");
+			if(pair[0] == variable)
+			{
+				return decodeURIComponent(pair[1]);
+			}
+		}
+		return false;
+}
+
+function catch_save_functions()
+{
+	document.addEventListener("keydown", function(e)
+	{
+		if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey))
+		{
+			 e.preventDefault();
+			 save_code_as();
+			 document.querySelector("nav>a[download]").click();
+		}
+	}, false);
+}
 
 function reset_codeareas(){
 	for(var i=0; i<document.querySelectorAll(".codearea").length; i++){
@@ -127,7 +166,7 @@ function save_code_as()
 {
 	var data = 'data:application/xml;charset=utf-8,' + encodeURIComponent(get_preview_code());
 	document.querySelector("nav>a[download]").download = "nexus_prototype_export.html";
-	document.querySelector("nav>a[download]").href = data;	
+	document.querySelector("nav>a[download]").href = data;
 }
 
 function resize_code_boxes()
