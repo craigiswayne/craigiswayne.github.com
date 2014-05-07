@@ -1,0 +1,108 @@
+<ol>
+	<li>Clean Install Ubuntu 14.04</li>
+	
+	<li>
+		These were the account details i used:
+		
+		your name: Craig Wayne
+		
+		computer's name: nexus_muze
+		username: craig_wayne
+		
+		Keyboard Layout: South Africa
+	</li>
+
+	<li>
+		Open Terminal
+		<code>Control + Alt + T</code>
+	</li>
+	
+	<li>
+		Set the screen timeout (due to inactivity) to never (just for now)
+		<code>setterm -blank 0</code>
+	</li>
+	
+	<li>
+		Get updated packages
+		<code>sudo apt-get update</code>
+		<!--not sudo apt-get dist-upgrade-->
+	</li>
+	
+	<li>
+		Install updates (upgrade)
+		<code>sudo apt-get upgrade</code>
+	</li>
+	
+	<li>
+		for some reason i rather be safe than sorry
+		fix broken packages (if there are any)
+		<code>sudo apt-get install -f</code>
+	</li>
+	
+	<li>
+		automount all other hard drives on system upon system start
+		
+	</li>
+	
+	<li>
+		install utorrent server dependancies
+		<a class=reference>http://www.howopensource.com/2011/08/install-utorrent-in-ubuntu-fedora/</a>
+		<code>sudo apt-get install libssl0.9.8:i386</code>
+	</li>
+	
+	<li>
+		get utorrent file
+		<code>wget http://download.utorrent.com/linux/utorrent-server-3.0-25053.tar.gz</code>
+	</li>
+	
+	<li>
+		move to the downloads folder
+		<code>cd Downloads/</code>
+	<li>
+	
+	<li><code>sudo cp utorrent-server-3.0-25053.tar.gz /opt/</code></li>
+	<li><code>cd /opt/</code></li>
+	<li><code>sudo tar -xvf utorrent-server-3.0-25053.tar.gz</code></li>
+	<li><code>sudo chmod 777 -R utorrent-server-v3_0/</code></li>
+	<li><code>sudo ln -s /opt/utorrent-server-v3_0/utserver /usr/bin/<code></li>
+	<li><code>sudo gedit /opt/rc.local</code></li>
+	<li><code>utorrent -settingspath /opt/utorrent-server-alpha-v3_3</code></li>
+	<li><code>http://localhost:8080/gui/</code></li>
+	
+	<li>finish off the utorrent tutorial</li>
+	
+	<li>set utorrent to auto start</li>
+	
+	<li>install google chrome
+		<code>sudo apt-get install libxss1</code>
+		<code>wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb</code>
+		<code>sudo dpkg -i google-chrome*.deb</code>
+		<code>sudo rm google-chrome-stable_current_amd64.deb</code>
+	<li>
+	
+	<li>
+		install lamp
+		https://help.ubuntu.com/community/ApacheMySQLPHP
+	</li>
+	
+	<li>
+		Empty out the sidebar
+		<code></code>
+	</li>
+	
+	<li>set a static ip for your network</li>
+	
+	<li>
+		automount media hdd...
+		sudo mkdir /media/data
+		sudo gedit /etc/fstab
+		add this line
+		UUID=(#_id of the additional harddrive#) /media/data defaults 0 2
+	</li>
+	
+	<li>
+		reboot your system
+		<code>sudo reboot</code>
+	</li>
+	
+</ol>
