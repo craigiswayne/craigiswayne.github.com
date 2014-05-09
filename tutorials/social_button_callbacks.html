@@ -3,8 +3,8 @@
 	<a id="tweet_button" href="https://twitter.com/intent/tweet?url=" class="twitter-share-button" data-size="large">Tweet</a>
 	<script type="text/javascript">
 		twttr.ready(function (twttr) {
-			twttr.events.bind('tweet', function( event ) {
-				//console.log( event );
+			twttr.events.bind('tweet', function(event) {
+				console.log(event);
 				social_callback("twitter");
 			});
 		});
@@ -56,29 +56,26 @@
 			 FB.Event.subscribe('edge.create', function(response) {
 				  alert('You liked the URL: ' + response);
 			 });
+			 
+			 FB.Event.subscribe('edge.remove',function(response){
+			 	alert('You unliked the URL: ' + response);
+			 });
 		};
 	</script>
 
 <h1>Google +1 Button with callback</h1>
-
-
-
-
 <script>
-var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-   function myCallback(jsonParam) {
-
-      //alert("URL: " + jsonParam.href + " state: " + jsonParam.state);
-      social_callback("google");
-   }
+	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		 po.src = 'https://apis.google.com/js/plusone.js';
+		 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		function myCallback(jsonParam) {
+			console.log(jsonParam);
+			console.log("URL: " + jsonParam.href + " state: " + jsonParam.state);
+			social_callback("google");
+		}
 
 </script>
-
 <g:plusone size="medium" callback="myCallback"></g:plusone>
-
-
 
 
 
