@@ -1,6 +1,6 @@
 <h1>Twitter Tweet Button with Call back</h1>
 	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-	<a id="tweet_button" href="https://twitter.com/intent/tweet?url=" class="twitter-share-button" data-size="large">Tweet</a>
+	<a id="tweet_button" href="https://twitter.com/intent/tweet?url=" class="twitter-share-button" data-size="medium">Tweet</a>
 	<script type="text/javascript">
 		twttr.ready(function (twttr) {
 			twttr.events.bind('tweet', function(event) {
@@ -25,9 +25,13 @@
 				  oauth: true
 			 });
 			 FB.Event.subscribe('edge.create', function(response) {
-				  social_callback("facebook");
+			 	alert("you just liked this site");
+			 });
+			 FB.event.subscribe('edge.remove',function(response){
+				alert("you unLiked this site");
 			 });
 		};
+		
 		(function(d) {
 			 var js, id = 'facebook-jssdk';
 			 if (d.getElementById(id)) {
@@ -63,21 +67,20 @@
 		};
 	</script>
 
+	
 <h1>Google +1 Button with callback</h1>
-<script>
-	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		 po.src = 'https://apis.google.com/js/plusone.js';
-		 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	<script>
+		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 		function myCallback(jsonParam) {
-			console.log(jsonParam);
-			console.log("URL: " + jsonParam.href + " state: " + jsonParam.state);
-			social_callback("google");
+			if(jsonParam.state == "off"){alert("you removed your +1");}
+			else{alert("you +1 this site");}
 		}
+	</script>
+	<g:plusone size="medium" callback="myCallback"></g:plusone>
 
-</script>
-<g:plusone size="medium" callback="myCallback"></g:plusone>
-
-
+	
 
 <script>
 	document.addEventListener("DOMContentLoaded",function(){document.querySelector("#tweet_button").href += window.location.href;},false);
