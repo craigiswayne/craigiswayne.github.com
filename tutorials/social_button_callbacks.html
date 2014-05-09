@@ -17,6 +17,7 @@
 		twttr.ready(function (twttr) {
 			twttr.events.bind('tweet', function(event) {
 				alert("you tweeted this site");
+				console.log(event);
 				if(event.target.dataset.callback){window[event.target.dataset.callback](event);}
 			});
 		});
@@ -29,7 +30,7 @@
 	<div id="fb-root"></div>
 	<script>
 		
-		window.fbAsyncInit = function() {
+		window.fbAsyncInit = function(){
 			 FB.init({
 				  appId: '328011467238834',
 				  status: true,
@@ -37,10 +38,12 @@
 				  xfbml: true,
 				  oauth: true
 			 });
+			 
 			 FB.Event.subscribe('edge.create', function(response) {
 			 	console.log(response);
 			 	alert("you just liked this site");
 			 });
+			 
 			 FB.Event.subscribe('edge.remove',function(response){
 			 	console.log(response);
 				alert("you unLiked this site");
