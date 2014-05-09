@@ -12,13 +12,14 @@
 
 <h1>Twitter Tweet Button with Call back</h1>
 	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-	<a id="tweet_button" href="https://twitter.com/intent/tweet?url=" class="twitter-share-button" data-size="medium" data-callback="tester">Tweet</a>
+	<a id="tweet_button" href="https://twitter.com/intent/tweet?url=" class="twitter-share-button" data-size="medium">Tweet</a>
 	<script type="text/javascript">
 		twttr.ready(function (twttr) {
 			twttr.events.bind('tweet', function(event) {
 				alert("you tweeted this site");
-				console.log(event);
-				if(event.target.dataset.callback){window[event.target.dataset.callback](event);}
+				//console.log(event);
+				//if(event.target.dataset.callback){window[event.target.dataset.callback](event);}
+				//
 			});
 		});
 	</script>
@@ -64,7 +65,7 @@
 		
 	</script>
 	
-	<div id=like_button class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false" data-callback="tester"></div>
+	<div id=like_button class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 
 	
 <h1>Google +1 Button with callback</h1>
