@@ -1,0 +1,88 @@
+<h1>Twitter Tweet Button with Call back</h1>
+	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+	<a id="tweet_button" href="https://twitter.com/intent/tweet?url=" class="twitter-share-button" data-size="large">Tweet</a>
+	<script type="text/javascript">
+		twttr.ready(function (twttr) {
+			twttr.events.bind('tweet', function( event ) {
+				//console.log( event );
+				social_callback("twitter");
+			});
+		});
+	</script>
+
+
+<h1>Facebook Like Button with Call back</h1>
+	<i><a href="http://jsfiddle.net/dmcs/3D2GD/1/">facebook callback jsfiddle</a></i>
+	<div id="fb-root"></div>
+	<script>
+		
+		window.fbAsyncInit = function() {
+			 FB.init({
+				  appId: '328011467238834',
+				  status: true,
+				  cookie: true,
+				  xfbml: true,
+				  oauth: true
+			 });
+			 FB.Event.subscribe('edge.create', function(response) {
+				  social_callback("facebook");
+			 });
+		};
+		(function(d) {
+			 var js, id = 'facebook-jssdk';
+			 if (d.getElementById(id)) {
+				  return;
+			 }
+			 js = d.createElement('script');
+			 js.id = id;
+			 js.async = true;
+			 js.src = "//connect.facebook.net/en_US/all.js";
+			 d.getElementsByTagName('head')[0].appendChild(js);
+		}(document));
+		
+	</script>
+	
+	<div id=like_button class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+	
+	<script>
+		window.fbAsyncInit = function() {
+			 FB.init({
+				  appId: '328011467238834',
+				  status: true,
+				  cookie: true,
+				  xfbml: true,
+				  oauth: true
+			 });
+			 FB.Event.subscribe('edge.create', function(response) {
+				  alert('You liked the URL: ' + response);
+			 });
+		};
+	</script>
+
+<h1>Google +1 Button with callback</h1>
+
+
+
+
+<script>
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+   function myCallback(jsonParam) {
+
+      //alert("URL: " + jsonParam.href + " state: " + jsonParam.state);
+      social_callback("google");
+   }
+
+</script>
+
+<g:plusone size="medium" callback="myCallback"></g:plusone>
+
+
+
+
+
+<script>
+	document.addEventListener("DOMContentLoaded",function(){document.querySelector("#tweet_button").href += window.location.href;},false);
+	function social_callback(network){alert("You liked\tweeted\+1 this site on: "+network);}
+</script>
