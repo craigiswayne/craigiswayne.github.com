@@ -1,8 +1,6 @@
 <script>
 	document.addEventListener("DOMContentLoaded",function(){document.querySelector("#tweet_button").href += window.location.href;},false);
-	
-	function tester(){console.log("tester called");}
-	
+
 	function google_plus_action(response){
 		console.log(response);
 		if(response.state == "off"){alert("you removed your +1");}
