@@ -1,0 +1,10 @@
+ref: http://demo.simpleinvoices.org/index.php?module=index&view=index
+
+1. each module defaults to a dashboard...
+2. each dashboard defaults to a system dashboard function which runs automatically... from the extended class
+
+this will be the structure of the folders
+
+nexus
+| nexus_zephyr
+| custom

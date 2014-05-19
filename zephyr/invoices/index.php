@@ -1,0 +1,7 @@
+<?php
+
+	invoices::dashboard();
+
+?>
+
+<input>

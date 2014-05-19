@@ -203,7 +203,7 @@ function show_preview()
 	workspace.dataset.loading = false;
 }
 
-function get_markup_code(){
+function get_html_code(){
 	return document.getElementById("markup-area").getElementsByClassName("codearea")[0].value;
 }
 
@@ -216,7 +216,7 @@ function get_preview_code()
 	var html = '';
 	html += "<style>"+get_css_code()+"</style>";
 	html += "<script>"+get_js_code()+"</script>";
-	html += get_markup_code();
+	html += get_html_code();
 	return html;
 }
 
@@ -248,11 +248,15 @@ function export_to_codepen(){
 	//set the name as the same name as the download OR! nexus prototype export
 	var data_obj = {
 		"title":"Nexus Prototype Export",
-		"html":get_markup_code(),
+		"html":get_html_code(),
 		"css":get_css_code(),
 		"js":get_js_code()
 	}
 	data.value = JSON.stringify(data_obj).replace(/"/g, "&quot;").replace(/'/g,"&apos;");
 	
 	form.submit();
+}
+
+function generate_prototype_share_url(){
+	return document.location.href + "?html="+encodeURIComponent(get_html_code())+ "&css=" +encodeURIComponent(get_css_code()) + "&js=" + encodeURIComponent(get_js_code());
 }

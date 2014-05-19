@@ -1,16 +1,6 @@
-<script>
-	document.addEventListener("DOMContentLoaded",function(){document.querySelector("#tweet_button").href += window.location.href;},false);
-
-	function google_plus_action(response){
-		console.log(response);
-		if(response.state == "off"){alert("you removed your +1");}
-		else{alert("you +1 this site");}
-	}
-</script>
-
 <h1>Twitter Tweet Button with Call back</h1>
 	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-	<a id="tweet_button" href="https://twitter.com/intent/tweet?url=" class="twitter-share-button" data-size="medium">Tweet</a>
+	<a id="tweet_button" href="https://twitter.com/share" class="twitter-share-button" data-size="medium">Tweet</a>
 	<script type="text/javascript">
 		twttr.ready(function (twttr) {
 			twttr.events.bind('tweet', function(event) {
@@ -63,13 +53,20 @@
 		
 	</script>
 	
-	<div id=like_button class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+	<div id=like_button class="fb-like" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
 
 	
 <h1>Google +1 Button with callback</h1>
+<i><a href="https://developers.google.com/+/web/+1button/">click for api reference</a></i>
 	<script>
 		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
 		po.src = 'https://apis.google.com/js/plusone.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		
+		function google_plus_action(response){
+		console.log(response);
+		if(response.state == "off"){alert("you removed your +1");}
+		else{alert("you +1 this site");}
+	}
 	</script>
-	<g:plusone size="medium" callback="google_plus_action"></g:plusone>
+	<div class=g-plusone data-size=tall data-annotation=bubble data-callback="google_plus_action"></div>

@@ -17,7 +17,9 @@
 	
 	<label class=action data-icon_name=share>
 		<div class=share_menu>
-			<a id="export_to_codepen_link" onclick="export_to_codepen()">CodePen</a><a>Email</a>
+			<a id="export_to_codepen_link" onclick="export_to_codepen()">CodePen</a>
+			<a>Email</a>
+			<input type=button onclick="prompt('Generated Link',generate_prototype_share_url());" value="get link">
 		</div>
 	</label>
 </nav>
