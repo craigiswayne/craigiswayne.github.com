@@ -32,10 +32,10 @@ document.addEventListener("DOMContentLoaded",function()
 	//resize events
 	workspace = document.getElementById("workspace");
 	var resizer = document.getElementById("resizer");
-	resizer.addEventListener("mousedown",function()
+	resizer.addEventListener("mousedown",function(event)
 	{
 		workspace.dataset.resizing = true;
-		resize_start = event.x;
+		resize_start = event.clientX;
 		editor_width = window.getComputedStyle(editor).width;
 	},false);
 	
@@ -44,18 +44,21 @@ document.addEventListener("DOMContentLoaded",function()
 	//dont need this, just check if the src element is the resizer
 	document.addEventListener("mouseup",function(){workspace.dataset.resizing = false;},false);
 	
-	document.addEventListener("mousemove",function()
+	document.addEventListener("mousemove",function(event)
 	{
 		//NOTE: the new_width is a percentage of the container not in pixels (px)
 		if(workspace.dataset.resizing=="true")
 		{	
 			var workspace_width = parseInt(window.getComputedStyle(workspace).width);
+			
 			var resizer_width = parseInt(window.getComputedStyle(resizer).width);
 			
-			var difference = event.x-resize_start;
+			var difference = event.clientX-resize_start;
+			
 			var new_width = ((parseInt(editor_width)+difference)/workspace_width)*100;
 			
 			editor.style.width	= new_width + "%";
+			
 			preview.style.width	= "calc(100% - "+editor.style.width+")";
 		}
 	},false);
@@ -144,7 +147,6 @@ function upload_files(){
 									document.querySelector(".code-box[data-tag=body] textarea").value = this.result;
 									document.querySelector("nav>label.action>input[type=file]").value = null;
 									show_preview();
-									console.log(this);
 								};
 						
 								reader.readAsText(file);
@@ -159,7 +161,7 @@ function upload_files(){
 
 
 function errorHandler(e){
-	console.log(e);
+	console.error(e);
 }
 
 function save_code_as()

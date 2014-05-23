@@ -48,15 +48,14 @@ body
 	margin:0px;
 	padding:0px;
 	box-sizing: border-box;
-	-moz-box-sizing:border-box;
 	font-family:Varela Round, Arial;
+	height:100%;
 }
 
 nav
 {
 	background-color:rgb(250, 101, 101);
 	box-sizing:border-box;
-	-moz-box-sizing:border-box;
 	height:22px;
 }
 
@@ -67,7 +66,6 @@ nav>.action{
 	float:left;
 	height:100%;
 	box-sizing:border-box;
-	-moz-box-sizing:border-box;
 	cursor:pointer;
 	border-right:1px solid white;
 }
@@ -201,6 +199,10 @@ nav>.action[data-icon_name=share]>.share_menu>a#export_to_codepen_link{
 {
 	width:calc(100% - 20px);
 	height:33.3333333333%;
+	
+	display:-moz-box;
+	-moz-box-orient:vertical;
+	
 	display:-webkit-box;
 	-webkit-box-orient:vertical;
 	min-height:22px; /*same as the height of the header*/
@@ -221,7 +223,6 @@ nav>.action[data-icon_name=share]>.share_menu>a#export_to_codepen_link{
 	color:white;
 	padding:0px 0px 0px 6px;
 	box-sizing:border-box;
-	-moz-box-sizing:border-box;
 	white-space:nowrap;
 	cursor:pointer;
 	background-image:-webkit-linear-gradient(top,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.5));
@@ -244,20 +245,19 @@ nav>.action[data-icon_name=share]>.share_menu>a#export_to_codepen_link{
 #workspace>form>.code-box>.codearea
 {
 	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	
 	display:block;
 	border:none;
 	line-height:18px;
 	resize:none;
 	margin:0px;
 	box-sizing:border-box;
-	-moz-box-sizing:border-box;
 	padding:2px 0px 10px 17px;
 	font-size:11px;
 	list-style-type:decimal;
 	background-color:transparent;
 	overflow:auto;
-	
-	
 	
 	background:repeating-linear-gradient(0deg, transparent, transparent 17px, skyblue 18px);
 	background-color:rgb(252,252,252);
@@ -286,7 +286,6 @@ nav>.action[data-icon_name=share]>.share_menu>a#export_to_codepen_link{
 	text-align:center;
 	padding:5px 0px;
 	box-sizing:border-box;
-	-moz-box-sizing:border-box;
 	width:100%;
 	display:block;
 }
