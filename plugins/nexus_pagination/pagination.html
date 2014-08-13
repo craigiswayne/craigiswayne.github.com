@@ -5,6 +5,14 @@
 <link rel="stylesheet" href="../../css/fonts/font-awesome-4.1.0/css/font-awesome.css" />
 
 <style>
+	div.pagination{
+		display:block;
+		position:relative;
+		padding:10px 0px;
+		width:877px;
+		margin:auto;
+	}
+
 	div.pagination *:not(.fa) {
 		font-family:"Lucida Grande";
 		font-size:11px;
@@ -12,7 +20,7 @@
 	
 	div.pagination>header,
 	div.pagination>footer{
-		border:1px solid black;
+		/*border:1px solid black;*/
 		display:inline-block;
 		width:100%;
 	}
@@ -43,12 +51,25 @@
 		background-color:rgb(0,175,240);
 	}
 	
-	div.pagination>header .dropdown>ul>li:hover{
+	div.pagination>header .dropdown:focus>ul{
+		display:block;
+	}
+	
+	div.pagination>header .dropdown>ul>label{
+		display:list-item;
+		text-indent:5px;
+		min-width:110px;
+		background-color:rgb(0,158,223);
+		border-top:1px solid #11C0FF;
+		cursor:pointer;
+	}
+	
+	div.pagination>header .dropdown>ul>label:hover{
 		background-color:rgba(0,0,0,0.2);
 	}
 	
-	div.pagination>header .dropdown:focus>ul{
-		display:block;
+	div.pagination>header .dropdown>ul>input[type=radio]:checked+label{
+		display:none;
 	}
 	
 	div.pagination .interact{
@@ -144,11 +165,8 @@
 		counter-increment:decimal_no_period;
 	}
 	
-	div.pagination>footer>button.interact:focus{
-		outline:none;
-	}
-	
 	div.pagination input[type=radio]:checked + label.interact,
+	div.pagination .dropdown:focus,
 	div.pagination .interact:hover{
 		background-color:rgb(0, 158, 223);
 		-webkit-transform:scale(1.1);
@@ -161,8 +179,18 @@
 	}
 	
 	div.pagination>header input[type=radio],
-	div.pagination>footer>input[type=radio]{
+	div.pagination>footer input[type=radio]{
 		display:none;
+	}
+	
+	div.pagination[data-working="true"]>.working_mask{
+		position:absolute;
+		top:0px;
+		left:0px;
+		width:100%;
+		height:100%;
+		background-color:rgba(50,50,50,0.5);
+		z-index:2;
 	}
 	
 	.ajax_preloader{
@@ -170,248 +198,63 @@
 			background-size:contain;
 			background-repeat: no-repeat;
 			background-position: center;
-			display: block !important;
+			display: inline-block;
 			margin: auto;
-			width:100%;
-			height:100%;
-			min-width:20px;
-			min-height:20px;
 			text-align: center;
+			width:100px;
+			height:100px;
 	}
 
 </style>
 
-<script>
-	
-	HTMLDivElement.prototype.paginate = function(){
-	
-		this.go_to_page = function(page_number){
-			
-			page_number = (page_number > this.total_pages) ? this.total_pages : page_number;
-			page_number = (page_number < 1) ? 1 : page_number;
-
-			this.page = page_number || 1;
-			
-			this.footer.querySelector("input[type=radio]:nth-of-type("+this.page+")").checked = "checked";
-			
-			this.scope_start	= ((this.page-1)*this.results_per_page)+1;
-			this.scope_end 		= this.scope_start+this.results_per_page-1;
-			this.querySelector("header>span.scope").innerHTML = this.scope_start + "-" + this.scope_end;
-
-			var missing_results = new Array();
-			for(var i=this.scope_start; i<this.scope_end+1; i++){
-				missing_results.push(i);
-			}
-			
-			for(var i=0; i<this.results.length; i++){
-				
-				var index = missing_results.indexOf(this.results[i].result_num);
-				
-				if(index != -1){
-					missing_results.splice(index,1);
-					this.results[i].element.dataset.showing = "true";
-				}
-				else{
-					this.results[i].element.dataset.showing = "false";
-				}
-				
-			}
-			
-			console.debug(missing_results);
-			if(missing_results.length > 0){
-				//var ajax_preloader = this.results_area.appendChild(document.createElement("div"));
-				//ajax_preloader.className = "ajax_preloader";
-			}
-			
-		};
-		
-		this.create_header = function(){
-			
-			this.header = this.header || this.querySelector("header") || this.insertBefore(document.createElement("header"),this.results_area);
-			
-			var interact_section = this.header.appendChild(document.createElement("section"));
-			
-			this.scope_title = this.header.appendChild(document.createElement("span"));
-			this.scope_title.className 						= "scope";
-			this.scope_title.innerText						= "1-"+this.results_per_page;
-			
-			this.results_per_page_dropdown_title 			= interact_section.appendChild(document.createElement("label"));
-			this.results_per_page_dropdown_title.innerText 	= this.results_per_page + " Per Page";
-			this.results_per_page_dropdown_title.className  = "interact dropdown fa fa-sort";
-			
-			this.sort_results_dropdown_title 			= interact_section.appendChild(document.createElement("button"));
-			this.sort_results_dropdown_title.innerText 	= "Sort By";
-			this.sort_results_dropdown_title.className  = "interact dropdown fa fa-sort";
-			this.sort_results_dropdown_title.innerHTML += "<ul><li>when youre</li><li>what is up</li><li>what is up</li><li>what is up</li><li>what is up</li><li>what is up</li></ul>";
-			
-			var radio_view_name							= this.id + "_view";
-			var list_view_radio							= interact_section.appendChild(document.createElement("input"));
-			list_view_radio.type 						= "radio";
-			list_view_radio.name						= radio_view_name;
-			list_view_radio.id							= list_view_radio.name+"_list";
-			list_view_radio.checked						= "checked";
-			var list_view_label							= interact_section.appendChild(document.createElement("label"));
-			list_view_label.className					= "interact fa fa-list-ul";
-			list_view_label.setAttribute("for",list_view_radio.id);
-			
-			var grid_view_radio							= interact_section.appendChild(document.createElement("input"));
-			grid_view_radio.type 						= "radio";
-			grid_view_radio.name						= radio_view_name;
-			grid_view_radio.id							= grid_view_radio+"_list";
-			var grid_view_label							= interact_section.appendChild(document.createElement("label"));
-			grid_view_label.className					= "interact fa fa-th-large";
-			grid_view_label.setAttribute("for",grid_view_radio.id);
-
-		}
-		
-		this.create_footer = function(){
-		
-			var pagination_container = this;
-			
-			this.footer = this.querySelector("footer") || this.appendChild(document.createElement("footer"));
-			
-			var pager_class = "interact";
-			
-			if(this.total_pages > 2){
-				var go_to_first_page = this.footer.appendChild(document.createElement("button"));
-				go_to_first_page.className = pager_class+" fa fa-angle-double-left";
-				go_to_first_page.addEventListener("click",function(){pagination_container.go_to_page(1);},false);
-			}
-			
-			if(this.total_pages > 1){
-				var previous_page = this.footer.appendChild(document.createElement("button"));
-				previous_page.className = pager_class+" fa fa-angle-left";
-				previous_page.addEventListener("click",function(){pagination_container.go_to_page(pagination_container.page-1);},false);
-			}
-			
-			for(var i=0; i<this.total_pages; i++){
-				
-				var pager_radio		= this.footer.appendChild(document.createElement("input"));
-				pager_radio.type    = "radio";
-				pager_radio.name 	= this.id + "_pager";
-				pager_radio.value	= (i+1);
-				pager_radio.id		= pager_radio.name+"_"+pager_radio.value;
-				pager_radio.addEventListener("change",function(){pagination_container.go_to_page(this.value);},false);
-				
-				var pager       = this.footer.appendChild(document.createElement("label"));
-				pager.className = pager_class;
-				pager.setAttribute("for",pager_radio.id);
-			}
-			
-			
-			if(this.total_pages > 1){
-				var next_page = this.footer.appendChild(document.createElement("button"));
-				next_page.className = pager_class+" fa fa-angle-right";
-				next_page.addEventListener("click",function(){pagination_container.go_to_page(pagination_container.page+1);},false);
-			}
-			
-			if(this.total_pages > 2){
-				var go_to_last_page = this.footer.appendChild(document.createElement("button"));
-				go_to_last_page.className = pager_class+" fa fa-angle-double-right";
-				go_to_last_page.addEventListener("click",function(){pagination_container.go_to_page(pagination_container.total_pages);},false);
-			}
-		};
-		
-		this.capture_results = function(){
-			
-			this.results = new Array();
-			
-			var valid_results = this.results_area.querySelectorAll("[data-result_num]");
-			
-			for(var i=0; i<valid_results.length; i++){
-				var result = new Object();
-				result.element = valid_results[i];
-				result.result_num = parseInt(valid_results[i].dataset.result_num);
-				this.results.push(result);
-			}
-			
-		};
-		
-		this.order = function(){
-			
-			this.results.sort(function(a,b){
-				return a.result_num - b.result_num;
-			});
-						
-			for(var i=0; i<this.results.length; i++){
-				this.results_area.removeChild(this.results[i].element);
-			}
-						
-			for(var i=0; i<this.results.length; i++){
-				this.results_area.appendChild(this.results[i].element);
-			}
-		};
-		
-		this.initialize = function(){
-			
-			this.id						= this.id || "pagination_"+Math.ceil((Math.random()*100));
-			this.className 		   	   += (this.className.indexOf("pagination") == -1) ? " pagination" : "";
-			
-			var initial_results			= this.innerHTML;
-			this.innerHTML = "";
-			this.results_area 			= this.appendChild(document.createElement("div"));
-			this.results_area.className	= "results_area";
-			this.results_area.innerHTML = initial_results;
-			
-			this.capture_results();
-			this.order();
-			this.results_per_page		= parseInt(this.dataset.results_per_page) || this.results.length || 10;
-			
-			this.total_results			= this.dataset.total_results;
-			this.sql_id					= this.dataset.sql_id;
-			this.total_pages			= Math.ceil(this.total_results / this.results_per_page);
-			this.page					= 1;
-			
-			
-			
-			this.create_header();
-			this.create_footer();
-			this.go_to_page(1);
-		}
-		
-		this.initialize();
-	};
-	
-	document.addEventListener("DOMContentLoaded",function(){
-		for(var pagination_areas = document.querySelectorAll("div.pagination:not([data-total_results='']):not([data_sql_id=''])"), i=0; i<pagination_areas.length; i++){pagination_areas[i].paginate();}
-	},false);
-</script>
+<script src=pagination.js></script>
 
 </head>
 
 <body>
 
 <div class="pagination" data-total_results="53" data-sql_id="3" data-results_per_page=7>
-	<p data-result_num=1>first</p>
-	<p data-result_num=4>fourth</p>
-	<p data-result_num=3>third</p>
-	<p data-result_num=2>second</p>
-	<p data-result_num=5>fifth</p>
-	<p data-result_num=6>sixth</p>
-	<p data-result_num=8>eighth</p>
-	<p data-result_num=9>ninth</p>
-	<p data-result_num=7>seventh</p>
-	<p data-result_num=10>tenth</p>
+	<p data-result_num=1 data-name="f" data-price="10" data-date="" data-rating="23"></p>
+	<p data-result_num=4 data-name="a" data-price="9" data-date="" data-rating="41"></p>
+	<p data-result_num=3 data-name="g" data-price="235" data-date="" data-rating="5"></p>
+	<p data-result_num=2 data-name="v" data-price="12.04" data-date="" data-rating="7"></p>
+	<p data-result_num=5 data-name="" data-price="2" data-date="" data-rating="-1"></p>
+	<p data-result_num=6 data-name="e" data-price="7" data-date="" data-rating="77"></p>
+	<p data-result_num=8 data-name="m" data-price="87" data-date="" data-rating="87"></p>
+	<p data-result_num=9 data-name="z" data-price="3" data-date="" data-rating="32"></p>
+	<p data-result_num=7 data-name="b" data-price="1" data-date="" data-rating="23"></p>
+	<p data-result_num=10 data-name="r" data-price="300" data-date="" data-rating="1"></p>
 </div>
 
 
 <span>to do</span>
 <ol>
-<li>mouse down on the next and previous buttons</li>
+<li>ajax</li>
 <li>ability to show all</li>
 <li>working mask</li>
-<li>what happens when the initial results are not in order</li>
 <li>changing of pages bug</li>
+<li>make the sorting more dynamic</li>
+<li>when changing the sort, need to display the results even if they are not showing already</li>
+<li>try stick with one colour and use alphas to change between</li>
+<li>what happens when there are more results present than the total results</li>
+<li>be wary of long url requests for ajax</li>
 </ol>
 
 <style>
-.results_area>*{
-height:100px;
-width:100px;
-display:inline-block;
-background-color:lime;
-margin:5px;
+.results_area>*[data-result_num]{
+	height:100px;
+	width:100px;
+	display:inline-block;
+	background-color:lime;
+	margin:5px;
+	vertical-align:top;
 }
+
+.results_area>*[data-result_num]:before{
+	content:"name: "attr(data-name) "\ price:" attr(data-price) "\ date:" attr(data-date) "\ rating:" attr(data-rating);
+}
+
+
 </style>
 
 </body>
