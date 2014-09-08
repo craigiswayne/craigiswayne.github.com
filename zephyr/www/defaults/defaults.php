@@ -16,6 +16,14 @@
 		</div>
 		
 		<a href="address_book.php">Address Book</a>
+		
+		
+		<div class="dropdown link">Coming Soon
+			<div class="dropdown list">
+				<a href="geyser_calculator.php">Geyser Calculator</a>
+			</div>
+		</div>
+		
 	</nav>
 </header>
 
