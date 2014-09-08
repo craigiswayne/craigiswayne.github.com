@@ -1,6 +1,6 @@
 var widget_data = new Object();
 
-document.addEventListener("DOMContentLoaded",setup_widget,false);
+document.addEventListener("DOMContentLoaded",initialize_nexus_galleries,false);
 var widget_media;
 
 function initialize_nexus_galleries()
@@ -338,7 +338,7 @@ function onYouTubeIframeAPIReady()
 					{
 						"showinfo":1,
 						"autohide":0,
-						"iv_load_policy":3,
+						"iv_load_policy":3,s
 						"rel":0,
 						"modestbranding":1
 					}
