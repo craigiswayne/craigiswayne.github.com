@@ -110,7 +110,7 @@ function modify_widget(w_index)
 	
 		var g_close = document.createElement("a");
 		g_close.className = "label close";
-		g_close.href = "#";
+		g_close.href = "javascript:void(0);";
 		g_close.addEventListener("click",function(){close_gallery(w_index);},false);
 		g_aligner.appendChild(g_close);
 	
@@ -315,6 +315,7 @@ function toggle_gallery_show(w_index)
 function close_gallery(w_index)
 {	
 	stop_slideshow();
+	
 	if(widget_data[w_index].media[widget_data[w_index].gallery.current_index].type == "youtube" && widget_data[w_index].media[widget_data[w_index].gallery.current_index].yt_player.getPlayerState() == 1)
 	{widget_data[w_index].media[widget_data[w_index].gallery.current_index].yt_player.pauseVideo();}
 	

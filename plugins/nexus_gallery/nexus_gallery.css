@@ -61,13 +61,14 @@
 }
 
 .nexus_gallery>.slider>img,
-.nexus_gallery>.slider>.youtube_video
-{
+.nexus_gallery>.slider>.youtube_video{
  height:100%;
  min-width:100px;
  display:inline-block;
  margin-right:0px;
  border-right:1px solid white;
+ margin:0px;
+ width:auto;
 }
 
 /*========================================================================================================================>
@@ -86,9 +87,8 @@ gallery css start
  overflow:hidden;
 }
 
-.gallery
-{
- position:absolute;
+.gallery{
+ position:fixed;
  top:0px;
  left:0px;
  width:100%;
@@ -103,14 +103,14 @@ gallery css start
  padding:0px;
 }
 
-.gallery:target
-{
- z-index:200;
+.gallery:target,
+.gallery:active,
+.gallery[data-active=true]{
+ z-index:1002;
  opacity:1;
 }
 
-.g_aligner>.label
-{
+.g_aligner>.label{
  text-transform:uppercase;
  text-decoration:none;
  position:absolute;
