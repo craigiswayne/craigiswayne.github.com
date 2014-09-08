@@ -338,7 +338,7 @@ function onYouTubeIframeAPIReady()
 					{
 						"showinfo":1,
 						"autohide":0,
-						"iv_load_policy":3,s
+						"iv_load_policy":3,
 						"rel":0,
 						"modestbranding":1
 					}
