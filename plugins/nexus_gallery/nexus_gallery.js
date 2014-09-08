@@ -27,7 +27,7 @@ function initialize_nexus_galleries()
 				widget_data[i].media[m_length].type			= "image";
 				widget_data[i].media[m_length].name			= widget_media[j].title || widget_media[j].alt || widget_media[j].src;
 				widget_data[i].media[m_length].url			= widget_media[j].src;
-				widget_data[i].media[m_length].thumb_url 	= widget_media[j].dataset.thumb_url || [i]widget_media[j].src;
+				widget_data[i].media[m_length].thumb_url 	= widget_media[j].dataset.thumb_url || widget_media[j].src;
 				break;
 
 				case "IFRAME":
