@@ -2,9 +2,10 @@ var widget_data = new Object();
 
 document.addEventListener("DOMContentLoaded",setup_widget,false);
 var widget_media;
-function setup_widget()
+
+function initialize_nexus_galleries()
 {
-	var media_widgets =  document.getElementsByClassName("nexus_gallery");
+	var media_widgets =  document.getElementsByClassName("nexus_gallery"); //change this to .nexus.gallery
 	
 	for(var i=0; i<media_widgets.length; i++)
 	{
@@ -22,11 +23,11 @@ function setup_widget()
 			switch(widget_media[j].tagName)
 			{
 				case "IMG":
-				widget_data[i].media[m_length] 					= new Object();
+				widget_data[i].media[m_length] 				= new Object();
 				widget_data[i].media[m_length].type			= "image";
 				widget_data[i].media[m_length].name			= widget_media[j].title || widget_media[j].alt || widget_media[j].src;
-				widget_data[i].media[m_length].url			=	widget_media[j].src;
-				widget_data[i].media[m_length].thumb_url = widget_media[j].src;
+				widget_data[i].media[m_length].url			= widget_media[j].src;
+				widget_data[i].media[m_length].thumb_url 	= widget_media[j].dataset.thumb_url || [i]widget_media[j].src;
 				break;
 
 				case "IFRAME":
