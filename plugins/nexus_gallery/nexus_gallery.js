@@ -17,8 +17,7 @@ function initialize_nexus_galleries()
 		widget_data[i].media = new Object();
 		widget_data[i].hasYouTube = false;
 		widget_media = media_widgets[i].childNodes;
-		for(var j=0; j<widget_media.length; j++)
-		{
+		for(var j=0; j<widget_media.length; j++){
 			var m_length = Object.keys(widget_data[i].media).length;
 			switch(widget_media[j].tagName)
 			{
@@ -50,10 +49,8 @@ function initialize_nexus_galleries()
 		}
 		
 		//add the youtube api script IF there are any youtube videos in the widget
-		if(Object.keys(widget_data[i].media).length>0)
-		{
-			if(widget_data[i].hasYouTube)
-			{
+		if(Object.keys(widget_data[i].media).length>0){
+			if(widget_data[i].hasYouTube){
 				var yt_api_script = document.createElement("script");
 				yt_api_script.src = "https://www.youtube.com/iframe_api";
 				var first_head = document.getElementsByTagName("head")[0];
@@ -67,8 +64,7 @@ function initialize_nexus_galleries()
 }
 
 var w_nav_width = 20;
-function modify_widget(w_index)
-{
+function modify_widget(w_index){
 		var w_nav_left = document.createElement("div");
 		w_nav_left.className = "nav";
 		w_nav_left.dataset.direction = "left";
@@ -110,7 +106,8 @@ function modify_widget(w_index)
 	
 		var g_close = document.createElement("a");
 		g_close.className = "label close";
-		g_close.href = "javascript:void(0);";
+		g_close.href = "javascript:void(0)";
+		g_close.addEventListener("click",function(){gallery.dataset.active="false";},false);
 		g_close.addEventListener("click",function(){close_gallery(w_index);},false);
 		g_aligner.appendChild(g_close);
 	
@@ -214,8 +211,7 @@ function modify_widget(w_index)
 
 
 var shifter,magic_number = 19;
-function move_widget_slider(w_index, shift)
-{
+function move_widget_slider(w_index, shift){
 	var slider_width = parseInt(window.getComputedStyle(widget_data[w_index].widget.slider).width);
 	var w_width = parseInt(window.getComputedStyle(widget_data[w_index].widget).width);
 
@@ -236,9 +232,9 @@ function move_widget_slider(w_index, shift)
 function stop_widget_slider(w_index)
 {clearInterval(shifter);}
 
-function show_gallery_slide(w_index,m_index)
-{
-		document.location.hash = "gallery"+w_index;
+function show_gallery_slide(w_index,m_index){
+		//document.location.hash = "gallery"+w_index;
+		document.querySelector("#gallery"+w_index).dataset.active="true";
 		m_index = isNaN(m_index) ? widget_data[w_index].gallery.current_index : m_index;
 		m_index = (m_index<0) ? (Object.keys(widget_data[w_index].media).length)-1 : m_index;
 		m_index = (m_index>(Object.keys(widget_data[w_index].media).length-1)) ? 0 : m_index;
@@ -312,20 +308,18 @@ function toggle_gallery_show(w_index)
 	{}
 }
 
-function close_gallery(w_index)
-{	
+function close_gallery(w_index){	
 	stop_slideshow();
 	
 	if(widget_data[w_index].media[widget_data[w_index].gallery.current_index].type == "youtube" && widget_data[w_index].media[widget_data[w_index].gallery.current_index].yt_player.getPlayerState() == 1)
 	{widget_data[w_index].media[widget_data[w_index].gallery.current_index].yt_player.pauseVideo();}
 	
 	widget_data[w_index].gallery.dataset.play_state = false; 
-	
+	widget_data[w_index].gallery.dataset.active = false;
 }
 
 
-function onYouTubeIframeAPIReady()
-{
+function onYouTubeIframeAPIReady(){
 	for(var i=0; i<Object.keys(widget_data).length; i++)
 	{
 		for(var j=0; j<Object.keys(widget_data[i].media).length; j++)

@@ -1,0 +1,37 @@
+@import url("font-awesome-4.2.0/css/font-awesome.min.css");
+
+@-webkit-keyframes slide_in_from_left{
+	from{
+		left:-50px;
+		opacity:0.1;
+	}
+	to{
+		left:0px;
+		opacity:1;
+	}
+}
+
+@keyframes slide_in_from_left{
+	from{
+		left:-50px;
+		opacity:0.1;
+	}
+	to{
+		left:0px;
+		opacity:1;
+	}
+}
+
+
+button,
+[onclick],
+[onmousedown],
+[href],
+input[type]:not([type=text]):not([type=""]){
+	cursor:pointer;
+}
+
+button:focus{
+	outline:none;
+}
+
