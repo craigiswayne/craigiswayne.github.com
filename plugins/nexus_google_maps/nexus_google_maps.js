@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 					
 					map.panTo(map.user_position);
 					var image = {
-						url: "http://maps.google.com/mapfiles/kml/paddle/ylw-stars.png",
+						url: "https://maps.google.com/mapfiles/kml/paddle/ylw-stars.png",
 						size: null,
 						origin: null,
 						anchor: null,
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 					marker_filter_option.innerText = window[map_containers[i].dataset.markers][j].name || window[map_containers[i].dataset.markers][j].title;
 					
 					(function(marker_data){
-						var directions_toolbar = '<label class=directions-toolbar data-icon=navigator>get directions<input type=button style=display:none;></label>';
+						var directions_toolbar = '<label class="directions-toolbar fa fa-road">get directions<input type=button style=display:none;></label>';
 						var divvedContent = '<div class="google-maps-infowindow"><div class=google-maps-infowindow-content>' + (marker_data.content || "") + "</div>" + directions_toolbar +'</div>';
 						if (marker_data.icon) {
 							var image = {
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 							var marker = new google.maps.Marker({
 									map: map,
 									position: latLong,
-									title: marker_data.title || marker_data.title,
+									title: marker_data.name || marker_data.title,
 									content: divvedContent,
 									icon: image || null,
 									visible: map_showmarkers
@@ -188,26 +188,31 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 							
 							
 						}
-						//if no latitude and longitude stated, use the address field
 						else{
 							geocoder.geocode({'address':marker_data.address}, function(results){
-								map_bounds.extend(results[0].geometry.location);
-								map.fitBounds(map_bounds);
-								var marker = new google.maps.Marker({
-										map: map,
-										position: results[0].geometry.location,
-										title: marker_data.name || marker_data.title,
-										content: divvedContent,
-										icon: image || null,
-										visible: map_showmarkers
-								});
-								marker_data.marker = marker;
-		
-								google.maps.event.addListener(marker, 'click', function() {
-									map.info_window.setContent(marker.content);//set the content
-									map.info_window.open(map,marker);
-									map.info_window.last_marker = marker;
-								});
+								
+								if(results){
+									
+									if(results.length !=0){
+										map_bounds.extend(results[0].geometry.location);
+										map.fitBounds(map_bounds);
+										
+										var marker = new google.maps.Marker({
+												map: map,
+												position: results[0].geometry.location,
+												title: marker_data.name || marker_data.title,
+												content: divvedContent,
+												icon: image || null,
+												visible: map_showmarkers
+										});
+										marker_data.marker = marker;
+										google.maps.event.addListener(marker_data.marker, 'click', function() {
+											this.map.info_window.setContent(this.content);
+											this.map.info_window.open(this.map,this);
+											this.map.info_window.last_marker = this;
+										});
+									}
+								}
 							});				
 						}
 					})(window[map_containers[i].dataset.markers][j]);
@@ -220,9 +225,12 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 			
 			var directions_steps_panel = map_containers[i].appendChild(document.createElement("div"));
 			directions_steps_panel.className = "google-map-directions-panel";
-			var directions_steps_panel_close = directions_steps_panel.appendChild(document.createElement("span"));
-			directions_steps_panel_close.dataset.icon = "close";
-			directions_steps_panel_close.addEventListener("click",function(){clear_google_map_directions(map);},false);			
+			var directions_steps_panel_close = directions_steps_panel.appendChild(document.createElement("button"));
+			directions_steps_panel_close.className="close fa fa-close";
+			directions_steps_panel_close.addEventListener("click",function(){clear_google_map_directions(map);},false);	
+			var steps_area = directions_steps_panel.appendChild(document.createElement("div"));
+			steps_area.className = "steps";
+			
 			
 			//ref: http://stackoverflow.com/questions/6378007/adding-event-to-element-inside-google-maps-api-infowindow
 			google.maps.event.addListener(map.info_window,'domready',function(){
@@ -244,14 +252,24 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 								markers[i].marker ? markers[i].marker.setVisible(false) : null;
 							}
 							else{
-								markers[i].marker ? markers[i].marker.setVisible(true) : null;
+								if(markers[i].marker){
+									markers[i].marker ? markers[i].marker.setVisible(true) : null;
+									
+									markers[i].marker.map.info_window.setContent(markers[i].marker.content);
+									markers[i].marker.map.panTo(markers[i].marker.position);
+									markers[i].marker.map.info_window.open(markers[i].marker.map,markers[i].marker);
+									markers[i].marker.map.info_window.last_marker = markers[i].marker;
+								}
 							}
 						}
 					}
 					else{
-						for(var i in markers){
+						console.debug(markers);
+						for(var i=0; i<markers.length; i++){
 								markers[i].marker ? markers[i].marker.setVisible(true) : null;
+								markers[i].marker.map.info_window.close();
 						}
+						
 					}
 					
 				});
@@ -260,12 +278,21 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 	}
 	
 	function clear_google_map_directions(map){
-		document.getElementById(map.id).getElementsByClassName("google-map-directions-panel")[0].dataset.show=false;
+		
+		var map_element = document.getElementById(map.id);
+		var google_map_directions_panel = map_element.getElementsByClassName("google-map-directions-panel")[0];
+		google_map_directions_panel.querySelector(".steps").innerHTML = "";
+		google_map_directions_panel.dataset.show=false;
 		map.info_window.open(map, map.info_window.last_marker);
 		map.directions_display.setMap(null);
 	}
 	
 	function get_google_map_directions(end,start,map){
+		
+		var map_element = document.getElementById(map.id);
+		var google_map_directions_panel = map_element.getElementsByClassName("google-map-directions-panel")[0];
+		google_map_directions_panel.querySelector(".steps").innerHTML = "";
+		
 		document.getElementById(map.id).getElementsByClassName("google-map-directions-panel")[0].dataset.show=true;
 		map.info_window.close();
 		
@@ -281,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function(){initialize_google_maps(
 		map.directions_service.route(request, function(response, status) {
 				if (status == google.maps.DirectionsStatus.OK){
 					map.directions_display.setMap(map);
-					map.directions_display.setPanel(document.getElementById(map.id).getElementsByClassName("google-map-directions-panel")[0]);
+					map.directions_display.setPanel(document.getElementById(map.id).getElementsByClassName("google-map-directions-panel")[0].querySelector(".steps"));
 					map.directions_display.setDirections(response);
 				}
 				else{

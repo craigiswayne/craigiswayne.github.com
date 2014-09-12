@@ -22,6 +22,39 @@
 	}
 }
 
+@-webkit-keyframes slide_in_from_right{
+	from{
+		right:-50px;
+		opacity:0.1;
+	}
+	to{
+		right:0px;
+		opacity:1;
+	}
+}
+
+@keyframes slide_in_from_left{
+	from{
+		right:-50px;
+		opacity:0.1;
+	}
+	to{
+		right:0px;
+		opacity:1;
+	}
+}
+
+.nexus.animation.slide_in_from_left{
+	-webkit-animation:slide_in_from_left 0.8s 0.3s ease forwards;
+	animation:slide_in_from_left 0.8s 0.3s ease forwards;
+	position:relative;
+}
+
+.nexus.animation.slide_in_from_right{
+	-webkit-animation:slide_in_from_right 0.8s 0.3s ease forwards;
+	animation:slide_in_from_right 0.8s 0.3s ease forwards;
+	position:relative;
+}
 
 button,
 [onclick],

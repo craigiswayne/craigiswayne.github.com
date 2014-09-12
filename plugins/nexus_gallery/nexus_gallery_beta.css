@@ -42,20 +42,23 @@
 .nexus.gallery .slider{
 	height:100%;
 	width:100%;
+	background-color: rgba(40, 40, 40, 0.9);
 }
 
-.nexus.gallery .slider .slide{
+.nexus.gallery .slider .slide,
+.nexus.gallery .slide{
 	height:100%;
 	margin:0px;
 	max-width:80px;
 	display:block;
 	float:left;
 	position:relative;
+	border:none;
 	border-right:1px solid rgb(245,245,245);
 	opacity:0;
 	cursor:pointer;
 	-webkit-animation:slide_in_from_left 0.8s 0.3s linear forwards;
-	
+		
 }
 
 .nexus.slideshow{
@@ -67,12 +70,14 @@
 	background-color: rgb(25,25,25);
 	z-index:-1;
 	opacity:0;
+	visibility:hidden;
 	transition:opacity 0.3s ease;
 }
 
 .nexus.slideshow[data-active=true]{
 	opacity:1;
 	z-index:2;
+	visibility:visible;
 }
 
 .nexus.slideshow header{
@@ -86,7 +91,7 @@
 	height:100%;
 	display:inline-block;
 	color:whitesmoke;
-	background-color:black;
+	background-color:rgba(0,0,0,0.5);
 	padding: 10px;
 	font-size: 15px;
 }
@@ -119,10 +124,8 @@
 	font-weight:bold;
 	font-size:26px;
 	top:40vh;
-}
-
-.nexus.slideshow .nav:focus{
-	outline:none;
+	z-index:2;
+	background-color:inherit;
 }
 
 .nexus.slideshow .nav:first-of-type{
