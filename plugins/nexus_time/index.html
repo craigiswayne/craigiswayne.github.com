@@ -1,0 +1,75 @@
+<html>
+
+<head>
+<style>
+	time{
+		display:block;
+	}
+	
+	time[datetime]:not([datetime=""]):before{
+		content:attr(datetime);
+		min-width:100px;
+		display:inline-block;
+	}
+</style>
+
+<script>
+	
+	document.addEventListener("DOMContentLoaded",function(){
+		var time_tags = document.querySelectorAll("time[datetime]:not([datetime=''])");
+		
+		for(var i=0; i<time_tags.length; i++){
+			format_time_tag_to_locale_time(time_tags[i]);
+		}
+		
+	},false);
+	
+	
+	function format_time_tag_to_locale_time(tag){
+		
+		var datetime_value = tag.getAttribute("datetime");
+		
+		var datetime = new Object();
+		
+			datetime.original_hours = parseInt(datetime_value.substring(0,2));
+			datetime.original_minutes = parseInt(datetime_value.substring(3,5));
+			datetime.locale_timezone_offset = 0-(new Date().getTimezoneOffset())/60;
+			datetime.original_timezone_offset = datetime_value.substring(5,datetime_value.length) || 0;
+			datetime.original_timezone_offset = parseInt(datetime.original_timezone_offset);
+			
+			if(datetime.original_timezone_offset < datetime.locale_timezone_offset){
+				datetime.timezone_difference = Math.abs(datetime.original_timezone_offset - datetime.locale_timezone_offset);
+			}
+			else{
+				datetime.timezone_difference = datetime.locale_timezone_offset - datetime.original_timezone_offset;
+			}
+			
+			datetime.locale_hours	= datetime.original_hours + datetime.timezone_difference;
+			datetime.locale_hours	= datetime.locale_hours < 0 ? (24 + datetime.locale_hours) : datetime.locale_hours;
+			datetime.locale_hours	= (datetime.locale_hours.toString().length == 1) ? "0"+datetime.locale_hours : datetime.locale_hours;
+			
+			datetime.locale_minutes = datetime.original_minutes;
+			datetime.locale_minutes	= (datetime.locale_minutes.toString().length == 1) ? "0"+datetime.locale_minutes : datetime.locale_minutes;
+			
+		tag.innerHTML = datetime.locale_hours + ":" + datetime.locale_minutes;
+	}
+
+</script>
+
+</head>
+<body>
+
+	
+		<fieldset>
+			<legend>Convert Time to Locale Time</legend>
+			<a class="reference" href="http://www.w3schools.com/tags/att_time_datetime.asp">reference</a>
+			<time datetime="11:38-3"></time>
+			<time datetime="01:39+10"></time>
+			<time datetime="22:14+3"></time>
+			<time datetime="19:23-5"></time>
+			<time datetime="15:03"></time>
+			<time datetime="15:03+1"></time>
+			<time datetime="15:03-1"></time>
+		</fieldset>	
+</body>
+</html>

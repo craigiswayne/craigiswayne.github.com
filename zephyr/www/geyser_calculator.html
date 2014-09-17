@@ -1,41 +1,44 @@
 <style>
-.geyser_calculator{
-border:1px solid black;
-width:340px;
-margin:auto;
-border-radius:5px;
-padding:10px;
-border:2px outset rgb(100, 100, 100)
-}
-
-.lcd{
-	background-color:rgb(129, 153, 133);
-	height:30px;
-	border:3px inset rgb(100, 100, 100);
+	.geyser_calculator{
+	border:1px solid black;
+	width:340px;
+	margin:auto;
 	border-radius:5px;
-	margin-bottom:10px
-}
-
-select{
-width:100%;
-display:inline-block;
-}
-
-label.submit{
-	background-color: rgb(255, 165, 0);
-	color: rgb(255, 255, 255);
-	padding: 0px 20px;
-	border-radius: 5px;
-	font-size: 28px;
-	margin: 10px 0px 0px auto;
-	display: block;
-	width: 15px;
-}
-
-label.submit input[type=submit]{
-	display:none;
-}
+	padding:10px;
+	border:2px outset rgb(100, 100, 100)
+	}
+	
+	.lcd{
+		background-color:rgb(129, 153, 133);
+		height:30px;
+		border:3px inset rgb(100, 100, 100);
+		border-radius:5px;
+		margin-bottom:10px
+	}
+	
+	select{
+	width:100%;
+	display:inline-block;
+	}
+	
+	label.submit{
+		background-color: rgb(255, 165, 0);
+		color: rgb(255, 255, 255);
+		padding: 0px 20px;
+		border-radius: 5px;
+		font-size: 28px;
+		margin: 10px 0px 0px auto;
+		display: block;
+		width: 15px;
+	}
+	
+	label.submit input[type=submit]{
+		display:none;
+	}
 </style>
+
+<script src="../../plugins/nexus.js"></script>
+
 <script>
 
 var sizes = new Array();
@@ -44,21 +47,25 @@ var sizes = new Array();
 	sizes.push(150);
 	sizes.push(200);
 	sizes.push(250);
-
+	
 var manufacturers = new Array();
 	var manufacturer = new Object();
 	manufacturer.name = "Agrinet";
+	manufacturer.website = "http://www.agrinet.co.za";
 	manufacturer.models = new Array();
 	manufacturers.push(manufacturer);
 	
 	var manufacturer = new Object();
-	manufacturer.name = "Allied";
+	manufacturer.name = "Geyser Allied";
+	manufacturer.logo_url = "http://www.geyserallied.co.za/themes/gap/images/logo.png";
+	manufacturer.website = "http://www.geyserallied.co.za";
 	manufacturer.models = new Array();
 	manufacturers.push(manufacturer);
 	
 	var manufacturer = new Object();
 	manufacturer.name = "Ariston";
 	manufacturer.models = new Array();
+	manufactuer.
 	manufacturers.push(manufacturer);
 	
 	var manufacturer = new Object();
@@ -471,7 +478,9 @@ var manufacturers = new Array();
 	manufacturer.models = new Array();
 	manufacturers.push(manufacturer);
 
-
+	sort_object_array({"array":manufacturers,"key":"name"});
+	
+	
 var manufacturers_dropdown, models_dropdown, sizes_dropdown;
 document.addEventListener("DOMContentLoaded",function(){
 

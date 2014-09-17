@@ -1,6 +1,5 @@
 @import url("../../css/nexus.css");
 
-
 .nexus.gallery{
 	height:60px;
 	width:100%;
@@ -43,6 +42,7 @@
 	height:100%;
 	width:100%;
 	background-color: rgba(40, 40, 40, 0.9);
+	white-space:nowrap;
 }
 
 .nexus.gallery .slider .slide,
@@ -50,8 +50,7 @@
 	height:100%;
 	margin:0px;
 	max-width:80px;
-	display:block;
-	float:left;
+	display:inline-block;
 	position:relative;
 	border:none;
 	border-right:1px solid rgb(245,245,245);
@@ -74,6 +73,12 @@
 	transition:opacity 0.3s ease;
 }
 
+.nexus.slideshow * {
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+
 .nexus.slideshow[data-active=true]{
 	opacity:1;
 	z-index:2;
@@ -94,6 +99,7 @@
 	background-color:rgba(0,0,0,0.5);
 	padding: 10px;
 	font-size: 15px;
+	opacity:0;
 }
 
 
@@ -105,9 +111,9 @@
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	background: none;
+	background:rgb(25,25,25);
 	color: rgba(245,245,255,0.8);
-	border: 2px solid rgba(245,245,245,0.8);
+	border: 3px solid rgba(245,245,245,0.8);
 	border-radius: 100%;
 	width: 30px;
 	height: 30px;
@@ -169,6 +175,7 @@
 .nexus.slideshow .tray .slider{
 	height:100%;
 	white-space:nowrap;
+	text-align:center;
 }
 
 .nexus.slideshow .tray .slide{
