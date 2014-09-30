@@ -134,7 +134,7 @@ var NexusGallery = new Object({
 					radio_option.name = "nexus_slideshow";
 					radio_option.value = i;
 					radio_option.addEventListener("change",function(){
-						NexusGallery.slideshow.show({"slide_num":NexusGallery.slideshow.value});
+						NexusGallery.slideshow.show({"slide_num":this.value});
 					},false);
 				}
 			}

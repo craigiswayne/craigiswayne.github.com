@@ -10,53 +10,66 @@ fix slider bug
 ability to fetch all images in current page
 widget resize listener
 progress bar
-use a V for the arrows?! or a greater than sign
 layer diagram
-tried to use as few images as possible
 cross browser animation
 description
 loads of images in the thumb_nav
 stop the gallery show automatically???
 fix the gallery show start when nothing is selected
 widget slider must increase in speed when held down for a long time
+is there a need to store the media in an array?
+
+transition on the image title
+cater for youtube before publishing
 -->
 
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Media Widget Demo | beta</title>
+  <title>Media Widget Demo</title>
 
-  <style>
-   body
-   {
-    font-family:Arial;
-    font-size:14px;
-    padding:0px;
-    margin:0px;
-   }
-  </style>
+	<style>
+		body{
+			font-family:Tahoma;
+			font-size:14px;
+			padding:0px;
+			margin:0px;
+		}
+	</style>
 
-  <link rel=stylesheet href=nexus_gallery.css>
-  <script src=nexus_gallery.js></script>
+  <link rel=stylesheet href="nexus_gallery.css">
+  <script src="nexus_gallery.js"></script>
 
 </head>
 <body>
-<div class=nexus_gallery data-theme=lightview data-auto_show=true>
- <img class="slide" src="../../images/hongqiao1.jpg">
- <iframe class="slide" src="https://www.youtube.com/watch?v=ZS1zScrdneY"></iframe>
- <img class="slide" src="../../images/hongqiao2.jpg">
- <img class="slide" src="../../images/hongqiao3.jpg">
- <iframe class="slide" src="http://youtu.be/cG6vHWKR-VA"></iframe>
- <img class="slide" src="../../images/hongqiao4.jpg">
- <img class="slide" src="../../images/hongqiao5.jpg">
- <img class="slide" src="../../images/hongqiao6.jpg">
- <iframe class="slide" src="https://www.youtube.com/watch?v=bo7fzOIV2vA"></iframe>
- <img class="slide" src="../../images/hongqiao7.jpg">
- <iframe class="slide" src="https://www.youtube.com/watch?v=i_SUu2qBcmA"></iframe>
- <iframe class="slide" src="https://www.youtube.com/watch?v=XLFZBhB7jhc"></iframe>
- <img class="slide" src="../../images/hongqiao8.jpg">
- <iframe class="slide" src="https://www.youtube.com/watch?v=-miBHbDugnY"></iframe>
- <iframe class="slide" src="https://www.youtube.com/watch?v=K3Djca0yzk0"></iframe>
+<fieldset>
+	<legend>Example 1 (auto-show=true): </legend>
+	<div class="nexus gallery" data-auto_show=true>
+		<img class=slide src="../../images/hongqiao1.jpg">
+		<img class=slide src="../../images/hongqiao2.jpg">
+		<img class=slide src="../../images/hongqiao3.jpg">
+		<img class=slide src="../../images/hongqiao4.jpg">
+		<img class=slide src="../../images/hongqiao5.jpg">
+		<img class=slide src="../../images/hongqiao6.jpg">
+		<img class=slide src="../../images/hongqiao7.jpg">
+		<img class=slide src="../../images/hongqiao8.jpg">
+		<img class=slide src="../../images/hongqiao6.jpg">
+		<img class=slide src="../../images/hongqiao7.jpg">
+		<img class=slide src="../../images/hongqiao8.jpg">
+		<img class=slide src="../../images/hongqiao8.jpg">
+	</div>
+</fieldset>
+
+
+
+<div class="nexus gallery" data-auto_show=true>
+ <img class=slide src="../../images/hongqiao1.jpg">
+ <iframe class=slide src="https://www.youtube.com/watch?v=ZS1zScrdneY"></iframe>
+ <img class=slide src="../../images/hongqiao2.jpg">
+ <iframe class=slide src="https://www.youtube.com/watch?v=-miBHbDugnY"></iframe>
+ <iframe class=slide src="https://www.youtube.com/watch?v=K3Djca0yzk0"></iframe>
 </div>
+
+
 </body>
 </html>
