@@ -26,8 +26,10 @@ cater for youtube before publishing
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Media Widget Demo</title>
-
+	<title>Media Widget Demo</title>
+	<link rel=stylesheet href="nexus_gallery.css">
+	<script src="nexus_gallery.js"></script>
+	<link rel=stylesheet href="../../css/nexus.css">
 	<style>
 		body{
 			font-family:Tahoma;
@@ -36,14 +38,10 @@ cater for youtube before publishing
 			margin:0px;
 		}
 	</style>
-
-  <link rel=stylesheet href="nexus_gallery.css">
-  <script src="nexus_gallery.js"></script>
-
 </head>
 <body>
 <fieldset>
-	<legend>Example 1 (auto-show=true): </legend>
+	<legend>Example 1 (auto-show=true)</legend>
 	<div class="nexus gallery" data-auto_show=true>
 		<img class=slide src="../../images/hongqiao1.jpg">
 		<img class=slide src="../../images/hongqiao2.jpg">
@@ -60,15 +58,16 @@ cater for youtube before publishing
 	</div>
 </fieldset>
 
-
-
-<div class="nexus gallery" data-auto_show=true>
- <img class=slide src="../../images/hongqiao1.jpg">
- <iframe class=slide src="https://www.youtube.com/watch?v=ZS1zScrdneY"></iframe>
- <img class=slide src="../../images/hongqiao2.jpg">
- <iframe class=slide src="https://www.youtube.com/watch?v=-miBHbDugnY"></iframe>
- <iframe class=slide src="https://www.youtube.com/watch?v=K3Djca0yzk0"></iframe>
-</div>
+<fieldset>
+	<legend>Example 2 (auto-show=false)</legend>
+	<div class="nexus gallery" data-auto_show=true>
+		<img class=slide src="../../images/hongqiao1.jpg">
+		<iframe class=slide src="https://www.youtube.com/watch?v=ZS1zScrdneY"></iframe>
+		<img class=slide src="../../images/hongqiao2.jpg">
+		<iframe class=slide src="https://www.youtube.com/watch?v=-miBHbDugnY"></iframe>
+		<iframe class=slide src="https://www.youtube.com/watch?v=K3Djca0yzk0"></iframe>
+	</div>
+</fieldset>
 
 
 </body>

@@ -15,32 +15,26 @@ height:100%;
 overflow-y:hidden;
 }
 
-body
-{
-	
-font-family:chalk;
-display:block;
-width:80vw;
-height:80vh;
-margin-top:5vh;
-margin-bottom:10vh;
-margin-left:auto;
-margin-right:auto;
-
-background-color:rgb(17,64,43);
-
-padding:20px 30px;
-box-sizing:border-box;
-
-font-size:2vw;
-word-break:break-all;
-color:white;
-
-overflow-y:auto;
-
-box-shadow:0 4px 2px 2px rgba(0,0,0,0.2),inset 0 0 10px 10px rgba(0,0,0,0.2);
-border-radius:10px;
-border:#9b6b2f solid 10px;
+body{
+	font-family:chalk;
+	-webkit-font-smoothing:antialiased;
+	display:block;
+	width:80vw;
+	height:80vh;
+	margin-top:5vh;
+	margin-bottom:10vh;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:rgb(17,64,43);
+	padding:20px 30px;
+	box-sizing:border-box;
+	font-size:2vw;
+	word-break:break-word;
+	color:white;
+	overflow-y:auto;
+	box-shadow:0 4px 2px 2px rgba(0,0,0,0.2),inset 0 0 10px 10px rgba(0,0,0,0.2);
+	border-radius:10px;
+	border:#9b6b2f solid 10px;
 }
 
 body:after
