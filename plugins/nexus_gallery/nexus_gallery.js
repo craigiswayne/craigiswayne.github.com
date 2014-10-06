@@ -272,7 +272,21 @@ var NexusGallery = new Object({
 		nav_right.className = "nav fa fa-angle-right";
 		
 		element.dataset.auto_show = element.dataset.auto_show || "false";
-		if(element.dataset.auto_show == "true") NexusGallery.slideshow.show({"instance":element});
+		if(element.dataset.auto_show == "true"){
+			
+			var elem = element;
+			if (elem.requestFullscreen) {
+			  elem.requestFullscreen();
+			} else if (elem.msRequestFullscreen) {
+			  elem.msRequestFullscreen();
+			} else if (elem.mozRequestFullScreen) {
+			  elem.mozRequestFullScreen();
+			} else if (elem.webkitRequestFullscreen) {
+			  elem.webkitRequestFullscreen();
+			}
+			
+			NexusGallery.slideshow.show({"instance":element});
+		}
 	}
 });
 
