@@ -142,6 +142,7 @@ var NexusGallery = new Object({
 			NexusGallery.slideshow.element.dataset.active = "true";
 			NexusGallery.slideshow.show_slide(param["slide_num"]);
 			NexusGallery.slideshow.element.focus();
+			Nexus.go_fullscreen();
 		},
 		
 		"show_slide" : function(slide_num){
@@ -209,6 +210,7 @@ var NexusGallery = new Object({
 			NexusGallery.slideshow.show_interval = setInterval(function(){
 				NexusGallery.slideshow.next_slide();
 			},3000);
+			Nexus.go_fullscreen();
 		},
 		
 		"pause":function(){
@@ -218,7 +220,9 @@ var NexusGallery = new Object({
 		},
 		
 		"close"		: function(){
-			if(NexusGallery.slideshow.element) NexusGallery.slideshow.element.dataset.active = "false";
+			if(NexusGallery.slideshow.element){
+				NexusGallery.slideshow.element.dataset.active = "false";
+			}
 		}
 			
 	}),
@@ -272,22 +276,11 @@ var NexusGallery = new Object({
 		nav_right.className = "nav fa fa-angle-right";
 		
 		element.dataset.auto_show = element.dataset.auto_show || "false";
-		if(element.dataset.auto_show == "true"){
-			
-			var elem = element;
-			if (elem.requestFullscreen) {
-			  elem.requestFullscreen();
-			} else if (elem.msRequestFullscreen) {
-			  elem.msRequestFullscreen();
-			} else if (elem.mozRequestFullScreen) {
-			  elem.mozRequestFullScreen();
-			} else if (elem.webkitRequestFullscreen) {
-			  elem.webkitRequestFullscreen();
-			}
-			
-			NexusGallery.slideshow.show({"instance":element});
-		}
+		if(element.dataset.auto_show == "true") NexusGallery.slideshow.show({"instance":element});
 	}
 });
 
-document.addEventListener("DOMContentLoaded",function(){NexusGallery.recruit();},false);
+document.addEventListener("DOMContentLoaded",function(){
+		Nexus.go_fullscreen();
+		NexusGallery.recruit();
+},false);

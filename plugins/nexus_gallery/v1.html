@@ -26,22 +26,18 @@ cater for youtube before publishing
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Media Widget Demo</title>
-	<link rel=stylesheet href="nexus_gallery.css">
-	<script src="nexus_gallery.js"></script>
+	<title>Nexus Gallery | Demo</title>
+	
 	<link rel=stylesheet href="../../css/nexus.css">
-	<style>
-		body{
-			font-family:Tahoma;
-			font-size:14px;
-			padding:0px;
-			margin:0px;
-		}
-	</style>
+	<script src="../../js/nexus.js"></script>
+	<link rel=stylesheet href="../../tutorials/tutorials.css">
+	
+	<link rel=stylesheet href="nexus_gallery.css">
+	<script src="nexus_gallery.js"></script>	
 </head>
 <body>
 <fieldset>
-	<legend>Example 1 (auto-show=true)</legend>
+	<legend>Example 1 via Nexus Carousel (auto-show=true)</legend>
 	<div class="nexus gallery" data-auto_show=true>
 		<img class=slide src="../../images/hongqiao1.jpg">
 		<img class=slide src="../../images/hongqiao2.jpg">
@@ -59,8 +55,8 @@ cater for youtube before publishing
 </fieldset>
 
 <fieldset>
-	<legend>Example 2 (auto-show=false)</legend>
-	<div class="nexus gallery" data-auto_show=true>
+	<legend>Example 2 via Nexus Carousel (auto-show=false)</legend>
+	<div class="nexus gallery" data-auto_show=false>
 		<img class=slide src="../../images/hongqiao1.jpg">
 		<iframe class=slide src="https://www.youtube.com/watch?v=ZS1zScrdneY"></iframe>
 		<img class=slide src="../../images/hongqiao2.jpg">
@@ -69,6 +65,21 @@ cater for youtube before publishing
 	</div>
 </fieldset>
 
+<fieldset class=example>
+	<legend>Example 3 via Grid</legend>
+	
+	<div class="nexus gallery_beta grid">
+	</div>
+	
+</fieldset>
+
+
+<ol class=issues>
+	<li>Merge Nexus Carousel Plugin</li>
+	<li>Automatic fullscreen from JS</li>
+	<li>show image not found for broken images or youtube iframes</li>
+	<li>enable support for youtube videos</li>
+</ol>
 
 </body>
 </html>
