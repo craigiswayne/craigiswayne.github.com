@@ -1,6 +1,6 @@
 var Nexus = new Object();
 //Nexus.repository_url = "//craigwayne.github.io";
-Nexus.repository_url = "http://127.0.0.1/craigwayne.github.com";
+Nexus.repository_url = document.location.origin+"/craigwayne.github.com";
 
 Nexus.go_fullscreen = function(element){
 	
@@ -74,11 +74,20 @@ Nexus.install = function(){
 	
 	//link the default nexus file
 	Nexus.link_css();
+	//link font awesome
+	Nexus.link_css(Nexus.repository_url+'/css/font-awesome-4.2.0/css/font-awesome.min.css');
 	
 	//nexus gallery	
 	if(document.querySelector(".nexus.gallery") || document.querySelector(".nexus.mosaic")){
 		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_gallery/nexus_gallery.css");
 		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_gallery/nexus_gallery.js");
+		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.css");
+		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.js");
+	}
+	
+	if(document.querySelector(".nexus.carousel")){
+		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.css");
+		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.js");
 	}
 	
 };

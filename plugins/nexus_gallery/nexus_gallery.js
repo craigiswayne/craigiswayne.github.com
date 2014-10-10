@@ -1,11 +1,36 @@
-Nexus.gallery = Nexus.gallery || new Object();
+Nexus.gallery = new Object();
 
 Nexus.gallery.install = function(){
 	
-	if(Nexus.gallery.element){return null;}
-	
 	Nexus.gallery.element = document.body.appendChild(document.createElement("div"));
 	Nexus.gallery.element.className = "nexus gallery";
+	
+	Nexus.gallery.element.addEventListener("keydown",function(){
+					
+		var key_code = event.keyCode;
+		switch(key_code){
+			
+			case 27:
+				Nexus.gallery.close();
+			break;
+			
+			case 37:
+				Nexus.gallery.previous_slide();
+			break;
+			
+			case 39:
+				Nexus.gallery.next_slide();
+			break;
+			
+			case 40:
+				Nexus.gallery.hide_carousel();
+			break;
+			
+			case 38:
+				Nexus.gallery.show_carousel();
+			break;
+		}
+	},false);
 	
 	var header = Nexus.gallery.element.appendChild(document.createElement("header"));
 			
@@ -50,8 +75,8 @@ Nexus.gallery.install = function(){
 			clearInterval(Nexus.gallery.interval);
 	},false);
 	
-	var tray = Nexus.gallery.element.appendChild(document.createElement("div"));
-	tray.className = "tray";
+	var carousel = Nexus.gallery.element.appendChild(document.createElement("div"));
+	carousel.className = "nexus carousel";
 	
 	var footer = Nexus.gallery.element.appendChild(document.createElement("footer"));
 	
@@ -62,16 +87,18 @@ Nexus.gallery.install = function(){
 	var radio_nav = footer.appendChild(document.createElement("div"));
 	radio_nav.className = "radio_nav";
 	
-	var toggle_tray = footer.appendChild(document.createElement("button"));
-	toggle_tray.className = "toggle_tray fa fa-caret-down";
+	var toggle_carousel = footer.appendChild(document.createElement("button"));
+	toggle_carousel.className = "toggle_carousel fa fa-caret-down";
 	
-	toggle_tray.addEventListener("click",function(){
-		Nexus.gallery.toggle_tray();
+	toggle_carousel.addEventListener("click",function(){
+		Nexus.gallery.toggle_carousel();
 	},false);
 	
 };
 
 Nexus.gallery.close = function(){
+	Nexus.gallery.element.dataset.active = "false";
+	Nexus.exit_fullscreen();
 };
 
 Nexus.gallery.previous_slide = function(){
@@ -83,11 +110,32 @@ Nexus.gallery.next_slide = function(){
 Nexus.gallery.toggle_show = function(){
 };
 
-Nexus.gallery.toggle_tray = function(){
+Nexus.gallery.toggle_carousel = function(){
+	
+	if(Nexus.gallery.element.querySelector(".carousel").dataset.active == "true"){
+		Nexus.gallery.hide_carousel();
+	}else{
+		Nexus.gallery.show_carousel();
+	}
 };
 
 Nexus.gallery.show = function(data){
-	//currently only supports node list
+	
+	//in the case of a mosaic
+	//add the images to the carousel... 
+	
+	Nexus.gallery.element.dataset.active = "true";
+	Nexus.go_fullscreen(Nexus.gallery.element);
 };
 
 Nexus.gallery.install();
+
+//document.addEventListener("DOMContentLoaded",function(){
+	var mosaic_tiles = document.querySelectorAll(".nexus.mosaic>.tile");
+	for(var i=0; i<mosaic_tiles.length; i++){
+		
+		mosaic_tiles[i].addEventListener("click",function(){
+				Nexus.gallery.show(this.parentNode);
+		},false);
+	}
+//},false);
