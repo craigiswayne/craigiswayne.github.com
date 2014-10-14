@@ -94,5 +94,6 @@ Nexus.install = function(){
 
 document.addEventListener("DOMContentLoaded",function(){Nexus.install();},false);
 
+console.debug("need a function to merge object data, for example, merge the dataset against the parameters sent to a function and that containers dataset");
 console.debug("include the nexus.css file via this script if its not already added");
 console.debug("this file must serve as a portal to other files");

@@ -28,13 +28,14 @@ body{
 	background-color:rgb(17,64,43);
 	padding:20px 30px;
 	box-sizing:border-box;
-	font-size:2vw;
+	font-size:16px;
 	word-break:break-word;
 	color:white;
 	overflow-y:auto;
 	box-shadow:0 4px 2px 2px rgba(0,0,0,0.2),inset 0 0 10px 10px rgba(0,0,0,0.2);
 	border-radius:10px;
 	border:#9b6b2f solid 10px;
+	counter-reset: example;
 }
 
 body:after
@@ -54,9 +55,23 @@ body:after
     0 2px 0 rgba(0,0,0,0.3);
 }
 
-a
-{
+a{
 	color:yellow;
+}
+
+a[href]:not([href=""]):empty:after{
+	content:attr(href);
+}
+
+fieldset.example {
+	margin: 40px 0px;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+fieldset.example legend:before{
+	counter-increment: example;
+	content: "Example " counter(example) ": ";
+	text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
 }
 
 textarea.code{
