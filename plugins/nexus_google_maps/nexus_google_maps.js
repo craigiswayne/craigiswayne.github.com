@@ -12,16 +12,18 @@ Nexus.google.map = function(container){
 	container.users_position	= new Object();
 	
 	container.initialize = function(){
-		var mapOptions = {
-			zoom: 8,
-			center: this.users_position.google_obj || this.defaults.center
-		};
-		this.map = new google.maps.Map(this, mapOptions);
+		
+		this.map = new google.maps.Map(this,{
+			zoom: 12,
+			center: this.defaults.center
+		});
+		
 		this.info_windows.push(new google.maps.InfoWindow());
+		
 		if(this.dataset.track == "true")this.track();
 	};
 	
-	container.get_users_location = function(callback){
+	container.get_users_position = function(callback){
 		
 		navigator.geolocation.getCurrentPosition(function(position){
 			container.users_position			= container.users_position || new Object();
@@ -32,21 +34,24 @@ Nexus.google.map = function(container){
 		});
 	};
 	
-	container.add_users_location_marker = function(){
-		console.debug
-		this.get_users_location(function(){
-			var marker_settings = new Object();
-			marker_settings.position = container.users_position.google_obj;
-			marker_settings.title 	 = "You are here"; 
-			marker_settings.pan_to	 = true;
-			marker_settings.icon 	= {
-				url:"http://blog.timesunion.com/hottopics/files/2011/11/pegman-front-big.png",
-				scaledSize: new google.maps.Size(35,70)
-			};
-			marker_settings.show_info = true;
+	container.add_users_position_marker = function(){
+		this.get_users_position(function(){
 			
-			var marker = container.add_marker(marker_settings);
-			container.map.panTo(marker.getPosition());
+			if(!container.users_position.marker){
+				var marker_settings = new Object();
+				marker_settings.position = container.users_position.google_obj;
+				marker_settings.title 	 = "You are here"; 
+				marker_settings.pan_to	 = true;
+				marker_settings.icon 	 = {
+					url:"http://blog.timesunion.com/hottopics/files/2011/11/pegman-front-big.png",
+					scaledSize: new google.maps.Size(35,70)
+				};
+				var marker = container.add_marker(marker_settings);
+				container.users_position.marker = marker;
+			}
+			else{
+				container.users_position.marker.setPosition(container.users_position.google_obj);
+			}
 		});
 	};
 	
@@ -84,13 +89,12 @@ Nexus.google.map = function(container){
 	};
 	
 	container.track = function(){
-		container.track_interval = setInterval(function(){
-			container.add_users_location_marker();
+		container.track_interval = setInterval(function(){			
+			container.add_users_position_marker();
 		},1000);
 	};
 	
 	container.remove_all_markers = function(){
-		console.debug(container);
 		for(var i=0; i<container.markers.length; i++){
 			container.remove_marker(container.markers[i]);
 		}
