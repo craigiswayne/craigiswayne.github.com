@@ -1,0 +1,33 @@
+<html>
+
+	<head>
+		<title>Track My Location</title>
+		
+		<link rel=stylesheet href="../css/showroom.css">
+		
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+		<script src="../js/nexus.js"></script>
+		<style>
+		button{
+			position:relative;
+			z-index:10;
+		}
+		</style>
+	</head>
+
+	<body>
+		<fieldset class="example">
+			<legend>Tracking Off</legend>
+			<div class="nexus google_maps"></div>
+		</fieldset>
+		
+		<fieldset class="example">
+			<legend>Tracking On</legend>
+			<div class="nexus google_maps" data-track=true></div>
+		</fieldset>
+		
+		
+	</body>
+	
+</html>

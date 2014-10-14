@@ -85,9 +85,16 @@ Nexus.install = function(){
 		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.js");
 	}
 	
+	//nexus carousel
 	if(document.querySelector(".nexus.carousel")){
 		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.css");
 		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.js");
+	}
+	
+	//nexus google maps
+	if(document.querySelector(".nexus.google_maps")){
+		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_google_maps/nexus_google_maps.css");
+		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_google_maps/nexus_google_maps.js");
 	}
 	
 };

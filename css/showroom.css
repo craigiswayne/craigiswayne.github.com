@@ -1,0 +1,30 @@
+html{
+	background-image:-webkit-linear-gradient(top,rgb(245, 245, 245) 20%,rgb(205, 205, 205),rgb(195, 195, 195));
+}
+
+head, head title{
+	display:block;
+}
+
+head title {
+	position: absolute;
+	display: inline-block;
+	top: 5px;
+	left: 4px;
+	font-size: 40px;
+	text-transform: uppercase;
+	color: rgb(0, 0, 0);
+	background-color: rgba(208, 203, 203, 0.8);
+	z-index: 1;
+}
+
+fieldset.example {
+	width: 80%;
+	height: 300px;
+	display: block;
+	margin: 40px auto;width: 80%;
+	height: 300px;
+	display: block;
+	margin: 40px auto;
+	box-sizing: border-box;
+}
