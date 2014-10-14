@@ -1,6 +1,6 @@
 var Nexus = new Object();
-//Nexus.repository_url = "//craigwayne.github.io";
-Nexus.repository_url = document.location.origin+"/craigwayne.github.com";
+Nexus.repository_url = "//craigwayne.github.io";
+//Nexus.repository_url = document.location.origin+"/craigwayne.github.com";
 
 Nexus.go_fullscreen = function(element){
 	
