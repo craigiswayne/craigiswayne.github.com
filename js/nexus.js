@@ -5,9 +5,7 @@ var Nexus = new Object();
 Nexus.references = [
 	"http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates" //coord_diff
 ];
-
-//Nexus.repository_url = "//craigwayne.github.io";
-Nexus.repository_url = document.location.origin+"/craigwayne.github.com";
+Nexus.repository_url = (document.location.host == "127.0.0.1") ? document.location.origin+"/craigwayne.github.com" : "//craigwayne.github.io";
 
 Nexus.go_fullscreen = function(element){
 	
