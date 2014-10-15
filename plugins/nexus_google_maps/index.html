@@ -2,41 +2,69 @@
 
 	<head>
 		<title>Nexus Google Maps | Demo</title>
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+		<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
+		<script src='http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false'></script>
+		<script src="../../js/nexus.js"></script>
+		<script src="nexus_google_maps.js"></script>
+		<link href="nexus_google_maps.css" rel="stylesheet">
+		
 
 		<link rel=stylesheet href="../../css/tutorials.css">
-		<script src="../../js/nexus.js"></script>
-		<script>
-			var demo_markers = new Array(
-				{
-					title:		"Gateway Theatre of Shopping",
-					latitude: 	-29.725589,
-					longitude: 	31.066547
-				},
-				{
-					title:		 "The Pavilion Centre",
-					latitude:	 -29.848107,
-					longitude:	 30.93529,
-					destination: true
-				}
-			);
+		<script>			
+			var realtime_distance_map_options = {
+				track: true,
+				callback: get_nearby_malls
+			};
 			
-			console.debug("for this demo find the closest two malls and then monitors users distance to it");
+			function get_nearby_malls(container){
+				var garages_nearby = [];
+				var service = new google.maps.places.PlacesService(container.map);  
+				var request = {
+					location: container.users_position.google_obj,
+					radius: "5000",
+					query: "garage"
+				};
+				
+				service.textSearch(request, function(results, status, pagination){
+					if (status == google.maps.places.PlacesServiceStatus.OK) {
+						for(var i=0; i<5; i++){
+							var marker_settings = {
+								title: results[i].name,
+								position: results[i].geometry.location,
+								destination: true
+							};
+							container.add_marker(marker_settings);
+						}
+					}
+				});
+			}
 		</script>
+		
+		<style>
+			.nexus.google_maps{
+				max-height:300px;
+			}
+		</style>
+		
 	</head>
 	
 	<body>
 	
 		<fieldset class=example>
 			<legend>Track Your Location</legend>
-			<div class="nexus google_maps" data-track="true" style=height:300px;></div>
+			<div id="map_1" class="nexus google_maps" data-track="true" data-maxZoom="8"></div>
 		</fieldset>
 		
 		<fieldset class=example>
-			<legend>Real Time Distance Calculator</legend>
-			<div id="real_time" class="nexus google_maps" data-track="true" data-center="-29.795327,30.83847" data-markers="demo_markers" style=height:300px;></div>
+			<legend>Real Time Distance Calculator (nearby garages)</legend>
+			<div id="map_2" class="nexus google_maps" data-options="realtime_distance_map_options"></div>
 		</fieldset>
 		
+		
+		<fieldset class=example>
+			<legend>Inline settings (data-zoom=5)</legend>
+			<div id="map_2" class="nexus google_maps" data-zoom="5"></div>
+		</fieldset>
 	</body>
 
 </html>

@@ -12,13 +12,8 @@ Nexus.google.maps.recruit = function(){
 
 Nexus.google.maps.map = function(container){
 	
-	container.references = [
-		"https://developers.google.com/maps/documentation/javascript/reference",
-		"http://salman-w.blogspot.com/2011/03/zoom-to-fit-all-markers-on-google-map.html"
-	];
-	
+	container.options 	= new Object();
 	container.defaults  = new Object();
-	container.defaults.center = new google.maps.LatLng(-33.924868,18.424055); //cape town
 	
 	container.map 	  			= null;
 	container.markers 			= new Array();
@@ -27,34 +22,65 @@ Nexus.google.maps.map = function(container){
 	
 	container.initialize = function(){
 		
-		container.map = new google.maps.Map(container,{
-			zoom: 12,
-			minZoom: 2,
-			center: container.defaults.center
-		});
+		container.get_options();
+		
+		container.map = new google.maps.Map(container,container.options);
+		
+		container.map.setCenter(container.options["center"]);
 		
 		container.map.bounds = new google.maps.LatLngBounds();
 		
 		container.info_windows.push(new google.maps.InfoWindow());
-						
-		if(container.dataset.center){
-			var center = container.dataset.center.split(",");
+		
+		for(var i=0; i<container.options["markers"].length; i++){
+				container.add_marker(container.options["markers"][i]);
+		}
+		
+		if(container.options["track"] == true){
+			container.track();
+		}
+		
+		google.maps.event.addListenerOnce(container.map, 'idle', function(){
+			container.options["callback"](container);
+		});
+	};
+	
+	container.get_options = function(){
+		
+		if(container.dataset["options"] && (window[container.dataset["options"]] instanceof Object)){
+			for(var key in window[container.dataset["options"]]){
+				container.options[key] = window[container.dataset["options"]][key];
+			}
+		}
+		
+		//dataset options override the options object specified
+		for(var key in container.dataset){
+			container.options[key] = container.dataset[key];
+		}
+		
+		container.options["zoom"]		= parseInt(container.options["zoom"])		|| 12;
+		container.options["minZoom"] 	= parseInt(container.options["minzoom"])	|| 2;
+		container.options["maxZoom"]	= parseInt(container.options["maxzoom"])	|| null;
+		
+		if(container.options["center"]){
+			var center = container.options["center"].split(",");
 			if(center[0] && center[1]){
 				center[0] = parseFloat(center[0]);
 				center[1] = parseFloat(center[1]);
-				container.map.setCenter(new google.maps.LatLng(center[0],center[1]));
+				container.options["center"]		= new google.maps.LatLng(center[0],center[1]);
 			}
 		}
 		
-		if(window[container.dataset.markers] && (window[container.dataset.markers] instanceof Array)){
-			for(var i=0; i<window[container.dataset.markers].length; i++){
-				container.add_marker(window[container.dataset.markers][i]);
-			}
-		}
+		container.options["markers"]	= window[container.options["markers"]] instanceof Array ? window[container.options["markers"]] : container.options["markers"];
+		container.options["markers"]	= container.options["markers"] instanceof Array ? container.options["markers"] : container.options["markers"];
+		container.options["markers"] 	= container.options["markers"] || new Array();
 		
-		if(container.dataset.track == "true"){
-			container.track();
-		}
+		container.options["center"]		= container.options["center"]				|| new google.maps.LatLng(-33.924868,18.424055); //cape town
+		container.options["track"]		= Boolean(container.options["track"]);
+		
+		container.options["callback"]	= (window[container.options["callback"]] instanceof Function) ? window[container.options["callback"]] : container.options["callback"];
+		container.options["callback"]	= (container.options["callback"] instanceof Function) ? container.options["callback"] : container.options["callback"];
+		container.options["callback"]	= container.options["callback"] || function(){};
 	};
 	
 	container.get_users_position = function(){
@@ -66,9 +92,11 @@ Nexus.google.maps.map = function(container){
 		container.users_position.longitude	= position.coords.longitude;
 		container.users_position.google_obj = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		
-		if(container.dataset.track == "true"){
+		if(container.options["track"] == true){
 			container.add_users_position_marker(container.users_position.google_obj);
-			container.users_position.monitor_destinations
+			if(container.info_windows[0].getMap()){
+				container.show_info_window(container.users_position.marker);
+			}
 		}
 	};
 	
@@ -88,13 +116,35 @@ Nexus.google.maps.map = function(container){
 			marker_settings.content = function(){
 				
 				var content = "<div class=title>"+this.title+"</div>";
+				var destination_data = new Array();
 				
 				for(var i=0; i<container.markers.length; i++){
 					if(container.markers[i].destination == true){
-						content += "<p>";
-						content += container.markers[i].title + " is a destination ("+ (Nexus.coord_diff({latitude:container.users_position.latitude,longitude:container.users_position.longitude},{latitude:container.markers[i].position.lat(),longitude:container.markers[i].position.lng()})).toFixed(2)+")";
-						content += "</p>";
+						destination 			= new Object();
+						destination.title 		= container.markers[i].title;
+						destination.distance	= (Nexus.coord_diff({latitude:container.users_position.latitude,longitude:container.users_position.longitude},{latitude:container.markers[i].position.lat(),longitude:container.markers[i].position.lng()})).toFixed(2);
+						destination_data.push(destination);
 					}
+				}
+				
+				//sort the destinations here
+				destination_data.sort(function(a,b){
+					return a.distance - b.distance;
+				});
+				
+				if(destination_data.length > 0){
+					content += "<table class=destinations>";
+					for(var i=0; i<destination_data.length; i++){
+						content += "<tr>";
+							content += "<td>";
+								content += destination_data[i].title;
+							content += "</td>";
+							content += "<td>";
+								content += destination_data[i].distance + "km";
+							content += "</td>";
+						content += "</tr>";
+					}
+					content += "</table>";
 				}
 				
 				return content;
@@ -111,10 +161,10 @@ Nexus.google.maps.map = function(container){
 	
 	container.show_info_window = function(marker){
 		
-		if(!marker){console.warn("No marker specified..."); return null;}
+		if(!marker){console.error("No marker specified..."); return null;}
 		
 		var content = (typeof(marker.content) == 'function') ? marker.content(marker) : marker.content;
-		
+		content = "<div class=info_window>" + content + "</div>";
 		this.info_windows[0].setContent(content || "Nothing to show...");
 		
 		this.info_windows[0].open(marker.map,marker);
@@ -140,24 +190,25 @@ Nexus.google.maps.map = function(container){
 		container.map.bounds.extend(marker_settings.position);
 		
 		var marker = new google.maps.Marker(marker_settings);
-		container.markers.push(marker);
+		
+		if(marker_settings.pan_to == true){container.map.panTo(marker.getPosition());}
+		
 		container.map.fitBounds(container.map.bounds);
 		
 		google.maps.event.addListener(marker,'click', function(){
 			container.show_info_window(marker);
 		});
 		
-		if(marker_settings.pan_to == true){container.map.panTo(marker.getPosition());}
-		
+		container.markers.push(marker);
+			
 		return marker;
 	};
 	
 	container.track = function(){
-		var some_val = navigator.geolocation.watchPosition(function(position){
+		
+		navigator.geolocation.watchPosition(function(position){
 			container.set_users_position(position);
-			container.monitor_
 		},null,null);
-		console.debug(some_val);
 	};
 	
 	container.remove_all_markers = function(){
@@ -183,5 +234,16 @@ Nexus.google.maps.map = function(container){
 google.maps.event.addDomListener(window, 'load', Nexus.google.maps.recruit);
 
 
-console.debug("make default center is users location");
-console.debug("remove all consoles");
+console.info("make default center is users location");
+console.info("remove all consoles");
+
+//references
+
+//api documentatipn
+//https://developers.google.com/maps/documentation/javascript/reference",
+
+//dynamically adjusting the map when a new marker is added
+//http://salman-w.blogspot.com/2011/03/zoom-to-fit-all-markers-on-google-map.html",
+
+//used in the callback
+//http://stackoverflow.com/a/7262773/1654250"
