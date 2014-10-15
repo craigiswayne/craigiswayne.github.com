@@ -1,10 +1,41 @@
 <html>
 
 	<head>
-		<title></title>
+		<title>Nexus Google Maps | Demo</title>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+		<link rel=stylesheet href="../../css/tutorials.css">
+		<script src="../../js/nexus.js"></script>
+		<script>
+			var demo_markers = new Array(
+				{
+					title:		"Gateway Theatre of Shopping",
+					latitude: 	-29.725589,
+					longitude: 	31.066547
+				},
+				{
+					title:		 "The Pavilion Centre",
+					latitude:	 -29.848107,
+					longitude:	 30.93529,
+					destination: true
+				}
+			);
+			
+			console.debug("for this demo find the closest two malls and then monitors users distance to it");
+		</script>
 	</head>
 	
 	<body>
+	
+		<fieldset class=example>
+			<legend>Track Your Location</legend>
+			<div class="nexus google_maps" data-track="true" style=height:300px;></div>
+		</fieldset>
+		
+		<fieldset class=example>
+			<legend>Real Time Distance Calculator</legend>
+			<div id="real_time" class="nexus google_maps" data-track="true" data-center="-29.795327,30.83847" data-markers="demo_markers" style=height:300px;></div>
+		</fieldset>
 		
 	</body>
 

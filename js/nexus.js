@@ -1,6 +1,13 @@
+/*modification of prototypes*/
+Number.prototype.toRad = function() { return this * (Math.PI / 180); };
+
 var Nexus = new Object();
-Nexus.repository_url = "//craigwayne.github.io";
-//Nexus.repository_url = document.location.origin+"/craigwayne.github.com";
+Nexus.references = [
+	"http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates" //coord_diff
+];
+
+//Nexus.repository_url = "//craigwayne.github.io";
+Nexus.repository_url = document.location.origin+"/craigwayne.github.com";
 
 Nexus.go_fullscreen = function(element){
 	
@@ -47,13 +54,15 @@ Nexus.link_css = function(href){
 		link.setAttribute("href",href);
 		link.setAttribute("rel","stylesheet");
 	}
+	
+	return link;
 };
 
 Nexus.link_js = function(src){
 	
 	if(!src){return;}
 	
-	var js_links = document.querySelectorAll("script");
+	var js_links = document.querySelectorAll("script[src]:not([src=''])");
 	var linked = false;
 	for(var i=0; i<js_links.length; i++){
 		var link = js_links[i];
@@ -67,6 +76,8 @@ Nexus.link_js = function(src){
 		var link = document.getElementsByTagName("head")[0].appendChild(document.createElement("script"));
 		link.setAttribute("src",src);
 	}
+	
+	return link;
 };
 
 Nexus.install = function(){
@@ -99,8 +110,37 @@ Nexus.install = function(){
 	
 };
 
+Nexus.coord_diff = function(coord_obj1, coord_obj2){
+	
+	if(!coord_obj1 || !coord_obj2){console.error("Requires 2 Parameters"); return null;}
+	
+	if(typeof(coord_obj1) != "object" || typeof(coord_obj2) != "object"){console.error("Both parameters must be of Object type"); return null;}
+	
+	lat1 = coord_obj1.latitude;
+	lat2 = coord_obj2.latitude;
+	
+	lon1 = coord_obj1.longitude;
+	lon2 = coord_obj2.longitude;
+	
+	//see references
+	var R = 6371; // km
+	var dLat = (lat2-lat1).toRad();
+	var dLon = (lon2-lon1).toRad();
+	var lat1 = lat1.toRad();
+	var lat2 = lat2.toRad();
+	
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+			Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c;
+	
+	return d;
+};
+
+
 document.addEventListener("DOMContentLoaded",function(){Nexus.install();},false);
 
 console.debug("need a function to merge object data, for example, merge the dataset against the parameters sent to a function and that containers dataset");
 console.debug("include the nexus.css file via this script if its not already added");
 console.debug("this file must serve as a portal to other files");
+console.debug("change callbacks to promises");
