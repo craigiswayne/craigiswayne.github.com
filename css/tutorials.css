@@ -74,6 +74,14 @@ fieldset.example legend:before{
 	text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
 }
 
+fieldset.references{
+	margin-top:20px;
+}
+
+fieldset.references legend:before{
+	content:"References";
+}
+
 textarea.code{
 	width:100%;
 	background-color:rgb(245, 245, 245);

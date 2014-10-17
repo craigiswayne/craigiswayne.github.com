@@ -13,10 +13,10 @@
 		<script>			
 			var realtime_distance_map_options = {
 				track: true,
-				callback: get_nearby_malls
+				tracking_completed: get_nearby_garages
 			};
 			
-			function get_nearby_malls(container){
+			function get_nearby_garages(container){
 				var garages_nearby = [];
 				var service = new google.maps.places.PlacesService(container.map);  
 				var request = {
@@ -24,9 +24,16 @@
 					radius: "5000",
 					query: "garage"
 				};
+				console.debug(request);
+				console.debug("fine up to here");
 				
 				service.textSearch(request, function(results, status, pagination){
 					if (status == google.maps.places.PlacesServiceStatus.OK) {
+						
+						console.debug(results);
+						console.debug(status);
+						console.debug(pagination);
+						
 						for(var i=0; i<5; i++){
 							var marker_settings = {
 								title: results[i].name,
