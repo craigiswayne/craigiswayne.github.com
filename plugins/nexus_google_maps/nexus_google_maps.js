@@ -1,5 +1,6 @@
 Nexus.google 		= Nexus.google || new Object();
 Nexus.google.maps 	= Nexus.google.maps || new Object();
+Nexus.google.maps.geolocation = Nexus.google.maps.geolocation || new Object();
 
 Nexus.google.maps.recruit = function(){
 	var candidates = document.querySelectorAll(".nexus.google_maps");
@@ -11,9 +12,6 @@ Nexus.google.maps.recruit = function(){
 
 
 Nexus.google.maps.map = function(container){
-	
-	container.options 	= new Object();
-	container.defaults  = new Object();
 	
 	container.map 	  			= null;
 	container.markers 			= new Array();
@@ -47,6 +45,8 @@ Nexus.google.maps.map = function(container){
 	};
 	
 	container.get_options = function(){
+		
+		container.options = container.options || new Object();
 		
 		if(container.dataset["options"] && (window[container.dataset["options"]] instanceof Object)){
 			for(var key in window[container.dataset["options"]]){
@@ -86,6 +86,10 @@ Nexus.google.maps.map = function(container){
 		container.options["tracking_completed"]	= (window[container.options["tracking_completed"]] instanceof Function) ? window[container.options["tracking_completed"]] : container.options["tracking_completed"];
 		container.options["tracking_completed"]	= (container.options["tracking_completed"] instanceof Function) ? container.options["tracking_completed"] : container.options["tracking_completed"];
 		container.options["tracking_completed"]	= container.options["tracking_completed"] || function(){};
+		
+		container.options["users_position_updated"]	= (window[container.options["users_position_updated"]] instanceof Function) ? window[container.options["users_position_updated"]] : container.options["users_position_updated"];
+		container.options["users_position_updated"]	= (container.options["users_position_updated"] instanceof Function) ? container.options["users_position_updated"] : container.options["users_position_updated"];
+		container.options["users_position_updated"]	= container.options["users_position_updated"] || function(){};
 	};
 	
 	container.get_users_position = function(){
@@ -103,7 +107,9 @@ Nexus.google.maps.map = function(container){
 				container.show_info_window(container.users_position.marker);
 			}
 		}
-	};t
+		
+		container.options["users_position_updated"](container);
+	};
 	
 	container.add_users_position_marker = function(google_position_obj){
 		
@@ -124,7 +130,7 @@ Nexus.google.maps.map = function(container){
 				var destination_data = new Array();
 				
 				for(var i=0; i<container.markers.length; i++){
-					if(container.markers[i].destination == true){
+					if(container.markers[i].track == true){
 						destination 			= new Object();
 						destination.title 		= container.markers[i].title;
 						destination.distance	= Nexus.coord_diff({latitude:container.users_position.latitude,longitude:container.users_position.longitude},{latitude:container.markers[i].position.lat(),longitude:container.markers[i].position.lng()});
@@ -218,13 +224,24 @@ Nexus.google.maps.map = function(container){
 	
 	container.track = function(){
 		
-		navigator.geolocation.watchPosition(function(position){
-			container.set_users_position(position);
-			
+		if(!Nexus.google.maps.geolocation.position){
+			Nexus.google.maps.geolocation.watch_id = navigator.geolocation.watchPosition(function(position){
+				
+				Nexus.google.maps.geolocation.position = position;
+				
+				container.set_users_position(Nexus.google.maps.geolocation.position);
+				
+				container.options["tracking_completed"](container);
+				container.options["tracking_completed"] = function(){}; //disables tracking_completed function from running over and over
+			},
+			function(){
+				alert("Browser Location Services are core to the tracking functionality. Please Enable this in your Browser settings...");
+			});
+		}else{
+			container.set_users_position(Nexus.google.maps.geolocation.position);
 			container.options["tracking_completed"](container);
-			
 			container.options["tracking_completed"] = function(){}; //disables tracking_completed function from running over and over
-		},null,null);
+		}
 	};
 	
 	container.remove_all_markers = function(){
@@ -243,6 +260,50 @@ Nexus.google.maps.map = function(container){
 		}
 	};
 	
+	container.get_directions = function(request){
+		
+		if(!request){console.error("No request received"); return null;}
+		
+		var icon_options = {
+			path: google.maps.SymbolPath.CIRCLE,
+			strokeOpacity:	1,
+			scale:			3,
+			strokeColor:	"red",
+			fillColor:		"red",
+			fillOpacity:	1
+		};
+		
+		var renderer_options = {
+			map: 				container.map,
+			suppressMarkers: 	true,
+			polylineOptions:{
+				strokeOpacity:	0,
+				icons: [{
+				  icon: icon_options,
+				  offset: '0',
+				  repeat: '15px'
+				}]
+			}
+		};
+		
+		container.directions		   = container.directions 			|| new Object();
+		container.directions.renderer  = container.directions.renderer  || new google.maps.DirectionsRenderer(renderer_options);
+		container.directions.service   = container.directions.service 	|| new google.maps.DirectionsService();
+		
+		if(container.directions.display){
+			container.directions.renderer.setMap(null);
+			container.directions.display  = null;
+		}
+		
+		
+		container.directions.service.route(request, function(response, status) {
+			
+			if(status == google.maps.DirectionsStatus.OK){
+				container.directions.display = container.directions.renderer.setDirections(response);
+			}
+		});
+	};
+	
 	container.initialize();	
 	return container;
 }
@@ -251,41 +312,33 @@ google.maps.event.addDomListener(window, 'load', Nexus.google.maps.recruit);
 
 
 console.info("FEATURE: make default center is users location");
-console.info("ISSUE: remove all consoles");
+
 console.info("FEATURE: allow for onclick functions on the google marker map");
+
 console.info("ISSUE: rename marker_settings to marker_options");
-console.info("DISCUSSION: watch position must be bound to the window and not elements");
+
 console.info("ISSUE: should i bind the functions to the container or the map?");
 console.info("ISSUE: when tracking the markers, if km is <1 show in meters");
+
 console.info("FEAUTURE: support for both imperial and metric units");
-console.info("ISSUE: if the user does not want to be tracked, then what?");
+
 console.info("FEATURE: allow the user to specify what to track");
+
 console.info("ISSUE: promises, implement to allow the user to specify functions to run once another is finished");
-console.info("ISSUE: in tracking, when the position is not fetched, what to do?");
+
 console.info("ISSUE: rename settings to options everywhere");
 console.info("FEATURE: when the user approaches the marker(s), fit the bounds of the map again");
 console.info("FEATURE: dotted line(s) to the destinations on the user");
 
-/*
-extract from one.om: fix for the watch position
-window.geolocation = window.geolocation || new Object();
-
-if(!window.geolocation.position){
-	console.debug("no position");
-	window.geolocation.watch_id = navigator.geolocation.watchPosition(function(position){
-		window.geolocation.position = position;
-		GoogleMap.set_users_position(container,window.geolocation.position);
-	});
-}else{
-	console.debug("position already being watched");
-	GoogleMap.set_users_position(container,window.geolocation.position);	
-}
-*/
+console.info("ISSUE: do i need to initialize the service, display and renderer for every map?!");
 
 //references
 
 //api documentatipn
 //https://developers.google.com/maps/documentation/javascript/reference",
+
+//api examples
+//https://developers.google.com/maps/documentation/javascript/examples/directions-simple
 
 //dynamically adjusting the map when a new marker is added
 //http://salman-w.blogspot.com/2011/03/zoom-to-fit-all-markers-on-google-map.html",

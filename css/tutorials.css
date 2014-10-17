@@ -79,19 +79,23 @@ fieldset.references{
 }
 
 fieldset.references legend:before{
-	content:"References";
+	content:"References:";
 }
 
 textarea.code{
 	width:100%;
-	background-color:rgb(245, 245, 245);
 	border:none;
 	border-radius:5px;
 	padding:10px;
 	resize:none;
 	white-space:initial;
 	min-height:60px;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: rgb(255, 255, 255);
 }
 
+textarea:focus{
+	outline:none;
+}
 
 

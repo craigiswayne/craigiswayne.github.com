@@ -16,6 +16,18 @@
 				tracking_completed: get_nearby_garages
 			};
 			
+			var tracking_with_guide_options = {
+				markers: [
+					{
+						title: "Cape Town",
+						track: true,
+						position: new google.maps.LatLng(-33.924868,18.424055) //cape town
+					}
+				],
+				track: true,
+				users_position_updated: show_guide_to_first_marker 
+			};
+			
 			function get_nearby_garages(container){
 				var garages_nearby = [];
 				var service = new google.maps.places.PlacesService(container.map);  
@@ -24,26 +36,29 @@
 					radius: "5000",
 					query: "garage"
 				};
-				console.debug(request);
-				console.debug("fine up to here");
 				
 				service.textSearch(request, function(results, status, pagination){
-					if (status == google.maps.places.PlacesServiceStatus.OK) {
-						
-						console.debug(results);
-						console.debug(status);
-						console.debug(pagination);
+					if (status == google.maps.places.PlacesServiceStatus.OK){
 						
 						for(var i=0; i<5; i++){
 							var marker_settings = {
 								title: results[i].name,
 								position: results[i].geometry.location,
-								destination: true
+								track: true
 							};
 							container.add_marker(marker_settings);
 						}
 					}
 				});
+			}
+			
+			function show_guide_to_first_marker(container){
+				var request = {
+					origin:			container.users_position.google_obj,
+					destination:	container.markers[0].position,
+					travelMode: 	google.maps.TravelMode.DRIVING
+				};
+				container.get_directions(request);				
 			}
 		</script>
 		
@@ -56,21 +71,25 @@
 	</head>
 	
 	<body>
+		<fieldset class=example>
+			<legend>Tracking with Guide (Realtime)</legend>
+			<div class="nexus google_maps" data-options="tracking_with_guide_options"></div>
+		</fieldset>
 	
 		<fieldset class=example>
-			<legend>Track Your Location</legend>
-			<div id="map_1" class="nexus google_maps" data-track="true" data-maxZoom="8"></div>
+			<legend>Track Your Location (Realtime)</legend>
+			<div class="nexus google_maps" data-track="true" data-maxZoom="8"></div>
 		</fieldset>
 		
 		<fieldset class=example>
-			<legend>Real Time Distance Calculator (nearby garages)</legend>
-			<div id="map_2" class="nexus google_maps" data-options="realtime_distance_map_options"></div>
+			<legend>Distance Calculator (Realtime) (Nearby Garages)</legend>
+			<div class="nexus google_maps" data-options="realtime_distance_map_options"></div>
 		</fieldset>
 		
 		
 		<fieldset class=example>
 			<legend>Inline settings (data-zoom=5)</legend>
-			<div id="map_2" class="nexus google_maps" data-zoom="5"></div>
+			<div class="nexus google_maps" data-zoom="5"></div>
 		</fieldset>
 	</body>
 
