@@ -127,13 +127,19 @@ Nexus.google.maps.map = function(container){
 			marker_settings.content = function(){
 				
 				var content = "<div class=title>"+this.title+"</div>";
+				content    += "<div class=location>";
+				content    += "<label>Latitude</label><span>"+container.users_position.latitude+"</span>";
+				content    += "<br/>";
+				content    += "<label>Longitude</label><span>"+container.users_position.longitude+"</span>";
+				content    += "<br/>";
+				content    += "</div>"
 				var destination_data = new Array();
 				
 				for(var i=0; i<container.markers.length; i++){
 					if(container.markers[i].track == true){
 						destination 			= new Object();
 						destination.title 		= container.markers[i].title;
-						destination.distance	= Nexus.coord_diff({latitude:container.users_position.latitude,longitude:container.users_position.longitude},{latitude:container.markers[i].position.lat(),longitude:container.markers[i].position.lng()});
+						destination.distance	= Nexus.math.coord_diff({latitude:container.users_position.latitude,longitude:container.users_position.longitude},{latitude:container.markers[i].position.lat(),longitude:container.markers[i].position.lng()});
 						if(destination.distance < 1){
 							destination.distance = (destination.distance * 1000).toFixed(2) + "m";	
 						}
@@ -205,6 +211,12 @@ Nexus.google.maps.map = function(container){
 		marker_settings.animation	= marker_settings.animation || google.maps.Animation.DROP;
 		marker_settings.destination = marker_settings.destination || false;
 		marker_settings.pan_to	 	= marker_settings.pan_to || true;
+		
+		if(marker_settings.marker_color){
+			marker_settings.icon 	= "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|"+Nexus.color_to_hex(marker_settings.marker_color).replace("#","")+"|000000";
+			console.debug(marker_settings.icon);
+			console.debug(encodeURIComponent(marker_settings.icon));
+		}
 		container.map.bounds.extend(marker_settings.position);
 		
 		var marker = new google.maps.Marker(marker_settings);
@@ -264,6 +276,8 @@ Nexus.google.maps.map = function(container){
 		
 		if(!request){console.error("No request received"); return null;}
 		
+		request["travelMode"]	= request["travelMode"] || google.maps.TravelMode.DRIVING;
+		
 		var icon_options = {
 			path: google.maps.SymbolPath.CIRCLE,
 			strokeOpacity:	1,
@@ -300,6 +314,12 @@ Nexus.google.maps.map = function(container){
 			
 			if(status == google.maps.DirectionsStatus.OK){
 				container.directions.display = container.directions.renderer.setDirections(response);
+			}
+			else{
+				console.group("Nexus Google Maps");
+				console.error("Directions could not be determined");
+				console.info(response);
+				console.groupEnd();
 			}
 		});
 	};

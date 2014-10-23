@@ -108,17 +108,31 @@ Nexus.install = function(){
 	
 };
 
-Nexus.coord_diff = function(coord_obj1, coord_obj2){
+Nexus.color_to_hex = function(color_string){
 	
-	if(!coord_obj1 || !coord_obj2){console.error("Requires 2 Parameters"); return null;}
+    var a = document.createElement('div');
+    a.style.color = color_string;
+    var colors = window.getComputedStyle( document.body.appendChild(a) ).color.match(/\d+/g).map(function(a){ return parseInt(a,10); });
+    document.body.removeChild(a);
+    return (colors.length >= 3) ? '#' + (((1 << 24) + (colors[0] << 16) + (colors[1] << 8) + colors[2]).toString(16).substr(1)) : false;
+};
+
+Nexus.math = Nexus.math || new Object();
+
+Nexus.math.coord_diff = function(coord_obj1, coord_obj2){
 	
-	if(typeof(coord_obj1) != "object" || typeof(coord_obj2) != "object"){console.error("Both parameters must be of Object type"); return null;}
+	if(!coord_obj1 || !coord_obj2){console.error("Requires 2 Parameters"); return false;}
 	
-	lat1 = coord_obj1.latitude;
-	lat2 = coord_obj2.latitude;
+	if(typeof(coord_obj1) != "object" || typeof(coord_obj2) != "object"){console.error("Both parameters must be of Object type"); return false;}
 	
-	lon1 = coord_obj1.longitude;
-	lon2 = coord_obj2.longitude;
+	lat1 = parseFloat(coord_obj1.latitude);
+	lat2 = parseFloat(coord_obj2.latitude);
+	
+	lon1 = parseFloat(coord_obj1.longitude);
+	lon2 = parseFloat(coord_obj2.longitude);
+	
+	if(isNaN(lat1) || isNaN(lat2) || isNaN(lon1) || isNaN(lon2)){console.error("Invalid values"); return false;}
+	
 	
 	//see references
 	var R = 6371; // km

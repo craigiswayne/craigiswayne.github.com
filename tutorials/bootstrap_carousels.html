@@ -1,0 +1,488 @@
+<html>
+
+	<head>
+		<title>Bootstrap Carousels</title>
+		
+		<script src="../plugins/jQuery/jQuery-1.11.0.js"></script>
+		
+		<link rel=stylesheet href="../plugins/bootstrap-3.2.0-dist/css/bootstrap.css">
+		<script src="../plugins/bootstrap-3.2.0-dist/js/bootstrap.js"></script>
+		
+		
+		<link rel=stylesheet href="../css/font-awesome-4.2.0/css/font-awesome.css">
+		
+		<link rel=stylesheet href="../css/tutorials.css">
+		
+		
+		<style>
+			.carousel .carousel-inner .item > img{
+				margin:auto;
+			}
+			
+			.carousel .carousel-inner .item h2{
+				margin: 0;     
+				color: #666;
+				padding-top: 90px;
+				font-size: 52px;
+				font-family: "trebuchet ms", sans-serif;    
+			}
+			.carousel .carousel-inner .item{
+				background: #333;    
+				text-align: center;
+				height: 300px !important;
+			}
+			
+			
+			.carousel.carousel-fade .item {
+				-webkit-transition: opacity 0.5s ease-in-out;
+				-moz-transition: opacity 0.5s ease-in-out;
+				-ms-transition: opacity 0.5s ease-in-out;
+				-o-transition: opacity 0.5s ease-in-out;
+				transition: opacity 0.5s ease-in-out;
+				opacity:0;
+			}
+			
+			.carousel.carousel-fade .active.item {
+				opacity:1;
+			}
+			
+			.carousel.carousel-fade .active.left,
+			.carousel.carousel-fade .active.right {
+				left: 0;
+				z-index: 2;
+				opacity: 0;
+				filter: alpha(opacity=0);
+			}
+			
+			.carousel.carousel-fade .next,
+			.carousel.carousel-fade .prev {
+				left: 0;
+				z-index: 1;
+			}
+			
+			.carousel.carousel-fade .carousel-control {
+				z-index: 3;
+			}
+			
+		</style>
+		
+	</head>
+	<body>
+		
+		<fieldset class="example">
+			<legend>Slide Effect</legend>
+			
+			<div id="example1" class="carousel slide" data-interval="3000">
+				
+				<ol class="carousel-indicators">
+					<li data-target="#example1" data-slide-to="0" class="active"></li>
+					<li data-target="#example1" data-slide-to="1"></li>
+					<li data-target="#example1" data-slide-to="2"></li>
+				</ol>
+				
+				<div class="carousel-inner">
+					<div class="active item">
+						<h2>Slide 1</h2>
+						<div class="carousel-caption">
+						  <h3>First slide label</h3>
+						  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						</div>
+					</div>
+					<div class="item">
+						<h2>Slide 2</h2>
+						<div class="carousel-caption">
+						  <h3>Second slide label</h3>
+						  <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+						</div>
+					</div>
+					<div class="item">
+						<h2>Slide 3</h2>
+						<div class="carousel-caption">
+						  <h3>Third slide label</h3>
+						  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+						</div>
+					</div>
+				</div>
+				
+				<a class="carousel-control left" href="#example1" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				
+				<a class="carousel-control right" href="#example1" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+				
+			</div>
+			
+		</fieldset>
+		
+		<fieldset class="example">
+			<legend>Fade Effect</legend>
+			
+			<div id="example2" class="carousel slide carousel-fade" data-interval="3000">
+				
+				<ol class="carousel-indicators">
+					<li data-target="#example2" data-slide-to="0" class="active"></li>
+					<li data-target="#example2" data-slide-to="1"></li>
+					<li data-target="#example2" data-slide-to="2"></li>
+				</ol>
+				
+				<div class="carousel-inner">
+					<div class="active item">
+						<h2>Slide 1</h2>
+						<div class="carousel-caption">
+						  <h3>First slide label</h3>
+						  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						</div>
+					</div>
+					<div class="item">
+						<h2>Slide 2</h2>
+						<div class="carousel-caption">
+						  <h3>Second slide label</h3>
+						  <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+						</div>
+					</div>
+					<div class="item">
+						<h2>Slide 3</h2>
+						<div class="carousel-caption">
+						  <h3>Third slide label</h3>
+						  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+						</div>
+					</div>
+				</div>
+				
+				<a class="carousel-control left" href="#example2" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				
+				<a class="carousel-control right" href="#example2" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+				
+			</div>
+			
+		</fieldset>
+		
+		<fieldset class="example">
+			<legend>Navigating via Javascript</legend>
+			
+			<div id="example3" class="carousel slide carousel-fade" data-interval="3000">
+				
+				<ol class="carousel-indicators">
+					<li data-target="#example3" data-slide-to="0" class="active"></li>
+					<li data-target="#example3" data-slide-to="1"></li>
+					<li data-target="#example3" data-slide-to="2"></li>
+				</ol>
+				
+				<div class="carousel-inner">
+					<div class="active item">
+						<h2>Slide 1</h2>
+						<div class="carousel-caption">
+						  <h3>First slide label</h3>
+						  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						</div>
+					</div>
+					<div class="item">
+						<h2>Slide 2</h2>
+						<div class="carousel-caption">
+						  <h3>Second slide label</h3>
+						  <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+						</div>
+					</div>
+					<div class="item">
+						<h2>Slide 3</h2>
+						<div class="carousel-caption">
+						  <h3>Third slide label</h3>
+						  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+						</div>
+					</div>
+				</div>
+				
+				<a class="carousel-control left" href="#example3" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				
+				<a class="carousel-control right" href="#example3" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+				
+			</div>
+			
+			<input id="example3_previous" type=button value="previous">
+			<input id="example3_next" type=button value="next">
+			
+			<script>
+				$("#example3_previous").click(function(){
+					$("#example3").carousel("prev");
+				});
+				
+				$("#example3_next").click(function(){
+					$("#example3").carousel("next");
+				});
+			</script>
+		</fieldset>
+		
+		<fieldset class="example">
+			<legend>No Transition</legend>
+			
+			<div id="example4" class="carousel" data-interval="3000">
+				
+				<ol class="carousel-indicators">
+					<li data-target="#example4" data-slide-to="0" class="active"></li>
+					<li data-target="#example4" data-slide-to="1"></li>
+					<li data-target="#example4" data-slide-to="2"></li>
+				</ol>
+				
+				<div class="carousel-inner">
+					<div class="active item">
+						<h2>Slide 1</h2>
+						<div class="carousel-caption">
+						  <h3>First slide label</h3>
+						  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						</div>
+					</div>
+					<div class="item">
+						<h2>Slide 2</h2>
+						<div class="carousel-caption">
+						  <h3>Second slide label</h3>
+						  <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+						</div>
+					</div>
+					<div class="item">
+						<h2>Slide 3</h2>
+						<div class="carousel-caption">
+						  <h3>Third slide label</h3>
+						  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+						</div>
+					</div>
+				</div>
+				
+				<a class="carousel-control left" href="#example4" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				
+				<a class="carousel-control right" href="#example4" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+				
+			</div>
+			
+		</fieldset>
+		
+		<fieldset class="example">
+			<legend>Injecting via JavaScript</legend>
+			
+			<div id="example5_container"></div>			
+			<input type=button value="Initialize" onclick="initialize_example5()">
+			
+			<script>			
+				function initialize_example5(){
+					document.querySelector("#example5_container").innerHTML = '<div id="example5" class="carousel" data-interval="3000"><ol class="carousel-indicators"><li data-target="#example5" data-slide-to="0" class="active"></li><li data-target="#example5" data-slide-to="1"></li><li data-target="#example5" data-slide-to="2"></li></ol><div class=carousel-inner><div class="active item"><h2>Slide 1</h2><div class="carousel-caption"><h3>First slide label</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div></div><div class="item"><h2>Slide 2</h2><div class="carousel-caption"><h3>Second slide label</h3><p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p></div></div><div class="item"><h2>Slide 3</h2><div class="carousel-caption"><h3>Third slide label</h3><p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p></div></div></div><a class="carousel-control left" href="#example5" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a><a class="carousel-control right" href="#example5" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>';
+				}
+			</script>
+		</fieldset>
+		
+		<fieldset class="example">
+			<legend>Nested Carousels</legend>
+			<div id="example6" class="carousel slide" data-ride="carousel">
+
+				<ol class="carousel-indicators">
+					<li data-target="#example6" data-slide-to="0" class="active"></li>
+					<li data-target="#example6" data-slide-to="1"></li>
+					<li data-target="#example6" data-slide-to="2"></li>
+				</ol>
+				
+				<div class="carousel-inner">
+					<div class="item active">
+						<img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide">
+						<div class="container">
+			
+							<div class="container" id="myWizard">
+								<div class="navbar">
+									<div class="navbar-inner">
+										<ul class="nav nav-pills">
+											<li class="active"><a href="#k1" data-toggle="tab">Step 1</a></li>
+											<li><a href="#k2" data-toggle="tab">Step 2</a></li>
+											<li><a href="#k3" data-toggle="tab">Step 3</a></li>
+											<li><a href="#k4" data-toggle="tab">Step 4</a></li>
+											<li><a href="#k5" data-toggle="tab">Step 5</a></li>
+										</ul>
+									</div>
+								</div>
+								
+								<div class="tab-content">
+			
+									<div class="tab-pane active" id="k1">
+										<p>55555</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+									
+									<div class="tab-pane" id="k2">
+										<p>66666</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+					
+									<div class="tab-pane" id="k3">
+										<p>9999</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+					
+									<div class="tab-pane" id="k4">
+										<p>777</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+					
+									<div class="tab-pane" id="k5">
+										<p>444444</p>
+										<a class="btn btn-success first" href="#">Start over</a>
+									</div>
+							
+								</div>
+							</div>
+						</div>
+					</div>
+			
+					<div class="item">
+						<img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide">
+						<div class="container">
+				
+							<div class="container" id="myWizard2">
+								<div class="navbar">
+									<div class="navbar-inner">
+										<ul class="nav nav-pills">
+											<li class="active"><a href="#step1" data-toggle="tab">Step 1</a></li>
+											<li><a href="#step2" data-toggle="tab">Step 2</a></li>
+											<li><a href="#step3" data-toggle="tab">Step 3</a></li>
+											<li><a href="#step4" data-toggle="tab">Step 4</a></li>
+											<li><a href="#step5" data-toggle="tab">Step 5</a></li>
+										</ul>
+									</div>
+								</div>
+								
+								<div class="tab-content">
+									<div class="tab-pane active" id="step1">
+										<p>aaaaaaaaaaaa</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+									
+									<div class="tab-pane" id="step2">
+										<p>vvvvvvvvv</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+				
+									<div class="tab-pane" id="step3">
+										<p>3333333</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+				
+									<div class="tab-pane" id="step4">
+										<p>ddddd</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+									
+									<div class="tab-pane" id="step5">
+										<p>Th44444</p>
+										<a class="btn btn-success first" href="#">Start over</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="item">
+				
+						<div class="container">
+							<div class="container" id="myWizard3">
+								<div class="navbar">
+									<div class="navbar-inner">
+										<ul class="nav nav-pills">
+											<li class="active"><a href="#s1" data-toggle="tab">Step 1</a></li>
+											<li><a href="#s2" data-toggle="tab">Step 2</a></li>
+											<li><a href="#s3" data-toggle="tab">Step 3</a></li>
+											<li><a href="#s4" data-toggle="tab">Step 4</a></li>
+											<li><a href="#s5" data-toggle="tab">Step 5</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="tab-content">
+									<div class="tab-pane active" id="s1">
+										<p>OOOOOOOOOOOOOOOOOOOO</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+									
+									<div class="tab-pane" id="s2">
+										<p>OOOOO222222</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+				
+									<div class="tab-pane" id="s3">
+										<p>OOOOO</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+				
+									<div class="tab-pane" id="s4">
+										<p>OOOOO11111</p>
+										<a class="btn btn-default next" href="#">Continue</a>
+									</div>
+				
+									<div class="tab-pane" id="s5">
+										<p>OOOOO22222222</p>
+										<a class="btn btn-success first" href="#">Start over</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<a class="left carousel-control" href="#example6" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+				<a class="right carousel-control" href="#example6" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+				
+			<script type="text/javascript">
+				$('#example6 .next').click(function(){
+				
+					var nextId = $(this).parents('.tab-pane').next().attr("id");
+					$('[href=#'+nextId+']').tab('show');
+					
+					})
+					
+					$('.first').click(function(){
+					$('#myWizard a:first').tab('show')
+				})
+				
+				$('#example6 .next').click(function(){
+				
+					var nextId = $(this).parents('.tab-pane').next().attr("id");
+					$('[href=#'+nextId+']').tab('show');
+					})
+					
+					$('.first').click(function(){
+					$('#myWizard2 a:first').tab('show')
+				})
+				
+				$('#example6 .next').click(function(){
+					
+					var nextId = $(this).parents('.tab-pane').next().attr("id");
+					$('[href=#'+nextId+']').tab('show');
+					})
+					
+					$('.first').click(function(){
+					$('#myWizard3 a:first').tab('show')
+				})
+				
+			</script>
+		</fieldset>
+		
+		<fieldset class="references">
+			<legend></legend>
+			<ol>
+				<li><a href="http://www.bootply.com/64693"></a></li>
+				<li><a href="http://getbootstrap.com/javascript/#carousel"></a></li>
+				<li><a href="http://stackoverflow.com/a/22095730/1654250"></a></li>
+			</ol>
+		</fieldset>
+		
+	</body>
+
+</html>

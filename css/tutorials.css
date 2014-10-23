@@ -35,7 +35,6 @@ body{
 	box-shadow:0 4px 2px 2px rgba(0,0,0,0.2),inset 0 0 10px 10px rgba(0,0,0,0.2);
 	border-radius:10px;
 	border:#9b6b2f solid 10px;
-	counter-reset: example;
 }
 
 body:after
@@ -63,13 +62,33 @@ a[href]:not([href=""]):empty:after{
 	content:attr(href);
 }
 
+fieldset{
+	border:2px groove threedface;
+	
+	-webkit-padding-before: 0.35em;
+	-webkit-padding-start: 0.75em;
+	-webkit-padding-end: 0.75em;
+	-webkit-padding-after: 0.625em;
+}
+
+fieldset legend{
+	color:inherit;
+	border-bottom:none;
+	margin:0px;
+}
+
 fieldset.example {
 	margin: 40px 0px;
 	background-color: rgba(0, 0, 0, 0.3);
+	counter-increment: example;
 }
 
-fieldset.example legend:before{
-	counter-increment: example;
+fieldset.example legend{
+	font-size:inherit;
+	text-align:center;
+}
+
+fieldset.example>legend:before{
 	content: "Example " counter(example) ": ";
 	text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
 }
@@ -83,7 +102,7 @@ fieldset.references legend:before{
 }
 
 textarea.code{
-	width:100%;
+	display:block;
 	border:none;
 	border-radius:5px;
 	padding:10px;
@@ -92,10 +111,22 @@ textarea.code{
 	min-height:60px;
 	background-color: rgba(0, 0, 0, 0.5);
 	color: rgb(255, 255, 255);
+	font-family:monospace;
 }
+
+fieldset.example textarea.code{
+	width:90%;
+	margin:10px auto;
+}
+
+
 
 textarea:focus{
 	outline:none;
+}
+
+input[type=button]{
+	color:black;
 }
 
 

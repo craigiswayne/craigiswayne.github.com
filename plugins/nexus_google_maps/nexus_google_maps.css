@@ -10,6 +10,12 @@
 	font-size:18px;
 }
 
+.nexus.google_maps .info_window .location label{
+	font-weight:bold;
+	display:inline-block;
+	min-width:60px;
+}
+
 .nexus.google_maps table.destinations{
 	color:black;
 }
