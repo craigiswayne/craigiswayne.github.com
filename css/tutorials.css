@@ -1,6 +1,6 @@
 @font-face
 {
-	font-family:chalk,Tahoma,Arial;
+	font-family:chalk;
 	src: url(../css/fonts/kimberly-geswein_kg-ten-thousand-reasons/KGTenThousandReasons.ttf);
 }
 
@@ -16,7 +16,7 @@ overflow-y:hidden;
 }
 
 body{
-	font-family:chalk;
+	font-family:chalk,Tahoma,Arial;
 	-webkit-font-smoothing:antialiased;
 	display:block;
 	width:80vw;
@@ -71,17 +71,26 @@ fieldset{
 	-webkit-padding-after: 0.625em;
 }
 
+fieldset.example,
+fieldset.notes,
+fieldset.references{
+	margin: 40px 0px;
+	background-color: rgba(0, 0, 0, 0.3);
+	counter-increment: example;
+}
+
 fieldset legend{
 	color:inherit;
 	border-bottom:none;
 	margin:0px;
 }
 
-fieldset.example {
-	margin: 40px 0px;
-	background-color: rgba(0, 0, 0, 0.3);
-	counter-increment: example;
+fieldset.example>legend:before,
+fieldset.notes>legend:before,
+fieldset.references>legend:before{
+	text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
 }
+
 
 fieldset.example legend{
 	font-size:inherit;
@@ -90,12 +99,13 @@ fieldset.example legend{
 
 fieldset.example>legend:before{
 	content: "Example " counter(example) ": ";
-	text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
 }
 
-fieldset.references{
-	margin-top:20px;
+
+fieldset.notes>legend:before{
+	content: "Notes:";
 }
+
 
 fieldset.references legend:before{
 	content:"References:";
@@ -107,7 +117,7 @@ textarea.code{
 	border-radius:5px;
 	padding:10px;
 	resize:none;
-	white-space:initial;
+	white-space:pre;
 	min-height:60px;
 	background-color: rgba(0, 0, 0, 0.5);
 	color: rgb(255, 255, 255);

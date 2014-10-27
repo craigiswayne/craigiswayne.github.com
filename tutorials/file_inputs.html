@@ -1,0 +1,143 @@
+<html>
+
+	<head>
+		<title>File Inputs</title>
+		<link rel=stylesheet href="../css/tutorials.css">
+	</head>
+	
+	<body>
+		<fieldset class=example>
+			<legend>All File Types</legend>
+			<input type=file>
+			
+			<textarea class=code>
+				<input type=file>
+			</textarea>
+			
+		</fieldset>
+		
+		<fieldset class=example>
+			<legend>All File Types (required)</legend>
+			<input type=file required>
+			
+			<textarea class=code>
+				<input type=file required>
+			</textarea>
+			
+		</fieldset>
+		
+		
+		<fieldset class=example>
+			<legend>Only Audio files</legend>
+			<input type=file accept="audio/*">
+			
+			<textarea class=code>
+				<input type=file accept="audio/*">
+			</textarea>
+			
+		</fieldset>
+		
+		<fieldset class=example>
+			<legend>Only Video files</legend>
+			<input type=file accept="video/*">
+			
+			<textarea class=code>
+				<input type=file accept="video/*">
+			</textarea>
+			
+		</fieldset>
+		
+		<fieldset class=example>
+			<legend>Only Image files</legend>
+			<input type=file accept="image/*">
+			
+			<textarea class=code>
+				<input type=file accept="image/*">
+			</textarea>
+			
+		</fieldset>
+		
+		<fieldset class=example>
+			<legend>Multiple Accepts (Only Audio Or Video)</legend>
+			<input type=file accept="audio/*, video/*">
+			
+			<textarea class=code>
+				<input type=file accept="audio/*, video/*">
+			</textarea>
+			
+		</fieldset>
+		
+		<fieldset class=example>
+			<legend>Only Word Documents</legend>
+			<input type=file accept="application/msword">
+			
+			<textarea class=code>
+				<input type=file accept="application/msword">
+			</textarea>
+			
+		</fieldset>
+		
+		<fieldset class=example>
+			<legend>Only Excel Documents</legend>
+			<input type=file accept="application/vnd.ms-excel">
+			
+			<textarea class=code>
+				<input type=file accept="application/vnd.ms-excel">
+			</textarea>
+			
+		</fieldset>
+		
+		
+		<fieldset class=example>
+			<legend>Only PDF Documents</legend>
+			<input type=file accept="application/pdf">
+			
+			<textarea class=code>
+				<input type=file accept="application/pdf">
+			</textarea>
+			
+		</fieldset>
+		
+		<fieldset class=example id="example_prevent_accept_mod">
+			<legend>Prevent Accept Modification</legend>
+			
+			<input id="example_prevent_accept_mod_file_input" type=file accept="audio/*">
+			<script>
+				document.querySelector("#example_prevent_accept_mod_file_input").addEventListener("click",function(){
+					this.accept = "audio/*";
+				},false);
+			</script>
+			
+<textarea class=code style=height:130px;>
+
+	<input id="example_prevent_accept_mod_file_input" type=file accept="audio/*">
+	<script>
+		document.querySelector("#example_prevent_accept_mod_file_input").addEventListener("click",function(){
+			this.accept = "audio/*";
+		},false);
+	</script>
+
+</textarea>
+
+		</fieldset>
+		
+		<fieldset class=notes>
+			<legend></legend>
+			
+			<ol>
+				<li>If the accept attribute is changed via the Browsers "Inspect Element", changes will take effect.<br/> See <a href="#example_prevent_accept_mod">this example</a> for the solution</li>
+			</ol>
+			
+		</fieldset>
+		
+		
+		<fieldset class=references>
+			<legend></legend>
+			<ol>
+				<li><a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a></li>
+				<li><a href="http://www.w3schools.com/tags/att_input_accept.asp">W3Schools</a></li>
+			</ol>
+		</fieldset>
+	</body>
+
+</html>
