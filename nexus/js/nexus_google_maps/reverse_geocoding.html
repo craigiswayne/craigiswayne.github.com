@@ -1,0 +1,40 @@
+<html>
+
+	<head>
+		<title>Nexus Google Maps | Demo</title>
+		<script src='http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false'></script>
+		<script src="../nexus.js"></script>
+		<script src="nexus_google_maps.js"></script>
+		<link href="nexus_google_maps.css" rel="stylesheet">
+		
+
+		<link rel=stylesheet href="../../../css/tutorials.css">
+		
+		<style>
+			.nexus.google_maps{
+				max-height:300px;
+			}
+		</style>
+		
+	</head>
+	
+	<body>		
+		<fieldset id="reverse_geocoding" class="example reverse_geocoding">
+			<style>
+				fieldset.example.reverse_geocoding input[type=text]{
+					width:80%;
+				}
+				fieldset.example.reverse_geocoding input{
+					display:block;
+					margin:0px auto 5px auto;
+				}
+			</style>
+			<legend>Reverse Geocoding</legend>
+			
+			<input type=text placeholde="Search..." value="166 Mountbatten Drive, Reservoir Hills" >
+			<input type=button value="Find"onclick="Nexus.google.maps.reverse_geocode({query:document.querySelector('#reverse_geocoding input[type=text]').value, map:document.querySelector('#reverse_geocoding .google_maps')});">
+			<div class="nexus google_maps" data-zoom="5"></div>
+		</fieldset>
+	</body>
+
+</html>
