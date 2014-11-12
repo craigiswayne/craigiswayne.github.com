@@ -1,0 +1,63 @@
+body{
+	font-family:Tahoma;
+}
+
+button,
+details summary{
+	cursor:pointer;
+}
+
+button:focus{
+	outline:none;
+}
+
+button.fa{
+	background:none;
+	border:none;
+}
+
+
+@media screen and (max-width:800px){
+	html{
+		font-size:14px;
+	}
+}
+
+@media screen and (max-width:1280px){
+	html{
+		font-size:16px;
+	}
+}
+
+
+
+.ajax_loading{
+	position: relative;
+	transition:all 0.3s ease;
+}
+.ajax_loading:before {
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.9);
+	background-image: url("../images/loading-spin.svg");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	z-index:1;
+}
+
+details.debug{
+	background-color:black;
+	color:limegreen;
+	font-family:monospace;
+	margin: 5px;
+	border: 5px solid rgba(0, 0, 0, 0);
+	border-radius: 5px;
+}
+
+[data-filtered=false]{
+	display:none;
+}

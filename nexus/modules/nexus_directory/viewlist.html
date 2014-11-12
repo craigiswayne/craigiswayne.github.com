@@ -1,0 +1,389 @@
+<html>
+<head>
+	<title>Nexus Directory | Viewlist</title>
+	<meta charset="UTF-8">
+	
+	<script src="../../nexus/js/nexus.js"></script>
+	
+	<script src='http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false'></script>
+	<script src="../../nexus/js/nexus_google_maps/nexus_google_maps.js"></script>
+	
+	<style>
+		.nexus.directory.viewlist{
+			border:10px solid black;
+			border-radius:8px;
+			margin:auto;
+			width:90%;
+			height:90%;
+			
+			overflow:hidden;
+			
+			background: rgb(63,76,107); /* Old browsers */
+			background: -moz-linear-gradient(left,  rgba(63,76,107,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(63,76,107,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left,  rgba(63,76,107,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left,  rgba(63,76,107,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left,  rgba(63,76,107,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
+			background: linear-gradient(to right,  rgba(63,76,107,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f4c6b', endColorstr='#3f4c6b',GradientType=1 ); /* IE6-9 */
+		}
+		
+		.nexus.directory.viewlist button.fa{
+			color:white;
+		}
+		
+		.nexus.directory.viewlist #navigator,
+		.nexus.directory.viewlist #preview{
+			height:100%;
+			float:left;
+		}
+			
+		.nexus.directory.viewlist #navigator{
+			background-color:rgba(0, 0, 0, 0.2);
+			box-shadow:10px 0px 20px 0px rgba(0, 0, 0, 0.5);
+			box-sizing:border-box;
+			
+			width:250px;
+			position:relative;
+			padding-right:15px;
+			transition:all 0.2s ease;
+			
+		}
+		
+		.nexus.directory.viewlist #navigator.hidden{
+			width: 0px;
+			overflow: hidden;
+		}
+
+		
+		.nexus.directory.viewlist #navigator header{
+			width:100%;
+			padding:5px 0px;
+			background-color:rgba(0,0,0,0.5);
+			height:30px;
+			max-height:30px;
+			position:relative;
+			display:-webkit-box;
+			
+			-webkit-box-flex:1;
+		}
+		
+		.nexus.directory.viewlist #navigator header *{
+			display:block;
+			margin:0px 2px;
+		}
+		
+		.nexus.directory.viewlist #navigator header input{
+			-webkit-box-flex:1;
+		}
+		
+		.nexus.directory.viewlist #navigator #details_wrapper{
+			overflow:auto;
+			max-height:calc(100% - 5px - 5px - 30px);
+			-webkit-box-flex:1;
+		}
+		
+		.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar {
+			-webkit-appearance: none;
+		}
+		
+		.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar:vertical {
+			width: 11px;
+		}
+		
+		.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar:horizontal {
+			height: 11px;
+		}
+		
+		.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar-thumb {
+			border-radius: 8px;
+			border: 2px solid white; /* should match background, can't be transparent */
+			background-color: rgba(0, 0, 0, .5);
+		}
+		
+		.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar-track { 
+			background-color: #fff; 
+			border-radius: 8px; 
+		} 
+		
+		.nexus.directory.viewlist #navigator #navigator_toggle_bar{
+			width: 15px;
+			position: absolute;
+			background:rgb(5,5,5);
+			height: 100%;
+			z-index: 1000000;
+			right: 0px;
+			top: 0px;
+		}
+		
+		.nexus.directory.viewlist #navigator #navigator_toggle_bar button{
+			border-radius: 100%;
+			background: rgb(255, 255, 255);
+			border: none;
+			width: 13px;
+			padding: 0px;
+			box-sizing: border-box;
+			display: block;
+			margin: 12px auto 0px auto;
+			color:black;
+		}
+		
+		.nexus.directory.viewlist details{
+			color:white;
+			border-bottom:1px solid rgba(255, 255, 255, 0.8);
+			text-transform:capitalize;
+		}
+		
+		.nexus.directory.viewlist details summary{
+			background-color:rgba(0, 0, 0, 0.3);
+			padding:5px 0px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			position:relative;
+		}
+		
+		.nexus.directory.viewlist details summary:focus{
+			outline:none;
+		}
+		
+		.nexus.directory.viewlist details summary button{
+			position:absolute;
+			right:0px;
+		}
+		
+		.nexus.directory.viewlist details .results{
+			padding-bottom:20px;
+		}
+		
+		.nexus.directory.viewlist details .results:empty:after{
+			content:"No results...";
+		}
+		
+		.nexus.directory.viewlist details .results>div{
+			margin-bottom:5px;
+			text-indent:10px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			cursor:pointer;
+		}
+		
+		.nexus.directory.viewlist details .results>div:hover{
+			background-color: rgba(255, 255, 0, 0.5);
+		}
+		
+		.nexus.directory.viewlist #preview{
+			box-sizing:border-box;
+			padding:10px;
+			color:white;
+			overflow:auto;
+			width:calc(100% - 250px);
+		}
+		
+		details.address.valid input[value=Validate] {
+			visibility: hidden;
+		}
+		
+		details.address ~ input[type=submit]{
+			visibility:hidden;
+		}
+		
+		details.address.valid ~ input[type=submit]{
+			visibility:visible;
+		}
+		
+		.nexus.directory.viewlist #navigator.hidden + #preview{
+			width:calc(100% - 15px);
+		}
+	</style>
+	
+	<script>
+		var directory_entries = [];
+	
+		document.addEventListener("DOMContentLoaded",function(){
+		
+			var dummy_director = (#directory#);
+			
+			var directory	= {
+				insurance_companies:(#insurance_companies#),
+				brokers:(#brokers#),
+				managing_agents:(#managing_agents#),
+				consultants:(#consultants#),
+				suppliers:(#suppliers#),
+				policy_holders:(#policy_holders#)
+			};
+			
+			
+			var details_wrapper = document.querySelector("#details_wrapper");
+			
+			for(var category in directory){
+				
+				var detail			= details_wrapper.appendChild(document.createElement("details"));
+				var summary			= detail.appendChild(document.createElement("summary"));
+				summary.innerHTML	= category.replace("_"," ");
+				
+				var add_button			= summary.appendChild(document.createElement("button"));
+				add_button.className 	= "fa fa-plus-square";
+				add_button.category 	= category
+				add_button.addEventListener("click",function(){
+					Nexus.ajax({target:document.querySelector(".nexus.directory.viewlist #preview"), url:'?method=add_form&template='+this.category})
+				},false);
+				
+				var results_container 		= detail.appendChild(document.createElement("div"));
+				results_container.className = "results";
+				
+				if(directory[category]){
+					
+					for(var j=0; j<directory[category].length; j++){
+						var result 					= new Object();
+						result.element				= results_container.appendChild(document.createElement("div"));
+						result.element.addEventListener("click",function(){
+							Nexus.ajax({target:document.querySelector(".nexus.directory.viewlist #preview"), url:'?method=view&template='+category})
+						},false);
+						result.name					= directory[category][j].name;
+						result.element.innerText	= result.name;
+						directory_entries.push(result);
+					}
+				}
+			}
+			
+			
+		
+		},false);
+		
+		function invalidate_address_details(address_details_container){
+			container = address_details_container;
+			container.className = container.className.replace(" valid ","");
+		}
+		
+		function validate_address_details(address_details_container){
+			
+			var container = address_details_container;
+			
+			var address_details = {
+				street_num: container.querySelector("input[name*=street_num]") 		? container.querySelector("input[name*=street_num]").value 	: null,
+				street_name: container.querySelector("input[name*=street_name]") 	? container.querySelector("input[name*=street_name]").value : null,
+				suburb: container.querySelector("input[name*=suburb]") 				? container.querySelector("input[name*=suburb]").value 		: null,
+				city: container.querySelector("input[name*=city]") 					? container.querySelector("input[name*=city]").value 		: null,
+				province: container.querySelector("input[name*=province]") 			? container.querySelector("input[name*=province]").value 	: null,
+				country: container.querySelector("input[name*=country]") 			? container.querySelector("input[name*=country]").value 	: null
+			};
+			
+			var query = "";
+			for(var i in address_details){
+				query += address_details[i] ? address_details[i]+", " : "";
+			}
+			
+			if(!query){
+				return false;
+			}
+			
+			var geocode_params = {
+				query:query,
+				callback:function(data_received){
+					
+					console.debug(data_received);
+					
+					if(data_received.response.status == google.maps.GeocoderStatus.OK){
+						
+						var nexus_address = {
+							street_number:"",
+							street_name:"",
+							suburb:"",
+							city:"",
+							province:"",
+							country:""
+						};
+						
+						for(var i in data_received.response.results[0].address_components){
+				
+							if(data_received.response.results[0].address_components[i].types[0] == "street_number"){
+								nexus_address.street_number = data_received.response.results[0].address_components[i].long_name;
+								continue;
+							}
+							
+							if(data_received.response.results[0].address_components[i].types[0] == "route"){
+								nexus_address.street_name = data_received.response.results[0].address_components[i].long_name;
+								continue;				
+							}
+							
+							if(data_received.response.results[0].address_components[i].types[0] == "sublocality_level_1"){
+								nexus_address.suburb = data_received.response.results[0].address_components[i].long_name;
+								continue;				
+							}
+							
+							if(data_received.response.results[0].address_components[i].types[0] == "locality"){
+								nexus_address.city = data_received.response.results[0].address_components[i].long_name;
+								continue;				
+							}
+							
+							if(data_received.response.results[0].address_components[i].types[0] == "administrative_area_level_1"){
+								nexus_address.province = data_received.response.results[0].address_components[i].long_name;
+								continue;				
+							}
+							
+							if(data_received.response.results[0].address_components[i].types[0] == "country"){
+								nexus_address.country = data_received.response.results[0].address_components[i].long_name;
+								continue;				
+							}
+			
+						}
+						
+						for(var i in nexus_address){
+							
+							var input = container.querySelector("input[name*="+i+"]");
+							if(input){
+								input.value = nexus_address[i];
+							}
+						}
+						
+						var form = container.parentNode
+						
+						while(form.tagName != "FORM"){
+							form = form.parentNode;
+						}
+						
+						container.className += " valid ";
+					}
+					else{
+						alert("Address Details are invalid");
+						invalidate_address_details(container);
+					}
+				}
+			};
+			Nexus.google.maps.ajax_reverse_geocode(geocode_params);
+			
+			//do the ajax query to google maps
+			//if there is a valid response, show the submit button
+			//dont forget, if the value has changed for any of the address fields... then the validation must start again AND the submit must not show
+		}
+	</script>
+	
+</head>
+<body>
+	<div class="nexus directory viewlist">
+	
+		<link rel=stylesheet href="../../nexus/css/font-awesome-4.2.0/css/font-awesome.css">
+		<link rel=stylesheet href="../../nexus/css/nexus.css">
+		
+		<div id="navigator">
+			<header>
+				<input type=text placeholder="Search..." onkeyup="Nexus.filter({query:this.value, data:directory_entries});">
+				<button class="fa fa-refresh" title="Refresh List"></button>
+				
+			</header>
+			
+			<div id="details_wrapper"></div>
+			
+			<div id="navigator_toggle_bar">
+				<button class="fa fa-angle-double-left" title="Hide List" onclick="this.toggle_class('fa-angle-double-left','fa-angle-double-right'); this.parentNode.parentNode.toggle_class('hidden');"></button>
+			</div>
+		</div>
+		
+		<div id="preview">
+			<h3>Directory Services</h3>
+		</div>
+	</div>
+</body>
+</html>

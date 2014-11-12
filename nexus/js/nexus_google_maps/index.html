@@ -1,0 +1,190 @@
+<html>
+
+	<head>
+		<title>Nexus Google Maps | Demo</title>
+		<script src='http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false'></script>
+		<script src="../nexus.js"></script>
+		<script src="nexus_google_maps.js"></script>
+		<link href="nexus_google_maps.css" rel="stylesheet">
+		
+
+		<link rel=stylesheet href="../../../css/tutorials.css">
+		
+		<style>
+			.nexus.google_maps{
+				max-height:300px;
+			}
+		</style>
+		
+	</head>
+	
+	<body>
+	
+		
+		<fieldset class="example distance_calculator">
+			<legend>Show Distance Between Two Points</legend>
+			<style>
+				.distance_calculator form{
+					text-align:center;
+					margin-bottom:10px;
+				}
+				
+				.distance_calculator form input[type=number]{
+					float:left;
+					margin:5px;
+				}
+			</style>
+			<script>
+				navigator.geolocation.getCurrentPosition(function(position){
+					console.debug(position);
+					document.querySelectorAll(".distance_calculator input[type=number]")[0].value = position.coords.latitude;
+					document.querySelectorAll(".distance_calculator input[type=number]")[1].value = position.coords.longitude;
+					document.querySelector(".distance_calculator .nexus.google_maps").users_position.latitude = position.coords.latitude;
+					document.querySelector(".distance_calculator .nexus.google_maps").users_position.longitude = position.coords.longitude;
+				});
+				function calculate_distance(form){
+					
+					var container	= document.querySelector(".distance_calculator .nexus.google_maps");
+					
+					for(var i=0; i<container.markers.length; i++){
+						container.markers[i].setMap(null);
+					}
+					container.markers = new Array();
+					
+					var map			= container.map;
+					
+					var point_1				= new Object();
+					point_1['latitude'] 	= form.querySelector("input[type=number]").value;
+					point_1['longitude']	= form.querySelectorAll("input[type=number]")[1].value;
+					point_1['marker_color']	= "green";
+					
+					
+					var point_2				= new Object();
+					point_2['latitude']		= form.querySelectorAll("input[type=number]")[2].value;
+					point_2['longitude']	= form.querySelectorAll("input[type=number]")[3].value;
+					point_2["marker_color"] = "blue";
+					
+					var distance 			= Nexus.math.coord_diff(point_1,point_2);
+					
+					container.add_marker(point_1);
+					container.add_marker(point_2);
+					
+					alert(distance);
+					
+					return false;
+				}
+			</script>
+			<form onsubmit="return false;">
+				<fieldset style=display:inline-block;>
+					<legend>Point 1</legend>
+					<input type="number" id="distance_between_point1_latitude" placeholder="latitude" step="any" required>
+					<input type="number" id="distance_between_point1_longitude" placeholder="longitude"  step="any" required>
+				</fieldset>
+				
+				
+				<fieldset style=display:inline-block;>
+					<legend>Point 2</legend>
+					<input type="number" id="distance_between_point2_latitude" placeholder="latitude" step="any" required>
+					<input type="number" id="distance_between_point2_longitude" placeholder="longitude" step="any" required>
+				</fieldset>
+				
+				<input type=submit style="display:block;margin:5px auto;" value="Calculate" onclick="calculate_distance(this.parentNode)">
+			</form>
+			
+			<div class="nexus google_maps"></div>
+		</fieldset>
+	
+		<fieldset class=example>
+			<legend>Tracking with Guide (Realtime)</legend>
+			<script>
+			
+				function show_guide_to_first_marker(container){
+					var request = {
+						origin:			container.users_position.google_obj,
+						destination:	container.markers[0].position
+					};
+					container.get_directions(request);				
+				}
+				
+				var tracking_with_guide_options = {
+					markers: [
+						{
+							title: "Cape Town",
+							track: true,
+							position: new google.maps.LatLng(-33.924868,18.424055) //cape town
+						}
+					],
+					track: true,
+					users_position_updated: show_guide_to_first_marker 
+				};
+				
+			</script>
+			<div class="nexus google_maps" data-options="tracking_with_guide_options"></div>
+		</fieldset>
+	
+		<fieldset class=example>
+			<legend>Track Your Location (Realtime)</legend>
+			<div class="nexus google_maps" data-track="true" data-maxZoom="8"></div>
+		</fieldset>
+		
+		<fieldset class=example>
+			<legend>Distance Calculator (Realtime) (Nearby Garages)</legend>
+			<script>
+			
+				function get_nearby_garages(container){
+					var garages_nearby = [];
+					var service = new google.maps.places.PlacesService(container.map);  
+					var request = {
+						location: container.users_position.google_obj,
+						radius: "5000",
+						query: "garage"
+					};
+					
+					service.textSearch(request, function(results, status, pagination){
+						if (status == google.maps.places.PlacesServiceStatus.OK){
+							
+							for(var i=0; i<5; i++){
+								var marker_settings = {
+									title: results[i].name,
+									position: results[i].geometry.location,
+									track: true
+								};
+								container.add_marker(marker_settings);
+							}
+						}
+					});
+				}
+			
+				var realtime_distance_map_options = {
+					track: true,
+					tracking_completed: get_nearby_garages
+				};
+			</script>
+			<div class="nexus google_maps" data-options="realtime_distance_map_options"></div>
+		</fieldset>
+		
+		
+		<fieldset class=example>
+			<legend>Inline settings (data-zoom=5)</legend>
+			<div class="nexus google_maps" data-zoom="5"></div>
+		</fieldset>
+		
+		<fieldset id="reverse_geocoding" class="example reverse_geocoding">
+			<style>
+				fieldset.example.reverse_geocoding input[type=text]{
+					width:80%;
+				}
+				fieldset.example.reverse_geocoding input{
+					display:block;
+					margin:0px auto 5px auto;
+				}
+			</style>
+			<legend>Reverse Geocoding</legend>
+			
+			<input type=text placeholde="Search..." value="166 Mountbatten Drive, Reservoir Hills" >
+			<input type=button value="Find"onclick="Nexus.google.maps.reverse_geocode({query:document.querySelector('#reverse_geocoding input[type=text]').value, map:document.querySelector('#reverse_geocoding .google_maps')});">
+			<div class="nexus google_maps" data-zoom="5"></div>
+		</fieldset>
+	</body>
+
+</html>
