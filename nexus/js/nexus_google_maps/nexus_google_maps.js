@@ -413,7 +413,7 @@ Nexus.google.maps.ajax_reverse_geocode = function(param){
 	var ajax_params = {
 		url: "http://maps.googleapis.com/maps/api/geocode/json?address="+param.query,
 		mime_type: "application/json",
-		callback: param.callback || null
+		success: param.success || null
 	};
 	Nexus.ajax(ajax_params);
 };

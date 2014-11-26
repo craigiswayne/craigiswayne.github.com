@@ -1,0 +1,11 @@
+<form class="nexus directory (#method#)" action="?method=add_contact" method="POST" onsubmit="Nexus.ajax({target:this.querySelector('div.result')}); return false;">
+	<img class=profile />
+	<input type=text	name="fields[name]" 			value="(#name#)"			placeholder="Name" 	required>
+	
+	(#address_section#)
+	
+	(#contact_section#)
+	
+	<input type=submit value="Save">
+	<div class=result></div>
+</form>

@@ -167,22 +167,14 @@ Nexus.math.coord_diff = function(coord_obj1, coord_obj2){
 
 Nexus.filter = function(param){
 
-	param.query				= param.query			|| null;
-	param.data				= param.data			|| new Array(); 
+	param.query				= param.query.toLowerCase()	|| null;
+	param.data				= param.data				|| new Array(); 
 	
 	if(!param.query || param.query == ""){
 		
 		for(var i=0; i<param.data.length; i++){
 			param.data[i].element.dataset.filtered = "true";
 		}
-		
-		/*
-			console.group("Nexus.filter_elements:");
-			console.error("No query present");
-			console.debug("parameters sent:");
-			console.debug(param);
-			console.groupEnd();
-		*/
 	}
 	else{
 		
@@ -204,13 +196,18 @@ Nexus.toggle_class = function(){
 
 Nexus.ajax = function(param){
 	
-	
-	param = (typeof param == "object") ? param : new Object();
+	if(arguments.length == 1 && typeof arguments[0] == "string"){
+		var tmp_url = arguments[0];
+		param = new Object();
+		param.url = tmp_url;
+	}
+
+	param = (typeof param == "object") 	? param : new Object();
 	
 	param.target 	= param.target 		|| undefined;
 	param.target 	= (typeof param.target == "string") ? document.querySelector(param.target) : param.target;
 	
-	param.url		= param.url 		|| undefined;
+	param.url		= param.url 		? param.url+"&ajax=true" : undefined;
 	param.source	= param.source 		|| (event ? (event.target || event.srcElement) : param.source) || null;
 	param.method	= param.method 		|| "GET";
 	//param.mime_type = param.mime_type 	||
@@ -220,19 +217,44 @@ Nexus.ajax = function(param){
 	
 	if(param.source && param.source.tagName == "FORM"){
 		
-		param.form_data = param.form_data || new FormData(param.source);
-		
 		param.url		= param.url || param.source.action;
 		
+		//param.data 		= new FormData(param.source);
+		param.data		= $(param.source).serialize();
+		param.form_data = param.form_data || new FormData(param.source);
+		
+		
 		param.method 	= param.source.method;
+		param.type		= param.source.method;
 	}
 	
-	
+
 	//check that all required parameters are present
 	if(!param.url){
 		console.error("Missing parameters");
 		return null;
 	}
+	
+	
+	//jquery's ajax method
+	var ajax_result = null;
+	
+	param.success 	= param.success || function(result){
+		
+		if(param.target){
+			
+			param.target.toggle_class("ajax_loading");
+			$(param.target).html(result);
+			return result;
+		}
+	};
+	
+	if(param.target){
+		param.target.toggle_class("ajax_loading");
+	}
+	
+	$.ajax(param);
+	/*return ajax_result;
 	
 	var xmlhttp;
 	
@@ -268,6 +290,9 @@ Nexus.ajax = function(param){
 			if(param.target){
 				param.target.innerHTML = "";				
 				for(var i=0; i<response.body.childNodes.length; i++){
+					
+					console.debug(response.body.childNodes[i]);
+					
 					param.target.appendChild(response.body.childNodes[i]);
 				}
 				param.target.toggle_class("ajax_loading");	
@@ -287,13 +312,55 @@ Nexus.ajax = function(param){
 	}
 	
 	xmlhttp.open(param.method,param.url,true);
+	xmlhttp.setRequestHeader("Content-type","text/plain;charset=UTF-8");
 	xmlhttp.send(param.form_data);
 	
-	return false;
+	return false;*/
 	
 };
 
+Nexus.observe = function(param){
+	
+	param = param || new Object();
+	
+	param["function"] = param["function"] || null;
+	
+	if(!param["function"]){console.error("No function defined"); return null;}
+	
+	var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+	
+	var observer = new MutationObserver(function(mutations){
+		param["function"](mutations);
+	});
+	
+	observer.observe(document.body,{
+			attribute:false,
+			childList:true,
+			subtree:true
+	});
+};
 
+//this is for a custom HTMLInputElement of type text, used for an ajax call
+/*document.addEventListener("DOMContentLoaded",function(){
+	Nexus.observe({
+			function: function(mutations){
+				for(var i in mutations){
+					console.debug(mutations);
+					if(mutations[i].addedNodes.length > 0){
+						var added_nodes = mutations[i].addedNodes;
+						for(var j in added_nodes){
+							if(added_nodes[j].tagName == "INPUT"){
+								if(added_nodes[j].type == "text" || !added_nodes.type){
+									console.debug(added_nodes[j]);
+								}
+							}
+						}
+					}
+				}
+			}
+	});
+},false);
+*/
 //document.addEventListener("DOMContentLoaded",function(){Nexus.install();},false);
 
 //console.debug("need a function to merge object data, for example, merge the dataset against the parameters sent to a function and that containers dataset");

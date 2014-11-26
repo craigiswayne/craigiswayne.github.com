@@ -1,5 +1,9 @@
 <?php
 
+//the clean array function is NOT recursive
+//array filter, verify that it is the same as the clean function
+//also the array_filter method should be used in the add method
+
 	class nexus{
 		
 		
@@ -7,11 +11,14 @@
 			
 			$template = file_get_contents($param['filename']);
 			
+			$param['data'] 				= array_key_exists('data',$param) ? $param['data'] : [];
+			$param['data']['method'] 	= array_key_exists('method',$param['data']) ? $param['data']['method'] : (debug_backtrace()[1]['function'] ?: null);
+			
 			if (preg_match_all("/\(#(.*?)#\)/", $template, $variables)){
 				
 			  foreach ($variables[1] as $i => $variable_name){
 			  	
-			  	$match		= array_key_exists($variable_name,$param['data']) ? $param['data'][$variable_name] : 'undefined';
+			  	$match		= array_key_exists($variable_name,$param['data']) ? $param['data'][$variable_name] : '';
 			  	$match		= is_array($match) ? json_encode($match) : $match;
 				$template	= str_replace($variables[0][$i],$match, $template);
 			  }
@@ -31,79 +38,94 @@
 			
 			$param['method'] = array_key_exists('method',$param) ? $param['method'] : null;
 			
-			if(method_exists($this,$param['method'])){$this->$param['method']();}
-			
+			if(method_exists($this,$param['method'])){
+				$_GET['method'] = null;
+				$this->$param['method']();
+			}
 		}
 		
-		function get_modules(){
+		function get_modules($param=[]){
 			$nexus_modules = [];
 			
+			$param['extends'] = array_key_exists('extends',$param) ? $param['extends'] : 'nexus';
+			
 			foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__))) as $file){
-				$filename  = pathinfo($file, PATHINFO_FILENAME);
-				$extension = pathinfo($file, PATHINFO_EXTENSION);
-				if($extension == 'php' && strpos($file,'nexus')>0 && $filename != 'nexus'){
-					array_push($nexus_modules,$filename);
+				//http://php.net/manual/en/class.splfileinfo.php
+				$filename	= $file->getFilename();
+				$path		= $file->getPath();
+				$extension	= $file->getExtension();
+				$basename	= $file->getBasename('.php');
+				
+				//exclude the prepended file and the appended file
+				
+				if($extension != 'php' || strpos($file,'nexus')<1 || $filename == 'nexus' || $filename == 'header.php'){
+					continue;
+				}
+				
+				require_once($path.'/'.$filename);
+
+				$class = new $basename;
+				$rf_class = new ReflectionClass($class);
+				if($rf_class->isSubclassOf($param['extends'])){
+					$nexus_modules[$basename] = $class;
 				}
 			}
 			return $nexus_modules;
 		}
 		
 		function debug($object){
+			
+			$title = (func_num_args() == 2) ? func_get_arg(1) : 'Debug';
+			
+			if(is_array($object) && func_num_args() == 1){
+				$title = 'Debugging Array('.sizeof($object).')';
+			}
+			
+			print '<link rel=stylesheet href="../../nexus/css/nexus.css">';
 			print '<details class=debug open>';
-			print '<summary>Debug</summary>';
+			print '<summary>'.$title.'</summary>';
 			print'<pre>';
 				print_r($object);
 			print'</pre>';
 			print '</details>';
 		}
 		
-	}
-	
-	
-	foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__))) as $file){
-		$filename  = pathinfo($file, PATHINFO_FILENAME);
-		$extension = pathinfo($file, PATHINFO_EXTENSION);
-		if($extension == 'php' && strpos($file,'nexus')>0 && $filename != 'nexus'){
+		function error($param=[]){
 			
-			//print $file.'<br/>';
+			print '<link rel=stylesheet href="../../nexus/css/nexus.css">';
+			print '<details class=debug open>';
+			print '<summary>Error ('.get_class($this).')</summary>';
+			print'<pre>';
+				print_r($param);
+			print'</pre>';
+			print '</details>';
+		}
+		
+		function get_module_path($param=[]){
 			
-			//include($file);
+			$param['relative'] = array_key_exists('relative',$param) ? $param['relative'] : true;
 			
-			//print 'required '.$filename.'.'.$extension.'<br/>';
+			$reflector = new ReflectionClass(get_class($this));
+			$fn = $reflector->getFileName();
+			$path = dirname($fn);
 			
-			//define($filename,new $filename());
+			$path = ($param['relative'] === true) ? str_replace($_SERVER['DOCUMENT_ROOT'],'',$path) : $path;
 			
-			//print 'defined '.$filename.'.'.$extension.'<br/><br/>';
+			return $path;
+		}
+		
+		function clean_array($array=[]){
 			
+			$array = array_filter($array);
+			
+			foreach($array as $key=>$value){
+				if(is_array($value)){
+					$array[$key] = array_filter($array[$key]);
+				}
+			}
+			$array = array_filter($array);
+			return $array;
 		}
 	}
-	
-	function exceptions_error_handler($severity, $message, $filename, $lineno){
-	
-	  if (error_reporting() == 0) {
-		return;
-	  }
-	  
-	  if (error_reporting() & $severity) {
-	  	
-		//catch all the file get contents errors
-		if(strpos('file_get_contents',$message) == 0){	  		
-			$tmp_params = [
-				'filename'	=>dirname(__FILE__).'/../templates/broken_link.html',
-				'data'		=>[
-					'filename' => $message
-				]
-			];
-			$nexus = new nexus;
-			print($nexus->get_template($tmp_params));
-		}
-		else{
-			throw new ErrorException($message, 0, $severity, $filename, $lineno);
-		}
-	  }
-	}
-	
-	//something wrong with the file_get_contents catch
-	//set_error_handler('exceptions_error_handler');
 
 ?>

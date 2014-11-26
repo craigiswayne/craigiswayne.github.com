@@ -1,0 +1,9 @@
+set the auto_append_file to the header php in php.ini settings
+create the schema nexus
+run the nexus method
+
+go to
+/Applications/MAMP/conf/apache
+basically allow for redirects on the 
+
+http://www.domesticind.org/
