@@ -5,7 +5,7 @@ Nexus.directory.labels = (#directory_labels#);
 Nexus.directory.update = function(){
 	
 	Nexus.ajax({
-		url: "?method=get_groups",
+		url: "?class=nexus_directory&method=get_groups",
 		success: function(result){
 			Nexus.directory.groups = JSON.parse(result);
 			add_directory_groups();
@@ -32,7 +32,7 @@ function add_directory_groups(){
 		add_button.relationship = category.replace("_"," ");
 		add_button.addEventListener("click",function(){
 			document.querySelector("#navigator").toggle_class('hidden');
-			Nexus.ajax({target:document.querySelector(".nexus.directory.viewlist #preview"), url:'?method=add_form&relationship='+this.relationship});
+			Nexus.ajax({target:document.querySelector(".nexus.directory.viewlist #preview"), url:'?class=nexus_directory&method=add_form&relationship='+this.relationship});
 		},false);
 		
 		var results_container 		= detail.appendChild(document.createElement("div"));
@@ -47,7 +47,7 @@ function add_directory_groups(){
 				result.element._id			= Nexus.directory.groups[category][j]._id;
 				result.element.addEventListener("click",function(){
 					document.querySelector("#navigator").toggle_class('hidden');
-					Nexus.ajax({target:document.querySelector(".nexus.directory.viewlist #preview"), url:'?method=view&fields[_id]='+this._id})
+					Nexus.ajax({target:document.querySelector(".nexus.directory.viewlist #preview"), url:'?class=nexus_directory&method=view&fields[_id]='+this._id})
 				},false);
 				result.name					= Nexus.directory.groups[category][j].name;
 				result.element.innerText	= result.name;
@@ -82,8 +82,8 @@ function validate_address_details(address_details_container){
 	var container = address_details_container;
 	
 	var address_details = {
-		street_num: container.querySelector("input[name*='street number']") ? container.querySelector("input[name*='street number']").value 	: null,
-		street_name: container.querySelector("input[name*='street name']") 	? container.querySelector("input[name*='street name']").value 		: null,
+		street_num: container.querySelector("input[name*='street_number']") ? container.querySelector("input[name*='street_number']").value 	: null,
+		street_name: container.querySelector("input[name*='street_name']") 	? container.querySelector("input[name*='street_name']").value 		: null,
 		suburb: container.querySelector("input[name*='suburb']") 			? container.querySelector("input[name*=suburb]").value 				: null,
 		city: container.querySelector("input[name*=city]") 					? container.querySelector("input[name*=city]").value 				: null,
 		province: container.querySelector("input[name*=province]") 			? container.querySelector("input[name*=province]").value 			: null,
@@ -108,8 +108,8 @@ function validate_address_details(address_details_container){
 				
 				
 				var nexus_address = {
-					"street number":"",
-					"street name":"",
+					"street_number":"",
+					"street_name":"",
 					"suburb":"",
 					"city":"",
 					"province":"",
@@ -119,12 +119,12 @@ function validate_address_details(address_details_container){
 				for(var i in data_received.results[0].address_components){
 		
 					if(data_received.results[0].address_components[i].types[0] == "street_number"){
-						nexus_address["street number"] = data_received.results[0].address_components[i].long_name;
+						nexus_address["street_number"] = data_received.results[0].address_components[i].long_name;
 						continue;
 					}
 					
 					if(data_received.results[0].address_components[i].types[0] == "route"){
-						nexus_address["street name"] = data_received.results[0].address_components[i].long_name;
+						nexus_address["street_name"] = data_received.results[0].address_components[i].long_name;
 						continue;				
 					}
 					

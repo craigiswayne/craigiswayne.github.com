@@ -7,7 +7,11 @@
 	class nexus{
 		
 		
-		function get_template($param=array()){
+		function get_template($param=[]){
+			
+			$param['filename'] = !file_exists($param['filename']) ? $this->get_module_path(['relative'=>false]).'/'.$param['filename'] : $param['filename'];
+			
+			if(!file_exists($param['filename'])){$this->error('Could not find file @ '.$param['filename']); return null;}
 			
 			$template = file_get_contents($param['filename']);
 			
@@ -33,14 +37,19 @@
 		
 		function __construct($param=array()){
 			
-			$param = is_array($param) ? $param : array();
+			$param = is_array($param) ? $param : [];
 			$param = array_merge($param,$_GET);
 			
 			$param['method'] = array_key_exists('method',$param) ? $param['method'] : null;
 			
-			if(method_exists($this,$param['method'])){
-				$_GET['method'] = null;
-				$this->$param['method']();
+			if($param['method']){
+				if(method_exists($this,$param['method'])){
+					$_GET['method'] = null;
+					$this->$param['method']();
+				}
+				else{
+					$this->error('Method: '.$param['method'].' does not exist in '.get_class($this).'.php');
+				}
 			}
 		}
 		
@@ -50,15 +59,32 @@
 			$param['extends'] = array_key_exists('extends',$param) ? $param['extends'] : 'nexus';
 			
 			foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__))) as $file){
+				
 				//http://php.net/manual/en/class.splfileinfo.php
 				$filename	= $file->getFilename();
 				$path		= $file->getPath();
 				$extension	= $file->getExtension();
 				$basename	= $file->getBasename('.php');
 				
-				//exclude the prepended file and the appended file
+				//$this->debug($extension);
+				//$this->debug(strpos($filename,'nexus'));
+				//$this->debug($filename);
 				
-				if($extension != 'php' || strpos($file,'nexus')<1 || $filename == 'nexus' || $filename == 'header.php'){
+				//print($filename.'<br/>');
+				//print($extension.'<br/>');
+				
+				//exclude the prepended file and the appended file
+				/*if($extension != 'php' || strpos($filename,'nexus') == false || $filename == 'nexus.php'){
+					print($filename.' didnt make it through <br/>');
+					print('extension: `'. $extension.'`<br/>');
+					print('filename: `'. $filename.'`<br/>');
+					print('path: '. $filename.'<br/>');
+					print('pos: `'.strpos($filename,'nexus').'`');
+					print('<hr>');
+					continue;
+				}*/
+				
+				if($extension!='php' || strpos($filename,'nexus_')===false){
 					continue;
 				}
 				
@@ -81,7 +107,7 @@
 				$title = 'Debugging Array('.sizeof($object).')';
 			}
 			
-			print '<link rel=stylesheet href="../../nexus/css/nexus.css">';
+			print '<link rel=stylesheet href="css/nexus.css">';
 			print '<details class=debug open>';
 			print '<summary>'.$title.'</summary>';
 			print'<pre>';

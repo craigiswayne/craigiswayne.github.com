@@ -1,0 +1,33 @@
+<details class="address valid" open>
+	<summary tabindex=-1><input name="fields[nexus_directory_addresses][0][name]" placeholder="Address Name" value="Physical Address"></summary>
+	
+	<div class=field>
+		<input type=text name="fields[nexus_directory_addresses][0][unit_number]" 	placeholder="Unit #" 		onchange="invalidate_address_details(this.parentNode.parentNode);" value="(#unit number#)">
+	</div>
+	
+	<div class=field>
+		<input type=text name="fields[nexus_directory_addresses][0][street_number]" placeholder="Street #" 		onchange="invalidate_address_details(this.parentNode.parentNode);" value="(#street number#)">
+	</div>
+	
+	<div class=field>	
+		<input type=text name="fields[nexus_directory_addresses][0][street_name]" 	placeholder="Street Name"	onchange="invalidate_address_details(this.parentNode.parentNode);" value="(#street name#)">
+	</div>
+		
+	<div class=field>
+		<input type=text name="fields[nexus_directory_addresses][0][suburb]" 		placeholder="Suburb"		onchange="invalidate_address_details(this.parentNode.parentNode);" value="(#suburb#)">
+	</div>
+	
+	<div class=field>	
+		<input type=text name="fields[nexus_directory_addresses][0][city]" 			placeholder="City" 			onchange="invalidate_address_details(this.parentNode.parentNode);" value="(#city#)">
+	</div>
+	
+	<div class=field>	
+		<input type=text name="fields[nexus_directory_addresses][0][province]" 		placeholder="Province" 		onchange="invalidate_address_details(this.parentNode.parentNode);" value="(#province#)">
+	</div>
+	
+	<div class=field>	
+		<input type=text name="fields[nexus_directory_addresses][0][country]" 		placeholder="Country" 		onchange="invalidate_address_details(this.parentNode.parentNode);" value="(#country#)">
+	</div>
+	
+	<input type=button value="Validate" onclick="validate_address_details(this.parentNode);">
+</details>

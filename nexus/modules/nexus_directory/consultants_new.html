@@ -1,4 +1,4 @@
-<form class="nexus directory new consultant" action="?method=add_contact" method="POST" onsubmit="Nexus.ajax({target:this.querySelector('div.result')}); return false;">
+<form class="nexus directory new consultant" action="?class=nexus_directory&method=add_contact" method="POST" onsubmit="Nexus.ajax({target:this.querySelector('div.result')}); return false;">
 
 	<img class=profile />
 	
@@ -6,8 +6,6 @@
 	<input type=text name="fields[first name]" placeholder="Consultant First Name" required>
 	<input type=text name="fields[last name]" placeholder="Consultant Last Name" required>
 	<input type=hidden name="fields[type]"	value="Person">
-	
-	(#details_section({})#)
 	
 	<details class="company" open>
 		<summary>Company<input type=button onclick="add_linked_contact_field({target:document.querySelector('form.nexus.directory.new.consultant details.company'),relationship:'Company'});" value="Add"></summary>

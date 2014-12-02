@@ -54,6 +54,7 @@ Nexus.exit_fullscreen = function(){
 Nexus.link_css = function(href){
 	
 	href = href || Nexus.repository_url+"/css/nexus.css";
+	
 	var style_links = document.querySelectorAll("link");
 	var linked = false;
 	for(var i=0; i<style_links.length; i++){

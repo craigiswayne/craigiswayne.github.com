@@ -212,10 +212,7 @@
 		
 		function viewlist($param=[]){
 			
-			$nexus_directory_linked_addresses = new nexus_directory_linked_addresses();
-			$nexus_directory_linked_addresses->add_form();
-			
-			/*$directory_groups			= $this->get_groups(); 
+			$directory_groups			= $this->get_groups(); 
 
 			$nexus_directory_labels 	= new nexus_directory_labels();
 			
@@ -224,50 +221,16 @@
 				'directory_labels'		=> $nexus_directory_labels->get_list()
 			];
 			
-			$module_js = '<script>'.$this->get_template(['filename'=>$this->get_module_path(['relative'=>false]).'/nexus_directory.js','data'=>$module_js_data]).'</script>';
+			$module_js = '<script>'.$this->get_template(['filename'=>'nexus_directory.js','data'=>$module_js_data]).'</script>';
 			
 			$param['data'] = [
 				'module_js'				=> $module_js
 			];
-			parent::viewlist($param);*/
+			parent::viewlist($param);
 		}
 		
 		function view($param=[]){
 			
-			/*$param['fields'] = array_key_exists('fields',$param) ? $param : (array_key_exists('fields',$_POST) ? $_POST['fields'] : []);
-
-			if(!$param['_id']){return null;}
-			
-			$tmp_data = [];
-			
-			$view_data = [
-				'address_details'=>$this->get_template(['filename'=>dirname(__FILE__).'/address_details_template.html','data'=>$tmp_data])
-			];
-			
-			return null;
-
-			$sql = '
-				SELECT
-				*
-				FROM nexus_directory_entries
-				
-				WHERE
-					_deleted!=1
-					AND nexus_directory_id='.$param['_id'].'
-			';
-			
-			$result = $this->sql_query($sql);
-			$contact = [];
-			foreach($result as $entry=>$columns){
-				$contact[$columns['label']] = $columns['value'];
-			}
-			
-			$template_data = [
-				'filename'=> dirname(__FILE__).'/'.$_GET['template'].'.html',
-				'data'	  => $contact
-			];
-			
-			print $this->get_template($template_data);*/
 			$nexus_directory_labels_categories	= new nexus_directory_labels_categories();
 			$nexus_directory_labels				= new nexus_directory_labels();
 			
@@ -319,6 +282,31 @@
 				';
 			}
 			
+			//add address details
+			$nexus_directory_addresses = new nexus_directory_addresses();
+			$linked_addresses = $nexus_directory_addresses->get_list(['where'=>'`nexus_directory_id`='.$_GET['fields']['_id']]);
+			//$this->debug($_GET['fields']['_id']);
+			//$this->debug($linked_addresses);
+			
+			foreach($linked_addresses as $key=>$data){
+				
+				$html .= '
+					<details open>
+						<summary>'.$data['name'].'</summary>
+				';
+			
+				foreach($data as $label => $value){
+					if($value && (strpos($label,'_id') != (strlen($label)-3)) ){
+						$html .= '<div class=field>';
+						$html .= 	'<label>'.str_replace('_',' ',$label).'</label><input type=text value="'.$value.'" disabled>';
+						$html .= '</div>';
+					}	
+				}
+				
+				$html .= '</details>';
+			}
+			
+			
 			$html .= '
 				<script>
 					document.querySelector("input[placeholder=Name]").value = document.querySelector("input[name*=\'Name\']").value;
@@ -326,26 +314,7 @@
 			';
 			
 			$html .= '</form>';
-			print($html);
-			
-			//send the fields data array to the view form and from there populate this jizz
-			//the view form and the edit form should be the same
-			//each view form should have it's own id and a class name
-			//get all the categories
-			//get all the fields for each category
-			//get all the linked contacts
-			
-			/*$template_data = [
-				'filename'=> dirname(__FILE__).'/view.html',
-				'data'	  => [
-					'address_section'	=>$this->get_template(['filename'=>dirname(__FILE__).'/address_details_template.html']),
-					'contact_section'	=>$this->get_template(['filename'=>dirname(__FILE__).'/contact_details_template.html'])
-				]
-			];*/
-			
-			//print($this->get_template($template_data));
-			//parent::view();
-			
+			print($html);			
 		}
 		
 		function add_form($param=[]){
@@ -361,8 +330,8 @@
 			
 			$template_data = [
 				'data'	  => [
-					'address_section'	=>$this->get_template(['filename'=>dirname(__FILE__).'/address_details_template.html']),
-					'contact_section'	=>$this->get_template(['filename'=>dirname(__FILE__).'/contact_details_template.html'])
+					'address_section'	=>$this->get_template(['filename'=>'address_details_template.html']),
+					'contact_section'	=>$this->get_template(['filename'=>'contact_details_template.html'])
 				]
 			];
 			
@@ -413,6 +382,19 @@
 			}
 			$_POST['fields'] = $this->clean_array($_POST['fields']);
 			
+			if(array_key_exists('nexus_directory_addresses',$_POST['fields'])){
+				
+				$nexus_directory_addresses = new nexus_directory_addresses();
+				
+				foreach($_POST['fields']['nexus_directory_addresses'] as $group=>$fields){
+					$fields['nexus_directory_id'] = $generated_id;
+					//$this->debug($fields);
+					$nexus_directory_addresses->add(['fields'=>$fields]);
+				}
+				unset($_POST['fields']['nexus_directory_addresses']);
+			}
+			
+			//add any linked contacts
 			if(array_key_exists('linked contacts',$_POST['fields'])){
 				
 				$nexus_directory_linked_contacts = new nexus_directory_linked_contacts();
@@ -430,6 +412,7 @@
 				unset($_POST['fields']['linked contacts']);
 			}
 			
+			//add any addresses
 			$nexus_directory_labels = new nexus_directory_labels();
 			$labels_list = $nexus_directory_labels->get_list();
 			$labels_used = [];
@@ -457,6 +440,7 @@
 			}
 			
 			foreach($add_data as $key=>$value){
+				$this->debug($add_data[$key]);
 				$nexus_directory_entries->add(['fields'=>$add_data[$key]]);
 			}
 			

@@ -124,7 +124,7 @@
 }
 
 .nexus.directory.viewlist details summary{
-	background-color:rgba(0, 0, 0, 0.3);
+	background-color:rgba(0,0,0,0.3);
 	padding:5px 0px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -210,11 +210,6 @@ form.nexus.directory details{
 }
 
 
-form.nexus.directory details input:not([type=button]):not([type=submit]):not([type=reset]),
-form.nexus.directory details select{
-	display:block;
-}
-
 form.nexus.directory details input[type=button]{
 	margin:0px 0px 0px auto;
 	display:block;
@@ -225,38 +220,20 @@ form.nexus.directory details summary input[type=button]{
 	float:right;
 }
 
+form.nexus.directory details summary input:not([type]),
+form.nexus.directory details summary input[type=text]{
+	border: none;
+	color: inherit;
+	font-size: 16px;
+	background-color: rgba(0, 0, 0, 0);
+}
+
 form.nexus.directory details.address input[type=button]{
 	display:block;
 	margin:0px 0px 5px auto; 
 }
 
-form.nexus.directory details .field{
-	display:-webkit-box;
-	margin:5px 0px;
-}
 
-
-form.nexus.directory details .field *{
-	-webkit-box-flex:1;
-}
-
-form.nexus.directory details .field label {
-	min-width: 100px;
-	display: inline-block;
-	font-size: 0.8em;
-	text-align: right;
-	text-indent: -5px;
-	margin-right: 5px;
-}
-
-form.nexus.directory details .field select{
-	text-transform:capitalize;
-}
-
-
-form.nexus.directory details .field .fa.fa-close{
-	line-height:20px;
-}
 
 form.nexus.directory img.profile ~input[type=text],
 form.nexus.directory img.profile ~input:not([type]){

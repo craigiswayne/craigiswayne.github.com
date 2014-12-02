@@ -114,7 +114,7 @@
 						foreach($class_vars['default_data'] as $k=>$data){
 							
 							$sql = 'INSERT INTO `'.$this->schema.'`.`'.$class_name.'`
-									('.implode(array_keys($data),',').')
+									(`'.implode(array_keys($data),'`,`').'`)
 							';
 							
 							$sql.= '
@@ -122,6 +122,7 @@
 							';
 							
 							//rather use the add method for this, and the add method must return the generated data, like PK and the other data that was auto filled in by db
+							$this->debug($sql);
 							$this->sql_query($sql);
 						}
 						
@@ -225,11 +226,20 @@
 					$columns[$column_name]['foreign_key'] 	= 'true';
 					$columns[$column_name]['not_null']		= 'true';
 				}
-				else{
-					$columns[$column_name]['datatype'] 		= 'VARCHAR(50)';
-					$columns[$column_name]['foreign_key'] 	= 'false';
-					$columns[$column_name]['not_null']		= 'false';
+				
+				$columns[$column_name]['datatype'] 				= $columns[$column_name]['datatype'] 			?: 'VARCHAR(50)';
+				$columns[$column_name]['not_null']				= $columns[$column_name]['not_null'] 			?: false;
+				$columns[$column_name]['label'] 				= $columns[$column_name]['label'] 				?: str_replace('_',' ',$column_name);
+				$columns[$column_name]['hidden_in_add_forms'] 	= $columns[$column_name]['hidden_in_add_forms'] ?: false;
+				
+				
+				$columns[$column_name]['foreign_key'] 			= $columns[$column_name]['foreign_key'] 		?: false;
+				
+				if($columns[$column_name]['foreign_key']==true){
+					$columns[$column_name]['foreigh_table']		= $columns[$column_name]['foreigh_table'] 		?: null;
 				}
+				
+				$columns[$column_name]['source_table']			= $columns[$column_name]['source_table'] 		?: null;
 			}
 			return $columns;
 		}
@@ -305,14 +315,59 @@
 		}
 		
 		function add_form(){
+			
+			//hide the primary key
+			//set the required attribute for not null columns
+			//disable the fields that are disabled in the settings for the add form
+			//labels for the columns should be the label value or the replacement of the underscores in the name
+			
+			$add_form .= '<form class="add page nexus animation popup" method="?class='.get_class($this).'&method=add">';
+			$add_form .= '<header>'.(get_class_vars(get_class($this))['add_form_settings']['title'] ?: (get_class_vars(get_class($this))['name'].' Add Form')).'</header>';
+			
 			$columns = $this->get_db_columns();
-			$this->debug($columns);
+			
+			foreach($columns as $column_name=>$column_data){
+				
+				if($column_data['hidden_in_add_form'] == true) continue;
+				
+				$add_form .= '<div class=field>';
+				
+				$add_form .= '<label>'.$column_data['label'].'</label>';
+				
+				if($column_data['foreign_key'] === true){
+					$add_form .= '<select name="fields['.$column_name.']" required><option>Select an Option...</option></select>';
+				}
+				else if($column_data['datatype'] == 'DATE'){
+					$add_form .= '<input type=date name="fields['.$column_name.']" required>';
+				}
+				else if($column_data['datatype'] == 'DATETIME'){
+					$add_form .= '<input type=datetime-local name="fields['.$column_name.']" required>';
+				}
+				else{
+					$add_form .= '<input name="fields['.$column_name.']" type="text" placeholder="Enter a Value..." required>';
+				}
+				
+				$add_form .= '</div>';
+				
+			}
+			
+			$add_form .= '</form>';
+			
+			print($add_form);
+				
+			//$this->debug($columns);
+			
+			//$tmp = [
+				//'filename'=>'add_form.html'
+			//];
+			
+			//print($this->get_template($tmp));
 		}
 		
 		function get($param=[]){
 			$param['limit'] = 1;
 			$param['_id']	= array_key_exists('_id',$param) ? $param['_id'] : null;
-			return $this->get_list($param);
+			return $this->get_list($param)[0];
 		}
 		
 		function get_list($param=[]){
