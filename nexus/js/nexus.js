@@ -1,32 +1,144 @@
-/*modification of prototypes*/
-Number.prototype.toRad = function() { return this * (Math.PI / 180); };
+/*Prototypes start*/
 
-HTMLElement.prototype.toggle_class = function(class_name1, class_name2){
-	
-	if(class_name1 && class_name2){
-		this.className = (this.className.indexOf(class_name1) != -1) ? this.className.replace(class_name1,class_name2) : this.className.replace(class_name2,class_name1);
-	}
-	else if(class_name1){	
-		if(this.className.indexOf(class_name1) == -1){
-			this.className += " " + class_name1 + " ";
-		}
-		else{
-			this.className = this.className.replace(class_name1,"");
-		}
-	}
-};
+  Number.prototype.toRad = function() { return this * (Math.PI / 180); };
+
+  Date.prototype.today = function(){
+    var date = new Date();
+	  return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()<10 ? '0'+date.getDate() : date.getDate());
+  };
+
+  Math.coord_diff = function(coord_obj1, coord_obj2){
+
+  	if(!coord_obj1 || !coord_obj2){
+  	  console.error("Requires 2 Parameters");
+  	  return false;
+  	}
+
+  	if(typeof(coord_obj1) != "object" || typeof(coord_obj2) != "object"){
+  	  console.error("Both parameters must be of Object type");
+  	  return false;
+    }
+
+  	lat1 = parseFloat(coord_obj1.latitude);
+  	lat2 = parseFloat(coord_obj2.latitude);
+
+  	lon1 = parseFloat(coord_obj1.longitude);
+  	lon2 = parseFloat(coord_obj2.longitude);
+
+  	if(isNaN(lat1) || isNaN(lat2) || isNaN(lon1) || isNaN(lon2)){
+  	  console.error("Invalid values");
+  	  return false;
+  	}
 
 
-var Nexus = new Object();
+  	//see references
+  	var R = 6371; // km
+  	var dLat = (lat2-lat1).toRad();
+  	var dLon = (lon2-lon1).toRad();
+  	var lat1 = lat1.toRad();
+  	var lat2 = lat2.toRad();
+
+  	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+  			Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+  	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  	var d = R * c;
+
+  	return d;
+  };
+
+  HTMLElement.prototype.toggle_class = function(class_name1, class_name2){
+
+    if(this.className.indexOf(class_name1) >= 0){
+      var existing_classes = this.className.split(" ");
+      for(var i=0; i<existing_classes.length; i++){
+        existing_classes[i] = existing_classes[i].trim();
+        if(existing_classes[i] == class_name1){
+          existing_classes[i] = class_name2;
+        }
+      }
+      this.className = existing_classes.join(" ");
+    }
+    else{
+      this.add_class(class_name1);
+    }
+  };
+
+  HTMLElement.prototype.remove_class = function(class_name){
+  	var existing_classes = this.className.split(" ");
+  	for(var i=0; i<existing_classes.length; i++){
+  		existing_classes[i] = existing_classes[i].trim();
+  		if(existing_classes[i] == class_name){
+  			existing_classes[i] = null;
+  		}
+  	}
+  	this.className = existing_classes.join(" ");
+  };
+
+  HTMLElement.prototype.add_class = function(class_name){
+  	var existing_classes = this.className.split(" ");
+  	existing_classes.push(class_name);
+  	for(var i=0; i<existing_classes.length; i++){
+  		existing_classes[i] = existing_classes[i].trim();
+  	}
+  	this.className = existing_classes.join(" ");
+  };
+
+  HTMLFormElement.prototype.submit_via_ajax = function(){
+    var form = this;
+
+		var result = Nexus.ajax({
+			url: 	  form.action,
+			data: 	$(form).serialize(),
+			method: form.method,
+			target:	form,
+			success: function(result){
+			  form.remove_class("ajax_loading");
+			  var success_notice        = form.appendChild(document.createElement("div"));
+			  success_notice.className  = "success_notice";
+
+			  var table_aligner			= success_notice.appendChild(document.createElement("table"));
+			  table_aligner.className	= "align_center";
+
+			  var table_row_aligner		= table_aligner.appendChild(document.createElement("tr"));
+
+			  var table_cell_aligner	= table_row_aligner.appendChild(document.createElement("td"));
+
+			  var success_icon          = table_cell_aligner.appendChild(document.createElement("img"));
+			  success_icon.className    = "success_icon animation popup";
+			  success_icon.src          = "images/thumbs_up.svg";
+
+			  var success_label         = table_cell_aligner.appendChild(document.createElement("label"));
+			  success_label.className   = "success_label animation popup";
+			  success_label.innerHTML   = "Success!";
+
+			  var success_next          = table_cell_aligner.appendChild(document.createElement("input"));
+			  success_next.type         = "button";
+			  success_next.value        = "Next";
+			  success_next.className    = "success_next animation popup";
+			  success_next.innerHTML    = "Next";
+
+			  success_next.onclick      = function(){
+           $(form).replaceWith(result);
+			  };
+			}
+		});
+
+		return false;
+  };
+/*Prototypes end*/
+
+var Nexus =  window; //there should be an option to extend the window OR NOT
+
 Nexus.references = [
 	"http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates" //coord_diff
 ];
-Nexus.repository_url = (document.location.host == "127.0.0.1") ? document.location.origin+"/craigwayne.github.com" : "//craigwayne.github.io";
+
+//Nexus.repository_url = (document.location.host == "127.0.0.1") ? document.location.origin+"/craigwayne.github.com" : "//craigwayne.github.io";
 
 Nexus.go_fullscreen = function(element){
-	
+
 	var target = element || document.body;
-	
+
 	var request_method = target.requestFullScreen || target.webkitRequestFullScreen || target.mozRequestFullScreen || target.msRequestFullScreen;
 
 	if (request_method){
@@ -38,7 +150,7 @@ Nexus.go_fullscreen = function(element){
 };
 
 Nexus.exit_fullscreen = function(){
-	
+
 	if (document.exitFullscreen) {
 		document.exitFullscreen();
 	}
@@ -48,13 +160,14 @@ Nexus.exit_fullscreen = function(){
 	else if (document.webkitCancelFullScreen) {
 		document.webkitCancelFullScreen();
 	}
-	
+
 };
 
+/*
 Nexus.link_css = function(href){
-	
+
 	href = href || Nexus.repository_url+"/css/nexus.css";
-	
+
 	var style_links = document.querySelectorAll("link");
 	var linked = false;
 	for(var i=0; i<style_links.length; i++){
@@ -69,14 +182,14 @@ Nexus.link_css = function(href){
 		link.setAttribute("href",href);
 		link.setAttribute("rel","stylesheet");
 	}
-	
+
 	return link;
 };
 
 Nexus.link_js = function(src){
-	
+
 	if(!src){return;}
-	
+
 	var js_links = document.querySelectorAll("script[src]:not([src=''])");
 	var linked = false;
 	for(var i=0; i<js_links.length; i++){
@@ -86,47 +199,48 @@ Nexus.link_js = function(src){
 			break;
 		}
 	}
-	
+
 	if(!linked){
 		var link = document.getElementsByTagName("head")[0].appendChild(document.createElement("script"));
 		link.setAttribute("src",src);
 	}
-	
+
 	return link;
 };
 
 Nexus.install = function(){
 	//this links the required files depending on the elements found
-	
+
 	//link the default nexus file
 	Nexus.link_css();
 	//link font awesome
 	Nexus.link_css(Nexus.repository_url+'/css/font-awesome-4.2.0/css/font-awesome.min.css');
-	
-	//nexus gallery	
+
+	//nexus gallery
 	if(document.querySelector(".nexus.gallery") || document.querySelector(".nexus.mosaic")){
 		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_gallery/nexus_gallery.css");
 		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_gallery/nexus_gallery.js");
 		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.css");
 		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.js");
 	}
-	
+
 	//nexus carousel
 	if(document.querySelector(".nexus.carousel")){
 		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.css");
 		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.js");
 	}
-	
+
 	//nexus google maps
 	if(document.querySelector(".nexus.google_maps")){
 		//Nexus.link_css(Nexus.repository_url+"/plugins/nexus_google_maps/nexus_google_maps.css");
 		//Nexus.link_js(Nexus.repository_url+"/plugins/nexus_google_maps/nexus_google_maps.js");
 	}
-	
+
 };
+*/
 
 Nexus.color_to_hex = function(color_string){
-	
+
     var a = document.createElement('div');
     a.style.color = color_string;
     var colors = window.getComputedStyle( document.body.appendChild(a) ).color.match(/\d+/g).map(function(a){ return parseInt(a,10); });
@@ -134,238 +248,116 @@ Nexus.color_to_hex = function(color_string){
     return (colors.length >= 3) ? '#' + (((1 << 24) + (colors[0] << 16) + (colors[1] << 8) + colors[2]).toString(16).substr(1)) : false;
 };
 
-Nexus.math = Nexus.math || new Object();
-
-Nexus.math.coord_diff = function(coord_obj1, coord_obj2){
-	
-	if(!coord_obj1 || !coord_obj2){console.error("Requires 2 Parameters"); return false;}
-	
-	if(typeof(coord_obj1) != "object" || typeof(coord_obj2) != "object"){console.error("Both parameters must be of Object type"); return false;}
-	
-	lat1 = parseFloat(coord_obj1.latitude);
-	lat2 = parseFloat(coord_obj2.latitude);
-	
-	lon1 = parseFloat(coord_obj1.longitude);
-	lon2 = parseFloat(coord_obj2.longitude);
-	
-	if(isNaN(lat1) || isNaN(lat2) || isNaN(lon1) || isNaN(lon2)){console.error("Invalid values"); return false;}
-	
-	
-	//see references
-	var R = 6371; // km
-	var dLat = (lat2-lat1).toRad();
-	var dLon = (lon2-lon1).toRad();
-	var lat1 = lat1.toRad();
-	var lat2 = lat2.toRad();
-	
-	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-			Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
-	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-	var d = R * c;
-	
-	return d;
-};
-
 Nexus.filter = function(param){
 
 	param.query				= param.query.toLowerCase()	|| null;
-	param.data				= param.data				|| new Array(); 
-	
-	if(!param.query || param.query == ""){
-		
+	param.data				= param.data				|| [];
+
+	if(!param.query || param.query === ""){
+
 		for(var i=0; i<param.data.length; i++){
 			param.data[i].element.dataset.filtered = "true";
 		}
 	}
 	else{
-		
-		for(var i=0; i<param.data.length; i++){
-			if(param.data[i].name.toLowerCase().indexOf(param.query) == -1){
-				param.data[i].element.dataset.filtered = "false";
+
+		for(var j=0; j<param.data.length; j++){
+			if(param.data[j].name.toLowerCase().indexOf(param.query) == -1){
+				param.data[j].element.dataset.filtered = "false";
 			}
 			else{
-				param.data[i].element.dataset.filtered = "true";
+				param.data[j].element.dataset.filtered = "true";
 			}
 		}
-	
-	}
-};
 
-Nexus.toggle_class = function(){
-	
+	}
 };
 
 Nexus.ajax = function(param){
-	
+
 	if(arguments.length == 1 && typeof arguments[0] == "string"){
 		var tmp_url = arguments[0];
-		param = new Object();
+		param = {};
 		param.url = tmp_url;
 	}
 
-	param = (typeof param == "object") 	? param : new Object();
-	
+	param = (typeof param == "object") 	? param : {};
+
 	param.target 	= param.target 		|| undefined;
 	param.target 	= (typeof param.target == "string") ? document.querySelector(param.target) : param.target;
-	
+
 	param.url		= param.url 		? param.url+"&ajax=true" : undefined;
 	param.source	= param.source 		|| (event ? (event.target || event.srcElement) : param.source) || null;
 	param.method	= param.method 		|| "GET";
-	//param.mime_type = param.mime_type 	||
-	
-	
-	param.form_data = param.form_data	|| null;
-	
-	if(param.source && param.source.tagName == "FORM"){
-		
-		param.url		= param.url || param.source.action;
-		
-		//param.data 		= new FormData(param.source);
-		param.data		= $(param.source).serialize();
-		param.form_data = param.form_data || new FormData(param.source);
-		
-		
-		param.method 	= param.source.method;
-		param.type		= param.source.method;
-	}
-	
 
 	//check that all required parameters are present
 	if(!param.url){
 		console.error("Missing parameters");
 		return null;
 	}
-	
-	
-	//jquery's ajax method
-	var ajax_result = null;
-	
+
 	param.success 	= param.success || function(result){
-		
+
 		if(param.target){
-			
-			param.target.toggle_class("ajax_loading");
-			$(param.target).html(result);
+			param.target.remove_class("ajax_loading");
+
+			//append or replace here
+			if(param.append === true){
+			  $(param.target).append('<div class="ajax_result">'+result+'</div>');
+			}else{
+			  $(param.target).html(result);
+			}
+
 			return result;
 		}
 	};
-	
+
 	if(param.target){
-		param.target.toggle_class("ajax_loading");
+		param.target.add_class("ajax_loading");
 	}
-	
+
 	$.ajax(param);
-	/*return ajax_result;
-	
-	var xmlhttp;
-	
-	if (window.XMLHttpRequest){
-		xmlhttp	= new XMLHttpRequest();
-	}
-	else{
-		xmlhttp	= new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	if(param.mime_type){
-		xmlhttp.overrideMimeType(param.mime_type+"; charset=UTF-8");
-	}
-	else{
-		xmlhttp.responseType = "document";
-	}
-	
-	xmlhttp.onreadystatechange=function(){
-		
-		var response = null;
-		
-		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			
-			response = xmlhttp.response;
-			
-			//formatting of the reponse
-			switch(xmlhttp.getResponseHeader("Content-Type")){
-				case "application/json; charset=UTF-8":
-					response = JSON.parse(response);
-				break;
-			}
-			
-			if(param.target){
-				param.target.innerHTML = "";				
-				for(var i=0; i<response.body.childNodes.length; i++){
-					
-					console.debug(response.body.childNodes[i]);
-					
-					param.target.appendChild(response.body.childNodes[i]);
-				}
-				param.target.toggle_class("ajax_loading");	
-			}
-			
-			if(param.callback){
-				var callback_params = {
-					response: 		response
-				};
-				param.callback(callback_params);
-			}
-		}
-	};
-	
-	if(param.target){
-		param.target.toggle_class("ajax_loading");
-	}
-	
-	xmlhttp.open(param.method,param.url,true);
-	xmlhttp.setRequestHeader("Content-type","text/plain;charset=UTF-8");
-	xmlhttp.send(param.form_data);
-	
-	return false;*/
-	
+};
+
+Nexus.show_in_popup = function(url){
+
+	var modal;
+
+	modal = document.querySelector(".modal") || document.body.appendChild(document.createElement("div"));
+	modal.className = "modal";
+
+	var popup = modal.appendChild(document.createElement("div"));
+	popup.className = "popup";
+
+	var close = modal.appendChild(document.createElement("button"));
+	close.className = "fa fa-close";
+	close.addEventListener("click",function(){
+			document.body.removeChild(this.parentNode);
+	},false);
+
+	Nexus.ajax({
+		'url':		url,
+		'target':	popup
+	});
 };
 
 Nexus.observe = function(param){
-	
+
 	param = param || new Object();
-	
+
 	param["function"] = param["function"] || null;
-	
+
 	if(!param["function"]){console.error("No function defined"); return null;}
-	
+
 	var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-	
+
 	var observer = new MutationObserver(function(mutations){
 		param["function"](mutations);
 	});
-	
+
 	observer.observe(document.body,{
 			attribute:false,
 			childList:true,
 			subtree:true
 	});
 };
-
-//this is for a custom HTMLInputElement of type text, used for an ajax call
-/*document.addEventListener("DOMContentLoaded",function(){
-	Nexus.observe({
-			function: function(mutations){
-				for(var i in mutations){
-					console.debug(mutations);
-					if(mutations[i].addedNodes.length > 0){
-						var added_nodes = mutations[i].addedNodes;
-						for(var j in added_nodes){
-							if(added_nodes[j].tagName == "INPUT"){
-								if(added_nodes[j].type == "text" || !added_nodes.type){
-									console.debug(added_nodes[j]);
-								}
-							}
-						}
-					}
-				}
-			}
-	});
-},false);
-*/
-//document.addEventListener("DOMContentLoaded",function(){Nexus.install();},false);
-
-//console.debug("need a function to merge object data, for example, merge the dataset against the parameters sent to a function and that containers dataset");
-//console.debug("include the nexus.css file via this script if its not already added");
-//console.debug("this file must serve as a portal to other files");
-//console.debug("change callbacks to promises");
-//console.debug("fix the link js functions");

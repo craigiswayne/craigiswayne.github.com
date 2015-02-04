@@ -1,0 +1,29 @@
+{
+	"manifest_version": 2,
+
+	"name": "Nexus Reverse Geocoding",
+
+	"description": "Find a place with only limited information",
+
+	"version": "1.0",
+
+	"icons": {
+		"128": "128.png"
+	},
+
+	"app": {
+
+		"urls": [
+			"http://craigwayne.github.io/nexus/js/nexus_google_maps/#reverse_geocoding"
+		],
+
+		"launch": {
+			"web_url": "http://craigwayne.github.io/nexus/js/nexus_google_maps/#reverse_geocoding"
+		}
+	},
+
+	"permissions": [
+		"unlimitedStorage",
+		"notifications"
+	]
+}

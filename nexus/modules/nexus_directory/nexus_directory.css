@@ -1,111 +1,70 @@
-.nexus.directory.viewlist{
-	border:10px solid black;
-	border-radius:8px;
-	margin:auto;
-	width:90%;
-	height:90%;
-	
-	overflow:hidden;
-	
-	background: rgb(63,76,107); /* Old browsers */
-	background: -moz-linear-gradient(left,  rgba(63,76,107,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(63,76,107,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  rgba(63,76,107,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(left,  rgba(63,76,107,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(left,  rgba(63,76,107,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
-	background: linear-gradient(to right,  rgba(63,76,107,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f4c6b', endColorstr='#3f4c6b',GradientType=1 ); /* IE6-9 */
+.nexus_directory.viewlist details {
+	margin: 0px;
 }
 
-.nexus.directory.viewlist button.fa{
-	color:white;
+.nexus_directory.viewlist{
+	padding: 51px 0px 0px 0px;
+	display:-webkit-box;
 }
 
-.nexus.directory.viewlist #navigator,
-.nexus.directory.viewlist #preview{
-	height:100%;
-	float:left;
+
+.nexus_directory.viewlist #navigator,
+.nexus_directory.viewlist #preview{
+	-webkit-box-flex:1;
 }
 	
-.nexus.directory.viewlist #navigator{
-	background-color:rgba(0, 0, 0, 0.2);
-	box-shadow:10px 0px 20px 0px rgba(0, 0, 0, 0.5);
+.nexus_directory.viewlist #navigator{
 	box-sizing:border-box;
-	
 	width:250px;
 	position:relative;
 	padding-right:15px;
 	transition:all 0.2s ease;
-	
 }
 
-.nexus.directory.viewlist #navigator.hidden{
+.nexus_directory.viewlist #navigator.hidden{
 	width: 0px;
 	overflow: hidden;
 }
 
 
-.nexus.directory.viewlist #navigator header{
-	width:100%;
-	padding:5px 0px;
-	background-color:rgba(0,0,0,0.5);
-	height:30px;
-	max-height:30px;
-	position:relative;
-	display:-webkit-box;
-	
+.nexus_directory.viewlist #navigator #details_wrapper{
 	-webkit-box-flex:1;
 }
 
-.nexus.directory.viewlist #navigator header *{
-	display:block;
-	margin:0px 2px;
-}
-
-.nexus.directory.viewlist #navigator header input{
-	-webkit-box-flex:1;
-}
-
-.nexus.directory.viewlist #navigator #details_wrapper{
-	overflow:auto;
-	max-height:calc(100% - 5px - 5px - 30px);
-	-webkit-box-flex:1;
-}
-
-.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar {
+.nexus_directory.viewlist #navigator #details_wrapper::-webkit-scrollbar {
 	-webkit-appearance: none;
 }
 
-.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar:vertical {
+.nexus_directory.viewlist #navigator #details_wrapper::-webkit-scrollbar:vertical {
 	width: 11px;
 }
 
-.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar:horizontal {
+.nexus_directory.viewlist #navigator #details_wrapper::-webkit-scrollbar:horizontal {
 	height: 11px;
 }
 
-.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar-thumb {
+.nexus_directory.viewlist #navigator #details_wrapper::-webkit-scrollbar-thumb {
 	border-radius: 8px;
 	border: 2px solid white; /* should match background, can't be transparent */
 	background-color: rgba(0, 0, 0, .5);
 }
 
-.nexus.directory.viewlist #navigator #details_wrapper::-webkit-scrollbar-track { 
+.nexus_directory.viewlist #navigator #details_wrapper::-webkit-scrollbar-track { 
 	background-color: #fff; 
 	border-radius: 8px; 
 } 
 
-.nexus.directory.viewlist #navigator #navigator_toggle_bar{
+.nexus_directory.viewlist #navigator #navigator_toggle_bar{
 	width: 15px;
 	position: absolute;
-	background:rgb(5,5,5);
+	background:rgb(150,150,150);
 	height: 100%;
 	z-index: 1000000;
 	right: 0px;
 	top: 0px;
 }
 
-.nexus.directory.viewlist #navigator #navigator_toggle_bar button{
+.nexus_directory.viewlist #navigator #navigator_toggle_bar button{
 	border-radius: 100%;
 	background: rgb(255, 255, 255);
 	border: none;
@@ -117,39 +76,16 @@
 	color:black;
 }
 
-.nexus.directory.viewlist details{
-	color:white;
-	border-bottom:1px solid rgba(255, 255, 255, 0.8);
-	text-transform:capitalize;
-}
-
-.nexus.directory.viewlist details summary{
-	background-color:rgba(0,0,0,0.3);
-	padding:5px 0px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	position:relative;
-}
-
-.nexus.directory.viewlist details summary:focus{
-	outline:none;
-}
-
-.nexus.directory.viewlist details summary button{
-	position:absolute;
-	right:0px;
-}
-
-.nexus.directory.viewlist details .results{
+.nexus_directory.viewlist details .results{
 	padding-bottom:20px;
 }
 
-.nexus.directory.viewlist details .results:empty:after{
+.nexus_directory.viewlist details .results:empty:after{
 	content:"No results...";
+	padding-left:10px;
 }
 
-.nexus.directory.viewlist details .results>div{
+.nexus_directory.viewlist details .results>div{
 	margin-bottom:5px;
 	text-indent:10px;
 	text-overflow: ellipsis;
@@ -158,16 +94,21 @@
 	cursor:pointer;
 }
 
-.nexus.directory.viewlist details .results>div:hover{
-	background-color: rgba(255, 255, 0, 0.5);
+.nexus_directory.viewlist details .results>div:hover{
+	background-color:yellow;
 }
 
-.nexus.directory.viewlist #preview{
+.nexus_directory.viewlist #preview{
 	box-sizing:border-box;
 	padding:10px;
-	color:white;
 	overflow:auto;
 	width:calc(100% - 250px);
+}
+
+.nexus_directory.viewlist #preview .app{
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
 }
 
 details.address.valid input[value=Validate] {
@@ -182,11 +123,11 @@ details.address.valid ~ input[type=submit]{
 	visibility:visible;
 }
 
-.nexus.directory.viewlist #navigator.hidden + #preview{
+.nexus_directory.viewlist #navigator.hidden + #preview{
 	width:calc(100% - 15px);
 }
 
-form.nexus.directory img.profile{
+form.nexus_directory img.profile{
 	width:150px;
 	height:150px;
 	float:left;
@@ -194,56 +135,16 @@ form.nexus.directory img.profile{
 	background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjE1MCIgaGVpZ2h0PSIxNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8IS0tIENyZWF0ZWQgd2l0aCBTVkctZWRpdCAtIGh0dHA6Ly9zdmctZWRpdC5nb29nbGVjb2RlLmNvbS8KICAgICAgRWRpdGVkIGJ5IHVsdHJhZHVkZTI1IC0gaHR0cDovL21hdHQtcnVzc2VsbC5jb20vIC0tPgogPHRpdGxlPk5vIGltYWdlIGZvciBtaW5lY3JhZnR3aWtpLm5ldDwvdGl0bGU+CiA8ZyBkaXNwbGF5PSJpbmxpbmUiPgogIDx0aXRsZT5CYWNrZ3JvdW5kPC90aXRsZT4KICA8cmVjdCBpZD0ic3F1YXJlIiBoZWlnaHQ9IjE0NyIgd2lkdGg9IjE0NyIgeT0iMS41IiB4PSIxLjUiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlPSIjNjY2NjY2IiBmaWxsPSIjZTFlMWUxIi8+CiA8L2c+CiA8ZyBkaXNwbGF5PSJpbmxpbmUiPgogIDx0aXRsZT5Gb250PC90aXRsZT4KICA8cmVjdCBpZD0iZm9udDEiIGhlaWdodD0iMTAiIHdpZHRoPSIxMCIgeT0iMTAwIiB4PSI3MCIgZmlsbD0iIzY2NjY2NiIvPgogIDxyZWN0IGlkPSJmb250MiIgaGVpZ2h0PSIxMCIgd2lkdGg9IjEwIiB5PSI4MCIgeD0iNzAiIGZpbGw9IiM2NjY2NjYiLz4KICA8cmVjdCBpZD0iZm9udDMiIGhlaWdodD0iMTAiIHdpZHRoPSIxMCIgeT0iNzAiIHg9IjgwIiBmaWxsPSIjNjY2NjY2Ii8+CiAgPHJlY3QgaWQ9ImZvbnQ0IiBoZWlnaHQ9IjIwIiB3aWR0aD0iMTAiIHk9IjUwIiB4PSI5MCIgZmlsbD0iIzY2NjY2NiIvPgogIDxyZWN0IGlkPSJmb250NSIgaGVpZ2h0PSIxMCIgd2lkdGg9IjMwIiB5PSI0MCIgeD0iNjAiIGZpbGw9IiM2NjY2NjYiLz4KICA8cmVjdCBpZD0iZm9udDYiIGhlaWdodD0iMTAiIHdpZHRoPSIxMCIgeT0iNTAiIHg9IjUwIiBmaWxsPSIjNjY2NjY2Ii8+CiA8L2c+Cjwvc3ZnPg%3D%3D);
 }
 
-form.nexus.directory input[type=submit]{
-	margin:10px 0px 0px auto;
-	display:block;
-	clear:left;
-}
 
-form.nexus.directory details{
-	display:block;
-	clear:left;	
-}
-
-form.nexus.directory details{
-	margin:50px 10px;
-}
-
-
-form.nexus.directory details input[type=button]{
-	margin:0px 0px 0px auto;
-	display:block;
-}
-
-form.nexus.directory details summary input[type=button]{
-	display:inline;
-	float:right;
-}
-
-form.nexus.directory details summary input:not([type]),
-form.nexus.directory details summary input[type=text]{
-	border: none;
-	color: inherit;
-	font-size: 16px;
-	background-color: rgba(0, 0, 0, 0);
-}
-
-form.nexus.directory details.address input[type=button]{
-	display:block;
-	margin:0px 0px 5px auto; 
-}
-
-
-
-form.nexus.directory img.profile ~input[type=text],
-form.nexus.directory img.profile ~input:not([type]){
+form.nexus_directory img.profile ~input[type=text],
+form.nexus_directory img.profile ~input:not([type]){
 	display:block;
 	width: calc(100% - 150px - 10px);
 	margin:10px 0px 5px;
 	float:left;
 }
 
-form.nexus.directory img.profile ~input:not([type=hidden]){
+form.nexus_directory img.profile ~input:not([type=hidden]){
 	font-size:1.5em;
 }
 

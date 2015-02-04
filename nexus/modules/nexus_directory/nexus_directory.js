@@ -32,7 +32,7 @@ function add_directory_groups(){
 		add_button.relationship = category.replace("_"," ");
 		add_button.addEventListener("click",function(){
 			document.querySelector("#navigator").toggle_class('hidden');
-			Nexus.ajax({target:document.querySelector(".nexus.directory.viewlist #preview"), url:'?class=nexus_directory&method=add_form&relationship='+this.relationship});
+			Nexus.ajax({target:document.querySelector(".nexus_directory.viewlist #preview"), url:'?class=nexus_directory&method=add_form&relationship='+this.relationship});
 		},false);
 		
 		var results_container 		= detail.appendChild(document.createElement("div"));
@@ -47,7 +47,7 @@ function add_directory_groups(){
 				result.element._id			= Nexus.directory.groups[category][j]._id;
 				result.element.addEventListener("click",function(){
 					document.querySelector("#navigator").toggle_class('hidden');
-					Nexus.ajax({target:document.querySelector(".nexus.directory.viewlist #preview"), url:'?class=nexus_directory&method=view&fields[_id]='+this._id})
+					Nexus.ajax({target:document.querySelector(".nexus_directory.viewlist #preview"), url:'?class=nexus_directory&method=view&fields[_id]='+this._id})
 				},false);
 				result.name					= Nexus.directory.groups[category][j].name;
 				result.element.innerText	= result.name;

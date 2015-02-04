@@ -1,32 +1,16 @@
-<html>
-<head>
+<div class="nexus_directory viewlist app animation popup">
 	
-	<title>Nexus Directory | Viewlist</title>
+	<header>
+		Directory
+		<input type=text placeholder="Search..." onkeyup="Nexus.filter({query:this.value, data:directory_entries});">
+		<button class="fa fa-refresh" title="Refresh List" onclick="Nexus.directory.update();"></button>
+	</header>
 	
-	<meta charset="UTF-8">
 	
-	<script src="js/nexus.js"></script>
-	
-	<script src='http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false'></script>
-	<script src="js/nexus_google_maps/nexus_google_maps.js"></script>
-	<script src="js/jQuery/jquery-1.11.0.js"></script>
-	
-	(#module_css#)
 	(#module_js#)
 	
-</head>
-<body>
-	<div class="nexus directory viewlist">
-	
-		<link rel=stylesheet href="css/font-awesome-4.2.0/css/font-awesome.css">
-		<link rel=stylesheet href="css/nexus.css">
 		
 		<div id="navigator">
-			<header>
-				<input type=text placeholder="Search..." onkeyup="Nexus.filter({query:this.value, data:directory_entries});">
-				<button class="fa fa-refresh" title="Refresh List" onclick="Nexus.directory.update();"></button>
-				
-			</header>
 			
 			<div id="details_wrapper"></div>
 			
@@ -38,6 +22,4 @@
 		<div id="preview">
 			<h3>Directory Services</h3>
 		</div>
-	</div>
-</body>
-</html>
+</div>

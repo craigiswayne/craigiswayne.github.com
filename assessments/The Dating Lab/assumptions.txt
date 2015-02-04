@@ -1,0 +1,16 @@
+Connection details to localhost database is as follows:
+  username: root
+  password: root
+
+A Schema with the name "assessments" has been created
+
+A Database Table with the name "tdl_browser_poll" has been created
+
+"tdl_browser_poll" has the following columns
+   _id
+   name
+   email
+   browser
+   reason
+   timestamp
+   _deleted

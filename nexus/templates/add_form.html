@@ -1,0 +1,24 @@
+<form class="add app animation popup" method="POST" action="?class=(#class_name#)&amp;method=add" onsubmit="this.submit_via_ajax(); return false;">
+
+	<header><span class="fa fa-bars no_shadow" onclick="this.parentNode.parentNode.querySelector('.menu').toggle_class('open');"></span>(#title#)</header>
+
+	<div class="content">
+
+		<ul class="menu">
+			<li class="menu_item"><input type=submit value=save onclick="this.parentNode.parentNode.toggle_class('open');"></li>
+			<li class="menu_item"><input type=button class=validate value="validate" onclick="this.parentNode.parentNode.toggle_class('open');"></li>
+			<li class="menu_item"><input type=reset onclick="this.parentNode.parentNode.toggle_class('open');"></li>
+		</ul>
+
+		(#fields#)
+	</div>
+
+	<footer>
+	  <input type=submit value="save">
+	</footer>
+
+	<script>(#js#)</script>
+
+	<style>(#css#)</style>
+
+</form>

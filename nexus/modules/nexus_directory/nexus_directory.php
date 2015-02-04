@@ -10,7 +10,8 @@
 		var $columns = [
 			'type' => [
 				'default'=>'Business'
-			]
+			],
+			'name'
 		];
 		
 		var $views = [
@@ -207,6 +208,31 @@
 					AND entries.nexus_directory_labels_id IN (
 						SELECT _id FROM nexus_directory_labels WHERE _deleted!=1 AND name = "Name"
 					)
+			',
+			'
+				CREATE OR REPLACE VIEW `claims_negotiators` AS 
+				SELECT 
+					entries.nexus_directory_id as `_id`, 
+					GROUP_CONCAT(entries.value SEPARATOR " ") as `name`,
+					directory._deleted
+					
+				FROM nexus_directory_entries entries
+				
+				LEFT OUTER JOIN nexus_directory directory ON entries.nexus_directory_id = directory._id 
+				
+				WHERE 
+				
+				entries.nexus_directory_id IN(	
+					SELECT nexus_directory_id FROM nexus_directory_entries
+					WHERE nexus_directory_labels_id = 10 AND value = "Claims Negotiator"
+				)
+				
+				AND entries.nexus_directory_labels_id IN (
+					SELECT _id
+					FROM nexus_directory_labels
+					WHERE name = "First Name" or name =  "Last Name"
+				)
+				GROUP BY entries.nexus_directory_id
 			'
 		];
 		
@@ -255,7 +281,7 @@
 			
 			$contact_entries = $this->sql_query($sql);
 			
-			$html = '<form class="nexus directory view">';
+			$html = '<form class="'.__CLASS__.' app view">';
 			$html .= '
 				<img class="profile">
 				<input type=text placeholder="Name" disabled>
@@ -306,6 +332,31 @@
 				$html .= '</details>';
 			}
 			
+			//linked connections
+			$sql = '
+				SELECT lc.relationship as label, contact_names.value as name
+				FROM nexus_directory_linked_contacts lc
+				LEFT OUTER JOIN (
+				SELECT entries.nexus_directory_id, entries.value
+				FROM nexus_directory_entries entries 
+				LEFT OUTER JOIN nexus_directory_labels labels ON entries.nexus_directory_labels_id = labels._id
+				WHERE labels.name = "Name" OR labels.name = "First Name"
+				) contact_names ON lc.child = contact_names.nexus_directory_id
+				WHERE 
+				lc._deleted!=1 
+				AND lc.parent='.$_GET['fields']['_id'].'
+			';
+			
+			$linked_connections = $this->sql_query($sql);
+			$html .= '<details open>';
+			$html .= '<summary>Linked Contacts</summary>';
+			foreach($linked_connections as $key=>$value){
+				$html .= '<div class=field>';
+				$html .= 	'<label>'.str_replace('_',' ',$value['label']).'</label><input type=text value="'.$value['name'].'" disabled>';
+				$html .= '</div>';
+			}
+			$html .= '</details>';
+			
 			
 			$html .= '
 				<script>
@@ -331,7 +382,8 @@
 			$template_data = [
 				'data'	  => [
 					'address_section'	=>$this->get_template(['filename'=>'address_details_template.html']),
-					'contact_section'	=>$this->get_template(['filename'=>'contact_details_template.html'])
+					'contact_section'	=>$this->get_template(['filename'=>'contact_details_template.html']),
+					'employee_role_section'	=>$this->get_template(['filename'=>'employee_role_section.html'])
 				]
 			];
 			
@@ -367,6 +419,10 @@
 				
 				case 'policy_holders':
 					$template_data['filename'] 				    = $param['template'].'policy_holders_new.html';
+				break;
+				
+				case 'employees':
+					$template_data['filename'] 				    = $param['template'].'employee_new.html';
 				break;
 			}
 			
@@ -415,6 +471,7 @@
 			//add any addresses
 			$nexus_directory_labels = new nexus_directory_labels();
 			$labels_list = $nexus_directory_labels->get_list();
+			
 			$labels_used = [];
 			foreach($labels_list as $key=>$value){
 				$labels_used[strtolower($value['name'])] = $value;
@@ -458,7 +515,8 @@
 				'consultants'			=> $this->sql_query('SELECT * FROM consultants'), 		//these are people that work for a managing agent, broker, insurance company
 				'policy_holders'		=> $this->sql_query('SELECT * FROM policy_holders'),
 				'suppliers'				=> $this->sql_query('SELECT * FROM suppliers'),
-				'businesses'			=> $this->sql_query('SELECT * FROM businesses')
+				'businesses'			=> $this->sql_query('SELECT * FROM businesses'),
+				'employees'				=> $this->sql_query('SELECT * FROM employees')
 			];
 			
 			$_GET['ajax'] = array_key_exists('ajax',$_GET) ? $_GET['ajax'] : false;
@@ -470,8 +528,6 @@
 			return $groups; 
 		}
 					
-	}	
-	
-	
+	}
 
 ?>
