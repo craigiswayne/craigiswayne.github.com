@@ -46,43 +46,6 @@
   	return d;
   };
 
-  HTMLElement.prototype.toggle_class = function(class_name1, class_name2){
-
-    if(this.className.indexOf(class_name1) >= 0){
-      var existing_classes = this.className.split(" ");
-      for(var i=0; i<existing_classes.length; i++){
-        existing_classes[i] = existing_classes[i].trim();
-        if(existing_classes[i] == class_name1){
-          existing_classes[i] = class_name2;
-        }
-      }
-      this.className = existing_classes.join(" ");
-    }
-    else{
-      this.add_class(class_name1);
-    }
-  };
-
-  HTMLElement.prototype.remove_class = function(class_name){
-  	var existing_classes = this.className.split(" ");
-  	for(var i=0; i<existing_classes.length; i++){
-  		existing_classes[i] = existing_classes[i].trim();
-  		if(existing_classes[i] == class_name){
-  			existing_classes[i] = null;
-  		}
-  	}
-  	this.className = existing_classes.join(" ");
-  };
-
-  HTMLElement.prototype.add_class = function(class_name){
-  	var existing_classes = this.className.split(" ");
-  	existing_classes.push(class_name);
-  	for(var i=0; i<existing_classes.length; i++){
-  		existing_classes[i] = existing_classes[i].trim();
-  	}
-  	this.className = existing_classes.join(" ");
-  };
-
   HTMLFormElement.prototype.submit_via_ajax = function(){
     var form = this;
 
@@ -125,6 +88,46 @@
 
 		return false;
   };
+
+
+  HTMLInputElement.prototype.read_file = function(callback){
+  
+	  if(this.type){
+		  console.debug(this.type);
+		  
+		  if(this.type === "file" && this.className.indexOf("nexus") > -1){
+			
+			this.adEventListener("change",function(){
+				
+				var reader = new FileReader();
+				
+				for(var i=0; i<this.files.length; i++){
+					var file = this.files[0];
+					reader.readAsBinaryString(file.slice(0, file.size));
+				}
+				
+				reader.onloadend = function(evt) {
+					
+					var file_contents = evt.target.result;
+					
+					if (evt.target.readyState == FileReader.DONE) {
+						calback = callback || function(file_contents){
+							console.group("read_file output:");
+							console.debug(file_contents);
+							console.groupEnd();
+						};
+						callback(file_contents);
+					}
+				};
+				
+				
+			},false);
+			
+		  }
+	  }
+	  
+  };
+
 /*Prototypes end*/
 
 var Nexus =  window; //there should be an option to extend the window OR NOT
