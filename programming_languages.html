@@ -1,0 +1,25 @@
+
+<script src="http://www.chartjs.org/assets/Chart.min.js"></script>
+
+<canvas id="languages_chart">
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+    var ctx = document.getElementById("languages_chart").getContext("2d");
+    var data = {
+        labels: ["HTML", "CSS 3", "Javascript", "jQuery", "PHP", "SQL"],
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [7, 4, 4, 4, 4, 6,]
+            }
+        ]
+    };
+
+
+    var programming_languages_chart = new Chart(ctx).Bar(data, data);
+},false);
+</script>

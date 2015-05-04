@@ -1,123 +1,166 @@
-
 <head>
-<title>Craig Wayne's Portfolio</title>
-	
-<style>
-	body{
-		font-family:Tahoma, Arial;
-		margin:0;
-		background: rgb(33, 90, 109);
-		/* Old browsers */
-		/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
+    <style>
+    *{
+box-sizing:border-box;
+}
 
-		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjEwMCUiIHkyPSIwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjE1YTZkIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzNjYTJhMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-		background: -moz-linear-gradient(45deg, rgb(36, 32, 86) 0%, rgb(17, 63, 71) 100%);
-		/* FF3.6+ */
+body{
+background:linear-gradient(to bottom right, rgb(80, 163, 162) 0%, rgb(83, 227, 166) 100%);
+font-family:'Oswald',Tahoma, Arial;
+margin:0;
+padding:90px 10px 0 10px;
+text-align:center;
+}
 
-		background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgb(36, 32, 86)), color-stop(100%, rgb(17, 63, 71)));
-		/* Chrome,Safari4+ */
+body>header:first-of-type{
+background-color:rgba(39, 33, 35,0.2);
+box-shadow:0 0 10px rgba(0,0,0,0.8);
+color:white;
+padding:10px;
+text-align:right;
+position:fixed;
+left:0;
+top:0;
+height:90px;
+width:100%;
+box-sizing:border-box;
+font-weight:bold;
+font-size:3em;
+}
 
-		background: -webkit-linear-gradient(45deg, rgb(36, 32, 86) 0%, rgb(17, 63, 71) 100%);
-		/* Chrome10+,Safari5.1+ */
+body>footer:last-of-type{
+background-color:rgba(39, 33, 35,0.9);
+width:100%;
+padding:20px;
+box-sizing:border-box;
+bottom:0;
+left:0;
+position:absolute;
+border-top:5px solid rgba(255,255,255,0.8);
+}
 
-		background: -o-linear-gradient(45deg, rgb(36, 32, 86) 0%, rgb(17, 63, 71) 100%);
-		/* Opera 11.10+ */
+.contact{
+display:block;
+margin-left:auto;
+width:150px;
+}
 
-		background: -ms-linear-gradient(45deg, rgb(36, 32, 86) 0%, rgb(17, 63, 71) 100%);
-		/* IE10+ */
+.contact *{
+display:block;
+width:100%;
+margin:2px 0;
+border-radius:4px;
+padding:4px 6px;
+}
 
-		background: linear-gradient(45deg, rgb(36, 32, 86) 0%, rgb(17, 63, 71) 100%);
-		/* W3C */
+.contact a{
+color:black;
+text-decoration:none;
+background-color:white;
+box-sizing:border-box;
+text-align:center;
+}
 
-		filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#215a6d', endColorstr='#3ca2a2', GradientType=1);
-		/* IE6-8 fallback on horizontal gradient */
-		
-		linear-gradient(45deg, rgb(36, 32, 86) 0%, rgb(17, 63, 71) 100%)
-	}
-	
-	section{
-		  margin: 0;
-		  height: 100vh;
-		  padding: 10px;
-		  box-sizing: border-box;
-	}
-	
-	section>header {
-		font-weight: bold;
-		font-size: 3em;
-		text-align: center;
-		margin: 0 auto 10px auto;
-		color: rgba(255, 255, 255, 0.9);
-		text-shadow: 0 0 10px rgb(0, 0, 0);
-	}
-	
-	section .item{
-		display:block;
-		text-decoration:none;
-		color:black;
-		background-color: rgba(255,255,255,0.5);
-		border-radius: 6px;
-		padding:6px 4px;
-		margin:5px auto;
-	}
-	
-	section#projects .item {
-		padding: 10px 6px;
-		box-shadow: 2px 2px 10px 0 rgba(0,0,0,0.5);
-	}
+.contact input,
+.contact textarea{
+border:none;
+overflow:hidden;
+resize:none;
+}
 
-	section#projects .item .title {
-		font-weight: bold;
-		margin: 0;
-	}
 
-	section#projects .item .description {
-		font-style: italic;
-	}
-	
-	.under_construction {
-	  display: block;
-	  font-size: 20px;
-	  text-align: center;
-	  border-radius: 6px;
-	  border: 2px dashed rgba(255, 255, 0, 0.2);
-	  font-weight: bold;
-	  background: rgba(0, 0, 0, 0.4);
-	  color: rgba(255, 255, 0, 0.8);
-	  padding: 10px;
-	  position: fixed;
-	  bottom: 52px;
-	  right: -100px;
-	  -webkit-transform: rotate(-45deg);
-	  width: 350px;
-	  height: 50px;
-	  box-sizing: border-box;
-	  box-shadow: 0 0 15px 0 rgb(0, 0, 0) inset;
-	}
-</style>
+.category{
+width:300px;
+height:300px;
+border-radius:100%;
+background:rgba(255,255,255,0.7);
+border:10px solid rgba(0,0,0,0.2);
+box-shadow:0 0 10px 0 black inset;
+margin:10px;
+display:inline-block;
+position:relative;
+overflow:hidden;
+float:left;
+}
 
+.category .content{
+position:absolute;
+width:100%;
+height:100%;
+opacity:0.5;
+top:0;
+left:0;
+overflow: hidden;
+border-radius: 100%;
+}
+
+.category .title{
+position:absolute;
+height:40px;
+line-height:30px;
+padding:0;
+bottom:0px;
+left:0;
+text-align:center;
+width:100%;
+background-color:rgb(43, 49, 47);
+border-top:3px solid rgba(0,0,0,0.5);
+color:white;
+}
+
+#body_vinyl{
+background: url("background.png");
+background-size: cover;
+background-repeat: no-repeat;
+position: fixed;
+width: 100%;
+height: 100%;
+z-index: 0;
+top: 0;
+right: 0;
+background-position: right;
+opacity:0.2;
+}
+    </style>
 </head>
+<header>Craig Wayne</header>
 
-<body>
-	
-	
-	<div class=under_construction>Under Construction</div>
-	
-	<section id="links">
-		<header>Links</header>
-		<a class="item fa fa-github" href="http://craigwayne.github.io">Github</a>
-		<a class="item fa fa-twitter" href="http://twitter.com/craigiswayne">Twitter</a>
-		<a class="item fa fa-codepen" href="http://codepen.io/craigiswayne">Codepen</a>
-		<a class="item fa fa-email" href="mailto:craig.wayne01@gmail.com?subject=Portfolio">Email</a>
-		<a class="item fa fa-stackoverflow" href="/?">StackOverflow</a>
-	</section>
-	
-	
-	<section id="projects">
-		<header>Projects</header>
-		<a href="http://craigwayne.github.io/prototype" class="item">
-			<p class="title">Prototype</p>
-			<p class="description">A front-end prototyping tool that allows you to quickly preview your html, css and javascript code as you type.<br/>Recently launched on to the Google Chrome app store.<br/>The Web app version is constantly being updated.<br/>The Chrome App updates at the end of every month.</p>
-		</a>
-	</section>
-</body>
+<section class=category>
+<iframe class=content src="http://craigwayne.github.io/prototype"></iframe>
+<div class=title>Projects</div>
+</section>
+
+
+<section class=category>
+<div class=content>
+<iframe class=content src="programming_languages.html"></iframe>
+</div>
+<div class=title>Skills</div>
+</section>
+
+
+<div id=body_vinyl class=vinyl>
+</div>
+
+<footer>
+<div class=contact>
+<input type=text name=name placeholder="Your name...">
+<textarea name=message placeholder="Your Message"></textarea>
+<a target="_blank" href="mailto:craig.wayne01@gmail.com?subject=Portfolio&body=" id="lnk_messenger">Drop me a text...</a>
+</div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+
+    document.querySelector("#lnk_messenger").onclick = function(){
+    
+        var message = "Message From: " + document.querySelector(".contact input[name=name]").value + "%0D%0A%0D%0A" +  document.querySelector(".contact textarea[name=message]").value;
+        
+        this.href="mailto:craig.wayne01@gmail.com?subject=Portfolio&body="+message;
+        
+    };
+    
+},false);
+</script>
