@@ -1,13 +1,10 @@
 @import url("nexus_window.css");
+@import url("nexus_animation.css");
 
-.fa-bars{
-	margin-right:5px;
-}
-
-button.fa{
-	background:none;
-	border:none;
-	color:inherit;
+*{
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
 }
 
 .page{
@@ -641,42 +638,6 @@ input[type=checkbox].nexus:checked:after,
 .no_shadow:hover{
 	box-shadow:none;
 }
-
-/*********ANIMATION START*******/
-  @-webkit-keyframes popup{
-  	0%{
-  		-webkit-transform:scale(0);
-  	}
-  	70%{
-  		-webkit-transform:scale(1.1);
-  	}
-  	100%{
-  		-webkit-transform:scale(1);
-  		visibility:visible;
-  	}
-  }
-
-  @keyframes popup{
-  	0%{
-  		transform:scale(0);
-  	}
-  	70%{
-  		transform:scale(1.1);
-  	}
-  	100%{
-  		transform:scale(1);
-  		visibility:visible;
-  	}
-  }
-
-
-
-  .animation.popup{
-  	-webkit-animation:popup 0.5s 0.3s ease forwards;
-  	animation:popup 0.5s 0.3s ease forwards;
-  	visibility:hidden;
-  }
-/*********ANIMATION END*******/
 
 /*********MEDIA QUERIES START**********/
   @media screen and (max-width:800px){
