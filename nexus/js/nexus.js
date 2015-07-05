@@ -1,366 +1,242 @@
-/*Prototypes start*/
 
-  Number.prototype.toRad = function() { return this * (Math.PI / 180); };
-
-  Date.prototype.today = function(){
-    var date = new Date();
-	  return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()<10 ? '0'+date.getDate() : date.getDate());
-  };
-
-  Math.coord_diff = function(coord_obj1, coord_obj2){
-
-  	if(!coord_obj1 || !coord_obj2){
-  	  console.error("Requires 2 Parameters");
-  	  return false;
-  	}
-
-  	if(typeof(coord_obj1) != "object" || typeof(coord_obj2) != "object"){
-  	  console.error("Both parameters must be of Object type");
-  	  return false;
-    }
-
-  	lat1 = parseFloat(coord_obj1.latitude);
-  	lat2 = parseFloat(coord_obj2.latitude);
-
-  	lon1 = parseFloat(coord_obj1.longitude);
-  	lon2 = parseFloat(coord_obj2.longitude);
-
-  	if(isNaN(lat1) || isNaN(lat2) || isNaN(lon1) || isNaN(lon2)){
-  	  console.error("Invalid values");
-  	  return false;
-  	}
-
-
-  	//see references
-  	var R = 6371; // km
-  	var dLat = (lat2-lat1).toRad();
-  	var dLon = (lon2-lon1).toRad();
-  	var lat1 = lat1.toRad();
-  	var lat2 = lat2.toRad();
-
-  	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-  			Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
-  	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  	var d = R * c;
-
-  	return d;
-  };
-
-  HTMLFormElement.prototype.submit_via_ajax = function(){
-    var form = this;
-
-		var result = Nexus.ajax({
-			url: 	  form.action,
-			data: 	$(form).serialize(),
-			method: form.method,
-			target:	form,
-			success: function(result){
-			  form.remove_class("ajax_loading");
-			  var success_notice        = form.appendChild(document.createElement("div"));
-			  success_notice.className  = "success_notice";
-
-			  var table_aligner			= success_notice.appendChild(document.createElement("table"));
-			  table_aligner.className	= "align_center";
-
-			  var table_row_aligner		= table_aligner.appendChild(document.createElement("tr"));
-
-			  var table_cell_aligner	= table_row_aligner.appendChild(document.createElement("td"));
-
-			  var success_icon          = table_cell_aligner.appendChild(document.createElement("img"));
-			  success_icon.className    = "success_icon animation popup";
-			  success_icon.src          = "images/thumbs_up.svg";
-
-			  var success_label         = table_cell_aligner.appendChild(document.createElement("label"));
-			  success_label.className   = "success_label animation popup";
-			  success_label.innerHTML   = "Success!";
-
-			  var success_next          = table_cell_aligner.appendChild(document.createElement("input"));
-			  success_next.type         = "button";
-			  success_next.value        = "Next";
-			  success_next.className    = "success_next animation popup";
-			  success_next.innerHTML    = "Next";
-
-			  success_next.onclick      = function(){
-           $(form).replaceWith(result);
-			  };
+var nexus = function(){
+	
+    //nexus error module
+    nexus.error = function(title,message){
+         if(window.location.search.indexOf("debug=true") < 0) return;
+        
+		if(message) console.error(title,message);
+		else console.error(title);
+    };
+    
+	//nexus google maps module
+	nexus.google = {};
+	nexus.google.maps = {
+		
+		api_url     : "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&callback=nexus.google.maps.post_install",
+		installed   : false,
+		options     : {
+			zoom: 8,
+            latitude: -34.397,
+            longitude: 150.644
+		},
+		
+		post_install: function(){
+			nexus.debug("Google Map API installtion complete...");
+			nexus.google.maps.installed = true;
+		},
+		
+		create      : function(element){
+			if(!nexus.google.maps.installed){
+				nexus.google.maps.install(function(){
+					nexus.google.maps.create(element);
+				});
 			}
-		});
+			else if(element instanceof HTMLElement){
+				nexus.debug("creating the map....");
 
-		return false;
-  };
+				//var map_options = array_m
 
-
-  HTMLInputElement.prototype.read_file = function(callback){
-  
-	  if(this.type){
-		  console.debug(this.type);
-		  
-		  if(this.type === "file" && this.className.indexOf("nexus") > -1){
-			
-			this.adEventListener("change",function(){
-				
-				var reader = new FileReader();
-				
-				for(var i=0; i<this.files.length; i++){
-					var file = this.files[0];
-					reader.readAsBinaryString(file.slice(0, file.size));
-				}
-				
-				reader.onloadend = function(evt) {
-					
-					var file_contents = evt.target.result;
-					
-					if (evt.target.readyState == FileReader.DONE) {
-						calback = callback || function(file_contents){
-							console.group("read_file output:");
-							console.debug(file_contents);
-							console.groupEnd();
-						};
-						callback(file_contents);
-					}
-				};
-				
-				
-			},false);
-			
-		  }
-	  }
-	  
-  };
-
-/*Prototypes end*/
-
-var Nexus =  window; //there should be an option to extend the window OR NOT
-
-Nexus.references = [
-	"http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates" //coord_diff
-];
-
-//Nexus.repository_url = (document.location.host == "127.0.0.1") ? document.location.origin+"/craigwayne.github.com" : "//craigwayne.github.io";
-
-Nexus.go_fullscreen = function(element){
-
-	var target = element || document.body;
-
-	var request_method = target.requestFullScreen || target.webkitRequestFullScreen || target.mozRequestFullScreen || target.msRequestFullScreen;
-
-	if (request_method){
-		request_method.call(target);
-	} else if (typeof window.ActiveXObject !== "undefined"){
-		var wscript = new ActiveXObject("WScript.Shell");
-		if(wscript !== null)wscript.SendKeys("{F11}");
-	}
-};
-
-Nexus.exit_fullscreen = function(){
-
-	if (document.exitFullscreen) {
-		document.exitFullscreen();
-	}
-	else if (document.mozCancelFullScreen) {
-		document.mozCancelFullScreen();
-	}
-	else if (document.webkitCancelFullScreen) {
-		document.webkitCancelFullScreen();
-	}
-
-};
-
-/*
-Nexus.link_css = function(href){
-
-	href = href || Nexus.repository_url+"/css/nexus.css";
-
-	var style_links = document.querySelectorAll("link");
-	var linked = false;
-	for(var i=0; i<style_links.length; i++){
-		var link = style_links[i];
-		if(link.getAttribute("href").indexOf(href) > -1){
-			linked = true;
-			break;
-		}
-	}
-	if(!linked){
-		var link = document.getElementsByTagName("head")[0].appendChild(document.createElement("link"));
-		link.setAttribute("href",href);
-		link.setAttribute("rel","stylesheet");
-	}
-
-	return link;
-};
-
-Nexus.link_js = function(src){
-
-	if(!src){return;}
-
-	var js_links = document.querySelectorAll("script[src]:not([src=''])");
-	var linked = false;
-	for(var i=0; i<js_links.length; i++){
-		var link = js_links[i];
-		if(link.getAttribute("src").indexOf(src) > -1){
-			linked = true;
-			break;
-		}
-	}
-
-	if(!linked){
-		var link = document.getElementsByTagName("head")[0].appendChild(document.createElement("script"));
-		link.setAttribute("src",src);
-	}
-
-	return link;
-};
-
-Nexus.install = function(){
-	//this links the required files depending on the elements found
-
-	//link the default nexus file
-	Nexus.link_css();
-	//link font awesome
-	Nexus.link_css(Nexus.repository_url+'/css/font-awesome-4.2.0/css/font-awesome.min.css');
-
-	//nexus gallery
-	if(document.querySelector(".nexus.gallery") || document.querySelector(".nexus.mosaic")){
-		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_gallery/nexus_gallery.css");
-		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_gallery/nexus_gallery.js");
-		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.css");
-		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.js");
-	}
-
-	//nexus carousel
-	if(document.querySelector(".nexus.carousel")){
-		Nexus.link_css(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.css");
-		Nexus.link_js(Nexus.repository_url+"/plugins/nexus_carousel/nexus_carousel.js");
-	}
-
-	//nexus google maps
-	if(document.querySelector(".nexus.google_maps")){
-		//Nexus.link_css(Nexus.repository_url+"/plugins/nexus_google_maps/nexus_google_maps.css");
-		//Nexus.link_js(Nexus.repository_url+"/plugins/nexus_google_maps/nexus_google_maps.js");
-	}
-
-};
-*/
-
-Nexus.color_to_hex = function(color_string){
-
-    var a = document.createElement('div');
-    a.style.color = color_string;
-    var colors = window.getComputedStyle( document.body.appendChild(a) ).color.match(/\d+/g).map(function(a){ return parseInt(a,10); });
-    document.body.removeChild(a);
-    return (colors.length >= 3) ? '#' + (((1 << 24) + (colors[0] << 16) + (colors[1] << 8) + colors[2]).toString(16).substr(1)) : false;
-};
-
-Nexus.filter = function(param){
-
-	param.query				= param.query.toLowerCase()	|| null;
-	param.data				= param.data				|| [];
-
-	if(!param.query || param.query === ""){
-
-		for(var i=0; i<param.data.length; i++){
-			param.data[i].element.dataset.filtered = "true";
-		}
-	}
-	else{
-
-		for(var j=0; j<param.data.length; j++){
-			if(param.data[j].name.toLowerCase().indexOf(param.query) == -1){
-				param.data[j].element.dataset.filtered = "false";
+				element.nexus			    = element.nexus || {};
+				element.nexus.google	    = element.nexus.google || {};
+				//element.nexus.google.map =  new google.maps.Map(element,nexus.google.maps.options);
+                var map_options             = nexus.google.maps.options;
+                map_options.center          = new google.maps.LatLng(map_options.latitude, map_options.longitude);
+                element.nexus.google.map    =  new google.maps.Map(element,nexus.google.maps.options);
+				return element.nexus.google.map;
+				nexus.debug("Finished creating map...");
 			}
 			else{
-				param.data[j].element.dataset.filtered = "true";
-			}
-		}
 
-	}
-};
-
-Nexus.ajax = function(param){
-
-	if(arguments.length == 1 && typeof arguments[0] == "string"){
-		var tmp_url = arguments[0];
-		param = {};
-		param.url = tmp_url;
-	}
-
-	param = (typeof param == "object") 	? param : {};
-
-	param.target 	= param.target 		|| undefined;
-	param.target 	= (typeof param.target == "string") ? document.querySelector(param.target) : param.target;
-
-	param.url		= param.url 		? param.url+"&ajax=true" : undefined;
-	param.source	= param.source 		|| (event ? (event.target || event.srcElement) : param.source) || null;
-	param.method	= param.method 		|| "GET";
-
-	//check that all required parameters are present
-	if(!param.url){
-		console.error("Missing parameters");
-		return null;
-	}
-
-	param.success 	= param.success || function(result){
-
-		if(param.target){
-			param.target.remove_class("ajax_loading");
-
-			//append or replace here
-			if(param.append === true){
-			  $(param.target).append('<div class="ajax_result">'+result+'</div>');
-			}else{
-			  $(param.target).html(result);
 			}
 
-			return result;
+		},
+		
+		install     : function(callback){
+			nexus.debug("Installing Google Map API...", nexus.google.maps.api_url);
+			nexus.scripts.install(nexus.google.maps.api_url);
+		},
+		
+		init        : function(){
+			//check if the google map script is installed
+			for(var i=0; i<document.scripts.length; i++){
+				if(document.scripts[i].src){
+					if(document.scripts[i].src == nexus.google.maps.api_url) return; 
+				}
+			}
+			nexus.google.maps.install();
 		}
 	};
+	
+	//nexus file module
+	nexus.file = {
+        read:function(files){
+            
+            nexus.debug(this);
+            nexus.debug(event);
+            
+            if(!event || !event.srcElement || !event.srcElement instanceof HTMLInputElement || !event.srcElement.type == "file"){return;}
+            
+            var file_input = event.srcElement;
+            files = files || file_input.files;
+            
+            if(files.length == 0){nexus.error("No files present"); return;} 
+            
+            var f = files[0];
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                var data = e.target.result;
+                var worker = new Worker('./xlsxworker2.js');
+                worker.onmessage = function(e) {
+                    switch(e.data.t) {
+                        case 'ready': break;
 
-	if(param.target){
-		param.target.add_class("ajax_loading");
-	}
+                        case 'e': console.error(e.data.d); break;
+                        default: 
 
-	$.ajax(param);
+                            var o = "", l = 0, w = 10240;
+                            for(; l<e.data.byteLength/w; ++l) o+=String.fromCharCode.apply(null,new Uint16Array(e.data.slice(l*w,l*w+w)));
+                            o+=String.fromCharCode.apply(null, new Uint16Array(e.data.slice(l*w)));
+
+                            xx=o.replace(/\n/g,"\\n").replace(/\r/g,"\\r"); 
+                            
+                            var temp_2 = JSON.parse(xx);
+                            var result = {};
+                            temp_2.SheetNames.forEach(function(sheetName) {
+                                var roa = XLSX.utils.sheet_to_row_object_array(temp_2.Sheets[sheetName]);
+                                if(roa.length > 0){
+                                    result[sheetName] = roa;
+                                }
+                            });
+                            console.debug(result);
+                            window.test = result["Stores Map"];
+                            nexus.json.table(result["Stores Map"],{generate_header:false});
+                            return result;
+                            break;
+                    }
+                };
+
+                var b = new ArrayBuffer(data.length*2), v = new Uint16Array(b);
+                for (var i=0; i != data.length; ++i) v[i] = data.charCodeAt(i);
+                var val =  [v, b];
+
+                worker.postMessage(val[1], [val[1]]);
+            };
+            reader.readAsBinaryString(f);
+        }
+        
+    },
+		
+	//nexus json module
+    nexus.json = {
+		table:function(json, options){
+            nexus.debug(options);
+            options = options || {};
+            //options.generate_header = options.generate_header || true;
+            nexus.debug(options);
+            
+            json = json || {};
+            
+            var table = document.createElement("table");
+            table.className                 = "nexus enable_row_select";
+            var table_header                = table.appendChild(document.createElement("thead"));
+            var table_header_row            = table_header.appendChild(document.createElement("tr"));
+            var table_header_checkbox_cell  = table_header_row.appendChild(document.createElement("th"));
+            var table_header_checkbox       = table_header_checkbox_cell.appendChild(document.createElement("input"));
+            table_header_checkbox.type      = "checkbox";
+            table_header_checkbox.className = "nexus";
+            table_header_checkbox.addEventListener("change",function(){
+            
+                var table = this.parentNode.parentNode.parentNode.parentNode;
+                var row_checkboxes = table.querySelectorAll(".row_checkbox_cell input[type=checkbox].row_checkbox");
+                for(var i=0; i<row_checkboxes.length; i++){
+                    row_checkboxes[i].checked = this.checked;
+					event.preventDefault();
+    				$(row_checkboxes[i]).trigger("change");
+					//$(row_checkboxes[i]).prop('checked', true).change();
+                }
+                
+            },false);
+            
+            if(options.generate_header === true){
+                
+                for(var i in Object.keys(json)){
+                    var header_cell = table_header_row.appendChild(document.createElement("th"));
+                    header_cell.innerHTML = Object.keys(json)[i];
+                }
+            }
+            
+            var table_body = table.appendChild(document.createElement("tbody"));
+            for(var i in Object.keys(json)){
+                var row_entry               = table_body.appendChild(document.createElement("tr"));
+                row_entry.className         = "selected";
+                var row_checkbox_cell       = row_entry.appendChild(document.createElement("td"));
+                row_checkbox_cell.className = "row_checkbox_cell";
+                var row_checkbox            = row_checkbox_cell.appendChild(document.createElement("input"));
+                row_checkbox.type           = "checkbox";
+                row_checkbox.checked        = true;
+                row_checkbox.className      = "nexus row_checkbox";
+                row_checkbox.addEventListener("change",function(){
+					console.debug("checkbox change function");
+                    if(this.checked){$(this.parentNode.parentNode).addClass("selected");}
+                    else{$(this.parentNode.parentNode).removeClass("selected");}
+                },false);
+                
+                
+                for(var j in Object.keys(Object.keys(json)[i])){
+                    var cell_value = json[i][Object.keys(json[i])[j]];
+                    if(cell_value !== undefined){
+                        var row_cell = row_entry.appendChild(document.createElement("td"));
+                        row_cell.className = Object.keys(json[i])[j];
+                        row_cell.innerHTML = cell_value;
+                    }
+                }
+            }
+            
+            document.querySelector("#table_output").innerHTML = "";
+            document.querySelector("#table_output").appendChild(table);
+            return table;
+        }
+    },
+	
+	//nexus jquery module
+	nexus.jquery_url = "http://code.jquery.com/jquery.js";
+	
+	nexus.debug = function(title,message){
+        if(window.location.search.indexOf("debug=true") < 0) return;
+        
+		if(message) console.debug(title,message);
+		else console.debug(title);
+    };
+	
+	nexus.link = function(src){
+		
+		if(src.substring(src.length-4, src.length) == ".css"){
+			var link = document.createElement("link");
+			link.rel = "stylesheet";
+			link.href = src;
+			document.head.appendChild(link);
+		}
+	};
+	
+	//nexus scripts module
+	nexus.scripts = {};
+	nexus.scripts.install = function(src){
+		nexus.debug("Installing Script:",src);
+		var script	= document.createElement("script");
+		script.type = "text/javascript";
+		script.src	= src;
+		document.body.appendChild(script);
+		return script;
+	};
+	
+	nexus.init = function(){
+		nexus.debug("Initializing nexus...");
+		//install jquery library
+		nexus.scripts.install("jquery.js");
+	};
+	nexus.init();
 };
 
-Nexus.show_in_popup = function(url){
-
-	var modal;
-
-	modal = document.querySelector(".modal") || document.body.appendChild(document.createElement("div"));
-	modal.className = "modal";
-
-	var popup = modal.appendChild(document.createElement("div"));
-	popup.className = "popup";
-
-	var close = modal.appendChild(document.createElement("button"));
-	close.className = "fa fa-close";
-	close.addEventListener("click",function(){
-			document.body.removeChild(this.parentNode);
-	},false);
-
-	Nexus.ajax({
-		'url':		url,
-		'target':	popup
-	});
-};
-
-Nexus.observe = function(param){
-
-	param = param || new Object();
-
-	param["function"] = param["function"] || null;
-
-	if(!param["function"]){console.error("No function defined"); return null;}
-
-	var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-
-	var observer = new MutationObserver(function(mutations){
-		param["function"](mutations);
-	});
-
-	observer.observe(document.body,{
-			attribute:false,
-			childList:true,
-			subtree:true
-	});
-};
+document.addEventListener("DOMContentLoaded",nexus,false);

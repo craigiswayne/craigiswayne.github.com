@@ -557,8 +557,7 @@ input[type=submit]{
 	color:white;
 }
 
-input[type=checkbox].nexus,
-.nexus input[type=checkbox]{
+input[type=checkbox].nexus{
     position: absolute;
     cursor: pointer;
     display: inline-block;
@@ -567,8 +566,7 @@ input[type=checkbox].nexus,
     top: 6px;
 }
 
-input[type=checkbox].nexus:before,
-.nexus input[type=checkbox]:before {
+input[type=checkbox].nexus:before{
     content: "";
     position: relative;
     left: -3px;
@@ -584,8 +582,7 @@ input[type=checkbox].nexus:before,
     transition: all 0.1s 0.1s linear;
 }
 
-input[type=checkbox].nexus:after,
-.nexus input[type=checkbox]:after {
+input[type=checkbox].nexus:after{
     content: "";
     width: 15px;
     height: 15px;
@@ -601,35 +598,27 @@ input[type=checkbox].nexus:after,
 }
 
 input[type=checkbox].nexus:before,
-.nexus input[type=checkbox]:before,
-input[type=checkbox].nexus:after,
-.nexus input[type=checkbox]:after {
+input[type=checkbox].nexus:after,{
     border-color: #C1C1C1;
 }
 
 input[type=checkbox].nexus:before,
-.nexus input[type=checkbox]:before,
-input[type=checkbox].nexus:after,
-.nexus input[type=checkbox]:after {
+input[type=checkbox].nexus:after {
     background-color: white;
 }
 
-input[type=checkbox].nexus:checked:after,
-.nexus input[type=checkbox]:checked:after {
+input[type=checkbox].nexus:checked:after {
     left: 13px;
     box-shadow: -1px 0 2px 0 rgba(10, 10, 10, 0.2);
     -webkit-box-shadow: -1px 0 2px 0 rgba(10, 10, 10, 0.2);
 }
 
-input[type=checkbox].nexus:checked:before,
-.nexus input[type=checkbox]:checked:before {
+input[type=checkbox].nexus:checked:before {
     background-color: rgb(229, 166, 46);
 }
 
 input[type=checkbox].nexus:checked:before,
-.nexus input[type=checkbox]:checked:before,
-input[type=checkbox].nexus:checked:after,
-.nexus input[type=checkbox]:checked:after {
+input[type=checkbox].nexus:checked:after{
     border-color: rgb(229, 166, 46);
 }
 
