@@ -44,7 +44,16 @@
 
 			if(!file_exists($param['filename'])){$this->error('Could not find file '.$param['filename']); return null;}
 
-			$template = file_get_contents($param['filename']);
+            /*cache fix*/
+            $opts = [
+              'http' => [
+                'method' => 'GET',
+                'header' => "Cache-Control: max-age=60\r\n",
+              ],
+            ];
+            $context = stream_context_create($opts);
+
+			$template = file_get_contents($param['filename'],false,$context);
 
 			$param['data'] 				= array_key_exists('data',$param) ? $param['data'] : [];
 			$param['data']['method'] 	= array_key_exists('method',$param['data']) ? $param['data']['method'] : (debug_backtrace()[1]['function'] ?: null);

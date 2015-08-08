@@ -1,4 +1,5 @@
 <?php
+    require_once("modules/nexus_claims/nexus_claims.php");
 
 	if(!$_GET['ajax']){
 		print('<head>');

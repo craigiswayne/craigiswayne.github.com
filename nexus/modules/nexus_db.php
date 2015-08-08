@@ -1,5 +1,5 @@
 <?php
-
+    require_once("modules/nexus.php");
 	class nexus_db extends nexus{
 
 

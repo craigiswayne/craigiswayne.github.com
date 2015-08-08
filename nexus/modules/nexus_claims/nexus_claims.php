@@ -1,5 +1,5 @@
 <?php
-
+    require_once("modules/nexus_db.php");
 	class nexus_claims extends nexus_db{
 
 		var $columns = [
