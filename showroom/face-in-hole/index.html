@@ -1,0 +1,28 @@
+<script src="jquery.js"></script>
+
+  <script>
+
+    function readURL(input) {
+
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+              $('#blah').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#imgInp").change(function(){
+      readURL(this);
+    });
+
+  </script>
+
+<div class=container>
+    <img id="blah" />
+    <img src="http://www.picgifs.com/uploads/generator_faceinhole/pug_1.png"/>
+    <input id="imgInp" type="file" value="Upload your image" onchange="readURL(this)"/>
+</div>
