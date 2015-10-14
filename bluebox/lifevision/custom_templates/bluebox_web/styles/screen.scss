@@ -7,6 +7,12 @@ $brand_color_dark:#5d3e7c;
 
 $border_color:#ccc;
 
+img{
+  max-width:100%;
+  max-height:100%;
+  border:none;
+}
+
 .big_round_button{
     background:$brand_color;
     background: -webkit-linear-gradient(to bottom left, $brand_color, $brand_color_dark); /* For Safari 5.1 to 6.0 */
@@ -73,10 +79,22 @@ $border_color:#ccc;
         padding-top:0;
       }
 
-      .title{
+      &.Video{
+        .file_link{
+          display:none;
+        }
+      }
+
+      > .title{
         font-size:16px;
         font-weight:bold;
-        margin:$gap 0 ($gap/2) 0;
+        margin:0 0 ($gap/2) 0;
+      }
+
+      >.file_link{
+        img{
+          margin-right:$gap/2
+        }
       }
 
       iframe{

@@ -110,15 +110,16 @@
 
 		public function my_courses_list() {
 			global $global;
-
+			//
 			$out="";
+			//
 			if($global[course]){
 				$this->course_content_page($global[course]);
 				return;
 			}
-
+			//
 			$out.="<h2>My Courses</h2>";
-
+			//
 			$subscriptions=$global[database]->sqlQuery("
 				select
 				bb_lifevision_subscriptions.*
@@ -165,128 +166,59 @@
 			return $out;
 		}
 
-		function parse_template($template,$data){
-			$template = $template ?: "";
-			while(preg_match("/\(#(.*?)#\)/", $template)){
-				if (preg_match_all("/\(#(.*?)#\)/", $template, $variables)){
-					foreach ($variables[1] as $i => $variable_name){
-						$match		= array_key_exists($variable_name,$data) ? $data[$variable_name] : '';
-						$match		= is_array($match) ? json_encode($match) : $match;
-						$template	= str_replace($variables[0][$i],$match, $template);
-					}
-				}
-			}
-			return html_entity_decode($template);
-		}
-
 		function course_content_page($course_id){
 			global $global;
-
-			$html = '';
+			//
 			if($course_id){
 				$course = new bb_lifevision_courses();
 				$course = $course->get(array("where"=>"_deleted!=1 and _id=$course_id"));
-
-				$template_course = "
-					<div class=course>
-						<div class=header>
-							<a class=\"lifevision_button_back button back\" href=\"/?Course-Dashboard\" >Dashboard</a>
-							<div class=title>(#name#)</div>
-							<img src='(#imageISfile#)' />
-						</div>
-
-						<div class=description>(#description#)</div>
-						<div class=\"content linked_files\">(#linked_files#)</div>
-					</div>
-
-					<style>
-
-					</style>
-				";
-
-				$template_course_file = "
-					<div class=\"file (#typeISLIST_Audio_Slide_Video#)\">
-						<div class=title>(#name#)</div>
-						<a href=\"(#file#)\" class=\"file_link\"><img src=\"/engine/images/(#image_type#).png\">Please Click here for the file</a>
-            <div class=content>(#video_iframeISsmallplaintextbox#)</div>
-					</div>
-				";
-
-				$template_error_message = "
-					<div class=\"message error\">
-						(#message#)
-					</div>
-				";
-
 				if($course) {
-
+					resp("<h2>$course[name]</h2>");
 					if($_SESSION['user']['_id']) {
-
 						$subscription = new bb_lifevision_subscriptions();
-
 						$subscription = $subscription->get(array("where"=>"_deleted!=1
 							and userISbb_usersID=".$_SESSION['user']['_id']."
 							and courseISbb_lifevision_coursesID=$course[_id]
 							and start_date <=".sqlstr(date("Y-m-d H:i:s",strtotime(now())))."
 							and end_date >=".sqlstr(date("Y-m-d H:i:s",strtotime(now())))."
 						"));
-
 						if($subscription) {
+							if($course[imageISfile]) {
+								resp("<img src=$course[imageISfile] border=0 style=float:left;margin-right:10px; />");
+							}
+							resp("<div style=\"margin-bottom:10px;\" >$course[description]</div>");
+							//
 							$course_files = new bb_lifevision_courses_files();
 							$course_files = $course_files->getlist(array("where"=>"_deleted!=1 and courseISbb_lifevision_coursesID=$course[_id]"));
-
-							$video_files  = [];
-							$audio_files 	= [];
-							$slide_files 	= [];
-
 							if($course_files) {
-								foreach($course_files as $file) {
-									if($file[typeISLIST_Audio_Slide_Video]=="Video" && $file["video_iframeISsmallplaintextbox"]) {
-										array_push($video_files, $file);
-
-									}elseif(($file[typeISLIST_Audio_Slide_Video]=="Audio") && ($file['file'] || $file["video_iframeISsmallplaintextbox"])){
-										$file["image_type"] = "sound";
-										array_push($audio_files, $file);
-
-									}elseif(($file[typeISLIST_Audio_Slide_Video]=="Slide") && ($file['file'] || $file["video_iframeISsmallplaintextbox"])){
-										$file["image_type"] = "slides";
-										array_push($slide_files,$file);
+								resp("<div style=\"margin-bottom:10px;\">");
+								foreach($course_files as $files) {
+									resp("<h3>$files[name]</h3>");
+									if($files[typeISLIST_Audio_Slide_Video]=="Video") {
+										resp("<div>$files[video_iframeISsmallplaintextbox]</div>");
+									}elseif(($files[typeISLIST_Audio_Slide_Video]=="Audio") && $files['file']){ //mp3 link
+										resp("<div><a href=\"$files[file]\" > <img src='/engine/images/sound.png' border=0 /> Please click here for audio file.</a> </div>");
+									}elseif(($files[typeISLIST_Audio_Slide_Video]=="Slide") && $files['file']){ //slide link
+										resp("<div><a href=\"$files[file]\" > <img src='/engine/images/slides.png' border=0 /> Please click here for file.</a> </div>");
 									}
-
 								}
-
-								$course['linked_files'] = "";
-								foreach($video_files as $file){
-									$course['linked_files'] .= $this->parse_template($template_course_file,$file);
-								}
-
-								foreach($slide_files as $file){
-									$course['linked_files'] .= $this->parse_template($template_course_file,$file);
-								}
-
-								foreach($audio_files as $file){
-									$course['linked_files'] .= $this->parse_template($template_course_file,$file);
-								}
-
+								resp("</div>");
 							}
-							$template = $this->parse_template($template_course,$course);
-              $html = $template;
 							//
 						}else{
-							$html = $this->parse_template($template_error_message, ["message" => "You don't have a valid subscription to see this course's content."]);
+							resp("You don't have a valid subscription to see this course's content.");
 						}
 					}else{
-							$html = $this->parse_template($template_error_message, ["message" => "You must be logged in to access course content."]);
+						resp("You must be logged in to access course content.");
 					}
 				}else{
-					$html = 	"<h2>Course Not Found</h2>";
-					$html .= 	"Course cannot be found.";
+					resp("<h2>Course Not Found</h2>");
+					resp("Course cannot be found.");
 				}
 			}else{
-				$html = 	"<h2>Course Not Found</h2>";
-				$html .= 	"Course cannot be found.";
+				resp("<h2>Course Not Found</h2>");
+				resp("Course cannot be found.");
 			}
-			resp($html);
 		}
 	}
 

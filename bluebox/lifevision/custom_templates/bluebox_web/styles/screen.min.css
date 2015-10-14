@@ -1,3 +1,8 @@
+img {
+  max-width: 100%;
+  max-height: 100%;
+  border: none; }
+
 .big_round_button, .lifevision_button_back {
   background: #96c;
   background: -webkit-linear-gradient(to bottom left, #96c, #5d3e7c);
@@ -54,9 +59,13 @@
     .course > .content .file:first-child {
       border: none;
       padding-top: 0; }
-    .course > .content .file .title {
+    .course > .content .file.Video .file_link {
+      display: none; }
+    .course > .content .file > .title {
       font-size: 16px;
       font-weight: bold;
-      margin: 10px 0 5px 0; }
+      margin: 0 0 5px 0; }
+    .course > .content .file > .file_link img {
+      margin-right: 5px; }
     .course > .content .file iframe {
       max-width: 100% !important; }
