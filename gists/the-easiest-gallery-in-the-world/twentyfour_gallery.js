@@ -69,7 +69,7 @@ function twentyfour_gallery (selector, settings){
   this.unveil_script = '!function(t){t.fn.unveil=function(i,e){function n(){var i=a.filter(function(){var i=t(this);if(!i.is(":hidden")){var e=o.scrollTop(),n=e+o.height(),r=i.offset().top,s=r+i.height();return s>=e-u&&n+u>=r}});r=i.trigger("unveil"),a=a.not(r)}var r,o=t(window),u=i||0,s=window.devicePixelRatio>1,l=s?"data-src-retina":"data-src",a=this;return this.one("unveil",function(){var t=this.getAttribute(l);t=t||this.getAttribute("data-src"),t&&(this.setAttribute("src",t),"function"==typeof e&&e.call(this))}),o.on("scroll.unveil resize.unveil lookup.unveil",n),n(),this}}(window.jQuery||window.Zepto);';
   this.settings = {
     prefix:"twentyfour_gallery_",
-    css:'*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html,body{min-height:100%;min-height:100vh}img{border:none;max-height:100%;max-width:100%}button:not([disabled]),input[type=button] input:not([disabled]),a[href]:not([disabled]),.button:not([disabled]),select:not([disabled]){cursor:pointer}button[disabled],input[type=button] input[disabled],a[href][disabled],.button[disabled],select[disabled]{cursor:not-allowed}.twentyfour.gallery{background-color:#141414;min-height:100px;min-width:100px;display:block;margin:10px auto;color:white;font-family:Tahoma, Arial;position:relative;overflow:hidden;padding:0 0 30px 0;width:50%;height:300px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.twentyfour.gallery:not(.ready){background-image:url(data:image/svg+xml;base64,PCEtLSBCeSBTYW0gSGVyYmVydCAoQHNoZXJiKSwgZm9yIGV2ZXJ5b25lLiBNb3JlIEAgaHR0cDovL2dvby5nbC83QUp6YkwgLS0+Cjxzdmcgd2lkdGg9IjQ0IiBoZWlnaHQ9IjQ0IiB2aWV3Qm94PSIwIDAgNDQgNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLXdpZHRoPSIyIj4KICAgICAgICA8Y2lyY2xlIGN4PSIyMiIgY3k9IjIyIiByPSIxIj4KICAgICAgICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIKICAgICAgICAgICAgICAgIGJlZ2luPSIwcyIgZHVyPSIxLjhzIgogICAgICAgICAgICAgICAgdmFsdWVzPSIxOyAyMCIKICAgICAgICAgICAgICAgIGNhbGNNb2RlPSJzcGxpbmUiCiAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsgMSIKICAgICAgICAgICAgICAgIGtleVNwbGluZXM9IjAuMTY1LCAwLjg0LCAwLjQ0LCAxIgogICAgICAgICAgICAgICAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS1vcGFjaXR5IgogICAgICAgICAgICAgICAgYmVnaW49IjBzIiBkdXI9IjEuOHMiCiAgICAgICAgICAgICAgICB2YWx1ZXM9IjE7IDAiCiAgICAgICAgICAgICAgICBjYWxjTW9kZT0ic3BsaW5lIgogICAgICAgICAgICAgICAga2V5VGltZXM9IjA7IDEiCiAgICAgICAgICAgICAgICBrZXlTcGxpbmVzPSIwLjMsIDAuNjEsIDAuMzU1LCAxIgogICAgICAgICAgICAgICAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+CiAgICAgICAgPC9jaXJjbGU+CiAgICAgICAgPGNpcmNsZSBjeD0iMjIiIGN5PSIyMiIgcj0iMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9InIiCiAgICAgICAgICAgICAgICBiZWdpbj0iLTAuOXMiIGR1cj0iMS44cyIKICAgICAgICAgICAgICAgIHZhbHVlcz0iMTsgMjAiCiAgICAgICAgICAgICAgICBjYWxjTW9kZT0ic3BsaW5lIgogICAgICAgICAgICAgICAga2V5VGltZXM9IjA7IDEiCiAgICAgICAgICAgICAgICBrZXlTcGxpbmVzPSIwLjE2NSwgMC44NCwgMC40NCwgMSIKICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPgogICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2Utb3BhY2l0eSIKICAgICAgICAgICAgICAgIGJlZ2luPSItMC45cyIgZHVyPSIxLjhzIgogICAgICAgICAgICAgICAgdmFsdWVzPSIxOyAwIgogICAgICAgICAgICAgICAgY2FsY01vZGU9InNwbGluZSIKICAgICAgICAgICAgICAgIGtleVRpbWVzPSIwOyAxIgogICAgICAgICAgICAgICAga2V5U3BsaW5lcz0iMC4zLCAwLjYxLCAwLjM1NSwgMSIKICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPgogICAgICAgIDwvY2lyY2xlPgogICAgPC9nPgo8L3N2Zz4=);background-repeat:no-repeat;background-size:50% 50%;background-position:50% 50%}.twentyfour.gallery:not(.ready) *{display:none}.twentyfour.gallery .slider{display:block;height:100%;width:100%;white-space:nowrap;-webkit-transition:margin-left 0.3s ease;-moz-transition:margin-left 0.3s ease;-o-transition:margin-left 0.3s ease;transition:margin-left 0.3s ease}.twentyfour.gallery .slider .slide{display:inline-block;vertical-align:top;text-align:center;height:100%}.twentyfour.gallery .action_area{position:absolute;top:0;height:100%;text-align:center;cursor:pointer;z-index:10}.twentyfour.gallery .action_area.left{left:0}.twentyfour.gallery .action_area.right{right:0}.twentyfour.gallery .action_area .icon{position:absolute;top:50%;width:100%;text-align:center}.twentyfour.gallery .stage{position:relative;height:100%;padding:0;z-index:1}.twentyfour.gallery .stage .slide{padding:10px;width:100%;position:relative}.twentyfour.gallery .stage .slide .caption{display:block;background-color:white;background-color:rgba(255,255,255,0.9);color:#777;position:absolute;text-align:left;bottom:0;left:0;width:100%;padding:5px 10px;overflow:hidden;font-size:12px;border:none}.twentyfour.gallery .stage .action_area{width:100px;max-width:15%;-webkit-transition:background-color 0.1s ease-in-out;-moz-transition:background-color 0.1s ease-in-out;-o-transition:background-color 0.1s ease-in-out;transition:background-color 0.1s ease-in-out}.twentyfour.gallery .stage .action_area:hover{background-color:rgba(0,0,0,0.5)}.twentyfour.gallery .stage .action_area:hover .icon.left{left:0}.twentyfour.gallery .stage .action_area:hover .icon.right{right:0}.twentyfour.gallery .stage .action_area .icon{font-size:30px;margin-top:-15px}.twentyfour.gallery .stage .action_area .icon.left{left:-100%}.twentyfour.gallery .stage .action_area .icon.right{right:-100%}.twentyfour.gallery .stage .fullscreen.toggler{position:absolute;top:-30px;right:-30px;font-size:20px;z-index:11;cursor:pointer;background-color:black;background-color:rgba(0,0,0,0.8);text-align:center;width:30px;height:30px;line-height:30px;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}.twentyfour.gallery .media_bar{width:100%;height:30px;line-height:30px;position:absolute;bottom:0;left:0;z-index:2;background:#45484d;background:-moz-linear-gradient(top, #45484d 0%, #000 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #45484d), color-stop(100%, #000));background:-webkit-linear-gradient(top, #45484d 0%, #000 100%);background:-o-linear-gradient(top, #45484d 0%, #000 100%);background:-ms-linear-gradient(top, #45484d 0%, #000 100%);background:linear-gradient(to bottom, #45484d 0%, #000 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr="#45484d", endColorstr="#000000",GradientType=0 )}.twentyfour.gallery .media_bar .toggler{padding:5px 20px;position:absolute;height:100%;top:0;border-color:black;border-width:1px;font-size:16px}.twentyfour.gallery .media_bar .toggler:hover{background-color:#141414}.twentyfour.gallery .media_bar .toggler.play_pause_toggle{left:0;border-right-style:solid}.twentyfour.gallery .media_bar .toggler.tray_toggle{right:0;border-left-style:solid}.twentyfour.gallery .media_bar .icon.pause{display:none}.twentyfour.gallery .media_bar .status{display:block;height:100%;width:100%;text-align:center}.twentyfour.gallery .tray{position:absolute;z-index:1;bottom:-50px;left:0;width:100%;background-color:black;height:70px;padding:10px 20px;-webkit-transition:bottom 0.3s ease;-moz-transition:bottom 0.3s ease;-o-transition:bottom 0.3s ease;transition:bottom 0.3s ease}.twentyfour.gallery .tray .slider .slide.thumbnail{width:80px;margin-left:5px;cursor:pointer}.twentyfour.gallery .tray .slider .slide.thumbnail:first-child{margin-left:0}.twentyfour.gallery .tray .slider .slide.thumbnail.active{border:2px solid #00afea}.twentyfour.gallery .tray .action_area{width:20px;background-color:black}.twentyfour.gallery .tray .action_area .icon{font-size:20px;margin-top:-10px}.twentyfour.gallery:hover .fullscreen.toggler{top:10px;right:10px}.twentyfour.gallery.playing .media_bar .icon.play{display:none}.twentyfour.gallery.playing .media_bar .icon.pause{display:block}.twentyfour.gallery.show_tray .tray{bottom:30px}.twentyfour.gallery.fullscreen{height:100%;width:100%;position:fixed;top:0;left:0;margin:0}[data-embed24="Images"]{min-height:100px;display:block;background-color:#141414;font-size:13px;color:white;text-align:center}[data-embed24="Images"] .slide{display:block;padding:0 5px}[data-embed24="Images"] .slide img{margin:5px auto}[data-embed24="Images"] .slide .caption{text-align:left;border-top:1px solid #ef3f3f;padding:5px 10px}[data-embed24="Images"][data-pos="middle"]{width:100%;max-height:100%;clear:both;margin:10px auto}[data-embed24="Images"][data-pos="left"]{float:left;margin:0 10px 10px 0}',
+    css:'',
     id:null,
     tray_default_state:'show_tray',
     container_class:"twentyfour gallery",
@@ -90,7 +90,7 @@ function twentyfour_gallery (selector, settings){
       stage:'<div class="stage"><div class="fullscreen toggler icon (#fullscreen_icon_class#)"></div><div class="action_area nav left"> <div class="icon left (#nav_left_icon_class#)"></div></div><div class="slider">(#slides#)</div><div class="action_area nav right"><div class="icon right (#nav_right_icon_class#)"></div></div></div>',
       slide:'<div class="slide"><div class="aligner">(#slide_content#)</div></div>',
       tray:'<div class="tray"><div class="action_area nav left"> <div class="icon (#nav_left_icon_class#)"></div></div><div class="slider">(#thumbnails#)</div><div class="action_area nav right"><div class="icon (#nav_right_icon_class#)"></div></div></div>',
-      media_bar:'<div class="media_bar"><div class="play_pause_toggle toggler button"><span class="icon play (#play_icon_class#)"></span><span class="icon pause (#pause_icon_class#)"></span></div><div class="status"><span class=current>1</span>/<span class="total">(#total_slides#)</span></div><div class="tray_toggle toggler button icon (#toggle_tray_icon_class#)"></div></div>'
+      media_bar:'<div class="media_bar"><div class="play_pause_toggle toggler button"><span class="icon play (#play_icon_class#)"></span><span class="icon pause (#pause_icon_class#)"></span></div><div class="status">(#slide_index_options#)&nbsp;/&nbsp;<span class="total">(#total_slides#)</span></div><div class="tray_toggle toggler button icon (#toggle_tray_icon_class#)"></div></div>'
     }
   };
 
@@ -137,6 +137,8 @@ function twentyfour_gallery (selector, settings){
 
   this.go_to_slide = function(index){
 
+    var gallery = this;
+
     if(index < 0){
       index = this.slides.length-1;
       $(this.container).addClass("last");
@@ -160,7 +162,20 @@ function twentyfour_gallery (selector, settings){
       $(this).removeClass("active");
     });
 
-    $(this.media_bar).find(".current").text(this.slide_index+1);
+    if(this.total_slides > this.minimum_slides){
+      $(this.media_bar).find(".current_slide").text(this.slide_index+1);
+    }
+    else{
+      $(this.media_bar).find("select.current_slide option").each(function(j){
+        if(j == gallery.slide_index){
+            $(this).attr("selected","selected");
+        }else{
+            $(this).removeAttr("selected");
+        }
+
+
+      });
+    }
 
     var current_thumbnail = $(this.tray_slider).find(".slide")[this.slide_index];
     $(current_thumbnail).addClass("active");
@@ -233,6 +248,10 @@ function twentyfour_gallery (selector, settings){
 
     $(this.media_bar).find(".tray_toggle").click(function(){
       gallery.toggle_tray();
+    });
+
+    $(this.media_bar).find("select.current_slide").change(function(){
+      gallery.go_to_slide($(this).val());
     });
 
     $(this.container).find('.action_area.nav.left').click(function(){
@@ -312,9 +331,20 @@ function twentyfour_gallery (selector, settings){
     data.total_slides = this.slides.length;
     data.attributes   = this.generate_attributes();
 
+    if(data.total_slides > this.settings.minimum_slides){
+      data.slide_index_options = "<select class='current_slide'>";
+      for(var i=0; i<data.total_slides; i++){
+        data.slide_index_options += "<option value='"+i+"'>"+ (i+1) +"</option>";
+      }
+      data.slide_index_options += "</select>";
+    }else{
+      data.slide_index_options = "<span class=current_slide>1</span>";
+    }
+
     data.stage        = nexus.parse_template(this.settings.templates.stage, data);
     data.tray         = nexus.parse_template(this.settings.templates.tray, data);
     data.media_bar    = nexus.parse_template(this.settings.templates.media_bar, data);
+
     return nexus.parse_template(this.settings.templates.gallery, data);
   };
 

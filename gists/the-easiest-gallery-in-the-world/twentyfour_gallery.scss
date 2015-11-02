@@ -228,6 +228,18 @@ $thumbnail_active_color:#00afea;
       height:100%;
       width:100%;
       text-align:center;
+
+      .current_slide{
+        background:none;
+        color:white;
+        border:none;
+        outline:none;
+
+        *{
+          color:black;
+        }
+
+      }
     }
   }
 
