@@ -336,9 +336,8 @@ $thumbnail_active_color:#00afea;
 
   .slide{
     display:block;
-    padding:0 5px;
     img{
-      margin:5px auto;
+      padding:5px;
       display:block;
     }
 
@@ -354,12 +353,18 @@ $thumbnail_active_color:#00afea;
 
 [data-embed24="Images"][data-pos="middle"]{
   clear:both;
-  margin:10px auto;
+  margin:10px;
   float:none;
+  width:auto;
 }
 
 [data-embed24="Images"][data-pos="left"]{
   float:left;
   margin:0 10px 10px 0;
   max-width:50%;
+}
+
+
+.lb-outerContainer {
+    height: auto !important;
 }
