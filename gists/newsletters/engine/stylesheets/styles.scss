@@ -2,36 +2,18 @@
 @import "_newsletter_base";
 @import "android_mail.scss";
 
-  /* /\/\/\/\/\/\/\/\/ TEMPLATE STYLES /\/\/\/\/\/\/\/\/ */
-
-  /* ========== Page Styles ========== */
-
-  #bodyCell{padding:$gap*2;}
-  #templateContainer{width:$full_newsletter_width;}
-
-  /**
-  * @tab Page
-  * @section background style
-  * @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
-  * @theme page
-  */
-  body, #bodyTable{
-    background-color:$color_foreground;
+  #bodyCell{
+    padding:$gap*2;
   }
 
-  /**
-  * @tab Page
-  * @section email border
-  * @tip Set the border for your email.
-  */
-  #templateContainer{
-  /*@editable*/ border:1px solid #BBBBBB;
+  body, #bodyTable{
+    background-color:$color_accent;
   }
 
 
   .headerContent h4{
-  color:#333333 !important;
-  font-style:normal;
+    color:#333333 !important;
+
   }
 
   #templatePreheader{
@@ -48,34 +30,24 @@
     text-align:right;
   }
 
-  /**
-  * @tab Header
-  * @section preheader link
-  * @tip Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
-  */
-  .preheaderContent a:link, .preheaderContent a:visited, /* Yahoo! Mail Override */ .preheaderContent a .yshortcuts /* Yahoo! Mail Override */{
-  /*@editable*/ color:#606060;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ text-decoration:underline;
+  .preheaderContent{
+
+    a{
+      &, &:link, &:visited, .yshortcuts{
+        color:#606060;
+        font-weight:normal;
+        text-decoration:underline;
+      }
+    }
+
   }
 
-  /**
-  * @tab Header
-  * @section header style
-  * @tip Set the background color and borders for your email's header area.
-  * @theme header
-  */
   #templateHeader{
     background-color:#FFFFFF;
     border-top:1px solid #FFFFFF;
-    border-bottom:1px solid #CCCCCC;
+
   }
 
-  /**
-  * @tab Header
-  * @section header text
-  * @tip Set the styling for your email's header text. Choose a size and color that is easy to read.
-  */
   .headerContent{
   /*@editable*/ color:#505050;
   /*@editable*/ font-family:Helvetica;
@@ -104,55 +76,7 @@
   #headerImage{
   height:auto;
   max-width:700px;
-  }
-
-  /* ========== Body Styles ========== */
-
-  /**
-  * @tab Body
-  * @section body style
-  * @tip Set the background color and borders for your email's body area.
-  */
-  #templateBody{
-  /*@editable*/ background-color:#FFFFFF;
-  /*@editable*/ border-top:1px solid #FFFFFF;
-  /*@editable*/ border-bottom:1px solid #CCCCCC;
-  }
-
-  /**
-  * @tab Body
-  * @section body text
-  * @tip Set the styling for your email's main content text. Choose a size and color that is easy to read.
-  * @theme main
-  */
-  .bodyContent{
-  /*@editable*/ color:#505050;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:16px;
-  /*@editable*/ line-height:150%;
-  padding-top:20px;
-  padding-right:20px;
-  padding-bottom:20px;
-  padding-left:20px;
-  /*@editable*/ text-align:left;
-  }
-
-  /**
-  * @tab Body
-  * @section body link
-  * @tip Set the styling for your email's main content links. Choose a color that helps them stand out from your text.
-  */
-  .bodyContent a:link, .bodyContent a:visited, /* Yahoo! Mail Override */ .bodyContent a .yshortcuts /* Yahoo! Mail Override */{
-  /*@editable*/ color:#EB4102;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ text-decoration:underline;
-  }
-
-  .bodyContent img{
-  display:inline;
-  height:auto;
-  max-width:560px;
-  }
+}
 
   /* ========== Column Styles ========== */
 
@@ -273,150 +197,77 @@
   /*@editable*/ text-decoration:underline;
   }
 
-  /* /\/\/\/\/\/\/\/\/ MOBILE STYLES /\/\/\/\/\/\/\/\/ */
 
-      @media only screen and (max-width: 700px){
-  /* /\/\/\/\/\/\/ CLIENT-SPECIFIC MOBILE STYLES /\/\/\/\/\/\/ */
-  body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:none !important;} /* Prevent Webkit platforms from changing default text sizes */
-          body{width:100% !important; min-width:100% !important;} /* Prevent iOS Mail from adding padding to the body */
 
-  /* /\/\/\/\/\/\/ MOBILE RESET STYLES /\/\/\/\/\/\/ */
-  #bodyCell{padding:10px !important;}
+.content_block{
+  border-top:1px solid $color_border_light;
+  border-right:1px solid $color_border_light;
+  border-bottom:none;
+  border-left:1px solid $color_border_light;
 
-  /* /\/\/\/\/\/\/ MOBILE TEMPLATE STYLES /\/\/\/\/\/\/ */
+  td.header{
+    background-color:$color_primary;
+    padding-top:$gap/2;
+    padding-right:$gap/2;
+    padding-bottom:$gap/2;
+    padding-left:$gap/2;
+    border-top:1px solid $color_primary;
+    border-right:1px solid $color_primary;
+    border-left:1px solid $color_primary;
 
-  /* ======== Page Styles ======== */
-
-  /**
-  * @tab Mobile Styles
-  * @section template width
-  * @tip Make the template fluid for portrait or landscape view adaptability. If a fluid layout doesn't work for you, set the width to 300px instead.
-  */
-  #templateContainer{
-    max-width:700px !important;
-    /*@editable*/ width:100% !important;
-  }
-
-  /**
-  * @tab Mobile Styles
-  * @section heading 1
-  * @tip Make the first-level headings larger in size for better readability on small screens.
-  */
-  h1{
-    /*@editable*/ font-size:24px !important;
-    /*@editable*/ line-height:100% !important;
-  }
-
-  /**
-  * @tab Mobile Styles
-  * @section heading 2
-  * @tip Make the second-level headings larger in size for better readability on small screens.
-  */
-  h2{
-    /*@editable*/ font-size:20px !important;
-    /*@editable*/ line-height:100% !important;
-  }
-
-  /**
-  * @tab Mobile Styles
-  * @section heading 3
-  * @tip Make the third-level headings larger in size for better readability on small screens.
-  */
-  h3{
-    /*@editable*/ font-size:18px !important;
-    /*@editable*/ line-height:100% !important;
-  }
-
-  /**
-  * @tab Mobile Styles
-  * @section heading 4
-  * @tip Make the fourth-level headings larger in size for better readability on small screens.
-  */
-  h4{
-    /*@editable*/ font-size:16px !important;
-    /*@editable*/ line-height:100% !important;
+    >*{
+      margin-bottom:0;
+      color:white;
+      font-weight:bold;
+    }
   }
 
 
-  /**
-  * @tab Mobile Styles
-  * @section header image
-  * @tip Make the main header image fluid for portrait or landscape view adaptability, and set the image's original width as the max-width. If a fluid setting doesn't work, set the image width to half its original size instead.
-  */
-  #headerImage{
-    height:auto !important;
-    /*@editable*/ max-width:700px !important;
-    /*@editable*/ width:100% !important;
+  .content_body{
+    line-height:150%;
+    text-align:left;
+    padding-top:$gap;
+    padding-right:$gap;
+    padding-bottom:$gap;
+    padding-left:$gap;
+
+    img{
+      display:inline;
+      height:auto;
+      max-width:560px;
+    }
   }
 
-  /**
-  * @tab Mobile Styles
-  * @section header text
-  * @tip Make the header content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
-  */
-  .headerContent{
-    /*@editable*/ font-size:20px !important;
-    /*@editable*/ line-height:125% !important;
+
+  .footer{
+    background-color:$color_accent;
+    border-top:1px solid $color_primary;
+    text-align:center;
+    border-bottom:2px solid $color_border;
+    margin-bottom:0;
+    padding-top:$gap/2;
+    padding-right:$gap/2;
+    padding-bottom:$gap/2;
+    padding-left:$gap/2;
+
+    a{
+      color:$color_link;
+    }
   }
+}
 
-  /* ======== Body Styles ======== */
 
-  /**
-  * @tab Mobile Styles
-  * @section body text
-  * @tip Make the body content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
-  */
-  .bodyContent{
-    /*@editable*/ font-size:18px !important;
-    /*@editable*/ line-height:125% !important;
-  }
+#focus_block_container{
+  padding-top:$gap/2;
+  padding-right:$gap/2;
+  padding-bottom:$gap/2;
+  padding-left:$gap/2;
+}
 
-  /* ======== Column Styles ======== */
-
-  .templateColumnContainer{display:block !important; width:100% !important;}
-
-  /**
-  * @tab Mobile Styles
-  * @section column image
-  * @tip Make the column image fluid for portrait or landscape view adaptability, and set the image's original width as the max-width. If a fluid setting doesn't work, set the image width to half its original size instead.
-  */
-  .columnImage{
-    height:auto !important;
-    /*@editable*/ max-width:700px !important;
-    /*@editable*/ width:100% !important;
-  }
-
-  /**
-  * @tab Mobile Styles
-  * @section left column text
-  * @tip Make the left column content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
-  */
-  .leftColumnContent{
-    /*@editable*/ font-size:16px !important;
-    /*@editable*/ line-height:125% !important;
-  }
-
-  /**
-  * @tab Mobile Styles
-  * @section right column text
-  * @tip Make the right column content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
-  */
-  .rightColumnContent{
-    /*@editable*/ font-size:16px !important;
-    /*@editable*/ line-height:125% !important;
-  }
-
-  /* ======== Footer Styles ======== */
-
-  /**
-  * @tab Mobile Styles
-  * @section footer text
-  * @tip Make the body content text larger in size for better readability on small screens.
-  */
-  .footerContent{
-    /*@editable*/ font-size:14px !important;
-    /*@editable*/ line-height:115% !important;
-  }
-
-  .footerContent a{display:block !important;} /* Place footer social and utility links on their own lines, for easier access */
-  }
+#templateContainer{
+  width:$full_newsletter_width;
+  border-top:1px solid $color_border;
+  border-right:1px solid $color_border;
+  border-bottom:1px solid $color_border;
+  border-left:1px solid $color_border;
+}

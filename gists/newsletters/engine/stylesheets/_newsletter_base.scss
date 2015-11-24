@@ -1,3 +1,9 @@
+/*
+  >* selectors dont work!
+  border css must be expanded,
+  same for margin and padding
+*/
+
 @import "_newsletter_palette";
 
 body{
@@ -7,6 +13,12 @@ body{
  -ms-text-size-adjust:100%;
  margin:0;
  padding:0;
+
+}
+
+body, table, p{
+    font-family:$font_family_brand;
+    color:$color_text;
 }
 
 
@@ -19,7 +31,10 @@ img{-ms-interpolation-mode:bicubic;} /* Allow smoother rendering of resized imag
 
 
 img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
-table{border-collapse:collapse !important;}
+table{
+  border-collapse:collapse !important;
+  background-color:$color_foreground;
+}
 body, #bodyTable, #bodyCell{height:100% !important; margin:0; padding:0; width:100% !important;}
 
 .MsoNormal{
@@ -28,118 +43,46 @@ body, #bodyTable, #bodyCell{height:100% !important; margin:0; padding:0; width:1
 
 p{
   margin:0;
+  font-size:$font_size;
 }
 
-h5, h6{
+h1, h2, h3, h4, h5, h6{
   font-family:$font_family_brand;
   display:block;
-  margin-top:$gap;
+  margin-top:0;
   margin-right:0;
+  margin-bottom:$gap;
   margin-left:0;
   text-align:left;
   letter-spacing:normal;
   font-style:normal;
   font-weight:normal;
   line-height:100%;
-  color:$color_text !important;
+  color:$color_text;
 }
 
-/**
-* @tab Page
-* @section heading 1
-* @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
-* @style heading 1
-*/
 h1{
-/*@editable*/ color:#333333 !important;
-display:block;
-/*@editable*/ font-family:$font_family_brand;
-/*@editable*/ font-size:26px;
-/*@editable*/ font-style:normal;
-/*@editable*/ font-weight:bold;
-/*@editable*/ line-height:100%;
-/*@editable*/ letter-spacing:normal;
-margin-top:0;
-margin-right:0;
-margin-bottom:10px;
-margin-left:0;
-/*@editable*/ text-align:left;
+  font-size:26px;
+  font-weight:bold;
 }
 
-/**
-* @tab Page
-* @section heading 2
-* @tip Set the styling for all second-level headings in your emails.
-* @style heading 2
-*/
 h2{
-/*@editable*/ color:#404040 !important;
-display:block;
-/*@editable*/ font-family:Helvetica;
-/*@editable*/ font-size:20px;
-/*@editable*/ font-style:normal;
-/*@editable*/ font-weight:bold;
-/*@editable*/ line-height:100%;
-/*@editable*/ letter-spacing:normal;
-margin-top:0;
-margin-right:0;
-margin-bottom:10px;
-margin-left:0;
-/*@editable*/ text-align:left;
+  font-size:20px;
+  font-weight:bold;
 }
 
-/**
-* @tab Page
-* @section heading 3
-* @tip Set the styling for all third-level headings in your emails.
-* @style heading 3
-*/
 h3{
-/*@editable*/ color:#606060 !important;
-display:block;
-/*@editable*/ font-family:Helvetica;
-/*@editable*/ font-size:16px;
-/*@editable*/ font-style:italic;
-/*@editable*/ font-weight:normal;
-/*@editable*/ line-height:100%;
-/*@editable*/ letter-spacing:normal;
-margin-top:0;
-margin-right:0;
-margin-bottom:10px;
-margin-left:0;
-/*@editable*/ text-align:left;
+  font-size:16px;
 }
-
-
-/**
-* @tab Page
-* @section heading 4
-* @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
-* @style heading 4
-*/
 
 h4{
-/*@editable*/ color:#808080 !important;
-display:block;
-/*@editable*/ font-family:Helvetica;
-/*@editable*/ font-size:14px;
-/*@editable*/ font-style:italic;
-/*@editable*/ font-weight:normal;
-/*@editable*/ line-height:100%;
-/*@editable*/ letter-spacing:normal;
-margin-top:0;
-margin-right:0;
-margin-bottom:10px;
-margin-left:0;
-/*@editable*/ text-align:left;
+  font-size:14px;
 }
 
 
 h5{
   font-size:12px;
-  margin-bottom:$gap;
 }
-
 
 h6{
   margin-bottom:0;

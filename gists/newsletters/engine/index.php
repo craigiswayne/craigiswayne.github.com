@@ -1,8 +1,10 @@
+<?php require_once("_newsletter_options.php"); ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <?php require_once("meta_tags.php") ?>
-    <title>*|MC:SUBJECT|*</title>
+    <title><?php echo $title; ?></title>
      <style>
        <?php
           echo(file_get_contents("stylesheets/styles.min.css"));
@@ -23,6 +25,11 @@
                 <tr>
                   <td align="center" valign="top">
                     <?php require_once("header.php"); ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" valign="top"  id="focus_block_container">
+                    <?php require_once("editors_block.php"); ?>
                   </td>
                 </tr>
              </table>
