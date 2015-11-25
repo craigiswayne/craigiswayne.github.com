@@ -167,7 +167,7 @@ h5{
   /*@editable*/ font-family:Helvetica;
   /*@editable*/ font-size:10px;
   /*@editable*/ line-height:125%;
-  /*@editable*/ text-align:left;
+  /*@editable*/ text-align:right;
 }
 
 /**
@@ -393,4 +393,11 @@ h5{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+}
+
+
+@media only screen and (min-width: $full_newsletter_width){
+  #templatePreheader{
+    display:none !important;
+  }
 }
