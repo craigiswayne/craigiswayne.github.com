@@ -1,15 +1,10 @@
 <?php require_once("_newsletter_options.php"); ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <?php require_once("meta_tags.php") ?>
     <title><?php echo $title; ?></title>
-     <style>
-       <?php
-          echo(file_get_contents("stylesheets/styles.min.css"));
-       ?>
-     </style>
+    <style><?php echo(file_get_contents("stylesheets/styles.min.css"));?></style>
    </head>
    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
      <center>
