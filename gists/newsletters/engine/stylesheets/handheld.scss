@@ -1,4 +1,3 @@
-$font_size:14px;
 @import "_newsletter_palette.scss";
 @import "_newsletter_mixin.scss";
 
@@ -34,6 +33,46 @@ $font_size:14px;
   #templateContainer{
     // max-width:$full_newsletter_width !important;
     width:100% !important;
+  }
+
+  /**
+  * @tab Mobile Styles
+  * @section heading 1
+  * @tip Make the first-level headings larger in size for better readability on small screens.
+  */
+  h1{
+    /*@editable*/ font-size:24px !important;
+    /*@editable*/ line-height:100% !important;
+  }
+
+  /**
+  * @tab Mobile Styles
+  * @section heading 2
+  * @tip Make the second-level headings larger in size for better readability on small screens.
+  */
+  h2{
+    /*@editable*/ font-size:20px !important;
+    /*@editable*/ line-height:100% !important;
+  }
+
+  /**
+  * @tab Mobile Styles
+  * @section heading 3
+  * @tip Make the third-level headings larger in size for better readability on small screens.
+  */
+  h3{
+    /*@editable*/ font-size:18px !important;
+    /*@editable*/ line-height:100% !important;
+  }
+
+  /**
+  * @tab Mobile Styles
+  * @section heading 4
+  * @tip Make the fourth-level headings larger in size for better readability on small screens.
+  */
+  h4{
+    /*@editable*/ font-size:16px !important;
+    /*@editable*/ line-height:100% !important;
   }
 
 

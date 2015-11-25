@@ -1,7 +1,3 @@
-<?php
-	ob_start();
-?>
-
 <?php require_once("_newsletter_options.php"); ?>
 <?php echo(file_get_contents("doctype.php")); ?>
 
@@ -18,11 +14,12 @@
                 	<td align="center" valign="top" id="bodyCell">
                     	<table border="0" cellpadding="0" cellspacing="0" id="templateContainer" style="border-top: 1px solid <?= $color_border ?>;border-right: 1px solid <?= $color_border ?>;border-bottom: 1px solid <?= $color_border ?>;border-left: 1px solid <?= $color_border ?>;">
                         	<tr>
-                          	<td align="center" valign="top">
-                            	<?php require_once("preheader.php"); ?>
-                            </td>
-                          </tr>
+                            	<td align="center" valign="top">
+                                	<?php require_once("preheader.php"); ?>
+                                </td>
+                            </tr>
                         	<tr>
+<<<<<<< HEAD
                           	<td align="center" valign="top">
                             	<?php require_once("header.php"); ?>
                             </td>
@@ -32,14 +29,17 @@
 															
 														</td>
 													</tr>
+=======
+                            	<td align="center" valign="top">
+                                	<?php require_once("header.php"); ?>
+                                </td>
+                            </tr>
+>>>>>>> parent of 3db776d... Newsletter | Preheader & Header
                         </table>
+
                     </td>
                 </tr>
             </table>
         </center>
     </body>
 </html>
-
-<?php
-	file_put_contents('index.html', ob_get_contents());
-?>
