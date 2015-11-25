@@ -31,6 +31,16 @@ body, #bodyTable{
 
 /**
 * @tab Page
+* @section background style
+* @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
+* @theme page
+*/
+#bodyCell{
+  /*@editable*/ border-top:4px solid #BBBBBB;
+}
+
+/**
+* @tab Page
 * @section email border
 * @tip Set the border for your email.
 */
@@ -143,6 +153,9 @@ h5{
 }
 
 .headerContent h4{
+<<<<<<< HEAD
+>>>>>>> parent of 3db776d... Newsletter | Preheader & Header
+=======
 >>>>>>> parent of 3db776d... Newsletter | Preheader & Header
   color:#333333 !important;
   font-style:normal;

@@ -20,6 +20,7 @@
                             </tr>
                         	<tr>
 <<<<<<< HEAD
+<<<<<<< HEAD
                           	<td align="center" valign="top">
                             	<?php require_once("header.php"); ?>
                             </td>
@@ -30,10 +31,15 @@
 														</td>
 													</tr>
 =======
+=======
+>>>>>>> parent of 3db776d... Newsletter | Preheader & Header
                             	<td align="center" valign="top">
                                 	<?php require_once("header.php"); ?>
                                 </td>
                             </tr>
+<<<<<<< HEAD
+>>>>>>> parent of 3db776d... Newsletter | Preheader & Header
+=======
 >>>>>>> parent of 3db776d... Newsletter | Preheader & Header
                         </table>
 
