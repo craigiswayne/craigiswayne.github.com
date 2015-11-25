@@ -1,3 +1,4 @@
+$font_size:16px;
 @import "_newsletter_palette.scss";
 @import "_newsletter_mixin.scss";
 
@@ -18,128 +19,17 @@ body, #bodyTable{
 
 /**
 * @tab Page
-* @section background style
-* @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
-* @theme page
-*/
-#bodyCell{
-  /*@editable*/ border-top:4px solid #BBBBBB;
-}
-
-/**
-* @tab Page
 * @section email border
 * @tip Set the border for your email.
 */
 #templateContainer{
-  /*@editable*/ border:1px solid #BBBBBB;
+  border-top:1px solid $color_border;
+  border-right:1px solid $color_border;
+  border-bottom:1px solid $color_border;
+  border-left:1px solid $color_border;
 }
 
-/**
-* @tab Page
-* @section heading 1
-* @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
-* @style heading 1
-*/
-h1{
-  /*@editable*/ color:#333333 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:26px;
-  /*@editable*/ font-style:normal;
-  /*@editable*/ font-weight:bold;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
-}
-
-/**
-* @tab Page
-* @section heading 2
-* @tip Set the styling for all second-level headings in your emails.
-* @style heading 2
-*/
-h2{
-  /*@editable*/ color:#404040 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:20px;
-  /*@editable*/ font-style:normal;
-  /*@editable*/ font-weight:bold;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
-}
-
-/**
-* @tab Page
-* @section heading 3
-* @tip Set the styling for all third-level headings in your emails.
-* @style heading 3
-*/
-h3{
-  /*@editable*/ color:#606060 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:16px;
-  /*@editable*/ font-style:italic;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
-}
-
-/**
-* @tab Page
-* @section heading 4
-* @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
-* @style heading 4
-*/
-h4{
-  /*@editable*/ color:#808080 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:14px;
-  /*@editable*/ font-style:italic;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
-}
-
-h5{
-  /*@editable*/ color:#333333 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:12px;
-  /*@editable*/ font-style:normal;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
-}
-
-.headerContent h4{
+.headerContent{
   color:#333333 !important;
   font-style:normal;
 }
@@ -163,11 +53,19 @@ h5{
 * @tip Set the styling for your email's preheader text. Choose a size and color that is easy to read.
 */
 .preheaderContent{
-  /*@editable*/ color:#808080;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:10px;
-  /*@editable*/ line-height:125%;
-  /*@editable*/ text-align:right;
+  background-color:$color_accent;
+  // font-family: $font_family_brand;
+  text-align:right;
+  padding-top:$gap/2;
+  padding-right:$gap/2;
+  padding-bottom:$gap/2;
+  padding-left:$gap/2;
+
+  h6{
+    text-align:right;
+    font-weight:normal;
+    margin-bottom:0;
+  }
 }
 
 /**
@@ -229,17 +127,6 @@ h5{
 }
 
 /* ========== Body Styles ========== */
-
-/**
-* @tab Body
-* @section body style
-* @tip Set the background color and borders for your email's body area.
-*/
-#editors_block{
-  /*@editable*/ background-color:#FFFFFF;
-  /*@editable*/ border-top:1px solid #FFFFFF;
-  /*@editable*/ border-bottom:1px solid #CCCCCC;
-}
 
 /**
 * @tab Body
@@ -399,5 +286,9 @@ h5{
 @media only screen and (min-width: $full_newsletter_width){
   #templatePreheader{
     display:none !important;
+  }
+
+  p{
+    line-height:150%;
   }
 }

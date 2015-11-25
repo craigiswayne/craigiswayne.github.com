@@ -1,3 +1,7 @@
+<?php
+	ob_start();
+?>
+
 <?php require_once("_newsletter_options.php"); ?>
 <?php echo(file_get_contents("doctype.php")); ?>
 
@@ -14,20 +18,28 @@
                 	<td align="center" valign="top" id="bodyCell">
                     	<table border="0" cellpadding="0" cellspacing="0" id="templateContainer">
                         	<tr>
-                            	<td align="center" valign="top">
-                                	<?php require_once("preheader.php"); ?>
-                                </td>
-                            </tr>
+                          	<td align="center" valign="top">
+                            	<?php require_once("preheader.php"); ?>
+                            </td>
+                          </tr>
                         	<tr>
-                            	<td align="center" valign="top">
-                                	<?php require_once("header.php"); ?>
-                                </td>
-                            </tr>
-                        </table>
+                          	<td align="center" valign="top">
+                            	<?php require_once("header.php"); ?>
+                            </td>
+                          </tr>
+													<tr>
+														<td id="focus_block_container">
 
+														</td>
+													</tr>
+                        </table>
                     </td>
                 </tr>
             </table>
         </center>
     </body>
 </html>
+
+<?php
+	file_put_contents('index.html', ob_get_contents());
+?>

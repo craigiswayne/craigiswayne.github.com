@@ -1,6 +1,11 @@
 @import "_newsletter_mixin.scss";
 @import "_newsletter_palette.scss";
 
+
+body, table, p{
+  font-family:$font_family_brand;
+}
+
 body{
   min-width:100%;
 }
@@ -39,6 +44,10 @@ table, td{
   mso-table-rspace:0pt;
 }
 
+td{
+  background-color:$color_foreground;
+}
+
 img{
   /* Allow smoother rendering of resized image in Internet Explorer */
   -ms-interpolation-mode:bicubic;
@@ -66,4 +75,78 @@ body, #bodyTable, #bodyCell{
   margin:0;
   padding:0;
   width:100% !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Helvetica,Tahoma,Arial;
+    display: block;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    margin-left: 0;
+    text-align: left;
+    letter-spacing: normal;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 100%;
+    color: $color_text;
+}
+
+/**
+* @tab Page
+* @section heading 1
+* @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
+* @style heading 1
+*/
+h1{
+  font-size:$font_size_heading;
+}
+
+/**
+* @tab Page
+* @section heading 2
+* @tip Set the styling for all second-level headings in your emails.
+* @style heading 2
+*/
+h2{
+  font-size:$font_size_heading * 0.75;
+}
+
+/**
+* @tab Page
+* @section heading 3
+* @tip Set the styling for all third-level headings in your emails.
+* @style heading 3
+*/
+h3{
+  font-size:$font_size_heading * 0.6;
+}
+
+/**
+* @tab Page
+* @section heading 4
+* @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+* @style heading 4
+*/
+h4{
+  font-size:$font_size_heading * 0.55;
+}
+
+h5{
+  font-size:$font_size_heading * 0.45;
+}
+
+h6 {
+  font-size: $font_size_heading * 0.4;
+}
+
+
+p{
+  font-family:$font_family_brand;
+  font-size:$font_size;
+  margin-top:0;
+  margin-right:0;
+  margin-bottom:$font_size * 0.85;
+  margin-left:0;
+  line-height:120%;
 }

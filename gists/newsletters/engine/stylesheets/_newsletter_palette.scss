@@ -12,6 +12,7 @@ $color_accent:#F5F5F5 !default;
 $color_border:#BBBBBB !default;
 $color_border_light:#d7d7d7 !default;
 
-$font_size:16px !default;
+$font_size:14px !default;
+$font_size_heading:$font_size * 1.8 !default;
 $font_family_fallback:Tahoma, Arial !default;
 $font_family_brand:Helvetica, $font_family_fallback !default;
