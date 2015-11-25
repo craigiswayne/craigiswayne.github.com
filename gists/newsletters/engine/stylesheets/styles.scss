@@ -3,59 +3,6 @@
 @import "handheld.scss";
 
 
-.content_block{
-
-  border-top: 1px solid $color_border_light;
-  border-right: 1px solid $color_border_light;
-  border-bottom: none;
-  border-left: 1px solid $color_border_light;
-
-  td.header{
-    background-color: $color_primary;
-    padding-top: $gap/2;
-    padding-right: $gap/2;
-    padding-bottom: $gap/2;
-    padding-left: $gap/2;
-    border-top: 1px solid $color_primary;
-    border-right: 1px solid $color_primary;
-    border-left: 1px solid $color_primary;
-
-    .title{
-      color:white !important;
-      margin-bottom: 0;
-      font-weight: bold;
-    }
-
-  }
-
-  .content{
-    line-height: 150%;
-    text-align: left;
-    padding-top: $gap;
-    padding-right: $gap;
-    padding-bottom: $gap;
-    padding-left: $gap;
-  }
-
-  .footer{
-    background-color: $color_accent;
-    border-top: 1px solid $color_primary;
-    text-align: center;
-    border-bottom: 2px solid $color_border;
-    margin-bottom: 0;
-    padding-top: $gap/2;
-    padding-right: $gap/2;
-    padding-bottom: $gap/2;
-    padding-left: $gap/2;
-
-    a{
-      color:$color_primary;
-      font-weight: bold;
-    }
-  }
-
-}
-
 #focus_block_container{
   padding-top: $gap/2;
   padding-right: $gap/2;

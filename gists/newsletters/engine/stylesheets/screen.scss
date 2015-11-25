@@ -17,18 +17,6 @@ body, #bodyTable{
   /*@editable*/ background-color:#F5F5F5;
 }
 
-/**
-* @tab Page
-* @section email border
-* @tip Set the border for your email.
-*/
-#templateContainer{
-  border-top:1px solid $color_border;
-  border-right:1px solid $color_border;
-  border-bottom:1px solid $color_border;
-  border-left:1px solid $color_border;
-}
-
 .headerContent{
   color:#333333 !important;
   font-style:normal;
