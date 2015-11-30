@@ -1,4 +1,5 @@
 
+<?php ob_start(); ?>
 <?php require_once("_newsletter_options.php"); ?>
 <?php echo(file_get_contents("doctype.php")); ?>
 
@@ -32,3 +33,5 @@
         </center>
     </body>
 </html>
+
+<?php file_put_contents("output/index-"+date('Y-m-d-H-i-s')+".html"); ?>
