@@ -16,9 +16,9 @@ body, #bodyTable{
   /*@editable*/ background-color:#F5F5F5;
 }
 
-
+<<<<<<< HEAD
 .headerContent{
-}
+=======
 /**
 * @tab Page
 * @section background style
@@ -37,6 +37,15 @@ body, #bodyTable{
 */
 #bodyCell{
   /*@editable*/ border-top:4px solid #BBBBBB;
+}
+
+/**
+* @tab Page
+* @section email border
+* @tip Set the border for your email.
+*/
+#templateContainer{
+  /*@editable*/ border:1px solid #BBBBBB;
 }
 
 /**
@@ -144,12 +153,26 @@ h5{
 }
 
 .headerContent h4{
+<<<<<<< HEAD
+>>>>>>> parent of 3db776d... Newsletter | Preheader & Header
+=======
+>>>>>>> parent of 3db776d... Newsletter | Preheader & Header
   color:#333333 !important;
   font-style:normal;
 }
 
 /* ========== Header Styles ========== */
 
+/**
+* @tab Header
+* @section preheader style
+* @tip Set the background color and bottom border for your email's preheader area.
+* @theme header
+*/
+#templatePreheader{
+  /*@editable*/ background-color:#FFFFFF;
+  /*@editable*/ border-bottom:1px solid #CCCCCC;
+}
 
 /**
 * @tab Header
@@ -162,6 +185,17 @@ h5{
   /*@editable*/ font-size:10px;
   /*@editable*/ line-height:125%;
   /*@editable*/ text-align:right;
+}
+
+/**
+* @tab Header
+* @section preheader link
+* @tip Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
+*/
+.preheaderContent a:link, .preheaderContent a:visited, /* Yahoo! Mail Override */ .preheaderContent a .yshortcuts /* Yahoo! Mail Override */{
+  /*@editable*/ color:#606060;
+  /*@editable*/ font-weight:normal;
+  /*@editable*/ text-decoration:underline;
 }
 
 /**
@@ -372,8 +406,15 @@ h5{
 * @section footer link
 * @tip Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
 */
-.footerContent a:link, .footerContent a:visited, /* Yahoo! Mail Override */ .footerContent a .yshortcuts, .footerContent a span /* Yahoo! Mail Override */ {
+.footerContent a:link, .footerContent a:visited, /* Yahoo! Mail Override */ .footerContent a .yshortcuts, .footerContent a span /* Yahoo! Mail Override */{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+}
+
+
+@media only screen and (min-width: $full_newsletter_width){
+  #templatePreheader{
+    display:none !important;
+  }
 }
