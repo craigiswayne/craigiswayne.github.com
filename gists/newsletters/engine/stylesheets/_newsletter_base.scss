@@ -59,6 +59,7 @@ img{
 
 table{
   border-collapse:collapse !important;
+  background-color:white;
 }
 
 body, #bodyTable, #bodyCell{
@@ -66,4 +67,27 @@ body, #bodyTable, #bodyCell{
   margin:0;
   padding:0;
   width:100% !important;
+  color:$color_text;
+  font-family:$font_family_brand;
+}
+
+
+h1,h2,h3,h4,h5,h6{
+  margin-top:0;
+  margin-bottom:$gap;
+  font-weight:bold;
+  display:block;
+  font-family:$font_family_brand;
+  line-height:100%;
+  letter-spacing:normal;
+  margin-top:0;
+  margin-right:0;
+  margin-bottom:$gap;
+  margin-left:0;
+  text-align:left;
+
+}
+
+h6{
+  font-size:11px;
 }

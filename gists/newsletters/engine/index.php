@@ -20,12 +20,17 @@
                             	<td align="center" valign="top">
                                 	<?php require_once("preheader.php"); ?>
                                 </td>
-                            </tr>
+                          </tr>
                         	<tr>
                             	<td align="center" valign="top">
                                 	<?php require_once("header.php"); ?>
                                 </td>
-                            </tr>
+                          </tr>
+													<tr>
+                            	<td align="center" valign="top" style="padding-top:<?= $gap_small ?>;padding-right:<?= $gap_small ?>;padding-bottom:<?= $gap_small ?>;padding-left:<?= $gap_small ?>;">
+                                	<?php require_once("top_story.php"); ?>
+                                </td>
+                          </tr>
                         </table>
 
                     </td>

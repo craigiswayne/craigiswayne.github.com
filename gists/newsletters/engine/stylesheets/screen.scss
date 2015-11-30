@@ -13,7 +13,7 @@
 * @theme page
 */
 body, #bodyTable{
-  /*@editable*/ background-color:#F5F5F5;
+  /*@editable*/ background-color:$color_accent;
 }
 
 
@@ -112,19 +112,7 @@ h3{
 * @style heading 4
 */
 h4{
-  /*@editable*/ color:#808080 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
   /*@editable*/ font-size:14px;
-  /*@editable*/ font-style:italic;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
 }
 
 h5{
@@ -218,10 +206,9 @@ h5{
 * @section body style
 * @tip Set the background color and borders for your email's body area.
 */
-#editors_block{
+#top_story{
   /*@editable*/ background-color:#FFFFFF;
-  /*@editable*/ border-top:1px solid #FFFFFF;
-  /*@editable*/ border-bottom:1px solid #CCCCCC;
+
 }
 
 /**
@@ -376,4 +363,10 @@ h5{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+}
+
+#top_story{
+  p{
+    max-width:$full_newsletter_width;
+  }
 }
