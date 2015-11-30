@@ -150,16 +150,6 @@ h5{
 
 /* ========== Header Styles ========== */
 
-/**
-* @tab Header
-* @section preheader style
-* @tip Set the background color and bottom border for your email's preheader area.
-* @theme header
-*/
-#templatePreheader{
-  /*@editable*/ background-color:#FFFFFF;
-  /*@editable*/ border-bottom:1px solid #CCCCCC;
-}
 
 /**
 * @tab Header
@@ -172,17 +162,6 @@ h5{
   /*@editable*/ font-size:10px;
   /*@editable*/ line-height:125%;
   /*@editable*/ text-align:right;
-}
-
-/**
-* @tab Header
-* @section preheader link
-* @tip Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
-*/
-.preheaderContent a:link, .preheaderContent a:visited, /* Yahoo! Mail Override */ .preheaderContent a .yshortcuts /* Yahoo! Mail Override */{
-  /*@editable*/ color:#606060;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ text-decoration:underline;
 }
 
 /**

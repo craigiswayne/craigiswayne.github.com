@@ -7,7 +7,7 @@
   $color_border = "#BBBBBB";
 
   $font_family_fallback = "Tahoma, Arial";
-  $font_family_brand ="Helvetica, " + $font_family_fallback;
+  $font_family_brand = "Helvetica, ".$font_family_fallback;
 
   $gap = "10px";
   $gap_small = "5px";

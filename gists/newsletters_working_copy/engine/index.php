@@ -7,6 +7,7 @@
 	<head>
 		<?php require_once("meta_tags.php") ?>
     <title><?php echo $title; ?></title>
+		<style type="text/css"><?php echo(file_get_contents("stylesheets/screen_beta.min.css"));?></style>
     <style type="text/css" ><?php echo(file_get_contents("stylesheets/styles.min.css"));?></style>
   </head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
