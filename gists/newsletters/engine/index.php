@@ -21,17 +21,21 @@
                                 </td>
                           </tr>
                         	<tr>
-                            	<td align="center" valign="top">
+                            <td align="center" valign="top">
                                 	<?php require_once("header.php"); ?>
-                                </td>
+                            </td>
                           </tr>
 													<tr>
-                            	<td align="center" valign="top" style="padding-top:<?= $gap_small ?>;padding-right:<?= $gap_small ?>;padding-bottom:<?= $gap_small ?>;padding-left:<?= $gap_small ?>;">
-                                	<?php require_once("top_story.php"); ?>
-                                </td>
+                          	<td align="center" valign="top" style="padding-top:<?= $gap_small ?>;padding-right:<?= $gap_small ?>;padding-bottom:<?= $gap_small ?>;padding-left:<?= $gap_small ?>;">
+                            	<?php require_once("top_story.php"); ?>
+                            </td>
                           </tr>
+													<tr>
+														<td align="center" valign="top">
+															<?php require_once("columns.php"); ?>
+														</td>
+													</tr>
                         </table>
-
                     </td>
                 </tr>
             </table>

@@ -111,7 +111,10 @@
 
   /* ======== Column Styles ======== */
 
-  .templateColumnContainer{display:block !important; width:100% !important;}
+  .templateColumnContainer, .column{
+    display:block !important;
+    width:100% !important;
+  }
 
   /**
   * @tab Mobile Styles
@@ -158,3 +161,13 @@
 
   .footerContent a{display:block !important;} /* Place footer social and utility links on their own lines, for easier access */
 }
+
+ @media screen and (max-width: $full_newsletter_width) {
+   table[class="responsive"]{
+      width:100%!important;
+    }
+
+    td[id="columns_container"]{
+        padding: 10px 5% 15px 5% !important;
+    }
+ }
