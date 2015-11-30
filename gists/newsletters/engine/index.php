@@ -35,4 +35,7 @@
     </body>
 </html>
 
-<?php file_put_contents("output/index-"+date('Y-m-d-H-i-s')+".html"); ?>
+<?php
+	$output = ob_get_contents();
+	file_put_contents("output/index-".date('YmdHis').".html", $output);
+?>
