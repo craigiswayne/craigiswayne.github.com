@@ -1,4 +1,3 @@
-
 <?php ob_start(); ?>
 <?php require_once("_newsletter_options.php"); ?>
 <?php echo(file_get_contents("doctype.php")); ?>
