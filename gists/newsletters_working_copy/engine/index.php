@@ -14,7 +14,7 @@
         	<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
             	<tr>
                 	<td align="center" valign="top" id="bodyCell">
-                    	<table border="0" cellpadding="0" cellspacing="0" id="templateContainer">
+                    	<table border="0" cellpadding="0" cellspacing="0" id="templateContainer" style="border-top:1px solid <?= $color_border ?>;border-right:1px solid <?= $color_border ?>;border-bottom:1px solid <?= $color_border ?>;border-left:1px solid <?= $color_border ?>;">
                         	<tr>
                             	<td align="center" valign="top">
                                 	<?php require_once("preheader.php"); ?>
