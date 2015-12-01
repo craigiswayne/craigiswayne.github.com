@@ -34,8 +34,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="center" class="footer" style="background-color:white;text-align:right; border-top:none;border-right:1px solid <?=$color_border?>; border-bottom:1px solid <?= $color_primary ?>; border-left: 1px solid <?=$color_border?>; padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-			      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?= $color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?= $color_primary ?>;border-right:3px solid <?= $color_primary ?>;border-bottom:1px solid <?= $color_primary ?>;border-left:3px solid <?= $color_primary ?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+					<td align="center" class="footer" style="background-color:white;text-align:right; border-top:none;border-right:1px solid <?=$color_border?>; border-bottom:1px solid <?= $color_primary ?>; border-left: none; padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+			      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?= $color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?= $color_primary ?>;border-right:3px solid <?= $color_primary ?>;border-bottom:1px solid <?= $color_primary ?>;border-left:3px solid <?= $color_primary ?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;font-family:<?=$font_family_brand?>;">
 			        Lees Meer
 			      </a>
 			    </td>

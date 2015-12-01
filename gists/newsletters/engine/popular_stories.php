@@ -13,16 +13,16 @@
 					<td align="center" valign="top" style="text-align:left;padding-top:<?= $gap ?>; padding-right:<?=$gap?>;padding-bottom:0;padding-left:<?=$gap?>;">
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
-								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;">
+								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
 									1
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
-									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
+									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" align="center" class="footer" style="background-color:white;text-align:right; border-top:none;border-right:none; border-bottom:1px solid <?=$color_primary?>; border-left:none; padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;font-family:<?=$font_family_brand?>;">
 						        Lees Meer
 						      </a>
 						    </td>
@@ -34,16 +34,16 @@
 					<td align="center" valign="top" style="text-align:left;padding-top:<?= $gap ?>; padding-right:<?=$gap?>;padding-bottom:0;padding-left:<?=$gap?>;">
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
-								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;">
+								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
 									2
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
-									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
+									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" align="center" class="footer" style="background-color:white;text-align:right; border-top:none;border-right:none; border-bottom:1px solid <?=$color_primary?>; border-left:none; padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;font-family:<?=$font_family_brand?>;">
 						        Lees Meer
 						      </a>
 						    </td>
@@ -55,16 +55,16 @@
 					<td align="center" valign="top" style="text-align:left;padding-top:<?= $gap ?>; padding-right:<?=$gap?>;padding-bottom:0;padding-left:<?=$gap?>;">
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
-								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;">
+								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
 									3
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
-									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
+									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" align="center" class="footer" style="background-color:white;text-align:right; border-top:none;border-right:none; border-bottom:1px solid <?=$color_primary?>; border-left:none; padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;font-family:<?=$font_family_brand?>;">
 						        Lees Meer
 						      </a>
 						    </td>
@@ -76,16 +76,16 @@
 					<td align="center" valign="top" style="text-align:left;padding-top:<?= $gap ?>; padding-right:<?=$gap?>;padding-bottom:0;padding-left:<?=$gap?>;">
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
-								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;">
+								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
 									4
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
-									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
+									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" align="center" class="footer" style="background-color:white;text-align:right; border-top:none;border-right:none; border-bottom:1px solid <?=$color_primary?>; border-left:none; padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;font-family:<?=$font_family_brand?>;">
 						        Lees Meer
 						      </a>
 						    </td>
@@ -97,16 +97,16 @@
 					<td align="center" valign="top" style="text-align:left;padding-top:<?= $gap ?>; padding-right:<?=$gap?>;padding-bottom:0;padding-left:<?=$gap?>;">
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
-								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;">
+								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
 									5
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
-									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
+									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" align="center" class="footer" style="background-color:white;text-align:right; border-top:none;border-right:none; border-bottom:1px solid <?=$color_primary?>; border-left:none; padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+						      <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" target="_top" style="text-transform:uppercase;background-color:<?=$color_primary?>;margin-top:0;margin-right:0;margin-left:0;color:white; font-weight:normal; margin-bottom:0;font-size:12px;text-decoration:none;border-top:3px solid <?=$color_primary?>;border-right:3px solid <?=$color_primary?>;border-bottom:1px solid <?=$color_primary?>;border-left:3px solid <?=$color_primary?>;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;font-family:<?=$font_family_brand?>;">
 						        Lees Meer
 						      </a>
 						    </td>

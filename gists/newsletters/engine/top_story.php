@@ -23,7 +23,7 @@
     </td>
   </tr>
   <tr>
-    <td colspan="2" class=footer style="background-color:<?= $color_accent ?>;text-align:center; border-top:1px solid <?= $color_primary ?>;border-right:1px solid <?= $color_border ?>; border-bottom:1px solid <?= $color_border_dark ?>; border-left: 1px solid <?= $color_border ?>; padding-top:<?= $gap_small ?>;padding-right:<?= $gap_small ?>;padding-bottom:<?= $gap_small ?>;padding-left:<?= $gap_small ?>;">
+    <td colspan="2" class=footer style="background-color:<?= $color_accent ?>;text-align:center; border-right:1px solid <?= $color_border ?>; border-bottom:1px solid <?= $color_border_dark ?>; border-left: 1px solid <?= $color_border ?>; border-top:1px solid <?=$color_primary?>; padding-top:<?= $gap_small ?>;padding-right:<?= $gap_small ?>;padding-bottom:<?= $gap_small ?>;padding-left:<?= $gap_small ?>;">
       <h6 style="margin-top:0;margin-right:0;margin-left:0;text-align:center;color:<?= $color_primary?>; font-weight:normal; margin-bottom:0;font-size:11px;">
         volg <a href="mailto:adriaan.basson@netwerk24.com" id="lnkFollowEmail" target="_top" style="font-weight:bold;color:<?= $color_primary?>">adriaan.basson@netwerk24.com</a> as 'n kontak
       </h6>
