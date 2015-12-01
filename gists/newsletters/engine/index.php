@@ -32,7 +32,12 @@
                           </tr>
 													<tr>
 														<td align="center" valign="top" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0">
-															<?php require_once("columns.php"); ?>
+															<?php require_once("responsive_row_1.php"); ?>
+														</td>
+													</tr>
+													<tr>
+														<td align="center" valign="top" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0">
+															<?php require_once("responsive_row_2.php"); ?>
 														</td>
 													</tr>
                         </table>
