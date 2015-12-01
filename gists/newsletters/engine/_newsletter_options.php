@@ -18,5 +18,5 @@
 
   $gap = "10px";
   $gap_small = "5px";
-
+  $gap_big = "20px";
 ?>
