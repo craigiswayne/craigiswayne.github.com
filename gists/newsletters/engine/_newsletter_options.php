@@ -19,4 +19,6 @@
   $gap = "10px";
   $gap_small = "5px";
   $gap_big = "20px";
+
+  $table_inline_defaults = 'border="0" cellpadding="0" cellspacing="0"';
 ?>

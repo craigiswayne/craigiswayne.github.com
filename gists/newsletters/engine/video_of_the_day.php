@@ -17,20 +17,15 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="center" style="text-align:left;padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 10px;">
-            <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" id="lnkArticleTitle" style="font-size: 16px;font-family: Arial, Helvetica, sans-serif;-ms-word-wrap: normal;word-wrap: normal;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-ms-word-break: break-word;word-break: break-word;color: #000;text-decoration: none; font-size: 16px;font-family: Arial, Helvetica, sans-serif;-ms-word-wrap: normal;word-wrap: normal;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-ms-word-break: break-word;word-break: break-word;margin: 0;font-weight: bold;color: #000;text-decoration: none">Traangas, streng veiligheid in Parys voor beraad</a>
-					</td>
-				</tr>
-				<tr>
 					<td align="center" style="padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 10px;">
             <a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" id="lnkGallery" class="image_container" style="font-size: 12px;font-family: Arial, Helvetica, sans-serif;-ms-word-wrap: normal;word-wrap: normal;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-ms-word-break: break-word;word-break: break-word;color: #2d3092">
-                <img src="http://cdn.24.co.za/files/Cms/General/d/729/c4b29b8f4b3748a1ab82770c2deded80.jpg" id="imgThumb" style="font-size: 12px;font-family: Arial, Helvetica, sans-serif;-ms-word-wrap: normal;word-wrap: normal;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-ms-word-break: break-word;word-break: break-word;border: none; max-width:100%;" alt="Traangas, streng veiligheid in Parys voor beraad">
+                <img src="http://cdn.24.co.za/files/Cms/General/d/1681/5aabab28c6db4c8e946cb2a8a90f1207.jpg" id="imgThumb" style="font-size: 12px;font-family: Arial, Helvetica, sans-serif;-ms-word-wrap: normal;word-wrap: normal;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-ms-word-break: break-word;word-break: break-word;border: none; max-width:100%;" alt="Traangas, streng veiligheid in Parys voor beraad">
             </a>
 					</td>
 				</tr>
 				<tr>
-					<td align="center" style="text-align:left;padding-top: 5px;padding-right: 10px;padding-bottom: <?= $gap ?>;padding-left: 10px;">
-						<a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" id="lnkArticleSynopsis" style="font-size: 14px;font-family: Arial, Helvetica, sans-serif;-ms-word-wrap: normal;word-wrap: normal;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-ms-word-break: break-word;word-break: break-word;color: #333;text-decoration: none">Die polisie het traangas en pepersproei gebruik om omgewingsaktiviste uiteen te jaag wat betoog het ondanks 'n verbod op openbare protesoptrede ná die terreuraanvalle in Parys waarin 130 mense dood is.  </a>
+					<td align="center" style="text-align:left;padding-top: 5px;padding-right: 10px;padding-bottom: 5px;padding-left: 10px;">
+						<a href="http://www.netwerk24.com/Nuus/Wereld/traangas-streng-veiligheid-in-parys-voor-beraad-20151130?utm_source=news24-am-newsletter&amp;utm_medium=email&amp;utm_campaign=Newsletters" id="lnkArticleTitle" style="font-size: 16px;font-family: Arial, Helvetica, sans-serif;-ms-word-wrap: normal;word-wrap: normal;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-ms-word-break: break-word;word-break: break-word;color: #000;text-decoration: none; font-size: 16px;font-family: Arial, Helvetica, sans-serif;-ms-word-wrap: normal;word-wrap: normal;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-ms-word-break: break-word;word-break: break-word;margin: 0;font-weight: bold;color: #000;text-decoration: none">Traangas, streng veiligheid in Parys voor beraad</a>
 					</td>
 				</tr>
 				<tr>
@@ -40,6 +35,7 @@
 			      </a>
 			    </td>
 				</tr>
+
 			</table>
 		</td>
 	</tr>

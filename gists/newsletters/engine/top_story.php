@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <td valign="top" class="content_body" style="border-top:1px solid <?= $color_border ?>;border-right:none;border-bottom:none;border-left:1px solid <?= $color_border ?>;font-family:<?= $font_family_brand ?>;padding-top:<?= $gap ?>;padding-right:<?= $gap ?>;padding-bottom:<?= $gap ?>;padding-left:<?= $gap ?>;">
-        <h3 style="color:<?= $color_text?>; margin-top:0; margin-bottom:<?= $gap_small ?>; font-weight:bold;">Zuma het self Cosatu verswak</h3>
+        <h2 style="color:<?= $color_text?>; margin-top:0; margin-bottom:<?= $gap_small ?>; font-weight:bold;font-style:normal;">As dit in Tlokwe kon gebeur</h2>
         <p style="max-width:<?= $p_tag_max_width ?>;color:<?= $color_text?>">'n Groot deel van pres. Jacob Zuma se nalatenskap sal wees sy verswakking van die ANC-alliansie.</p>
         <p style="max-width:<?= $p_tag_max_width ?>;color:<?= $color_text?>">Die vakverbond Cosatu en die SAKP was twee van Zuma se mees lojale (en luide) ondersteuners op pad na sy oorwinning in 2007 by die ANC-konferensie in Polokwane.</p>
     </td>
