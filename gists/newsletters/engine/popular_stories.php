@@ -1,11 +1,11 @@
-<table class="responsive" border="0" cellpadding="0" cellspacing="0" width="47%" align="right" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0;border-collapse: collapse !important;background-color: white;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+<table class="responsive" border="0" cellpadding="0" cellspacing="0" width="47%" align="right" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0;border-collapse: collapse !important;background-color: white;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;margin-bottom:<?= $gap ?>">
 	<tr>
 		<td align="center" valign="top" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0">
 			<table cellpadding="0" cellspacing="0" border="0" width="100%" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0;border-collapse: collapse !important;background-color: white;border-top:1px solid <?= $color_border ?>;border-right:1px solid <?= $color_border ?>;border-bottom:1px solid <?= $color_border ?>;border-left:1px solid <?= $color_border ?>;">
 				<tr>
 					<td class="header" align="center" valign="middle" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0; padding-top: 5px;padding-right: 5px;padding-bottom: 5px;padding-left: 5px;background: #2d3092;border-top: 1px solid #2d3092;border-right: 1px solid #2d3092;border-bottom: 1px solid #2d3092;border-left: 1px solid #2d3092;text-align: left;font-weight:bold; font-family: Helvetica, Tahoma, Arial;-ms-word-wrap: normal;word-wrap: normal;color: #fff;text-decoration: none;font-style:normal;">
 						<h4 style="margin-bottom:0;margin-top:0;margin-right:0;margin-left:0;font-size:14px;">
-							Terwyl jy geslaap het
+							<a style="text-decoration:none;color:white; text-transform:uppercase;" href="http://www.netwerk24.com/?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters">Gister se gewildste stories</a>
 						</h4>
 					</td>
 				</tr>
