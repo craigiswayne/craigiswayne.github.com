@@ -4,9 +4,9 @@
   $p_tag_max_width = (intval($full_newsletter_width) - $top_story_image_width)."px";
 ?>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%" id="top_story" class="content_block">
+<table <?= $table_inline_defaults ?> width="100%" id="top_story" class="content_block">
   <tr>
-    <td colspan="2" class="header" style="padding-top: <?= $gap_small ?>;padding-right: <?= $gap_small ?>;padding-bottom: <?= $gap_small ?>;padding-left: <?= $gap_small ?>;background: <?= $color_primary ?>;border-top: 1px solid <?= $color_primary ?>;border-right: 1px solid <?= $color_primary ?>;border-bottom: 1px solid <?= $color_primary ?>;border-left: 1px solid <?= $color_primary ?>;text-align: left;font-weight:bold; font-family: <?= $font_family_brand ?>;-ms-word-wrap: normal;word-wrap: normal;color: #fff;text-decoration: none;font-style:normal;">
+    <td colspan="2" class="header" style="padding-top: <?= $gap_small ?>;padding-right: <?= $gap_small ?>;padding-bottom: <?= $gap_small ?>;padding-left: <?= $gap_small ?>;background: <?= $color_primary ?>;border-top: 1px solid <?= $color_primary ?>;border-right: 1px solid <?= $color_primary ?>;border-bottom: 1px solid <?= $color_primary ?>;border-left: 1px solid <?= $color_primary ?>;text-align: left;font-weight:bold; font-family:<?= $font_family_brand ?>;-ms-word-wrap: normal;word-wrap: normal;color: #fff;text-decoration: none;font-style:normal;">
       <h4 style="margin-bottom:0;margin-top:0;margin-right:0;margin-left:0;font-size:14px;">
         GOEIEMÔRE, SUID-AFRIKA
       </h4>

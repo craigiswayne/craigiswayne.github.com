@@ -4,6 +4,8 @@
   $color_primary_light = "#9698AF";
   $color_accent = "#F5F5F5";
 
+  $color_secondary = "#ef3f3f";
+
   $title = "Netwerk24 Newsletter";
   $full_newsletter_width = "700px";
   $color_text_secondary = "#808080";
