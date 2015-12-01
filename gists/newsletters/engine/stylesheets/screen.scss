@@ -1,11 +1,6 @@
 @import "_newsletter_palette.scss";
 @import "_newsletter_mixin.scss";
 
-/* ========== Page Styles ========== */
-
-#bodyCell{padding:$gap*2;}
-#templateContainer{width:$full_newsletter_width;}
-
 /**
 * @tab Page
 * @section background style
@@ -14,121 +9,6 @@
 */
 body, #bodyTable{
   /*@editable*/ background-color:$color_accent;
-}
-
-
-.headerContent{
-}
-/**
-* @tab Page
-* @section background style
-* @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
-* @theme page
-*/
-#bodyCell{
-  /*@editable*/ border-top:4px solid #BBBBBB;
-}
-
-/**
-* @tab Page
-* @section background style
-* @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
-* @theme page
-*/
-#bodyCell{
-  /*@editable*/ border-top:4px solid #BBBBBB;
-}
-
-/**
-* @tab Page
-* @section heading 1
-* @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
-* @style heading 1
-*/
-h1{
-  /*@editable*/ color:#333333 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:26px;
-  /*@editable*/ font-style:normal;
-  /*@editable*/ font-weight:bold;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
-}
-
-/**
-* @tab Page
-* @section heading 2
-* @tip Set the styling for all second-level headings in your emails.
-* @style heading 2
-*/
-h2{
-  /*@editable*/ color:#404040 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:20px;
-  /*@editable*/ font-style:normal;
-  /*@editable*/ font-weight:bold;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
-}
-
-/**
-* @tab Page
-* @section heading 3
-* @tip Set the styling for all third-level headings in your emails.
-* @style heading 3
-*/
-h3{
-  /*@editable*/ color:#606060 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:16px;
-  /*@editable*/ font-style:italic;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
-}
-
-/**
-* @tab Page
-* @section heading 4
-* @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
-* @style heading 4
-*/
-h4{
-  /*@editable*/ font-size:14px;
-}
-
-h5{
-  /*@editable*/ color:#333333 !important;
-  display:block;
-  /*@editable*/ font-family:Helvetica;
-  /*@editable*/ font-size:12px;
-  /*@editable*/ font-style:normal;
-  /*@editable*/ font-weight:normal;
-  /*@editable*/ line-height:100%;
-  /*@editable*/ letter-spacing:normal;
-  margin-top:0;
-  margin-right:0;
-  margin-bottom:10px;
-  margin-left:0;
-  /*@editable*/ text-align:left;
 }
 
 .headerContent h4{
@@ -219,7 +99,7 @@ h5{
 */
 .bodyContent{
   /*@editable*/ color:#505050;
-  /*@editable*/ font-family:Helvetica;
+  /*@editable*/ font-family:$font_family_brand;
   /*@editable*/ font-size:16px;
   /*@editable*/ line-height:150%;
   padding-top:20px;

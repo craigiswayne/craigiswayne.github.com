@@ -13,7 +13,7 @@
     	<center>
         	<table <?= $table_inline_defaults ?> align="center" height="100%" width="100%" id="bodyTable" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0;border-collapse: collapse !important;background-color: #f5f5f5;height: 100% !important;margin: 0;padding: 0;width: 100% !important;color: <?=$color_text?>;font-family:<?=$font_family_brand?>">
             	<tr>
-                	<td align="center" valign="top" id="bodyCell" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0;height: 100% !important;margin: 0;padding: 20px;width: 100% !important;color: <?=$color_text?>;font-family:<?=$font_family_brand?>;border-top: 4px solid <?=$color_border?>">
+                	<td align="center" valign="top" id="bodyCell" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0;height: 100% !important;margin: 0;padding: 20px;width: 100% !important;color: <?=$color_text?>;font-family:<?=$font_family_brand?>;">
                     	<table <?= $table_inline_defaults ?> id="templateContainer" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0;mso-table-rspace: 0;border-collapse: collapse !important;background-color: #FFF;width: <?= $full_newsletter_width ?>;border-top:1px solid <?= $color_border ?>;border-right:1px solid <?= $color_border ?>;border-bottom:1px solid <?= $color_border ?>;border-left:1px solid <?= $color_border ?>; ">
                         	<tr>
                             	<td align="center" valign="top">
