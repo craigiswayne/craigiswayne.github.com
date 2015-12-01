@@ -1,7 +1,7 @@
 <?php
 
   $color_primary = "#2d3092";
-
+  $color_primary_light = "#9698AF";
   $color_accent = "#F5F5F5";
 
   $title = "Netwerk24 Newsletter";
