@@ -14,7 +14,7 @@
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
 								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
-									1
+									<img src="http://www.netwerk24.com/images/newsletters/counter_1.png" width="40" height="40" style="width:40px;height:40px;"/>
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
 									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
@@ -35,7 +35,7 @@
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
 								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
-									2
+									<img src="http://www.netwerk24.com/images/newsletters/counter_2.png" width="40" height="40" style="width:40px;height:40px;"/>
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
 									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
@@ -56,7 +56,7 @@
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
 								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
-									3
+									<img src="http://www.netwerk24.com/images/newsletters/counter_3.png" width="40" height="40" style="width:40px;height:40px;"/>
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
 									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
@@ -77,7 +77,7 @@
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
 								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
-									4
+									<img src="http://www.netwerk24.com/images/newsletters/counter_4.png" width="40" height="40" style="width:40px;height:40px;"/>
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
 									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
@@ -98,7 +98,7 @@
 						<table <?= $table_inline_defaults ?> width="100%">
 							<tr>
 								<td align="center" valign="middle" width="40px" height="40px" style="width:40px;height:40px;background-color:<?=$color_primary_light?>;color:white;border-right:<?=$gap?> solid white;font-family:<?=$font_family_brand?>;">
-									5
+									<img src="http://www.netwerk24.com/images/newsletters/counter_5.png" width="40" height="40" style="width:40px;height:40px;"/>
 								</td>
 								<td align="center" valign="middle" style="text-align:left;padding-bottom:<?=$gap_small?>;vertical-align:middle;">
 									<a href="http://www.netwerk24.com/Nuus/Onderwys/seks-skok-by-topskool-20151128?utm_source=news24-am-newsletter&utm_medium=email&utm_campaign=Newsletters" style="font-weight:bold;text-decoration:none;color:<?=$color_text?>; font-size:14px;font-family:<?=$font_family_brand?>;">KYK: Bouwer Bosch en Binnelanders se Ivanka trou!</a>
