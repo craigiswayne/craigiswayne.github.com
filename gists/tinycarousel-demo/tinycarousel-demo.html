@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title>TinyCarousel Demo</title>
+	<link rel="stylesheet" href="styles.min.css" />
+
+	<style>
+		#RHS{
+			width:300px;
+		}
+	</style>
+
+	<script src="../jquery.min.js"></script>
+	<script src="jquery.tinycarousel.js"></script>
+
+	<script id='nexus_prototype_preview_js' >
+			$(document).ready(function(){
+				$('.livescoring.widget').tinycarousel({
+						axis:"y",
+						animationTime:500,
+						infinite:false
+				});
+			});
+	</script>
+
+</head>
+<body>
+	<div id="RHS">
+
+		<div class="livescoring widget">
+			<div class="header"><h2 class="heading">Live scoring</h2></div>
+
+			<div class="viewport">
+
+				<a class="buttons prev" href="#">&#710;</a>
+				<a class="buttons next" href="#">&#711;</a>
+
+				<ul class="overview">
+					<li>
+						<div class="fixture">
+							<span class="team home">Stormers</span>
+							<span class="versus">v</span>
+							<span class="team away">Highlanders</span>
+						</div>
+
+						<a class="focus">
+
+							<div class="team home">
+								<img src="" />
+							</div>
+
+							<div class="middle">
+								<div class="status">Not Started</div>
+								<div class="score">
+									<span class="home">29</span>
+									<span class="separator">-</span>
+									<span class="away">28</span>
+								</div>
+							</div>
+
+							<div class="team away">
+								<img src="" />
+							</div>
+
+						</a>
+					</li>
+				</ul>
+			</div>
+
+
+			<div class="footer">
+				<a target="_blank" href="/LiveScoring">Other live scores</a>
+				<span class="separator">|</span>
+				<a href="http://www.supersport.com/video" target="_blank">View video clips</a>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
