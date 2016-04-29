@@ -84,13 +84,24 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;
 #==============================================================================
 # DEVELOPMENT ENVIRONMENT THINGS
 #==============================================================================
+echo "Setting up Development environment...";
+brew install coreutils;
+
 echo "Installing nginx...";
 brew install nginx;
 brew services start nginx;
+
+#TODO fix this
+#nginx_cellar_dir=$($(dirname $(dirname $(realpath $(which nginx))))/logs);
+#ln -s /usr/local/var/log/nginx $nginx_cellar_dir;
+ln -s /usr/local/var/log/nginx/ /usr/local/Cellar/nginx/1.10.0/logs
+
 atom /usr/local/etc/nginx/;
+
 #modify
 #user yourusername staff
 #listen 80;
+
 sudo nginx -s reload;
 # you can browse to localhost or 127.0.0.1 and it should work
 #TODO get the html root from nginx configs
