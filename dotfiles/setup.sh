@@ -91,7 +91,6 @@ brew install coreutils;
 echo "Installing nginx...";
 brew install nginx;
 brew services start nginx;
-#nginx.conf worker_rlimit_nofile 1024; in the main section
 ulimit -n 1024;
 
 #TODO fix this
