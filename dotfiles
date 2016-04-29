@@ -80,6 +80,19 @@ defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool 
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true;
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;
 
+
+#==============================================================================
+# DEVELOPMENT ENVIRONMENT THINGS
+#==============================================================================
+echo "Installing nginx...";
+brew install nginx;
+sudo cp -v /usr/local/opt/nginx/*.plist /Library/LaunchDaemons/
+sudo chown root:wheel /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+atom /usr/local/etc/nginx/;
+#modify
+#user yourusername staff
+#listen 80;
+
 #TODO get the html root from nginx configs
 #TODO install phpmyadmin
 
