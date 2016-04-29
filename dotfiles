@@ -86,17 +86,38 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;
 #==============================================================================
 echo "Installing nginx...";
 brew install nginx;
-sudo cp -v /usr/local/opt/nginx/*.plist /Library/LaunchDaemons/
-sudo chown root:wheel /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+brew services start nginx;
 atom /usr/local/etc/nginx/;
 #modify
 #user yourusername staff
 #listen 80;
-
+sudo nginx -s reload;
+# you can browse to localhost or 127.0.0.1 and it should work
 #TODO get the html root from nginx configs
+
+echo "Installing PHP";
+brew tap homebrew/php;
+brew install php56 --with-fpm --without-apache --with-debug;
+brew services start php56;
+lsof -Pni4 | grep LISTEN | grep php;
+
+echo "Enabling Nginx for PHP...";
+#index index.php
+location ~ \.php$ {
+    root  <chemin/vers/votre/site>;
+    try_files $uri =404;
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass 127.0.0.1:9000;
+    include  fastcgi.conf;
+}
+atom /usr/local/etc/nginx/nginx.conf;
+brew services restart nginx;
+
+echo "Installing MySQL...";
+brew install mysql;
+brew services restart mysql;
+
 #TODO install phpmyadmin
-
-
 echo "Setting Terminal Theme…";
 #TODO
 
