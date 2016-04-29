@@ -90,6 +90,7 @@ brew install coreutils;
 echo "Installing nginx...";
 brew install nginx;
 brew services start nginx;
+ulimit -n 1024;
 
 #TODO fix this
 #nginx_cellar_dir=$($(dirname $(dirname $(realpath $(which nginx))))/logs);
