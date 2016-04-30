@@ -103,8 +103,11 @@ open "http://localhost/";
 echo "Installing PHP";
 brew tap homebrew/php;
 brew install php56 --with-fpm --without-apache;
+brew install php56-mcrypt;
 brew services start php56;
 lsof -Pni4 | grep LISTEN | grep php;
+echo "Ensure there are no php errors...";
+php -v;
 
 echo "Enabling Nginx for PHP...";
 touch /usr/local/var/www/index.php;
