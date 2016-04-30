@@ -20,7 +20,10 @@ apm stars --install;
 echo "Installing Homebrew Cask...";
 brew install brew-cask;
 echo "Installing Cask Applications..."
-brew cask install android-file-transfer appcleaner firefox genymotion github-desktop google-chrome googleappengine google-drive google-photos-backup filezilla linein paintbrush remote-play skype sony-ericsson-bridge sourcetree teamviewer universal-media-server virtualbox vlc phpstorm;
+casks=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/cask.list);
+while read p; do
+  echo $p
+#brew cask install android-file-transfer appcleaner firefox genymotion github-desktop google-chrome googleappengine google-drive google-photos-backup filezilla linein paintbrush remote-play skype sony-ericsson-bridge sourcetree teamviewer universal-media-server virtualbox vlc phpstorm;
 #details for phpstorm
 #license server http://idea.qinxi1992.cn
 
@@ -120,6 +123,8 @@ echo "Installing MySQL...";
 brew install mysql;
 brew services restart mysql;
 
+#TODO add nginx, www, and log folder to Development Group on Finder Sidebar
+#TODO break up this script
 #TODO enable phpmyadmin
 #TODO fetch all my repos
 
@@ -172,9 +177,8 @@ echo "Adding your pictures folder to the Finder sidebar…";
 # # sudo grep -r 'xdebug.so' /
 #
 # #http://serverfault.com/questions/671400/multiple-versions-of-php-through-nginx
-# #https://gist.github.com/t-io/8255711
-# #backup applications list
 
+#TODO loop through list files to install shit
 #TODO setup Time Machine from terminal?
 #TODO set 24hour clock in menu bar
 #TODO recent documents in dock
