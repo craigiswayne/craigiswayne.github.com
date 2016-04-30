@@ -18,5 +18,5 @@ pkg-config
 readline
 unixodbc
 xz
-homebrew/php/php56
+homebrew/php/php56 --with-fpm --without-apache
 homebrew/php/php56-mcrypt

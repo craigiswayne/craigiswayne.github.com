@@ -1,36 +1,3 @@
-#TODO test that php works WITHOUT a vhost entry
-echo "Installing XCode Command Line tools...";
-sudo xcrun cc;
-xcode-select --install;
-
-#==============================================================================
-# HOMEBREW
-#==============================================================================
-echo "Installing Homebrew..."
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
-brew doctor;
-brew update;
-brew upgrade;
-
-brew install node;
-npm install -g node-sass;
-brew cask install atom;
-apm stars --install;
-
-echo "Installing Homebrew Cask...";
-brew install brew-cask;
-echo "Installing Cask Applications..."
-casks=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/cask.list);
-while read p; do
-  echo $p
-#brew cask install android-file-transfer appcleaner firefox genymotion github-desktop google-chrome googleappengine google-drive google-photos-backup filezilla linein paintbrush remote-play skype sony-ericsson-bridge sourcetree teamviewer universal-media-server virtualbox vlc phpstorm;
-#details for phpstorm
-#license server http://idea.qinxi1992.cn
-
-brew doctor;
-echo "Cleaning up Homebrew...";
-brew cleanup;
-
 #==============================================================================
 # OS TWEAKS
 #==============================================================================
@@ -84,18 +51,58 @@ defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool 
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true;
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;
 
+#==============================================================================
+# HOMEBREW
+#==============================================================================
+echo "Installing Homebrew...";
+
+echo "Installing XCode Command Line tools...";
+sudo xcrun cc;
+xcode-select --install;
+
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
+brew doctor;
+brew update;
+brew upgrade;
+
+echo "Installing Homebrew Cask...";
+brew install brew-cask;
+echo "Installing Cask Applications...";
+casks=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/cask.list);
+for cask in "$casks"
+do
+	brew cask install "$cask";
+done
+
+brew doctor;
+echo "Cleaning up Homebrew...";
+brew cleanup;
 
 #==============================================================================
 # DEVELOPMENT ENVIRONMENT THINGS
 #==============================================================================
-echo "Setting up Development environment...";
-brew install coreutils;
+#details for phpstorm
+#license server http://idea.qinxi1992.cn
 
-echo "Installing nginx...";
-brew install nginx;
+echo "Setting up Development environment...";
+
+echo "Installing Homebrew taps...";
+taps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/homebrew.developer.list);
+for tap in "$taps"
+do
+	brew install "$tap";
+done
+
+echo "NPM Installations...";
+npm install -g node-sass;
+
+echo "APM Installations...";
+apm stars --install;
+
+
+echo "Post Install Nginx...";
 brew services start nginx;
 ulimit -n 1024;
-
 #TODO fix this
 #nginx_cellar_dir=$($(dirname $(dirname $(realpath $(which nginx))))/logs);
 ln -s /usr/local/var/log/nginx/ /usr/local/Cellar/nginx/1.10.0/logs
@@ -103,10 +110,8 @@ curl -o /usr/local/etc/nginx/nginx.conf https://raw.githubusercontent.com/craigi
 sudo nginx -s reload;
 open "http://localhost/";
 
-echo "Installing PHP";
-brew tap homebrew/php;
-brew install php56 --with-fpm --without-apache;
-brew install php56-mcrypt;
+#TODO TEST THAT THE FLAGS WORK
+echo "PHP Post Install...";
 brew services start php56;
 lsof -Pni4 | grep LISTEN | grep php;
 echo "Ensure there are no php errors...";
@@ -119,8 +124,7 @@ brew services restart nginx;
 sudo nginx -s reload;
 open "http://localhost/";
 
-echo "Installing MySQL...";
-brew install mysql;
+echo "MySQL Post Install...";
 brew services restart mysql;
 
 #TODO add nginx, www, and log folder to Development Group on Finder Sidebar
@@ -143,8 +147,6 @@ echo "Adding your home folder to the Finder sidebar…";
 
 echo "Adding your pictures folder to the Finder sidebar…";
 #TODO
-
-
 
 #TODO set this via terminal
 #date.timezone = Africa/Johannesburg
@@ -178,7 +180,6 @@ echo "Adding your pictures folder to the Finder sidebar…";
 #
 # #http://serverfault.com/questions/671400/multiple-versions-of-php-through-nginx
 
-#TODO loop through list files to install shit
 #TODO setup Time Machine from terminal?
 #TODO set 24hour clock in menu bar
 #TODO recent documents in dock
@@ -186,6 +187,7 @@ echo "Adding your pictures folder to the Finder sidebar…";
 #==============================================================================
 # REFERENCES
 #==============================================================================
+#https://gist.github.com/jimothyGator/5436538 < NGINX DEFAULTS
 #http://www.thexlab.com/faqs/maintscripts.html < MAINTENANCE SCRIPTS
 #https://haroldsoh.com/2011/10/07/clone-all-repos-from-a-bitbucket-source/ < GIT REPOS
 #https://gist.github.com/saetia/1623487 < SYSTEM TWEAKS
