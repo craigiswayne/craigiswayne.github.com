@@ -102,7 +102,7 @@ open "http://localhost/";
 
 echo "Installing PHP";
 brew tap homebrew/php;
-brew install php56 --with-fpm --without-apache --with-debug;
+brew install php56 --with-fpm --without-apache;
 brew services start php56;
 lsof -Pni4 | grep LISTEN | grep php;
 
