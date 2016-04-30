@@ -94,19 +94,11 @@ brew services start nginx;
 ulimit -n 1024;
 
 #TODO fix this
-#TODO use dotfiles folder as base for modifications
 #nginx_cellar_dir=$($(dirname $(dirname $(realpath $(which nginx))))/logs);
-#ln -s /usr/local/var/log/nginx $nginx_cellar_dir;
 ln -s /usr/local/var/log/nginx/ /usr/local/Cellar/nginx/1.10.0/logs
-
-atom /usr/local/etc/nginx/;
-#modify
-#user yourusername staff
-#listen 80;
-
+curl -o /usr/local/etc/nginx/nginx.conf https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/nginx.conf;
 sudo nginx -s reload;
-# you can browse to localhost or 127.0.0.1 and it should work
-#TODO get the html root from nginx configs
+open "http://localhost/";
 
 echo "Installing PHP";
 brew tap homebrew/php;
@@ -115,18 +107,18 @@ brew services start php56;
 lsof -Pni4 | grep LISTEN | grep php;
 
 echo "Enabling Nginx for PHP...";
-#index index.php
-atom /usr/local/etc/nginx/nginx.conf;
+touch /usr/local/var/www/index.php;
+echo "<?php phpinfo(); ?>" >> index.php;
 brew services restart nginx;
+sudo nginx -s reload;
+open "http://localhost/";
 
 echo "Installing MySQL...";
 brew install mysql;
 brew services restart mysql;
 
 #TODO enable phpmyadmin
-
-#https://craigiswayne@bitbucket.org/craigiswayne/nexus_forms.git
-
+#TODO fetch all my repos
 
 #TODO install phpmyadmin
 echo "Setting Terminal Theme…";
@@ -145,128 +137,18 @@ echo "Adding your pictures folder to the Finder sidebar…";
 #TODO
 
 
-#brew install nginx-full --with-geoip --with-upload-progress-module
-#brew cask install nginx;
-#autostart nginx
-#http://derickbailey.com/2014/12/27/how-to-start-nginx-on-port-80-at-mac-osx-boot-up-log-in/
-#if that doesnt work #https://gist.github.com/mralexho/6cd3cf8b2ebbd4f33165
-#sudo cp /usr/local/opt/nginx/*.plist /Library/LaunchDaemons;
-#sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist;
-#nginx uses this as the web path /usr/local/var
 
-#Installing PHP 5.6
-#https://blog.frd.mn/install-nginx-php-fpm-mysql-and-phpmyadmin-on-os-x-mavericks-using-homebrew/
-#brew tap homebrew/dupes;
-#brew tap homebrew/versions;
-#brew tap homebrew/homebrew-php;
-#brew install --without-apache --with-fpm --with-debug --with-cgi --with-mysql php56;
-#brew install php56-memcache php56-memcached php56-mcrypt php56-xdebug php56-imagick;
-#echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile && . ~/.bash_profile
-#source ~/.bash_profile;
-# mkdir -p ~/Library/LaunchAgents;
-# ln -sfv /usr/local/opt/php56/homebrew.mxcl.php56.plist ~/Library/LaunchAgents/;
-# launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist;
-# #TODO set this via terminal
-# date.timezone = Africa/Johannesburg
-#Test php-fpm is running
-#lsof -Pni4 | grep LISTEN | grep php
-
-# #ref: http://blog.joefallon.net/2013/10/install-mysql-on-mac-osx-using-homebrew/
-# brew install mysql;
-# mysql.server restart
-
-#TODO get list of previously installed applications and then loop through them and install... look in bookmarks
-#TODO and maybe sort this list alphabetically?!
-
+#TODO set this via terminal
+#date.timezone = Africa/Johannesburg
 
 # https://gist.github.com/jimothyGator/5436538
-echo "Fetching Nexus forms repo…";
-#TODO dynamically get the web root and use it in the line below
-mkdir -p /usr/local/var/www/nexus_forms;
-git init;
-git remote add origin https://craigiswayne@bitbucket.org/craigiswayne/nexus_forms.git;
-git pull origin master;
-git submodule update --init --recursive;
 
-
-#Actually don’t need this just yet
-#echo "Adding in host entry…";
-#sudo echo "127.0.0.1 forms.nexus.org" >> /etc/hosts
-
-#http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/
-#TODO do the nginx configs stuff here
-
-#get the nexus repo
-
-
-#echo "Get All Git Projects...";
-#todo
-#see reference at the top
-
-#set the following applications to show on the Dock
-#Finder
-#Google Chrome
-#Atom
-#SourceTree
-#Google Apps Engine
-
-# #get git sheeyit
-# mkdir -p /usr/local/var/www/nexus_forms/;
-# cd /usr/local/var/www/nexus_forms/;
-# git init;
-# git remote add origin https://craigiswayne@bitbucket.org/craigiswayne/nexus_forms.git;
-# git pull origin master -v;
-# git submodule update --init --recursive;
-
-
-# #! /usr/bin/env
-# HOMEBREW_APPLICATIONS_DIR='/Applications';
-# ICLOUD_FOLDER='~/Library/Mobile\ Documents/com~apple~CloudDocs';
-# echo "Linking applications backed up to the iCloud";
-# #ln -sf ~/Library/Mobile\ Documents/com~apple~CloudDocs/Applications/*.app /Applications/
-#
-# # # disable line wrapping
-# # tput rmam;
-# # # enable line wrapping
-# # #tput smam;
-#
-# #REF:https://echo.co/blog/os-x-109-local-development-environment-apache-php-and-mysql-homebrew
-# #Ensure brew install php is used before any other php
-# # echo "export PATH=\$(echo \$PATH | sed 's|/usr/local/bin||; s|/usr/local/sbin||; s|::|:|; s|^:||; s|\(.*\)|/usr/local/bin:/usr/local/sbin:\1|')" >> ~/.bash_profile && source ~/.bash_profile
-# #
-# # #MySQL stuffs;
-# # brew install -v mysql
-# # cp -v $(brew --prefix mysql)/support-files/my-default.cnf $(brew --prefix mysql)/my.cnf
-# # cat >> $(brew --prefix mysql)/my.cnf <<'EOF'
-# # # Echo & Co. changes
-# # max_allowed_packet = 2G
-# # innodb_file_per_table = 1
-# # EOF
-# # sed -i '' 's/^# \(innodb_buffer_pool_size\)/\1/' $(brew --prefix mysql)/my.cnf
-# # [ ! -d ~/Library/LaunchAgents ] && mkdir -v ~/Library/LaunchAgents
-# # [ -f $(brew --prefix mysql)/homebrew.mxcl.mysql.plist ] && ln -sfv $(brew --prefix mysql)/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/
-# # [ -e ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist ] && launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-# # $(brew --prefix mysql)/bin/mysql_secure_installation
-#
 # #this depends on which php version you're using
 # brew install -v xdebug;
-#
-#
-# #brew cask install --appdir=$HOMEBREW_APPLICATIONS_DIR google-music-manager;
-# #brew cask install --appdir=$HOMEBREW_APPLICATIONS_DIR all2mp3
-#
-# brew cleanup --force;
-#
-# #defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Drive.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-# #killall Dock
-#
-# # probably wanna install everything on a user level... to be safe
-# # so for the sites folder you'd wanna do this:
-# # ~/sites/
-# # Enabling XDebug
-# # when adding more sites have a look at dynamically just adding in jizz using regex to match urls
-#
-#
+#defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Drive.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+#killall Dock
+
+# Enabling XDebug
 # # Go to your php ini file, e.g:
 # # /usr/local/etc/php/5.6/php.ini
 # # find a section called Dynamic Extensions
@@ -280,19 +162,15 @@ git submodule update --init --recursive;
 # # xdebug.remote_connect_back=On
 # # xdebug.remote_log=/var/log/xdebug.log
 # # restart your server
-#
+
 # # associaye web.whatsapp.com to your browser
-#
-#
 # # Changing the port of xdebug
 # # find the php.ini file where xdebug is initialized
 # # sudo grep -r 'xdebug.so' /
 #
 # #http://serverfault.com/questions/671400/multiple-versions-of-php-through-nginx
 # #https://gist.github.com/t-io/8255711
-#
 # #backup applications list
-# # find /Applications/ -iname *.app > ~/Library/Mobile\ Documents/com~apple~CloudDocs/Documents/applications.bak -maxdepth 1
 
 #TODO setup Time Machine from terminal?
 #TODO set 24hour clock in menu bar
