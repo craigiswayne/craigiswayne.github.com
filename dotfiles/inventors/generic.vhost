@@ -1,0 +1,69 @@
+server {
+
+   listen       80;
+   server_name {{url}};
+
+   access_log  logs/{{repo_dir}}/access.log;
+   error_log  logs/{{repo_dir}}/error.log;
+
+   root html/{{repo_dir}};
+   proxy_cache off;
+
+   location / {
+       include fastcgi.conf;
+       index  index.php index.html index.htm;
+       try_files $uri $uri/ @handler;
+       expires off;
+   }
+
+
+   location ^~ /app/ { deny all; }
+   location ^~ /includes/ { deny all; }
+   location ^~ /lib/ { deny all; }
+   location ^~ /media/downloadable/ { deny all; }
+   location ^~ /pkginfo/ { deny all; }
+   location ^~ /report/config.xml { deny all; }
+   location ^~ /var/ { deny all; }
+
+   location /var/export/ {
+       auth_basic "Restricted";
+       auth_basic_user_file htpasswd;
+       autoindex on;
+   }
+
+   location ~* \.(jpe?g|gif|css|png|js|ico|pdf|zip|tar|t?gz|mp3|wav|swf)$ {
+       access_log off;
+       expires 1y;
+       log_not_found off;
+   }
+
+   location /. {
+      return 404;
+   }
+
+   location @handler {
+      rewrite / /index.php;
+   }
+
+   location ~ .php/ {
+      rewrite ^(.*.php)/ $1 last;
+   }
+
+   location ~ .php$ {
+
+      if (!-e $request_filename) {
+        rewrite / /index.php last;
+      }
+
+      expires off;
+      fastcgi_pass 127.0.0.1:9000;
+
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+      include fastcgi_params;
+
+      location ~ .php/ {
+        rewrite ^(.*.php)/ $1 last;
+      }
+
+   }
+}
