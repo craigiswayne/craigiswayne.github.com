@@ -30,6 +30,8 @@ sudo nginx -s reload;
 open "http://localhost/";
 
 echo "PHP Post Install...";
+scp $(find /usr/local/Cellar/php56 -iname "homebrew.mxcl.php56.plist") ~/Library/LaunchAgents/;
+
 php_ini_loaded_file=$(php -r 'print php_ini_loaded_file();');
 replace ";date.timezone =" "date.timezone = Africa/Johannesburg" -- $php_ini_loaded_file;
 brew services start php56;
@@ -37,13 +39,18 @@ lsof -Pni4 | grep LISTEN | grep php;
 echo "Ensure there are no php errors...";
 php -v;
 
+echo "Nginx Post Install...";
+#scp $(find /usr/local/Cellar/nginx -iname "homebrew.mxcl.nginx.plist") ~/Library/LaunchAgents/;
+sudo cp /usr/local/opt/nginx/*.plist /Library/LaunchDaemons;
+sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+
 echo "Enabling Nginx for PHP...";
 #TODO variablize this
 touch /usr/local/var/www/index.php;
 echo "<?php phpinfo(); ?>" >> index.php;
 brew services restart nginx;
 sudo nginx -s reload;
-open "http://localhost/";
+open "http://127.0.0.1/";
 
 echo "MySQL Post Install...";
 brew services restart mysql;

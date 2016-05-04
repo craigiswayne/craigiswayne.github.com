@@ -7,7 +7,8 @@ sh setup.development.sh;
 
 #==============================================================================
 # REFERENCES
-
+#http://derickbailey.com/2014/12/27/how-to-start-nginx-on-port-80-at-mac-osx-boot-up-log-in/ < AUTOSTART NGINX with sudo
+#http://www.robertmulley.com/tutorial/nginx-install-and-setup-mac-os-x-yosemite/ < NGINX,PHP,HOMEBREW,MAC OSX
 #https://gist.github.com/jimothyGator/5436538 < NGINX DEFAULTS
 #http://www.thexlab.com/faqs/maintscripts.html < MAINTENANCE SCRIPTS
 #https://haroldsoh.com/2011/10/07/clone-all-repos-from-a-bitbucket-source/ < GIT REPOS
