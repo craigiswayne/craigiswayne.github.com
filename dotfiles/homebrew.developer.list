@@ -17,6 +17,7 @@ pcre
 pkg-config
 readline
 unixodbc
+xdebug
 xz
 homebrew/php/php56 --with-fpm --without-apache
 homebrew/php/php56-mcrypt

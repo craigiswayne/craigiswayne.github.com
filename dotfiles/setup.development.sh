@@ -57,32 +57,17 @@ brew services restart mysql;
 echo "Setting Terminal Theme…";
 #TODO
 
+#TODO setup magento envronment variable (fastcgi_param  MAGE_IS_DEVELOPER_MODE TRUE;) (maybe separate script for inventors?)
+#TODO autoinclude the custom php file to disable caches
+#TODO maybe set the timeout on php for debugging purposes (php.ini max_execution_time = x) (request_terminate_timeout = x)
+#TODO x = 300? 5mins
+#TODO disable phpstorm setting Detect and use existing file indents for editing
+#TODO phpstorm setting show line numbers by default
+#TODO enable remote debugging but it would need xdebug installed on server right?!
 # #this depends on which php version you're using
-# brew install -v xdebug;
 #TODO list this
 #defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Drive.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 #killall Dock
-
-# Enabling XDebug
-# or maybe try installing via homebrew?
-# Go to your php ini file, e.g:
-# /usr/local/etc/php/5.6/php.ini
-# find a section called Dynamic Extensions
-# add this to that section:
-# zend_extension=/usr/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so
-
-# then at the bottom of the ini file add this:
-# zend_extension=locationOfYourxDebugfile
-# xdebug.remote_port=9000
-# xdebug.remote_enable=On
-# xdebug.remote_connect_back=On
-# xdebug.remote_log=/var/log/xdebug.log
-# restart your server
-
-# associate web.whatsapp.com to your browser
-# Changing the port of xdebug
-# find the php.ini file where xdebug is initialized
-# sudo grep -r 'xdebug.so' /
 
 #TODO find a way to easily switch php versions
 #http://serverfault.com/questions/671400/multiple-versions-of-php-through-nginx
