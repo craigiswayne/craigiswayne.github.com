@@ -32,7 +32,7 @@
         <routers>
             <adminhtml>
                 <args>
-                    <frontName><![CDATA[{{magento_username}}]]></frontName>
+                    <frontName><![CDATA[admin]]></frontName>
                 </args>
             </adminhtml>
         </routers>
