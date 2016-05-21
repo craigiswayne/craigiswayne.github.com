@@ -2,7 +2,7 @@
 <config>
     <global>
         <install>
-            <date><![CDATA[{{now}}]]></date>
+            <date><![CDATA[#now#]]></date>
         </install>
         <crypt>
             <key><![CDATA[92d23636cd8ca98f84ae03d67ec7e5a1]]></key>
@@ -15,9 +15,9 @@
             <default_setup>
                 <connection>
                     <host><![CDATA[localhost]]></host>
-                    <username><![CDATA[{{mysql_username}}]]></username>
-                    <password><![CDATA[{{mysql_password}}]]></password>
-                    <dbname><![CDATA[{{db_name}}]]></dbname>
+                    <username><![CDATA[#mysql_username#]]></username>
+                    <password><![CDATA[#mysql_password#]]></password>
+                    <dbname><![CDATA[#db_name#]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>
