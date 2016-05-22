@@ -5,7 +5,7 @@
             <date><![CDATA[#now#]]></date>
         </install>
         <crypt>
-            <key><![CDATA[92d23636cd8ca98f84ae03d67ec7e5a1]]></key>
+            <key><![CDATA[#encryption_key#]]></key>
         </crypt>
         <disable_local_modules>false</disable_local_modules>
         <resources>

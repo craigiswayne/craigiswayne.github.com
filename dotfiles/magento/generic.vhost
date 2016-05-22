@@ -1,21 +1,17 @@
 server {
-
    listen       80;
-   server_name {{url}};
+   server_name  #hostname#;
+   root         html/#project_name#;
+   proxy_cache  off;
 
-   access_log  logs/{{repo_dir}}/access.log;
-   error_log  logs/{{repo_dir}}/error.log;
-
-   root html/{{repo_dir}};
-   proxy_cache off;
+   access_log  #nginx_log_dir#/#project_name#_access.log;
+   error_log   #nginx_log_dir#/#project_name#_error.log;
 
    location / {
-       include fastcgi.conf;
        index  index.php index.html index.htm;
-       try_files $uri $uri/ @handler;
+       try_files $uri $uri/ @handler =404;
        expires off;
    }
-
 
    location ^~ /app/ { deny all; }
    location ^~ /includes/ { deny all; }
@@ -32,14 +28,11 @@ server {
    }
 
    location ~* \.(jpe?g|gif|css|png|js|ico|pdf|zip|tar|t?gz|mp3|wav|swf)$ {
-       access_log off;
        expires 1y;
-       log_not_found off;
+       error_log #nginx_log_dir#/#project_name#_404_assets.log;
+       log_not_found on;
    }
 
-   location /. {
-      return 404;
-   }
 
    location @handler {
       rewrite / /index.php;
@@ -47,23 +40,5 @@ server {
 
    location ~ .php/ {
       rewrite ^(.*.php)/ $1 last;
-   }
-
-   location ~ .php$ {
-
-      if (!-e $request_filename) {
-        rewrite / /index.php last;
-      }
-
-      expires off;
-      fastcgi_pass 127.0.0.1:9000;
-
-      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-      include fastcgi_params;
-
-      location ~ .php/ {
-        rewrite ^(.*.php)/ $1 last;
-      }
-
    }
 }
