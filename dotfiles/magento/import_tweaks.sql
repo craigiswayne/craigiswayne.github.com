@@ -22,3 +22,5 @@ INSERT INTO `#db_name#`.`admin_role` (parent_id,tree_level,sort_order,role_type,
 VALUES (1,2,0,'U',(SELECT user_id FROM `#db_name#`.admin_user WHERE username = 'admin'),'#first_name#');
 
 UNLOCK TABLES;
+
+-- TODO disable the secret key from backend urls

@@ -5,7 +5,7 @@
             <date><![CDATA[#now#]]></date>
         </install>
         <crypt>
-            <key><![CDATA[#encryption_key#]]></key>
+            <key><![CDATA[#magento_encryption_key#]]></key>
         </crypt>
         <disable_local_modules>false</disable_local_modules>
         <resources>
