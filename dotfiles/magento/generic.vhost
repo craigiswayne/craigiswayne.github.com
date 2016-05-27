@@ -33,10 +33,28 @@ server {
        log_not_found on;
    }
 
-
    location @handler {
       rewrite / /index.php;
    }
+
+   location ~ .php$ {
+
+     if ($uri = /markdown.php){
+       root html;
+     }
+
+     try_files $uri $uri/ =404;
+
+     if (!-e $request_filename) {
+       return 404;
+     }
+
+     fastcgi_pass 127.0.0.1:9000;
+     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+     include fastcgi_params;
+     expires off;
+   }
+
 
    location ~ .php/ {
       rewrite ^(.*.php)/ $1 last;
