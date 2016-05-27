@@ -6,6 +6,7 @@ UPDATE `#db_name#`.core_config_data SET value = '#full_url#' WHERE path = 'web/s
 UPDATE `#db_name#`.core_config_data SET value = '#hostname#' WHERE path = 'web/cookie/cookie_domain';
 UPDATE `#db_name#`.core_config_data SET value = '#google_tag_id#' WHERE path = 'googletagmanager/general_settings/tag_id';
 UPDATE `#db_name#`.core_config_data SET VALUE = 1 WHERE path = "payment/banktransfer/active";
+update `#db_name#`.core_config_data SET value = 0 WHERE path = "admin/security/use_form_key";
 DELETE FROM `#db_name#`.`admin_role` WHERE user_id IN (SELECT user_id FROM `#db_name#`.`admin_user` WHERE username  = "admin");
 DELETE FROM `#db_name#`.`admin_user` WHERE username = "admin";
 

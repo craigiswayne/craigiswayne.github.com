@@ -1,29 +1,4 @@
 <?php
-/**
- * Magento Enterprise Edition
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Magento Enterprise Edition End User License Agreement
- * that is bundled with this package in the file LICENSE_EE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.magento.com/license/enterprise-edition
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
- *
- * @category    Mage
- * @package     Mage
- * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
- * @license http://www.magento.com/license/enterprise-edition
- */
-
 if (version_compare(phpversion(), '5.3.0', '<')===true) {
     echo  '<div style="font:12px/1.35em arial, helvetica, sans-serif;">
 <div style="margin:0 0 25px 0; border-bottom:1px solid #ccc;">
@@ -34,9 +9,6 @@ Whoops, it looks like you have an invalid PHP version.</h3></div><p>Magento supp
     exit;
 }
 
-/**
- * Compilation includes configuration file
- */
 define('MAGENTO_ROOT', getcwd());
 
 $compilerConfig = MAGENTO_ROOT . '/includes/config.php';
@@ -82,18 +54,19 @@ if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
         }
         Enterprise_PageCache_Model_Cache::getCacheInstance()->cleanType('full_page');
 
+        $directories_to_empty = [
+            Mage::getBaseDir("cache"),
+            dirname(Mage::getBaseDir("cache")).DS."full_page_cache"
+        ];
 
-        //mageDelTree(Mage::getBaseDir("cache"));
-
-
-        $dir = Mage::getBaseDir("cache");
-        $di = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-        $ri = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
-        foreach ( $ri as $file ) {
-            $file->isDir() ?  rmdir($file) : unlink($file);
+        foreach($directories_to_empty as $dir){
+            $di = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+            $ri = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
+            foreach ( $ri as $file ) {
+                $file->isDir() ?  rmdir($file) : unlink($file);
+            }
+            rmdir($dir);
         }
-
-
     }
 }
 
