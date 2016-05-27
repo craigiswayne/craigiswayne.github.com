@@ -1,4 +1,5 @@
 server {
+
    listen       80;
    server_name  ~^local\.?(?<domain>.*)\.(?:co\.za|com|org|net);
    root         html/$domain;
@@ -8,7 +9,7 @@ server {
 
    location / {
        index  index.php index.html index.htm;
-       try_files $uri $uri/ @handler =404;
+       try_files $uri $uri/ @handler;
        expires off;
    }
 
@@ -26,18 +27,11 @@ server {
        autoindex on;
    }
 
-   location ~* \.(jpe?g|gif|css|png|js|ico|pdf|zip|tar|t?gz|mp3|wav|swf)$ {
-       expires 1y;
-       error_log logs/assets_not_found.log;
-       log_not_found on;
-   }
-
-
    location @handler {
-      rewrite / /index.php;
+       rewrite / /index.php;
    }
 
-   location ~ .php/ {
-      rewrite ^(.*.php)/ $1 last;
+   location ~ .php/ { ## Forward paths like /js/index.php/x.js to relevant handler
+       rewrite ^(.*.php)/ $1 last;
    }
 }
