@@ -1,0 +1,29 @@
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server ipv6only=on;
+
+        root /usr/local/var/www/{{PROJECT_ROOT}};
+        index index.php index.html index.htm;
+
+        server_name {{SUBDOMAIN}}.{{DOMAIN}}.{{TLD}};
+
+        location / {
+                # try_files $uri $uri/ =404;
+                try_files $uri $uri/ /index.php?q=$uri&$args;
+        }
+
+        # Execute php scripts
+        location ~ .php$ {
+
+          try_files $uri $uri/ =404;
+
+          if (!-e $request_filename) {
+            return 404;
+          }
+
+          fastcgi_pass 127.0.0.1:9000;
+          fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+          include fastcgi_params;
+          expires off;
+        }
+}
