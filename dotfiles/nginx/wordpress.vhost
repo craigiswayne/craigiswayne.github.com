@@ -2,7 +2,7 @@ server {
         listen 80 default_server;
         listen [::]:80 default_server ipv6only=on;
 
-        root /usr/local/var/www/{{PROJECT_ROOT}};
+        root {{PROJECT_ROOT}};
         index index.php index.html index.htm;
 
         server_name {{SUBDOMAIN}}.{{DOMAIN}}.{{TLD}};

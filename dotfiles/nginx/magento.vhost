@@ -27,12 +27,6 @@ server {
        autoindex on;
    }
 
-   location ~* \.(jpe?g|gif|css|png|js|ico|pdf|zip|tar|t?gz|mp3|wav|swf)$ {
-       expires 1y;
-       error_log #nginx_log_dir#/#repo_name#_404_assets.log;
-       log_not_found on;
-   }
-
    location @handler {
       rewrite / /index.php;
    }
