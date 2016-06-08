@@ -1,16 +1,22 @@
 server {
    listen       80;
-   server_name  #hostname#;
-   root         html/#repo_name#;
+   server_name  {{project_server_name}};
+   root         {{project_root}};
    proxy_cache  off;
 
-   access_log  #nginx_log_dir#/#repo_name#_access.log;
-   error_log   #nginx_log_dir#/#repo_name#_error.log;
+   access_log  {{nginx_logs_dir}}/{{project_name}}_access.log;
+   error_log   {{nginx_logs_dir}}/{{project_name}}_error.log;
 
    location / {
        index  index.php index.html index.htm;
        try_files $uri $uri/ @handler =404;
        expires off;
+   }
+
+   location ~* \.(jpe?g|gif|css|png|js|ico|pdf|zip|tar|t?gz|mp3|wav|swf)$ {
+      expires 1y;
+      error_log logs/assets_not_found.log;
+      log_not_found on;
    }
 
    location ^~ /app/ { deny all; }
