@@ -1,0 +1,24 @@
+# Redirect everything to the main site. We use a separate server statement and NOT an if statement - see http://wiki.nginx.org/IfIsEvil
+
+server {
+	server_name local.huisgenoot.com;
+	root html/huisgenoot.com;
+
+	index index.php;
+
+	location ~* \.(jpe?g|gif|css|png|js|ico|pdf|zip|tar|t?gz|mp3|wav|swf)$ {
+	expires 1y;
+	error_log logs/assets_not_found.log;
+	log_not_found on;
+}
+
+  include      default_locations.conf;
+	#include global/restrictions.conf;
+
+	# Additional rules go here.
+
+	# Only include one of the files below.
+	include servers/wordpress.conf;
+#	include global/wordpress-ms-subdir.conf;
+#	include global/wordpress-ms-subdomain.conf;
+}

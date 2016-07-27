@@ -1,0 +1,9 @@
+server {
+   listen       80;
+   server_name  local.craigiswayne.github.com;
+
+   root         html/craigiswayne.github.com;
+   proxy_cache  off;
+
+   include      default_locations.conf;
+}

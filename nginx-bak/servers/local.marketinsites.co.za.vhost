@@ -1,0 +1,15 @@
+server {
+
+   listen       80;
+   server_name  local.marketinsites.co.za;
+   root         html/marketinsites.co.za;
+   proxy_cache  off;
+
+   include      default_locations.conf;
+
+   location / {
+       index  index.php index.html index.htm;
+       try_files $uri $uri/ @handler;
+       expires off;
+   }
+}

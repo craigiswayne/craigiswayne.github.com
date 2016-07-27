@@ -1,0 +1,17 @@
+server {
+   listen       80;
+   server_name  local.playground.com;
+
+   root         html/playground/;
+   proxy_cache  off;
+
+
+
+   include      default_locations.conf;
+
+   location / {
+       index  index.php index.html index.htm;
+       try_files $uri $uri/ @handler =404;
+       expires off;
+   }
+}
