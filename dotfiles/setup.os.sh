@@ -22,6 +22,11 @@ echo "Showing only active items in Dock...";
 defaults write com.apple.dock static-only -bool TRUE;
 killall Dock;
 
+#==============================================================================
+# Finder Settings
+#==============================================================================
+echo "Modifying Finder settings...";
+
 echo "Set default Finder location to home folder (~/)";
 defaults write com.apple.Finder NewWindowTarget -string "PfLo";
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}";
@@ -37,6 +42,17 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true;
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false;
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true;
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;
+
+echo "Setting Finder default view as List View...";
+find ~/ -name ".DS_Store" -o -type f -name ".DS_Store" -delete;
+sudo find /usr -name ".DS_Store" -o -type f -name ".DS_Store" -delete;
+defaults write com.apple.Finder FXPreferredViewStyle Nlsv;
+killall Finder;
+
+echo "Setting Clock to 24 Hour Format...";
+#TODO TEST THIS and FIGURE OUT A WAY TO RESTART THE MENU
+defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  HH:mm';
+
 
 echo "Enabling the `locate` function in terminal…";
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist;
@@ -64,6 +80,15 @@ echo "Adding your home folder to the Finder sidebar…";
 echo "Adding your pictures folder to the Finder sidebar…";
 #TODO
 
-#TODO set 24hour clock in menu bar
 #TODO recent documents in dock
-#TODO default finder sort by settings "snap to grid";
+
+#TODO auto assign: Control + CMD + M to zoom windows
+#Keyboard Application Shortcuts, Text = "Zoom"
+
+echo "Disabling local Time Machine backups...";
+sudo tmutil disablelocal;
+
+#############
+# REFERENCES:
+#############
+#http://www.defaults-write.com/change-default-view-style-in-os-x-finder/

@@ -21,6 +21,10 @@ do
 	brew cask install "$cask";
 done
 
+echo "Installing your Application preferences...";
+echo "Setting VLC to autoupdate...";
+defaults write org.videolan.vlc SUAutomaticallyUpdate true;
+
 brew doctor;
 echo "Cleaning up Homebrew...";
 brew cleanup;

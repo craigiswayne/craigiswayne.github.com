@@ -1,0 +1,6 @@
+<application>
+  <component name="UISettings">
+    <option name="HIDE_TOOL_STRIPES" value="false" />
+    <option name="ACTIVATE_RIGHT_EDITOR_ON_CLOSE" value="true" />
+  </component>
+</application>

@@ -1,0 +1,44 @@
+autoconf
+composer
+coreutils
+curl
+freetype
+gettext
+icu4c
+jpeg
+libpng
+libxml2
+makedepend
+mcrypt
+mhash
+modman
+mysql
+nginx
+node
+openssl
+pcre
+pkg-config
+readline
+ruby
+symfony-installer
+unixodbc
+wget
+xdebug
+xz
+homebrew/php/php54 --with-fpm --without-debug
+homebrew/php/php54-mcrypt -fs
+homebrew/php/php54-redis -fs
+homebrew/php/php54-xdebug -fs
+homebrew/php/php56 --with-fpm --without-debug
+homebrew/php/php56-mcrypt -fs
+homebrew/php/php56-redis -fs
+homebrew/php/php56-xdebug -fs
+php56-redis
+php56-memcache
+vpnc
+Caskroom/cask/gulp
+Caskroom/cask/virtualbox
+Caskroom/cask/vagrant
+Caskroom/cask/vagrant-manager
+php56-intl
+homebrew/php/wp-cli

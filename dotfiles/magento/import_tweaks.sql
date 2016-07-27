@@ -1,12 +1,13 @@
 DELETE FROM `adminnotification_inbox`;
 
 UPDATE `core_cache_option` SET value = 1;
-UPDATE `core_config_data` SET value = '#full_url#' WHERE path = 'web/unsecure/base_url';
-UPDATE `core_config_data` SET value = '#full_url#' WHERE path = 'web/secure/base_url';
-UPDATE `core_config_data` SET value = '#hostname#' WHERE path = 'web/cookie/cookie_domain';
-UPDATE `core_config_data` SET value = '#google_tag_id#' WHERE path = 'googletagmanager/general_settings/tag_id';
-UPDATE `core_config_data` SET VALUE = 1 WHERE path = "payment/banktransfer/active";
-update `core_config_data` SET value = 0 WHERE path = "admin/security/use_form_key";
+UPDATE `core_config_data` SET value = '#full_url#' WHERE path = 'web/unsecure/base_url' AND scope_id = 0;
+UPDATE `core_config_data` SET value = '#full_url#' WHERE path = 'web/secure/base_url' AND scope_id = 0;
+UPDATE `core_config_data` SET value = '#hostname#' WHERE path = 'web/cookie/cookie_domain' AND scope_id = 0;
+UPDATE `core_config_data` SET value = '#google_tag_id#' WHERE path = 'googletagmanager/general_settings/tag_id' and scope_id = 0;
+UPDATE `core_config_data` SET value = 'http://#hostname#' WHERE path = 'magebridge/redirect/magebridge_root' and scope_id = 0;
+UPDATE `core_config_data` SET VALUE = 1 WHERE path = "payment/banktransfer/active" and scope_id = 0;
+UPDATE `core_config_data` SET value = 0 WHERE path = "admin/security/use_form_key" and scope_id = 0;
 DELETE FROM `admin_role` WHERE user_id IN (SELECT user_id FROM `admin_user` WHERE username  = "admin");
 DELETE FROM `admin_user` WHERE username = "admin";
 

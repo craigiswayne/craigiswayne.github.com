@@ -60,6 +60,7 @@ if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
         ];
 
         foreach($directories_to_empty as $dir){
+            #FIXME if directory doesn't exist then move on
             $di = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
             $ri = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
             foreach ( $ri as $file ) {
@@ -71,6 +72,8 @@ if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
 }
 
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 umask(0);
 

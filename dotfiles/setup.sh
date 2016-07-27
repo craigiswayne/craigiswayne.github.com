@@ -20,5 +20,6 @@ sh setup.development.sh;
 #==============================================================================
 
 echo "A special thanks to all those who have helped compile this script...";
-read -p "Press any key to reboot...";
+read -p "Press any key to reboot...
+";
 sudo reboot now;
