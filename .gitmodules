@@ -1,9 +1,0 @@
-[submodule "gists/nginx-conf"]
-	path = gists/nginx-conf
-	url = https://gist.github.com/craigiswayne/c1fe7863165d7f54bb170db96d90231e
-[submodule "gists/js-os-detection"]
-	path = gists/js-os-detection
-	url = https://gist.github.com/craigiswayne/a0f5ffc67d14fd9ed87f0a487e20a22b
-[submodule "gists/remove_trcked_ignored_files"]
-	path = gists/remove_trcked_ignored_files
-	url = https://gist.github.com/craigiswayne/f803997987656fe7b83a116ee08128b9
