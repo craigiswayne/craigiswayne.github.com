@@ -15,6 +15,9 @@ brew upgrade;
 echo "Installing Homebrew Cask...";
 
 echo "Installing Homebrew taps...";
+brew tap homebrew/dupes
+brew tap homebrew/php
+
 my_taps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/brew.list);
 for tap in "$my_taps"
 do
