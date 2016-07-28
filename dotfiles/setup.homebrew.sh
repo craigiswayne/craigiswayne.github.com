@@ -13,6 +13,14 @@ brew update;
 brew upgrade;
 
 echo "Installing Homebrew Cask...";
+
+echo "Installing Homebrew taps...";
+my_taps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/bar);
+for tap in "$my_taps"
+do
+	brew install "$tap";
+done
+
 brew install brew-cask;
 echo "Installing Cask Applications...";
 my_casks=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/cask.list);
