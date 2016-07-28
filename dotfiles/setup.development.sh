@@ -5,13 +5,6 @@
 
 echo "Setting up Development environment...";
 
-echo "Installing Homebrew taps...";
-my_taps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/bar);
-for tap in "$my_taps"
-do
-	brew install "$tap";
-done
-
 echo "Installing Node plugins...";
 node_plugins=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/npm_plugins.list);
 for plugin in "$node_plugins"
