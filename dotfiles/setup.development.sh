@@ -6,11 +6,11 @@
 echo "Setting up Development environment...";
 
 echo "Installing Node plugins...";
-node_plugins=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/npm_plugins.list);
+node_plugins=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/npm.list);
 for plugin in "$node_plugins"
 do
-	npm install $plugin -g;
-done
+	npm install $plugin -g
+done;
 
 echo "Installing Atom add-ons...";
 apm stars --install;
@@ -44,7 +44,7 @@ NGINX_CONF=$NGINX_CONF_FOLDER"/nginx.conf";
 echo -e "user $(whoami) staff;\n" "$(cat $NGINX_CONF)" > $NGINX_CONF;
 #scp $(find /usr/local/Cellar/nginx -iname "homebrew.mxcl.nginx.plist") ~/Library/LaunchAgents/;
 
-sudo cp /usr/local/opt/nginx/*.plist /Library/LaunchDaemons;
+ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents/;
 sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 
 echo "Enabling Nginx for PHP...";
@@ -85,10 +85,12 @@ echo 'export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033
 echo 'export CLICOLOR=1;' >> $BASH_PROFILE_FILE;
 echo 'export LSCOLORS=ExFxBxDxCxegedabagacad;' >> $BASH_PROFILE_FILE;
 echo 'export LC_ALL=$LANG;' >> $BASH_PROFILE_FILE;
-echo 'alias ls="ls -laGFh";' >> $BASH_PROFILE_FILE;
+echo 'alias lscw="ls -laGFh";' >> $BASH_PROFILE_FILE;
 
 echo "Applying Terminal Theme...";
+#FIXME MUST BE A BETTER WAY TO DO THIS
 curl https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal -o tomorrow-night.terminal
+rm tomorrow-night.terminal;
 open tomorrow-night.terminal;
 sleep 1;
 defaults write com.apple.Terminal 'Default Window Settings' 'tomorrow-night';
@@ -114,8 +116,8 @@ http://krypted.com/mac-os-x/adding-objects-to-the-dock/
 PERSISTENT_DOCK_APPS=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/persistent_dock_apps.list);
 for APP in "$PERSISTENT_DOCK_APPS"
 do
-		defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://~/Applications/Google Drive.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>';
-done
+		defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://~/Applications/Google Drive.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+done;
 #killall Dock
 
 #TODO find a way to easily switch php versions
