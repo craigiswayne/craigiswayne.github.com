@@ -1,5 +1,5 @@
 android-file-transfer
-appcleaner
+#appcleaner
 atom
 filezilla
 firefox
@@ -9,8 +9,8 @@ google-chrome
 google-drive
 google-photos-backup
 googleappengine
+gulp
 linein
-mysqlworkbench
 paintbrush
 phpstorm
 prefs-editor
@@ -20,8 +20,8 @@ skype
 sony-ericsson-bridge
 sourcetree
 teamviewer
-tuntap
-universal-media-server
+#tuntap
+#universal-media-server
 utorrent
 virtualbox
 vlc
