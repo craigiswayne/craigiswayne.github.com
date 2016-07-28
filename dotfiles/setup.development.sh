@@ -16,6 +16,10 @@ echo "Installing Atom add-ons...";
 apm stars --install;
 
 echo "Post Install Nginx...";
+# Link configured servers
+# FIX ME, variablize this
+ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/servers/ /usr/local/etc/nginx/
+ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/global/ /usr/local/etc/nginx/
 sudo nginx;
 #TODO change nginx port
 #TODO maybe replace the whole nginx conf with my one

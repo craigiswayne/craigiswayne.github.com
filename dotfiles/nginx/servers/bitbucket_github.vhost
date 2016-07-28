@@ -1,13 +1,10 @@
 server {
    listen       80;
-   server_name  local.playground.com;
-
-   root         html/playground/;
+   server_name  ~^local\.?(?<domain>.*)\.(github.com).*$ ~^local\.?(?<domain>.*)\.(bitbucket.org).*$;
+   root         html/$domain.$2/;
    proxy_cache  off;
 
-
-
-   include      default_locations.conf;
+   include      global/default_locations.conf;
 
    location / {
        index  index.php index.html index.htm;
