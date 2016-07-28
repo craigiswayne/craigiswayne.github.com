@@ -16,7 +16,9 @@ echo "Installing Atom add-ons...";
 apm stars --install;
 
 echo "Post Install Nginx...";
-brew services start nginx;
+sudo nginx;
+#TODO change nginx port
+#TODO maybe replace the whole nginx conf with my one
 ulimit -n 1024;
 NGINX_INSTALL_DIR=$(dirname $(dirname $(realpath $(which nginx))));
 #TODO variablize this
