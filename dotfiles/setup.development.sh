@@ -62,6 +62,8 @@ echo "MySQL Post Install...";
 brew services restart mysql;
 
 echo "Customizing PHPStorm...";
+# TODO link nginx server file
+# activation license server = http://idea.pjoc.pub/
 #TODO proper link for phpstorm editor.xml
 PHPSTORM_PREFERENCES_FOLDER=$(find ~/Library/Preferences -type d -iname "phpstorm*");
 scp craigiswayne.github.com/dotfiles/phpstorm/editor.xml $PHPSTORM_PREFERENCES_FOLDER/options;
