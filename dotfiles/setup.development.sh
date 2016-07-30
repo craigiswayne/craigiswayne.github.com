@@ -15,6 +15,12 @@ done;
 echo "Installing Atom add-ons...";
 apm stars --install;
 
+echo "Installing my Personal GitHub Repo...";
+mkdir -p /usr/local/var/www/craigiswayne.github.com;
+cd /usr/local/var/www/craigiswayne.github.com;
+git init;
+git pull origin master;
+
 echo "Post Install Nginx...";
 # Link configured servers
 # FIX ME, variablize this
@@ -22,6 +28,9 @@ ln -sf /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/servers/ /usr/l
 ln -sf /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/global/ /usr/local/etc/nginx/
 ln -sf /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/markdown.php /usr/local/etc/nginx/
 ln -sf /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/nginx.conf /usr/local/etc/nginx/
+ln -sf /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/mime.types.conf /usr/local/etc/nginx/
+ln -sf /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/errors /usr/local/var/www
+ln -sf /usr/local/var/log/nginx /usr/local/var/www/logs
 
 sudo nginx;
 #TODO change nginx port

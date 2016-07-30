@@ -14,7 +14,6 @@ types {
     text/vnd.sun.j2me.app-descriptor      jad;
     text/vnd.wap.wml                      wml;
     text/x-component                      htc;
-    text/markdown                         md;
 
     image/png                             png;
     image/tiff                            tif tiff;
@@ -87,4 +86,7 @@ types {
     video/x-ms-asf                        asx asf;
     video/x-ms-wmv                        wmv;
     video/x-msvideo                       avi;
+
+    text/markdown                         md;
+    text/plain                            log;
 }

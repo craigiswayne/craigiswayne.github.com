@@ -5,7 +5,7 @@ server {
    root         html/marketinsites.co.za;
    proxy_cache  off;
 
-   include      default_locations.conf;
+   include      global/default_locations.conf;
 
    location / {
        index  index.php index.html index.htm;

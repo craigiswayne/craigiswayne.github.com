@@ -3,6 +3,8 @@
 #==============================================================================
 echo "Customizing OS to your liking...";
 
+echo "Disabling the guest account...";
+
 echo "Setting Automatic Updates...";
 sudo softwareupdate --schedule on;
 
