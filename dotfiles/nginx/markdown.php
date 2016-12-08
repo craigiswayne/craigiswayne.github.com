@@ -8,7 +8,7 @@ class GitHubMarkdownRender {
 	const MARKDOWN_EXT = '.md';
 	const CACHE_SESSION_KEY = 'ghmarkdownrender';
 
-	const GITHUB_PERSONAL_ACCESS_TOKEN = '';
+	const GITHUB_PERSONAL_ACCESS_TOKEN = '2b10429cd1c6f27672b56b8d3100ba6e60c13077';
 	const DOCUMENT_ROOT = '/usr/local/var/www';
 
 
@@ -97,10 +97,17 @@ class GitHubMarkdownRender {
 		$requestURI = trim($_SERVER['REQUEST_URI']);
 		$requestURI = preg_replace('/\?.+$/','',$requestURI);
 
+//		print_r($_SERVER['REQUEST_URI']);
+//		echo '<br/>';
+//		var_dump($_SERVER);
+//		print_r(self::DOCUMENT_ROOT);
+
 		// request URI must end with self::MARKDOWN_EXT
-		return (preg_match('/\\' . self::MARKDOWN_EXT . '$/',$requestURI))
-			? self::DOCUMENT_ROOT . $requestURI
-			: false;
+
+		return $_SERVER['QUERY_STRING'];
+
+		//original code below
+//		return (preg_match('/\\' . self::MARKDOWN_EXT . '$/',$requestURI)) ? self::DOCUMENT_ROOT . $requestURI : false;
 	}
 
 	private function renderErrorMessage($errorHtml) {

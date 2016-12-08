@@ -1,6 +1,6 @@
 server {
-	server_name local.mh.co.za;
-	root html/mh.co.za;
+	server_name local.pimpmylog.com;
+	root html/PimpMyLog;
 
 	index index.php;
   include global/default_locations.conf;
@@ -10,4 +10,6 @@ server {
 	include global/wordpress.conf;
 	#	include global/wordpress-ms-subdir.conf;
 	#	include global/wordpress-ms-subdomain.conf;
+
+	access_log off;
 }

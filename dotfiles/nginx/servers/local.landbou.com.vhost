@@ -1,8 +1,8 @@
 server {
-	server_name local.topcar.co.za;
-	root html/topcar.co.za;
+  server_name  local.landbou.com;
+  root         html/landbou.com;
 
-	index index.php;
+	index index.php index.html;
   include global/default_locations.conf;
 	include global/restrictions.conf;
 
@@ -10,4 +10,5 @@ server {
 	include global/wordpress.conf;
 	#	include global/wordpress-ms-subdir.conf;
 	#	include global/wordpress-ms-subdomain.conf;
+  proxy_read_timeout 6000s;
 }

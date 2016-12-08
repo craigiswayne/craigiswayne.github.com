@@ -119,9 +119,10 @@ do
 done;
 echo $HORIZONTAL_LINE;
 
-echo "Starting Web Server...";
-sudo nginx;
-echo $HORIZONTAL_LINE;
+echo "Updating Your Packages...";
+apm update;
+brew cask update;
+brew update;
 
 echo "Opening Apps that you will need to be using...";
 open -g -a Skype;
@@ -131,8 +132,6 @@ echo "Finished :)...";
 echo "Clear any pending TODO's";
 echo $HORIZONTAL_LINE;
 
-#TODO find a way to restore the magento code to its original repo state
-#TODO mysqldump --user=root --host=localhost --protocol=tcp --port=3306 --default-character-set=utf8 --single-transaction=TRUE --routines --events "redsquare";
 #TODO compress shit WITHOUT full structure
 #TODO if errors occur add to you have new mail
 #FIXME tar: Removing leading '/' from member names

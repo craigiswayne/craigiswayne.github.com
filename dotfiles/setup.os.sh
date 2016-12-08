@@ -4,6 +4,7 @@
 echo "Customizing OS to your liking...";
 
 echo "Disabling the guest account...";
+#TODO disable the guest account
 
 echo "Setting Automatic Updates...";
 sudo softwareupdate --schedule on;
@@ -52,9 +53,7 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv;
 killall Finder;
 
 echo "Setting Clock to 24 Hour Format...";
-#TODO TEST THIS and FIGURE OUT A WAY TO RESTART THE MENU
 defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  HH:mm';
-
 
 echo "Enabling the `locate` function in terminal…";
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist;
@@ -71,16 +70,16 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;
 
 echo "Inverting Mouse Scroll…";
-#TODO
+#TODO set the mouse scroll
 
 echo "Removing ‘All My Files’ from Finder sidebar...";
-#TODO
+#TODO remove all files
 
 echo "Adding your home folder to the Finder sidebar…";
-#TODO
+#TODO add home folder
 
 echo "Adding your pictures folder to the Finder sidebar…";
-#TODO
+#TODO add pictures folder
 
 #TODO recent documents in dock
 

@@ -1,0 +1,14 @@
+server {
+  #server_name  ^(?<subdomain>[a-z]+)\.?(?<domain>.*)\.(?<tld>.*);
+  server_name ~^local\.?(?<domain>.*)\.(?<tld>.*);
+  root         html/$domain.$tld;
+
+	index index.php;
+  include global/default_locations.conf;
+	include global/restrictions.conf;
+
+	# Only include one of the files below.
+	include global/wordpress.conf;
+	#	include global/wordpress-ms-subdir.conf;
+	#	include global/wordpress-ms-subdomain.conf;
+}
