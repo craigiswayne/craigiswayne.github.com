@@ -1,8 +1,8 @@
 server {
-  server_name  local.landbou.com;
-  root         html/landbou.com;
+  server_name  local.craigiswayne.github.com;
+  root         html/craigiswayne.github.com;
 
-	index index.php index.html;
+	index index.php;
   include global/default_locations.conf;
 	include global/restrictions.conf;
 
@@ -10,5 +10,4 @@ server {
 	include global/wordpress.conf;
 	#	include global/wordpress-ms-subdir.conf;
 	#	include global/wordpress-ms-subdomain.conf;
-  proxy_read_timeout 6000s;
 }
