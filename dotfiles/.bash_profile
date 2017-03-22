@@ -1,3 +1,5 @@
+
+
 export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ ";
 export CLICOLOR=1;
 export LSCOLORS=ExFxBxDxCxegedabagacad;
@@ -26,10 +28,34 @@ function submodules_initialize () {
 }
 
 
-function maybe_do_composer () {
+function maybe_install_composer () {
   if [ -f composer.json ]
   then
     composer update;
+  fi;
+}
+
+
+function maybe_install_npm () {
+  if [ -f package.json ]
+  then
+    npm install;
+  fi;
+}
+
+
+function maybe_install_bower () {
+  if [ -f bower.json ]
+  then
+    bower install --allow-root;
+  fi;
+}
+
+
+function maybe_run_grunt () {
+  if [[ -f Gruntfile.js || -f gruntfile.js ]]
+  then
+    grunt;
   fi;
 }
 
@@ -112,90 +138,90 @@ function view_missing_assets_nginx () {
 }
 
 
-function locate_missing_assets_nginx () {
-  username=craigwayne;
-  SYS_LOGS_DIR=/usr/local/var/log;
-  NGINX_LOG_DIR=$SYS_LOGS_DIR/nginx;
-  NOT_FOUND_ASSETS_LOG_FILE=$NGINX_LOG_DIR/assets_not_found.log;
-  number_of_missing_assets=$(wc -l < $NOT_FOUND_ASSETS_LOG_FILE);
-  number_of_missing_assets=$(echo "$number_of_missing_assets" | xargs);
-
-  if [ $number_of_missing_assets == 0 ]
-  then
-    echo "No missing assets logged...";
-    return;
-  fi;
-
-  LIVE_PROTOCOL="http://";
-  LOCAL_SUBDOMAIN="local";
-
-  COUNT=0;
-  while read line;
-  do
-    local_host=$(expr "$line" : '.*host: "\(.*\)",');
-    asset_local_url=$(expr "$line" : '.*GET \(.*\) HTTP');
-    asset_local_path=$(expr "$line" : '.*open() "\(.*\)" failed');
-    asset_local_directory=$(dirname $asset_local_path);
-
-    #TODO fix this reference here to a a variable reference
-    #TODO when checking for http://maenkind.huisgenoot.com/ it puts a www in the front
-    remote_host="www."$(expr "$local_host" : 'local.\(.*\)');
-    remote_host_dev="staging."$(expr "$local_host" : 'local.\(.*\)');
-    remote_host_subdomain=""$(expr "$local_host" : 'local.\(.*\)');
-    asset_remote_url=$LIVE_PROTOCOL$remote_host$asset_local_url;
-    asset_remote_url_subdomain=$LIVE_PROTOCOL$remote_host_subdomain$asset_local_url;
-    asset_remote_url_dev_subdomain=$LIVE_PROTOCOL$remote_host_dev$asset_local_url;
-
-    echo "LIVE_PROTOCOL:         "$LIVE_PROTOCOL;
-    echo "LOCAL SUBDOMAIN:       "$LOCAL_SUBDOMAIN;
-    echo "LOCAL HOST:            "$local_host;
-    echo "ASSET LOCAL URL:       "$asset_local_url;
-    echo "ASSET LOCAL DIRECTORY: "$asset_local_directory;
-    echo "ASSET LOCAL PATH:      "$asset_local_path;
-    echo "ASSET REMOTE URL:      "$asset_remote_url;
-    echo "REMOTE HOST:           "$remote_host;
-
-    mkdir -p $asset_local_directory;
-
-    if [ -f $asset_local_path ]
-    then
-      echo "$asset_local_url already exists";
-    else
-      response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url -o /dev/null);
-
-      if [ $response != 200 ]
-      then
-        response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url_subdomain -o /dev/null);
-        asset_remote_url=$asset_remote_url_subdomain;
-      fi;
-
-      if [ $response != 200 ]
-      then
-        response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url_dev_subdomain -o /dev/null);
-        asset_remote_url=$asset_remote_url_dev_subdomain;
-      fi;
-
-      echo "Looking for:           "$asset_remote_url;
-      echo "RESPONSE:              "$response;
-
-      if [ $response == 200 ]
-      then
-        COUNT=$[$COUNT+1];
-        mkdir -p $asset_local_directory;
-        sudo chown -Rv $username $asset_local_directory; #TODO this breaks
-        curl -L $asset_remote_url -o $asset_local_path;
-        echo "Found $asset_local_path ($response)"...;
-      else
-        echo "Asset is missing... but couldn't be found...";
-      fi;
-    fi;
-    echo "";
-  done < $NOT_FOUND_ASSETS_LOG_FILE;
-  echo "Found $COUNT/$number_of_missing_assets missing asset(s)...";
-
-  rm $NOT_FOUND_ASSETS_LOG_FILE;
-  sudo nginx -s reload;
-}
+# function locate_missing_assets_nginx () {
+#   username=craigwayne;
+#   SYS_LOGS_DIR=/usr/local/var/log;
+#   NGINX_LOG_DIR=$SYS_LOGS_DIR/nginx;
+#   NOT_FOUND_ASSETS_LOG_FILE=$NGINX_LOG_DIR/assets_not_found.log;
+#   number_of_missing_assets=$(wc -l < $NOT_FOUND_ASSETS_LOG_FILE);
+#   number_of_missing_assets=$(echo "$number_of_missing_assets" | xargs);
+#
+#   if [ $number_of_missing_assets == 0 ]
+#   then
+#     echo "No missing assets logged...";
+#     return;
+#   fi;
+#
+#   LIVE_PROTOCOL="http://";
+#   LOCAL_SUBDOMAIN="local";
+#
+#   COUNT=0;
+#   while read line;
+#   do
+#     local_host=$(expr "$line" : '.*host: "\(.*\)",');
+#     asset_local_url=$(expr "$line" : '.*GET \(.*\) HTTP');
+#     asset_local_path=$(expr "$line" : '.*open() "\(.*\)" failed');
+#     asset_local_directory=$(dirname $asset_local_path);
+#
+#     #TODO fix this reference here to a a variable reference
+#     #TODO when checking for http://maenkind.huisgenoot.com/ it puts a www in the front
+#     remote_host="www."$(expr "$local_host" : 'local.\(.*\)');
+#     remote_host_dev="staging."$(expr "$local_host" : 'local.\(.*\)');
+#     remote_host_subdomain=""$(expr "$local_host" : 'local.\(.*\)');
+#     asset_remote_url=$LIVE_PROTOCOL$remote_host$asset_local_url;
+#     asset_remote_url_subdomain=$LIVE_PROTOCOL$remote_host_subdomain$asset_local_url;
+#     asset_remote_url_dev_subdomain=$LIVE_PROTOCOL$remote_host_dev$asset_local_url;
+#
+#     echo "LIVE_PROTOCOL:         "$LIVE_PROTOCOL;
+#     echo "LOCAL SUBDOMAIN:       "$LOCAL_SUBDOMAIN;
+#     echo "LOCAL HOST:            "$local_host;
+#     echo "ASSET LOCAL URL:       "$asset_local_url;
+#     echo "ASSET LOCAL DIRECTORY: "$asset_local_directory;
+#     echo "ASSET LOCAL PATH:      "$asset_local_path;
+#     echo "ASSET REMOTE URL:      "$asset_remote_url;
+#     echo "REMOTE HOST:           "$remote_host;
+#
+#     mkdir -p $asset_local_directory;
+#
+#     if [ -f $asset_local_path ]
+#     then
+#       echo "$asset_local_url already exists";
+#     else
+#       response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url -o /dev/null);
+#
+#       if [ $response != 200 ]
+#       then
+#         response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url_subdomain -o /dev/null);
+#         asset_remote_url=$asset_remote_url_subdomain;
+#       fi;
+#
+#       if [ $response != 200 ]
+#       then
+#         response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url_dev_subdomain -o /dev/null);
+#         asset_remote_url=$asset_remote_url_dev_subdomain;
+#       fi;
+#
+#       echo "Looking for:           "$asset_remote_url;
+#       echo "RESPONSE:              "$response;
+#
+#       if [ $response == 200 ]
+#       then
+#         COUNT=$[$COUNT+1];
+#         mkdir -p $asset_local_directory;
+#         sudo chown -Rv $username $asset_local_directory; #TODO this breaks
+#         curl -L $asset_remote_url -o $asset_local_path;
+#         echo "Found $asset_local_path ($response)"...;
+#       else
+#         echo "Asset is missing... but couldn't be found...";
+#       fi;
+#     fi;
+#     echo "";
+#   done < $NOT_FOUND_ASSETS_LOG_FILE;
+#   echo "Found $COUNT/$number_of_missing_assets missing asset(s)...";
+#
+#   rm $NOT_FOUND_ASSETS_LOG_FILE;
+#   sudo nginx -s reload;
+# }
 
 
 function remove_tracked_ignored_files () {
@@ -292,42 +318,42 @@ function repo_maintenance () {
   #update_gitignore;
   wp_install_dev_tools;
 
-  console_warning "";
-  console_warning "#############################################################";
-  console_warning "# TODO";
-  console_warning "#############################################################";
-  console_warning "";
-  console_warning "Delete repositories remotely that are older than 6 months...";
-  console_warning "Check that the repo has an icon...";
+  console.warning "";
+  console.warning "#############################################################";
+  console.warning "# TODO";
+  console.warning "#############################################################";
+  console.warning "";
+  console.warning "Delete repositories remotely that are older than 6 months...";
+  console.warning "Check that the repo has an icon...";
 
-  console_warning "";
-  console_warning "run wp";
-  console_warning "remove any errors that appear...";
-  console_warning "";
+  console.warning "";
+  console.warning "run wp";
+  console.warning "remove any errors that appear...";
+  console.warning "";
 
-  console_warning "";
-  console_warning "Remove any 'MobileDetect' occurences...";
-  console_warning "Remove any 'mobileGrade' occurences...";
-  console_warning "";
+  console.warning "";
+  console.warning "Remove any 'MobileDetect' occurences...";
+  console.warning "Remove any 'mobileGrade' occurences...";
+  console.warning "";
 
-  console_warning "";
-  console_warning "Remove branches older than 6 months";
-  console_warning "e.g. git branch -dr origin/feature/login";
-  console_warning "https://www.git-tower.com/learn/git/faq/delete-remote-branch";
-  console_warning "";
+  console.warning "";
+  console.warning "Remove branches older than 6 months";
+  console.warning "e.g. git branch -dr origin/feature/login";
+  console.warning "https://www.git-tower.com/learn/git/faq/delete-remote-branch";
+  console.warning "";
 
-  console_warning "";
-  console_warning "Look for all classes that extend the WP_Widget...";
-  console_warning "and check if the construct class is used properly";
-  console_warning "or at least check if there is a construct method";
-  console_warning "something like:";
-  console_warning 'find ./ -name \*.php | xargs grep "extends WP_Widget"';
-  console_warning 'find ./ -name \*.php | xargs grep "parent::WP_Widget"';
-  console_warning "";
+  console.warning "";
+  console.warning "Look for all classes that extend the WP_Widget...";
+  console.warning "and check if the construct class is used properly";
+  console.warning "or at least check if there is a construct method";
+  console.warning "something like:";
+  console.warning 'find ./ -name \*.php | xargs grep "extends WP_Widget"';
+  console.warning 'find ./ -name \*.php | xargs grep "parent::WP_Widget"';
+  console.warning "";
 
   console.info "Running WP CLI...";
   wp;
-  console_warning "Check if there are any errors...";
+  console.warning "Check if there are any errors...";
 
 
   console.info "Check that no submodules are tracking any branches...";
@@ -439,13 +465,14 @@ function strip_dev_subdomain_from_string(){
 }
 
 
-function import_database_from_dev () {
+function wp_import_database_from_dev () {
   wp db create;
   db_name=$(get_user_input "Enter in Database Name" --default=$(wp eval 'echo DB_NAME;'));
-  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASS -h$DEV_MYSQL $db_name > ~/Downloads/$db_name.sql
+  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASS -h$DEV_MYSQL_HOST $db_name > ~/Downloads/$db_name.sql
   wp db import ~/Downloads/$db_name.sql;
   rm ~/Downloads/$db_name.sql;
   wp_replace_urls;
+  wp_reset_admin_user;
 }
 
 
@@ -517,10 +544,12 @@ function wp_build_themes () {
 
 # see here: https://wp-cli.org/commands/user/update/
 function wp_reset_admin_user () {
+  admin_pass=admin;
   wp user create $(strip_email_domain) $(git config user.email) --role=administrator --display_name="$(git config user.name)" --first_name="$(git config user.name)" --last_name="";
-  wp user update $(strip_email_domain) --user_pass=admin --allow-root --skip-email --skip-plugins --skip-theme;
+  wp user update $(strip_email_domain) --user_pass=$admin_pass --user_email=$(git config user.email) --allow-root --skip-email --skip-plugins --skip-theme;
   echo "Admin Username = '$(strip_email_domain)'";
-  echo "Admin Password = 'admin'";
+  echo "Admin Password = '$admin_pass'";
+  wp option update 'admin_email' $(git config user.email);
 }
 
 
@@ -583,40 +612,12 @@ function create_and_link_nginx_entry () {
 
 function build_project () {
 
-  echo "looking for composer.json..."
-  if [ -f composer.json ]
-  then
-    composer install;
-  else
-    echo "No composer.json found...";
-  fi;
+  maybe_install_composer;
+  maybe_install_npm;
+  maybe_install_bower;
+  maybe_run_grunt;
 
-
-  echo "looking for package.json..."
-  if [ -f package.json ]
-  then
-    npm install;
-  else
-    echo "No package.json found...";
-  fi;
-
-
-  echo "looking for bower.json..."
-  if [ -f bower.json ]
-  then
-    bower install --allow-root;
-  else
-    echo "No bower.json found...";
-  fi;
-
-
-  echo "looking for Gruntfile.js..."
-  if [[ -f Gruntfile.js || -f gruntfile.js ]]
-  then
-    grunt;
-  else
-    echo "No Gruntfile.js found...";
-  fi;
+  console.success "Project Build finished Successfully...";
 
 }
 
@@ -646,7 +647,7 @@ function find_todos_and_fixmes {
   if [ $count -gt 0 ]
   then
     console_group_start "TODO's and FIXME's";
-  	console_warning "$count file(s) need attention";
+  	console.warning "$count file(s) need attention";
   	printf "$results";
     echo "";
     echo "";
@@ -679,7 +680,7 @@ function php_lint {
   if [ $count -gt 0 ]
   then
     console_group_start "PHP Linting...";
-  	console_warning "$count files need attention";
+  	console.warning "$count files need attention";
   	printf "$results";
     console_group_end;
   fi;
@@ -1215,7 +1216,13 @@ function console.success () {
 }
 
 
-function console_warning {
+function console.error {
+  message=$1;
+  echo $color_red"$message"$color_none;
+}
+
+
+function console.warning {
   message=$1;
   echo $color_orange"$message"$color_none;
 }
@@ -1240,7 +1247,7 @@ function get_latest_code {
   git checkout $branch;
   git pull origin $branch;
   submodules_initialize;
-  maybe_do_composer;
+  maybe_install_composer;
 }
 
 alias get_latest_code_from_dev="get_latest dev";
@@ -1408,7 +1415,7 @@ function nginx_conf () {
 }
 
 
-function calc_project_type () {
+function wp_project_type () {
   [[ ! -z $1 ]] && start="$1" || start=".";
 
   if [[ -f "$1/composer.json" ]]
@@ -1498,7 +1505,7 @@ function wp_git_site () {
   fi;
 
 
-  project_type=$(calc_project_type $temp_dir);
+  project_type=$(wp_project_type $temp_dir);
   console.info "Step 5 - Determine project type ($project_type)";
   case "$project_type" in
       wp-full)
@@ -1523,7 +1530,6 @@ function wp_git_site () {
 
       *)
         console.error "Something went wrong in the case statement...";
-        exit;
       ;;
   esac
 
@@ -1582,6 +1588,8 @@ function wp_git_site () {
   console.info "Last Step - Open in phpStorm and Browser";
   phpstorm $site_name;
   open http://$site_url;
+
+  rm -rf $temp_dir;
 }
 
 
