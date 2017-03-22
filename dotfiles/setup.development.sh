@@ -8,11 +8,24 @@
 echo "Setting up Development environment...";
 
 echo "Git customizations...";
+git config --global user.email "craigiswayne@gmail.com"
 #TODO add the .DS_Store to the global ignore config
 git config --global core.editor "atom -w"
+# git config --global core.editor "nano"
 git config --global color.ui true;
 git config --global core.autocrlf input
 git config --global core.safecrlf true
+git config --global push.default current
+git config --global core.excludesfile ~/.gitignore_global
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.gitignore_global ~/;
+
+echo "Setting up NPM Defaults...";
+# http://iamsim.me/set-your-npm-init-defaults/
+npm config set init.author.name "Craig Wayne";
+npm config set init.author.email $(git config --global --get user.email);
+npm config set init.author.url http://craigiswayne.github.io
+npm config set init.license MIT;
+
 
 echo "Installing Node plugins...";
 node_plugins=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/npm.list);
@@ -99,14 +112,8 @@ echo "Customizing PHPStorm...";
 # http://dl.google.com/closure-compiler/compiler-latest.zip
 
 echo "Terminal Customization...";
-echo "Modifying Bash Profile...";
-BASH_PROFILE_FILE=~/.bash_profile;
-touch $BASH_PROFILE_FILE;
-echo 'export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ ";' >> $BASH_PROFILE_FILE;
-echo 'export CLICOLOR=1;' >> $BASH_PROFILE_FILE;
-echo 'export LSCOLORS=ExFxBxDxCxegedabagacad;' >> $BASH_PROFILE_FILE;
-echo 'export LC_ALL=$LANG;' >> $BASH_PROFILE_FILE;
-echo 'alias lscw="ls -laGFh";' >> $BASH_PROFILE_FILE;
+ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile ~/.bash_profile
+ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/config.yml ~/.wp-cli/config.yml
 
 echo "Applying Terminal Theme...";
 #FIXME MUST BE A BETTER WAY TO DO THIS
@@ -125,6 +132,7 @@ defaults write com.apple.Terminal 'Startup Window Settings' 'tomorrow-night';
 #xdebug.remote_port=9001
 #xdebug.profiler_enable=1
 #php --ini | grep xdebug | head -n 1
+# xdebug.profiler_output_dir = "/tmp"
 
 echo "Custom Paths...";
 echo "export PATH=~/.composer/vendor/bin:$PATH" >> ~/.bash_profile;
@@ -137,5 +145,9 @@ do
 		defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://~/Applications/Google Drive.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 done;
 
+ln -s /usr/local/var/www/ ~/www
+
 #TODO find a way to easily switch php versions
 #http://serverfault.com/questions/671400/multiple-versions-of-php-through-nginx
+
+git clone https://github.com/craigiswayne/cw-grunt-init-gruntfile.git ~/.grunt-init/cw-gruntfile
