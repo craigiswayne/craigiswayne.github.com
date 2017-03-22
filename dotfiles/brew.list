@@ -19,13 +19,9 @@ wp-cli
 xz
 php56
 php56-intl -fs
-php56-mcrypt -fs
-php56-redis -fs
 php56-xdebug -fs
-php56-memcache -fs
+php56-igbinary -fs
 php71
 php71-intl -fs
-php71-mcrypt -fs
-php71-redis -fs
 php71-xdebug -fs
-php71-memcache -fs
+watch
