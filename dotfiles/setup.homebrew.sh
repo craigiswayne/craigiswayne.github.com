@@ -8,15 +8,18 @@ sudo xcrun cc;
 xcode-select --install;
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
+chown -Rv $(whomai) /usr/local/;
+brew prune;
 brew doctor;
 brew update;
 brew upgrade;
 
-echo "Installing Homebrew Cask...";
+
 
 echo "Installing Homebrew taps...";
-brew tap homebrew/dupes
-brew tap homebrew/php
+brew tap homebrew/dupes;
+brew tap homebrew/php;
+brew tap homebrew/nginx;
 
 my_taps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/brew.list);
 for tap in "$my_taps"
