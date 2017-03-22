@@ -1,7 +1,6 @@
 #==============================================================================
 # My Workstation Setup
 #==============================================================================
-git config --global user.email "craigiswayne@gmail.com"
 sh setup.os.sh;
 sh setup.homebrew.sh;
 sh setup.development.sh;
