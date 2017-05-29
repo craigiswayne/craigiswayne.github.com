@@ -1,18 +1,2 @@
-# IDE Configurations Files and Folders
-.idea/
-
-# Package Manager Folders
-vendor/
-bower_components/
-node_modules/
-
-# WordPress Core Folders
-wp-admin/
-wp-includes/
-
-
 .DS_Store
-
-
-# Cache Folders
-.sass-cache
+.idea/

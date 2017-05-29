@@ -15,6 +15,7 @@ gulp
 java
 linein
 mysqlworkbench
+osxfuse
 paintbrush
 phpstorm
 prefs-editor
@@ -23,8 +24,10 @@ slack
 skype
 sony-ericsson-bridge
 sourcetree
+sshfs
 teamviewer
 unrarx
 utorrent
 virtualbox
 vlc
+spectacle

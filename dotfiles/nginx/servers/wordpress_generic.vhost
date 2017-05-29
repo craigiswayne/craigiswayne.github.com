@@ -7,8 +7,4 @@ server {
   include global/wordpress.conf;
   include global/default_locations.conf;
 	include global/restrictions.conf;
-
-	# Only include one of the files below.
-	#	include global/wordpress-ms-subdir.conf;
-	#	include global/wordpress-ms-subdomain.conf;
 }
