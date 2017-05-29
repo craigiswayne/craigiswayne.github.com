@@ -19,8 +19,12 @@ wget
 wp-cli
 xz
 php56
-php56-intl -fs
-php56-xdebug -fs
-php56-igbinary -fs
+php56-igbinary
+php56-intl
+php56-mcrypt
+php56-mongo
+php56-xdebug
+php56-xhgui
+php56-xhprof
 python
 watch
