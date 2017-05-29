@@ -1,0 +1,19 @@
+server {
+	server_name local.xhgui.io;
+	root /usr/local/Cellar/php56-xhgui/0.4.0/webroot/;
+
+	index index.php;
+
+	location / {
+		try_files $uri $uri/ /index.php?$args;
+  }
+
+	location ~ \.php$ {
+		try_files $uri =404;
+		include        	fastcgi_params;
+		fastcgi_pass    127.0.0.1:9000;
+		fastcgi_index   index.php;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  }
+
+}

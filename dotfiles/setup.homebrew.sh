@@ -17,27 +17,25 @@ brew upgrade;
 
 
 echo "Installing Homebrew taps...";
-brew tap homebrew/dupes;
-brew tap homebrew/php;
-brew tap homebrew/nginx;
-
-my_taps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/brew.list);
-for tap in "$my_taps"
+brew_taps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/brew_taps.list);
+for tap in "$brew_taps"
 do
-	brew install "$tap";
+	brew tap "$tap";
 done
 
-brew install brew-cask;
+brew_apps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/brew.list);
+for app in "$brew_apps"
+do
+	brew install "$app";
+done
+
+
 echo "Installing Cask Applications...";
-my_casks=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/cask.list);
-for cask in "$my_casks"
+brew_casks=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/cask.list);
+for cask in "$brew_casks"
 do
 	brew cask install "$cask";
 done
-
-echo "Installing your Application preferences...";
-echo "Setting VLC to autoupdate...";
-defaults write org.videolan.vlc SUAutomaticallyUpdate true;
 
 brew doctor;
 echo "Cleaning up Homebrew...";

@@ -27,12 +27,7 @@ npm config set init.author.url http://craigiswayne.github.io
 npm config set init.license MIT;
 
 
-echo "Installing Node plugins...";
-node_plugins=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/npm.list);
-for plugin in "$node_plugins"
-do
-	npm install -g $plugin
-done
+npm install -g $(npm stars)
 
 echo "Installing Atom add-ons...";
 apm stars --install;

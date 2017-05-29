@@ -89,6 +89,10 @@ echo "Adding your pictures folder to the Finder sidebar…";
 echo "Disabling local Time Machine backups...";
 sudo tmutil disablelocal;
 
+echo "Installing your Application preferences...";
+echo "Setting VLC to autoupdate...";
+defaults write org.videolan.vlc SUAutomaticallyUpdate true;
+
 #############
 # REFERENCES:
 #############
