@@ -37,7 +37,7 @@ echo "Tweaking the NGINX configurations...";
 #NGINX_HTML_ROOT=$(readlink "$NGINX_INSTALL_DIR/html");
 #NGINX_CONF_DIR=$(dirname $(sh -c "$(curl -fsSL https://gist.github.com/craigiswayne/c1fe7863165d7f54bb170db96d90231e/raw/nginx_conf.sh)" conf-path));
 
-#TODO clone all existing gists onto my pc
+#TODO add a link to the /usr/loca/etc/nginx in the finder
 
 
 echo "Symlinking NGINX configuration files...";
@@ -69,32 +69,34 @@ open "http://localhost/";
 
 
 echo "PHP Post Install...";
-PHP_INI_LOADED_FILE=$(php -r 'print php_ini_loaded_file();');
-ln -sfv /usr/local/opt/php56/homebrew.mxcl.php56.plist ~/Library/LaunchAgents/;
-launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist;
-replace ";date.timezone =" "date.timezone = Africa/Johannesburg" -- $PHP_INI_LOADED_FILE;
-mkdir -p /usr/local/var/log/php;
-touch /usr/local/var/log/php/error.log;
+#PHP_INI_LOADED_FILE=$(php -r 'print php_ini_loaded_file();');
+#ln -sfv /usr/local/opt/php56/homebrew.mxcl.php56.plist ~/Library/LaunchAgents/;
+#launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist;
+replace ";date.timezone =" "date.timezone = Africa/Johannesburg" -- $(php -r 'print php_ini_loaded_file();');
+#mkdir -p /usr/local/var/log/php;
+#touch /usr/local/var/log/php/error.log;
 #TODO fix this;
-chmod 777 /usr/local/var/log/php/error.log;
-replace ";error_log = syslog" "error_log = /usr/local/var/log/php/error.log" -- $PHP_INI_LOADED_FILE;
-brew services start php56;
+#chmod 777 /usr/local/var/log/php/error.log;
+mkdir -p ~/www/logs/php;
+ln -sfv /usr/local/var/log/php-fpm.log ~/www/logs/php/;
+replace ";error_log = syslog" "error_log = /usr/local/var/www/logs/php/error.log" -- $(php -r 'print php_ini_loaded_file();');
+#brew services start php56;
 lsof -Pni4 | grep LISTEN | grep php;
 echo "Ensure there are no php errors...";
 php -v;
 
-ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents/;
-sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+#ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents/;
+#sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 
 echo "Enabling Nginx for PHP...";
-touch $NGINX_HTML_ROOT/index.php;
-echo "<?php phpinfo(); ?>" >> index.php;
-brew services restart nginx;
-sudo nginx -s reload;
+touch ~/www/index.php;
+echo "<?php phpinfo(); ?>" >> ~/www/index.php;
+#brew services restart nginx;
+#sudo nginx -s reload;
 open "http://127.0.0.1/";
 
 echo "MySQL Post Install...";
-brew services restart mysql;
+#brew services restart mysql;
 
 echo "Customizing PHPStorm...";
 # TODO link nginx server file
@@ -107,12 +109,13 @@ echo "Customizing PHPStorm...";
 
 echo "Terminal Customization...";
 ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile ~/.bash_profile
+mkdir -p ~/.wp-cli/;
 ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/config.yml ~/.wp-cli/config.yml
 
 echo "Applying Terminal Theme...";
 #FIXME MUST BE A BETTER WAY TO DO THIS
-curl https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal -o tomorrow-night.terminal
-open tomorrow-night.terminal;
+open $(curl https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal -o tomorrow-night.terminal);
+# open tomorrow-night.terminal;
 rm tomorrow-night.terminal;
 sleep 1;
 defaults write com.apple.Terminal 'Default Window Settings' 'tomorrow-night';
@@ -133,15 +136,15 @@ echo "export PATH=~/.composer/vendor/bin:$PATH" >> ~/.bash_profile;
 
 #TODO list this
 #http://krypted.com/mac-os-x/adding-objects-to-the-dock/
-PERSISTENT_DOCK_APPS=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/persistent_dock_apps.list);
-for APP in "$PERSISTENT_DOCK_APPS"
-do
-		defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://~/Applications/Google Drive.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-done;
+#PERSISTENT_DOCK_APPS=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/persistent_dock_apps.list);
+#for APP in "$PERSISTENT_DOCK_APPS"
+#do
+#		defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://~/Applications/Google Drive.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+#done;
 
-ln -s /usr/local/var/www/ ~/www
+#ln -s /usr/local/var/www/ ~/www
 
 #TODO find a way to easily switch php versions
 #http://serverfault.com/questions/671400/multiple-versions-of-php-through-nginx
 
-git clone https://github.com/craigiswayne/cw-grunt-init-gruntfile.git ~/.grunt-init/cw-gruntfile
+#git clone https://github.com/craigiswayne/cw-grunt-init-gruntfile.git ~/.grunt-init/cw-gruntfile
