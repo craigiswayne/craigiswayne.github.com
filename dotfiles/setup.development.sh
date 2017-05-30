@@ -25,7 +25,7 @@ npm config set init.author.name "Craig Wayne";
 npm config set init.author.email $(git config --global --get user.email);
 npm config set init.author.url http://craigiswayne.github.io
 npm config set init.license MIT;
-
+npm adduser;
 
 npm install -g $(npm stars)
 
@@ -33,18 +33,12 @@ echo "Installing Atom add-ons...";
 apm stars --install;
 
 echo "Tweaking the NGINX configurations...";
-NGINX_INSTALL_DIR=$(dirname $(dirname $(realpath $(which nginx))));
-NGINX_HTML_ROOT=$(realpath "$NGINX_INSTALL_DIR/html");
-NGINX_CONF_DIR=$(dirname $(sh -c "$(curl -fsSL https://gist.github.com/craigiswayne/c1fe7863165d7f54bb170db96d90231e/raw/nginx_conf.sh)" conf-path));
+#NGINX_INSTALL_DIR=$(dirname $(dirname $(realpath $(which nginx))));
+#NGINX_HTML_ROOT=$(readlink "$NGINX_INSTALL_DIR/html");
+#NGINX_CONF_DIR=$(dirname $(sh -c "$(curl -fsSL https://gist.github.com/craigiswayne/c1fe7863165d7f54bb170db96d90231e/raw/nginx_conf.sh)" conf-path));
 
 #TODO clone all existing gists onto my pc
 
-
-echo "Installing my Personal GitHub Repo...";
-mkdir -p $NGINX_HTML_ROOT/craigiswayne.github.com;
-cd $NGINX_HTML_ROOT/craigiswayne.github.com;
-git init;
-git pull origin master;
 
 echo "Symlinking NGINX configuration files...";
 CUSTOM_NGINX_CONFIGS=$(find $NGINX_HTML_ROOT/craigiswayne.github.com/dotfiles/nginx -d 1);
@@ -58,13 +52,18 @@ done;
 # ln -sfv $NGINX_HTML_ROOT/craigiswayne.github.com/dotfiles/nginx/nginx.conf $NGINX_CONF_DIR
 # ln -sfv $NGINX_HTML_ROOT/craigiswayne.github.com/dotfiles/nginx/mime.types.conf $NGINX_CONF_DIR
 # ln -sfv $NGINX_HTML_ROOT/craigiswayne.github.com/dotfiles/nginx/errors/ $NGINX_HTML_ROOT
-ln -sfv /usr/local/var/log/nginx $NGINX_HTML_ROOT/logs
+mkdir -p ~/www/logs/;
+ln -sfv /usr/local/var/log/nginx ~/www/logs/nginx
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf;
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers /usr/local/etc/nginx/servers;
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/global /usr/local/etc/nginx/global
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/errors/ ~/www/errors
 
 # TODO dynamically fetch this
-ln -sfv $(find /usr/local/Cellar/nginx -iname "homebrew.mxcl.nginx.plist") ~/Library/LaunchAgents/;
+#ln -sfv $(find /usr/local/Cellar/nginx -iname "homebrew.mxcl.nginx.plist") ~/Library/LaunchAgents/;
 # TODO autostart nginx
 
-sudo nginx;
+#sudo nginx;
 #ulimit -n 1024;
 open "http://localhost/";
 
