@@ -148,3 +148,7 @@ echo "export PATH=~/.composer/vendor/bin:$PATH" >> ~/.bash_profile;
 #http://serverfault.com/questions/671400/multiple-versions-of-php-through-nginx
 
 #git clone https://github.com/craigiswayne/cw-grunt-init-gruntfile.git ~/.grunt-init/cw-gruntfile
+
+
+sudo cp /usr/local/opt/nginx/*.plist /Library/LaunchDaemons
+sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
