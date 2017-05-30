@@ -1,33 +1,35 @@
-android-file-transfer
-#appcleaner
-atom
-fliqlo
-filebot
-filezilla
-firefox
-genymotion
-github-desktop
 google-chrome
 google-drive
 google-photos-backup
-googleappengine
-gulp
-java
-linein
-mysqlworkbench
-osxfuse
-paintbrush
+atom
 phpstorm
-prefs-editor
-remote-play
-slack
-skype
-sony-ericsson-bridge
-sourcetree
-sshfs
-teamviewer
-unrarx
-utorrent
-virtualbox
-vlc
+transmission
+kodi
 spectacle
+
+vlc
+firefox
+
+#android-file-transfer
+# fliqlo
+# filebot
+# filezilla
+# genymotion
+# github-desktop
+# googleappengine
+# gulp
+# java
+# linein
+# mysqlworkbench
+# osxfuse
+# paintbrush
+# prefs-editor
+# remote-play
+# slack
+# skype
+# sony-ericsson-bridge
+# sourcetree
+# sshfs
+# teamviewer
+# unrarx
+# virtualbox
