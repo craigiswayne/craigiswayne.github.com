@@ -34,7 +34,7 @@ done
 # Setup brew services to run automatically
 brew services start mysql;
 brew services start nginx;
-
+brew services start homebrew/php/php56;
 
 echo "Installing Cask Applications...";
 brew_casks=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/cask.list);
