@@ -1,14 +1,40 @@
-
-
-export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ ";
+function parse_git_branch () {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\$(parse_git_branch): \[\033[33;1m\]\w\[\033[m\]\$ ";
 export CLICOLOR=1;
 export LSCOLORS=ExFxBxDxCxegedabagacad;
 export LC_ALL=$LANG;
 alias lscw="ls -laGFH";
-export PATH=~/.composer/vendor/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-export PATH="/usr/local/sbin:$PATH"
-export PATH="~/bin:$PATH"
 
+## From brew doctor
+export PATH="/usr/local/sbin:$PATH";
+
+## To enable global npm packages when npm is installed with HomeBrew
+export PATH="~/.npm-packages/bin:$PATH";
+#export PATH="/usr/local/opt/node:$PATH";
+
+## From installing node with homebrew
+## @link http://stackoverflow.com/a/26919540/1654250
+export NODE_PATH='/usr/local/lib/node_modules:';
+
+## From yo doctor
+export NODE_PATH='$NODE_PATH:~/.npm-packages/lib/node_modules';
+
+## From Homebrew
+export NVM_DIR="$HOME/.nvm"
+ . "/usr/local/opt/nvm/nvm.sh"
+
+## Composer Global
+export PATH="~/.composer/vendor/bin:$PATH";
+
+## Other binaries
+export PATH="/usr/local/opt:/usr/local/share:$PATH";
+
+# export PATH=~/.composer/vendor/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.node/bin;
+# export PATH="/usr/local/sbin:$PATH"
+# export PATH="~/bin:$PATH";
+# export PATH="/Users/craigwayne/.npm-packages/bin:$PATH";
 
 alias whats_my_ip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | awk '{print $2}'";
 
@@ -22,6 +48,12 @@ color_blue_light=$'\e[94m';
 color_green_light=$'\e[92m';
 #http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
+DEV_WWW_USERNAME='';
+DEV_WWW_HOST='';
+LOCAL_MYSQL_USERNAME='';
+DEV_MYSQL_USERNAME='';
+DEV_MYSQL_PASSWORD='';
+DEV_MYSQL_HOST='';
 
 function submodules_initialize () {
   git submodule update --init --recursive
@@ -32,6 +64,7 @@ function maybe_install_composer () {
   if [ -f composer.json ]
   then
     composer update;
+    composer install;
   fi;
 }
 
@@ -88,6 +121,8 @@ function open_startup_apps () {
 function delete_dev_logs () {
   for i in `find /usr/local/var/www -name 'debug.log'` ; do rm $i ;  done
   for i in `find /usr/local/var/log -name '*.log'` ; do rm $i ; touch $i;  done
+  for i in `find ~/.npm/_logs -name '*.log'` ; do rm $i ;  done
+  delete_xdebug_logs;
 }
 
 
@@ -101,11 +136,19 @@ function dev_cleanup () {
   brew prune;
   brew services cleanup;
   brew doctor;
+  brew cleanup;
   brew cask cleanup;
   brew cask doctor;
   delete_dev_logs;
   apm clean;
   npm prune;
+}
+
+
+function delete_xdebug_logs () {
+  console.info "Deleting xdebug logs...";
+  xdebug_logs_size=$(find /private/var/tmp -name "cachegrind*" -exec du -ch {} + | grep total);
+  console.info "Freeing up $xdebug_logs_size";
   find /private/var/tmp -name "cachegrind*" -exec rm -rf {} \;
 }
 
@@ -136,92 +179,6 @@ function view_missing_assets_nginx () {
   NOT_FOUND_ASSETS_LOG_FILE=$NGINX_LOG_DIR/assets_not_found.log;
   cat $NOT_FOUND_ASSETS_LOG_FILE;
 }
-
-
-# function locate_missing_assets_nginx () {
-#   username=craigwayne;
-#   SYS_LOGS_DIR=/usr/local/var/log;
-#   NGINX_LOG_DIR=$SYS_LOGS_DIR/nginx;
-#   NOT_FOUND_ASSETS_LOG_FILE=$NGINX_LOG_DIR/assets_not_found.log;
-#   number_of_missing_assets=$(wc -l < $NOT_FOUND_ASSETS_LOG_FILE);
-#   number_of_missing_assets=$(echo "$number_of_missing_assets" | xargs);
-#
-#   if [ $number_of_missing_assets == 0 ]
-#   then
-#     echo "No missing assets logged...";
-#     return;
-#   fi;
-#
-#   LIVE_PROTOCOL="http://";
-#   LOCAL_SUBDOMAIN="local";
-#
-#   COUNT=0;
-#   while read line;
-#   do
-#     local_host=$(expr "$line" : '.*host: "\(.*\)",');
-#     asset_local_url=$(expr "$line" : '.*GET \(.*\) HTTP');
-#     asset_local_path=$(expr "$line" : '.*open() "\(.*\)" failed');
-#     asset_local_directory=$(dirname $asset_local_path);
-#
-#     #TODO fix this reference here to a a variable reference
-#     #TODO when checking for http://maenkind.huisgenoot.com/ it puts a www in the front
-#     remote_host="www."$(expr "$local_host" : 'local.\(.*\)');
-#     remote_host_dev="staging."$(expr "$local_host" : 'local.\(.*\)');
-#     remote_host_subdomain=""$(expr "$local_host" : 'local.\(.*\)');
-#     asset_remote_url=$LIVE_PROTOCOL$remote_host$asset_local_url;
-#     asset_remote_url_subdomain=$LIVE_PROTOCOL$remote_host_subdomain$asset_local_url;
-#     asset_remote_url_dev_subdomain=$LIVE_PROTOCOL$remote_host_dev$asset_local_url;
-#
-#     echo "LIVE_PROTOCOL:         "$LIVE_PROTOCOL;
-#     echo "LOCAL SUBDOMAIN:       "$LOCAL_SUBDOMAIN;
-#     echo "LOCAL HOST:            "$local_host;
-#     echo "ASSET LOCAL URL:       "$asset_local_url;
-#     echo "ASSET LOCAL DIRECTORY: "$asset_local_directory;
-#     echo "ASSET LOCAL PATH:      "$asset_local_path;
-#     echo "ASSET REMOTE URL:      "$asset_remote_url;
-#     echo "REMOTE HOST:           "$remote_host;
-#
-#     mkdir -p $asset_local_directory;
-#
-#     if [ -f $asset_local_path ]
-#     then
-#       echo "$asset_local_url already exists";
-#     else
-#       response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url -o /dev/null);
-#
-#       if [ $response != 200 ]
-#       then
-#         response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url_subdomain -o /dev/null);
-#         asset_remote_url=$asset_remote_url_subdomain;
-#       fi;
-#
-#       if [ $response != 200 ]
-#       then
-#         response=$(curl -L --silent --connect-timeout 10 --head --write-out '%{http_code}\n' $asset_remote_url_dev_subdomain -o /dev/null);
-#         asset_remote_url=$asset_remote_url_dev_subdomain;
-#       fi;
-#
-#       echo "Looking for:           "$asset_remote_url;
-#       echo "RESPONSE:              "$response;
-#
-#       if [ $response == 200 ]
-#       then
-#         COUNT=$[$COUNT+1];
-#         mkdir -p $asset_local_directory;
-#         sudo chown -Rv $username $asset_local_directory; #TODO this breaks
-#         curl -L $asset_remote_url -o $asset_local_path;
-#         echo "Found $asset_local_path ($response)"...;
-#       else
-#         echo "Asset is missing... but couldn't be found...";
-#       fi;
-#     fi;
-#     echo "";
-#   done < $NOT_FOUND_ASSETS_LOG_FILE;
-#   echo "Found $COUNT/$number_of_missing_assets missing asset(s)...";
-#
-#   rm $NOT_FOUND_ASSETS_LOG_FILE;
-#   sudo nginx -s reload;
-# }
 
 
 function remove_tracked_ignored_files () {
@@ -275,10 +232,18 @@ function repo_maintenance () {
 
   checklist=(
   "Git Pruning"
+  "Git Submodule status"
   "Git Remote Prunining"
   "Check for README"
   "Check for CHANGELOG"
   "WP Content Only Repo?"
+  "Create Jenkins Build Tasks fo dev, staging"
+  "Create Jenkins Build Badges"
+  "Check standard branches exist (master, develop, bugs, features)"
+  "Does the repo have the necessary branch permissions"
+  "Does the repo have the correct code language set"
+  "Is the repo assigned to the correct team"
+  "Is the repo's Website field set correctly"
   staging
   www );
 
@@ -318,42 +283,42 @@ function repo_maintenance () {
   #update_gitignore;
   wp_install_dev_tools;
 
-  console.warning "";
-  console.warning "#############################################################";
-  console.warning "# TODO";
-  console.warning "#############################################################";
-  console.warning "";
-  console.warning "Delete repositories remotely that are older than 6 months...";
-  console.warning "Check that the repo has an icon...";
+  console.warn "";
+  console.warn "#############################################################";
+  console.warn "# TODO";
+  console.warn "#############################################################";
+  console.warn "";
+  console.warn "Delete repositories remotely that are older than 6 months...";
+  console.warn "Check that the repo has an icon...";
 
-  console.warning "";
-  console.warning "run wp";
-  console.warning "remove any errors that appear...";
-  console.warning "";
+  console.warn "";
+  console.warn "run wp";
+  console.warn "remove any errors that appear...";
+  console.warn "";
 
-  console.warning "";
-  console.warning "Remove any 'MobileDetect' occurences...";
-  console.warning "Remove any 'mobileGrade' occurences...";
-  console.warning "";
+  console.warn "";
+  console.warn "Remove any 'MobileDetect' occurences...";
+  console.warn "Remove any 'mobileGrade' occurences...";
+  console.warn "";
 
-  console.warning "";
-  console.warning "Remove branches older than 6 months";
-  console.warning "e.g. git branch -dr origin/feature/login";
-  console.warning "https://www.git-tower.com/learn/git/faq/delete-remote-branch";
-  console.warning "";
+  console.warn "";
+  console.warn "Remove branches older than 6 months";
+  console.warn "e.g. git branch -dr origin/feature/login";
+  console.warn "https://www.git-tower.com/learn/git/faq/delete-remote-branch";
+  console.warn "";
 
-  console.warning "";
-  console.warning "Look for all classes that extend the WP_Widget...";
-  console.warning "and check if the construct class is used properly";
-  console.warning "or at least check if there is a construct method";
-  console.warning "something like:";
-  console.warning 'find ./ -name \*.php | xargs grep "extends WP_Widget"';
-  console.warning 'find ./ -name \*.php | xargs grep "parent::WP_Widget"';
-  console.warning "";
+  console.warn "";
+  console.warn "Look for all classes that extend the WP_Widget...";
+  console.warn "and check if the construct class is used properly";
+  console.warn "or at least check if there is a construct method";
+  console.warn "something like:";
+  console.warn 'find ./ -name \*.php | xargs grep "extends WP_Widget"';
+  console.warn 'find ./ -name \*.php | xargs grep "parent::WP_Widget"';
+  console.warn "";
 
   console.info "Running WP CLI...";
   wp;
-  console.warning "Check if there are any errors...";
+  console.warn "Check if there are any errors...";
 
 
   console.info "Check that no submodules are tracking any branches...";
@@ -367,7 +332,30 @@ function wp_install_dev_tools () {
   console.info "Installing WP Dev Tools...";
   wp plugin install debug-bar --activate;
   wp plugin install wordpress-importer --activate;
+  wp plugin install theme-check --activate;
+  wp plugin install log-deprecated-notices --activate
+  wp plugin install debug-bar-cron --activate
+  wp plugin install p3-profiler --activate
+  wp plugin install wpperformancetester --activate
   console.info "";
+}
+
+
+function wp_site_url (){
+  site_url=$(wp option get siteurl --skip-plugins --skip-themes);
+  site_url=$(strip_protocol_from_string $site_url);
+  site_url=$(strip_local_subdomain_from_string $site_url);
+  site_url=$(strip_dev_subdomain_from_string $site_url);
+  site_url=$(get_user_input "Enter in the Site URL with no protocol and no subdomain, and no environment subdomain" --default=$site_url);
+  echo $site_url;
+}
+
+function wp_db_name () {
+  db_name=$site_name;
+  db_name=$(strip_tld $db_name);
+  db_name=$(safe_db_name $db_name);
+  db_name=$(get_user_input "Enter in the DB Name" --default="$db_name" --default=$db_name);
+  echo $db_name;
 }
 
 
@@ -377,11 +365,7 @@ function wp_replace_urls () {
   desired_sub_domain=local;
 
   protocols=( http https );
-  site_url=$(wp option get siteurl --skip-plugins --skip-themes);
-  site_url=$(strip_protocol_from_string $site_url);
-  site_url=$(strip_local_subdomain_from_string $site_url);
-  site_url=$(strip_dev_subdomain_from_string $site_url);
-  site_url=$(get_user_input "Enter in the Site URL with no protocol and no subdomain" --default=$site_url);
+  site_url=$(wp_site_url);
   site=""; # leave unchanged
   site_temp="$site_url";
 
@@ -406,6 +390,7 @@ function wp_replace_urls () {
         echo "";
         echo "Replacing $protocol://$sub_domain.$site -> http://$desired_sub_domain.$site";
         wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes;
+        wp search-replace "$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes --allow-root;
       fi;
 
     done
@@ -416,7 +401,7 @@ function wp_replace_urls () {
   do
     echo "";
     echo "Replacing $protocol://$site -> http://$desired_sub_domain.$site";
-    wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes;
+    wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes --all-tables --precise --verbose;
   done
 }
 
@@ -468,7 +453,7 @@ function strip_dev_subdomain_from_string(){
 function wp_import_database_from_dev () {
   wp db create;
   db_name=$(get_user_input "Enter in Database Name" --default=$(wp eval 'echo DB_NAME;'));
-  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASS -h$DEV_MYSQL_HOST $db_name > ~/Downloads/$db_name.sql
+  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name > ~/Downloads/$db_name.sql
   wp db import ~/Downloads/$db_name.sql;
   rm ~/Downloads/$db_name.sql;
   wp_replace_urls;
@@ -477,25 +462,67 @@ function wp_import_database_from_dev () {
 
 
 function backup_database () {
-  db_name=$(get_user_input "Enter Database Name");
+
+  if [ -z $1 ]
+  then
+    db_name=$(get_user_input "Enter Database Name");
+  else
+    db_name=$1;
+  fi;
 
   user="wordpress";
   password="wordpress";
-  date=$(date +"%d_%b_%Y");
+  date=$(date +"%Y_%b_%d");
   host="localhost";
   backup_path=~/Downloads;
   output_file=$backup_path/$db_name"_db_"$date.sql;
   echo $output_file;
   umask 177;
   echo "Backing up to... "$output_file;
-  mysqldump --user=$user --password=$password --host=$host $db_name --add-drop-trigger --add-drop-database > $output_file;
-  echo "Backup finished :)";
+
+  # see: https://makandracards.com/makandra/595-dumping-and-importing-from-to-mysql-in-an-utf-8-safe-way
+  mysqldump --compatible=mysql4 --user=$user --password=$password --host=$host $db_name --skip-set-charset --add-drop-trigger --add-drop-database --default-character-set=utf8 -r $output_file;
+  replace "TYPE=InnoDB" "Engine=InnoDB" -- $output_file;
+  # replace "utf8mb4_unicode_520_ci" "utf8_general_ci" -- $output_file;
+  console.success "Backup finished :)";
+
+  # --default-character-set=latin1
+
+
 
   #TODO show file size after backup
   # Delete files older than 30 days
   # find $backup_path/* -mtime +30 -exec rm {} \;
   # --databases $DB_NAME
   # TODO allow for multiple backups to separate files
+}
+
+
+
+function send_db_to_dev (){
+
+  console.danger "This will REPLACE the database on DEV!!!";
+  get_user_input "is that ok?" --default="yes";
+
+  if [ -z $1 ]
+  then
+    db_name=$(wp_db_name);
+  else
+    db_name=$1;
+  fi;
+
+  local_db_file_path=~/Downloads/backup-$db_name.sql;
+
+  site_url=$(wp_site_url);
+  wp search-replace "local.$site_url" "dev.$site_url" --export=$local_db_file_path;
+
+  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -e "DROP DATABASE IF EXISTS $db_name";
+
+  # backup_database $db_name;
+  # local_db_file_path=/$backup_path/$db_name"_db_"$date.sql;
+
+  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -e "CREATE DATABASE IF NOT EXISTS $db_name";
+  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -D $db_name --default-character-set=utf8 < $local_db_file_path;
 }
 
 
@@ -556,6 +583,8 @@ function wp_reset_admin_user () {
 
 function flush_dns_cache () {
   echo "todo";
+  echo "Check Google Chrome cache";
+  open -a 'Google Chrom' chrome://net-internals/#dns;
 }
 
 
@@ -611,14 +640,11 @@ function create_and_link_nginx_entry () {
 
 
 function build_project () {
-
   maybe_install_composer;
   maybe_install_npm;
   maybe_install_bower;
   maybe_run_grunt;
-
   console.success "Project Build finished Successfully...";
-
 }
 
 
@@ -647,7 +673,7 @@ function find_todos_and_fixmes {
   if [ $count -gt 0 ]
   then
     console_group_start "TODO's and FIXME's";
-  	console.warning "$count file(s) need attention";
+  	console.warn "$count file(s) need attention";
   	printf "$results";
     echo "";
     echo "";
@@ -680,7 +706,7 @@ function php_lint {
   if [ $count -gt 0 ]
   then
     console_group_start "PHP Linting...";
-  	console.warning "$count files need attention";
+  	console.warn "$count files need attention";
   	printf "$results";
     console_group_end;
   fi;
@@ -688,10 +714,11 @@ function php_lint {
 }
 
 
-function git {
+function git () {
 
   if [[ "$1" == "status" ]]
   then
+    composer status -v;
     files_changed="$(git diff --name-only)";
     php_lint $files_changed;
     # find_todos_and_fixmes $files_changed;
@@ -701,6 +728,9 @@ function git {
   then
     echo "Have you done repo maintenance?";
     command git "$@"
+  elif [[ "$1" == "log" ]]
+  then
+    command git "$@"  --decorate --oneline;
   else
     command git "$@"
   fi
@@ -816,6 +846,13 @@ function show_databases_dev () {
 
 function show_databases {
   mysql -u$LOCAL_MYSQL_USERNAME -e "SHOW DATABASES";
+}
+
+function mysql_database_sizess (){
+  mysql -uroot -e 'SELECT table_schema                                        "DB Name",
+   Round(Sum(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB"
+FROM   information_schema.tables
+GROUP  BY table_schema;';
 }
 
 
@@ -983,7 +1020,7 @@ function phpstorm () {
   then
     open -a phpstorm;
   else
-    open -a phpstorm ~/www/$1;
+    open -a phpstorm $1;
   fi;
 }
 
@@ -1216,13 +1253,13 @@ function console.success () {
 }
 
 
-function console.error {
+function console.danger {
   message=$1;
   echo $color_red"$message"$color_none;
 }
 
 
-function console.warning {
+function console.warn {
   message=$1;
   echo $color_orange"$message"$color_none;
 }
@@ -1247,6 +1284,8 @@ function get_latest_code {
   git checkout $branch;
   git pull origin $branch;
   submodules_initialize;
+  maybe_install_bower;
+  maybe_install_npm;
   maybe_install_composer;
 }
 
@@ -1273,11 +1312,12 @@ function maybe_add_host_entry {
 
   if [[ -z $host_entry ]]
   then
-    sudo -s;
-    echo "127.0.0.1 $new_host_entry" >> $hosts_file;
-    echo "";
-    console.success "Host entry created successfully...";
-    echo "";
+    console.danger "No host entry exists for $new_host_entry";
+    # sudo -s;
+    # echo "127.0.0.1 $new_host_entry" >> $hosts_file;
+    # echo "";
+    # console.success "Host entry created successfully...";
+    # echo "";
   fi;
 }
 
@@ -1296,12 +1336,12 @@ function git_submodule_exists {
 
 
 function go_to_dev_server () {
-  ssh $DEV_USERNAME@$DEV_HOST;
+  ssh $DEV_WWW_USERNAME@$DEV_WWW_HOST;
 }
 
 
 function go_to_dev_mysql_server () {
-  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASS -h$DEV_MYSQL_HOST;
+  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST;
 }
 
 
@@ -1482,7 +1522,9 @@ function wp_git_site () {
   site_name=$(get_user_input "Enter in the Site Name" --default=$site_name)
   site_url=local.$site_name;
 
-  db_name=$(safe_db_name $site_name);
+  db_name=$site_name;
+  db_name=$(strip_tld $db_name);
+  db_name=$(safe_db_name $db_name);
   db_name=$(get_user_input "Enter in the DB Name" --default="$db_name");
   temp_dir=$(get_temp_dir);
 
@@ -1502,6 +1544,8 @@ function wp_git_site () {
   then
     rm -rf $web_root/$site_name;
     git clone --recursive -b master $git_url "$temp_dir";
+  else
+    temp_dir="$web_root/$site_name";
   fi;
 
 
@@ -1529,7 +1573,7 @@ function wp_git_site () {
       ;;
 
       *)
-        console.error "Something went wrong in the case statement...";
+        console.danger "Something went wrong in the case statement...";
       ;;
   esac
 
@@ -1544,10 +1588,10 @@ function wp_git_site () {
   develop_exists=$(git_show_all_branches | grep develop);
   dev_exists=$(git_show_all_branches | grep dev);
   source_branch=master;
-  if [[ ! -z $develop_exists ]]
+  if [[ ! -z "$develop_exists" ]]
   then
     source_branch=develop;
-  elif [[ ! -z $dev_exists ]]
+  elif [[ ! -z "$dev_exists" ]]
   then
     source_branch=dev;
   fi;
@@ -1573,8 +1617,8 @@ function wp_git_site () {
   wp theme activate $(wp theme list --field=name --skip-plugins --skip-themes | head -n 1) --skip-themes --skip-plugins;
 
 
-  console.info "Step 14 - Maybe Add Nginx Configs";
-  # maybe_add_nginx_configs $site_name;
+  console.info "(Skipping) Step 14 - Maybe Add Nginx Configs";
+  # # maybe_add_nginx_configs $site_name;
 
 
   console.info "Step 15 - Maybe Add Host Entry";
@@ -1586,7 +1630,7 @@ function wp_git_site () {
   #import_database_from_dev;
 
   console.info "Last Step - Open in phpStorm and Browser";
-  phpstorm $site_name;
+  phpstorm ~/www/$site_name;
   open http://$site_url;
 
   rm -rf $temp_dir;
@@ -1602,4 +1646,79 @@ function my_alarm_clock () {
     say -r 210 "Wake Up Wayne!"
   	(( count++ ))
   done
+}
+
+function set_terminal_title () {
+  PROMPT_COMMAND='echo -en "\033]0;New terminal title\a"'
+}
+
+function node_fix () {
+  cd ~/;
+  rm -rf /usr/local/lib/node_modules
+  brew uninstall node
+  brew install node --without-npm
+  echo prefix=~/.npm-packages >> ~/.npmrc
+  curl -L https://www.npmjs.com/install.sh | sudo sh
+  #export NODE_PATH=/usr/local/lib/node_modules;
+}
+
+
+function update_locate_db () {
+  sudo /usr/libexec/locate.updatedb
+}
+
+
+function git_delete_tag (){
+  tag_name=$(get_user_input "Enter Tag Name");
+  git tag -d $tag_name;
+  git push origin :refs/tags/$tag_name;
+}
+
+
+function mount_dev_server (){
+  mkdir -p ~/devserver;
+  sshfs -o allow_other,defer_permissions $DEV_WWW_USERNAME@$DEV_WWW_HOST: ~/devserver
+  #sudo sshfs -o allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa root@xxx.xxx.xxx.xxx:/ /mnt/droplet
+}
+
+function unmount_dev_server (){
+  sudo umount ~/devserver;
+}
+
+
+function wpackagist_plugin_lookup () {
+  # https://wpackagist.org/search?q=advanced-cron-manager&type=plugin
+  echo "todo";
+}
+
+
+man() {
+    env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
+
+cat() {
+    local out colored
+    out=$(/bin/cat $@)
+    colored=$(echo $out | pygmentize -f console -g 2>/dev/null)
+    [[ -n $colored ]] && echo "$colored" || echo "$out"
+}
+
+
+function disk_usage (){
+  echo "see here: http://osxdaily.com/2007/03/20/command-line-disk-usage-utilities-df-and-du/";
+  cd /;
+  sudo du | sort -n > /tmp/du.txt;
+}
+
+
+function locate_missing_assets_nginx (){
+  echo "";
 }

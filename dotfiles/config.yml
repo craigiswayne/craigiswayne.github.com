@@ -12,3 +12,4 @@ core config:
         define( 'WP_HOME', 'http://'. $_SERVER['SERVER_NAME'] );
         define( 'WP_SITEURL', 'http://'. $_SERVER['SERVER_NAME'] );
         define( 'SAVEQUERIES', true );
+        define( 'WP_MEMORY_LIMIT', '256M' );

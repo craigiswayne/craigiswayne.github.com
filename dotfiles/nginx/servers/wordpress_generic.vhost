@@ -7,4 +7,6 @@ server {
   include global/wordpress.conf;
   include global/default_locations.conf;
 	include global/restrictions.conf;
+
+
 }
