@@ -5,6 +5,8 @@ node
 mysql
 nginx
 git
+php56
+php56-xdebug
 
 # autoconf
 # coreutils
@@ -20,12 +22,10 @@ git
 # symfony-installer
 # wget
 # xz
-# php56
 # php56-igbinary
 # php56-intl
 # php56-mcrypt
 # php56-mongo
-# php56-xdebug
 # php56-xhgui
 # php56-xhprof
 # python
