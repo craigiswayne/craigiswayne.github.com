@@ -4,7 +4,7 @@
 echo "Installing Homebrew...";
 
 echo "Installing XCode Command Line tools...";
-sudo xcrun cc;
+# sudo xcrun cc; # doesnt work anymore =/
 xcode-select --install;
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
@@ -14,6 +14,8 @@ brew doctor;
 brew update;
 brew upgrade;
 
+# Allow Homebrew to use caskroom
+brew cask;
 
 
 echo "Installing Homebrew taps...";
@@ -28,6 +30,10 @@ for app in "$brew_apps"
 do
 	brew install "$app";
 done
+
+# Setup brew services to run automatically
+brew services start mysql;
+brew services start nginx;
 
 
 echo "Installing Cask Applications...";
