@@ -122,6 +122,7 @@ function delete_dev_logs () {
   for i in `find /usr/local/var/www -name 'debug.log'` ; do rm $i ;  done
   for i in `find /usr/local/var/log -name '*.log'` ; do rm $i ; touch $i;  done
   for i in `find ~/.npm/_logs -name '*.log'` ; do rm $i ;  done
+  echo "TODO delete npm logs @ ~/.npm/_logs";
   delete_xdebug_logs;
 }
 
