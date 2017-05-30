@@ -4,6 +4,7 @@ composer
 node
 mysql
 nginx
+git
 
 # autoconf
 # coreutils
