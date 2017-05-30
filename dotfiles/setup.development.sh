@@ -108,16 +108,16 @@ echo "Customizing PHPStorm...";
 # http://dl.google.com/closure-compiler/compiler-latest.zip
 
 echo "Terminal Customization...";
-ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile ~/.bash_profile
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile ~/.bash_profile
 mkdir -p ~/.wp-cli/;
-ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/config.yml ~/.wp-cli/config.yml
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/config.yml ~/.wp-cli/config.yml
 
 echo "Applying Terminal Theme...";
 #FIXME MUST BE A BETTER WAY TO DO THIS
-open $(curl https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal -o tomorrow-night.terminal);
+open $(curl -fsSL https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal);
 # open tomorrow-night.terminal;
-rm tomorrow-night.terminal;
-sleep 1;
+#rm tomorrow-night.terminal;
+#sleep 1;
 defaults write com.apple.Terminal 'Default Window Settings' 'tomorrow-night';
 defaults write com.apple.Terminal 'Startup Window Settings' 'tomorrow-night';
 
