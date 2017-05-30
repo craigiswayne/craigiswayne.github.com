@@ -55,8 +55,8 @@ done;
 mkdir -p ~/www/logs/;
 ln -sfv /usr/local/var/log/nginx ~/www/logs/nginx
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf;
-ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers /usr/local/etc/nginx/servers;
-ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/global /usr/local/etc/nginx/global
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers/ /usr/local/etc/nginx/servers
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/global/ /usr/local/etc/nginx/global
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/errors/ ~/www/errors
 
 # TODO dynamically fetch this
