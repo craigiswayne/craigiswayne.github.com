@@ -1,4 +1,6 @@
-homebrew/dupes
-homebrew/fuse
+caskroom/cask
 homebrew/php
-homebrew/nginx
+
+# homebrew/dupes
+# homebrew/fuse
+# homebrew/nginx
