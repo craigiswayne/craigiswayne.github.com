@@ -10,7 +10,7 @@ echo "Setting Automatic Updates...";
 sudo softwareupdate --schedule on;
 
 echo "Updating Mac System Software...";
-softwareupdate -iva;
+softwareupdate -ia --verbose;
 
 echo "Daily Software Updates";
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;
