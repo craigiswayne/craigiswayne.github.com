@@ -1,8 +1,21 @@
-#==============================================================================
+#===================================================================================================================
 # My Workstation Setup
-#==============================================================================
+# Usage: sh "$(curl -fsSL https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/setup.sh)"
+#===================================================================================================================
+
+# Setup the OS to your liking
 sh setup.os.sh;
+
+# Setup 3rd Party Apps via homebrew
 sh setup.homebrew.sh;
+
+# Now that nginx is installed... clone my setup repo
+working_directory=$(pwd);
+ln -s /usr/local/var/www ~/www;
+cd ~/www;
+git clone https://github.com/craigiswayne/craigiswayne.github.com.git;
+cd $working_directory;
+
 sh setup.development.sh;
 
 #==============================================================================
