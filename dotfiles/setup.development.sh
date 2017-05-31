@@ -55,8 +55,8 @@ done;
 mkdir -p ~/www/logs/;
 ln -sfv /usr/local/var/log/nginx ~/www/logs/nginx
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf;
-ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers /usr/local/etc/nginx/servers;
-ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/global /usr/local/etc/nginx/global
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers/ /usr/local/etc/nginx/servers
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/global/ /usr/local/etc/nginx/global
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/errors/ ~/www/errors
 
 # TODO dynamically fetch this
@@ -108,16 +108,16 @@ echo "Customizing PHPStorm...";
 # http://dl.google.com/closure-compiler/compiler-latest.zip
 
 echo "Terminal Customization...";
-ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile ~/.bash_profile
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile ~/.bash_profile
 mkdir -p ~/.wp-cli/;
-ln -s /usr/local/var/www/craigiswayne.github.com/dotfiles/config.yml ~/.wp-cli/config.yml
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/config.yml ~/.wp-cli/config.yml
 
 echo "Applying Terminal Theme...";
 #FIXME MUST BE A BETTER WAY TO DO THIS
-open $(curl https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal -o tomorrow-night.terminal);
+open $(curl -fsSL https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal);
 # open tomorrow-night.terminal;
-rm tomorrow-night.terminal;
-sleep 1;
+#rm tomorrow-night.terminal;
+#sleep 1;
 defaults write com.apple.Terminal 'Default Window Settings' 'tomorrow-night';
 defaults write com.apple.Terminal 'Startup Window Settings' 'tomorrow-night';
 
@@ -148,3 +148,7 @@ echo "export PATH=~/.composer/vendor/bin:$PATH" >> ~/.bash_profile;
 #http://serverfault.com/questions/671400/multiple-versions-of-php-through-nginx
 
 #git clone https://github.com/craigiswayne/cw-grunt-init-gruntfile.git ~/.grunt-init/cw-gruntfile
+
+
+sudo cp /usr/local/opt/nginx/*.plist /Library/LaunchDaemons
+sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
