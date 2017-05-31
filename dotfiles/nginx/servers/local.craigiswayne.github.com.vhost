@@ -1,6 +1,0 @@
-server {
-  server_name  local.craigiswayne.github.com;
-  root         html/craigiswayne.github.com;
-
-	index index.html;
-}
