@@ -57,7 +57,7 @@ defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  HH:mm';
 
 echo "Enabling the `locate` function in terminal…";
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist;
-sudo /usr/libexec/locate.updatedb;
+# sudo /usr/libexec/locate.updatedb; -- permission denied
 
 echo "Plain text mode for TextEdit…";
 defaults write com.apple.TextEdit RichText -int 0;

@@ -8,15 +8,6 @@ echo "Installing XCode Command Line tools...";
 xcode-select --install;
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
-chown -Rv $(whomai) /usr/local/;
-brew prune;
-brew doctor;
-brew update;
-brew upgrade;
-
-# Allow Homebrew to use caskroom
-brew cask;
-
 
 echo "Installing Homebrew taps...";
 brew_taps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/brew_taps.list);
@@ -25,16 +16,15 @@ do
 	brew tap "$tap";
 done
 
+brew update;
+
 brew_apps=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/brew.list);
 for app in "$brew_apps"
 do
 	brew install "$app";
 done
 
-# Setup brew services to run automatically
-brew services start mysql;
-brew services start nginx;
-brew services start homebrew/php/php56;
+brew services restart --all;
 
 echo "Installing Cask Applications...";
 brew_casks=$(curl https://raw.githubusercontent.com/craigiswayne/craigiswayne.github.com/master/dotfiles/cask.list);
@@ -43,6 +33,10 @@ do
 	brew cask install "$cask";
 done
 
-brew doctor;
+# PATH inclusions
+echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile;
+
 echo "Cleaning up Homebrew...";
+brew doctor;
 brew cleanup;
+brew prune;

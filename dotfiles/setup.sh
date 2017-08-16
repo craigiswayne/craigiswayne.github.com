@@ -11,7 +11,7 @@ sh setup.homebrew.sh;
 
 # Now that nginx is installed... clone my setup repo
 working_directory=$(pwd);
-ln -s /usr/local/var/www ~/www;
+ln -sfv /usr/local/var/www ~/www;
 cd ~/www;
 git clone https://github.com/craigiswayne/craigiswayne.github.com.git;
 cd $working_directory;
@@ -31,6 +31,12 @@ sh setup.development.sh;
 #http://stackoverflow.com/questions/525592/find-and-replace-inside-a-text-file-from-a-bash-command < FIND and REPLACE
 
 #==============================================================================
+
+
+echo "Sign in to your google chrome account"
+open -a Google\ Chrome;
+
+echo "Setup iCloud Drive"
 
 echo "A special thanks to all those who have helped compile this script...";
 read -n 1 "Press any key to reboot...

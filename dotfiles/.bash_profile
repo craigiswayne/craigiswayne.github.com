@@ -1,40 +1,15 @@
 function parse_git_branch () {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\$(parse_git_branch): \[\033[33;1m\]\w\[\033[m\]\$ ";
+
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\$(parse_git_branch):\[\033[33;1m\]\w\[\033[m\]\$ ";
 export CLICOLOR=1;
 export LSCOLORS=ExFxBxDxCxegedabagacad;
 export LC_ALL=$LANG;
-alias lscw="ls -laGFH";
 
-## From brew doctor
 export PATH="/usr/local/sbin:$PATH";
 
-## To enable global npm packages when npm is installed with HomeBrew
-export PATH="~/.npm-packages/bin:$PATH";
-#export PATH="/usr/local/opt/node:$PATH";
-
-## From installing node with homebrew
-## @link http://stackoverflow.com/a/26919540/1654250
-export NODE_PATH='/usr/local/lib/node_modules:';
-
-## From yo doctor
-export NODE_PATH='$NODE_PATH:~/.npm-packages/lib/node_modules';
-
-## From Homebrew
-export NVM_DIR="$HOME/.nvm"
- . "/usr/local/opt/nvm/nvm.sh"
-
-## Composer Global
-export PATH="~/.composer/vendor/bin:$PATH";
-
-## Other binaries
-export PATH="/usr/local/opt:/usr/local/share:$PATH";
-
-# export PATH=~/.composer/vendor/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.node/bin;
-# export PATH="/usr/local/sbin:$PATH"
-# export PATH="~/bin:$PATH";
-# export PATH="/Users/craigwayne/.npm-packages/bin:$PATH";
+alias lscw="ls -laGFH";
 
 alias whats_my_ip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | awk '{print $2}'";
 
@@ -43,17 +18,19 @@ alias tree="find . -print | sed -e 's;[^/]* |____;g;s;____|; |;g'";
 color_red=$'\e[31m';
 color_none=$'\e[0m';
 color_orange=$'\e[33m';
-#color_green=$'\e['
 color_blue_light=$'\e[94m';
 color_green_light=$'\e[92m';
 #http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
-DEV_WWW_USERNAME='';
-DEV_WWW_HOST='';
-LOCAL_MYSQL_USERNAME='';
-DEV_MYSQL_USERNAME='';
-DEV_MYSQL_PASSWORD='';
-DEV_MYSQL_HOST='';
+DEV_WWW_USERNAME='root';
+DEV_WWW_HOST='152.111.240.157';
+LOCAL_MYSQL_USERNAME='root';
+DEV_MYSQL_USERNAME='root';
+DEV_MYSQL_PASSWORD='mysqlr00t';
+DEV_MYSQL_HOST='152.111.240.158';
+
+source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_wp';
+source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_git';
 
 function submodules_initialize () {
   git submodule update --init --recursive
@@ -104,8 +81,11 @@ function sync_web_root () {
 
 
 function update_apps () {
-  apm update --confirm false;
+  apm update --no-confirm;
+  npm cache verify;
+  # npm i -g npm;
   npm update;
+  npm update -g;
   brew update;
   brew upgrade;
   composer self-update;
@@ -113,17 +93,23 @@ function update_apps () {
 
 
 function open_startup_apps () {
-  open -a slack;
   open -a mail;
 }
 
+function find_and_delete () {
+  for i in `find /Volumes/MEDIA -name '._*'` ; do rm $i;  done
+}
+
+
 
 function delete_dev_logs () {
-  for i in `find /usr/local/var/www -name 'debug.log'` ; do rm $i ;  done
-  for i in `find /usr/local/var/log -name '*.log'` ; do rm $i ; touch $i;  done
-  for i in `find ~/.npm/_logs -name '*.log'` ; do rm $i ;  done
+  for i in `find /usr/local/var/www -name 'debug.log'` ; do sudo rm $i ;  done
+  for i in `find /usr/local/var/log -name '*.log'` ; do sudo rm $i;  done
+  for i in `find ~/.npm/_logs -name '*.log'` ; do sudo rm $i ;  done
   echo "TODO delete npm logs @ ~/.npm/_logs";
-  delete_xdebug_logs;
+  brew services restart --all;
+  sudo nginx -s reload;
+  # delete_xdebug_logs;
 }
 
 
@@ -329,83 +315,6 @@ function repo_maintenance () {
 }
 
 
-function wp_install_dev_tools () {
-  console.info "Installing WP Dev Tools...";
-  wp plugin install debug-bar --activate;
-  wp plugin install wordpress-importer --activate;
-  wp plugin install theme-check --activate;
-  wp plugin install log-deprecated-notices --activate
-  wp plugin install debug-bar-cron --activate
-  wp plugin install p3-profiler --activate
-  wp plugin install wpperformancetester --activate
-  console.info "";
-}
-
-
-function wp_site_url (){
-  site_url=$(wp option get siteurl --skip-plugins --skip-themes);
-  site_url=$(strip_protocol_from_string $site_url);
-  site_url=$(strip_local_subdomain_from_string $site_url);
-  site_url=$(strip_dev_subdomain_from_string $site_url);
-  site_url=$(get_user_input "Enter in the Site URL with no protocol and no subdomain, and no environment subdomain" --default=$site_url);
-  echo $site_url;
-}
-
-function wp_db_name () {
-  db_name=$site_name;
-  db_name=$(strip_tld $db_name);
-  db_name=$(safe_db_name $db_name);
-  db_name=$(get_user_input "Enter in the DB Name" --default="$db_name" --default=$db_name);
-  echo $db_name;
-}
-
-
-function wp_replace_urls () {
-
-  sub_domains=( dev staging www );
-  desired_sub_domain=local;
-
-  protocols=( http https );
-  site_url=$(wp_site_url);
-  site=""; # leave unchanged
-  site_temp="$site_url";
-
-  for sub_domain in "${sub_domains[@]}"
-  do
-    for protocol in "${protocols[@]}"
-    do
-      search="$protocol://$sub_domain";
-      site=${site_temp##$search.};
-      site_temp=$site;
-    done
-  done
-
-
-  for sub_domain in "${sub_domains[@]}"
-  do
-    for protocol in "${protocols[@]}"
-    do
-
-      if [ $sub_domain != $desired_sub_domain ]
-      then
-        echo "";
-        echo "Replacing $protocol://$sub_domain.$site -> http://$desired_sub_domain.$site";
-        wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes;
-        wp search-replace "$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes --allow-root;
-      fi;
-
-    done
-  done
-
-  # Replace instances in the db where no subdomain is specified
-  for protocol in "${protocols[@]}"
-  do
-    echo "";
-    echo "Replacing $protocol://$site -> http://$desired_sub_domain.$site";
-    wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes --all-tables --precise --verbose;
-  done
-}
-
 
 function safe_db_name () {
   [[ ! -z $1 ]] && input="$1" || input="";
@@ -450,101 +359,17 @@ function strip_dev_subdomain_from_string(){
   echo $result;
 }
 
+function dev_db_exists(){
+  exists='false';
+  db=$1;
+  result=$(mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -e"SELECT schema_name from INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = \"$db\"");
 
-function wp_import_database_from_dev () {
-  wp db create;
-  db_name=$(get_user_input "Enter in Database Name" --default=$(wp eval 'echo DB_NAME;'));
-  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name > ~/Downloads/$db_name.sql
-  wp db import ~/Downloads/$db_name.sql;
-  rm ~/Downloads/$db_name.sql;
-  wp_replace_urls;
-  wp_reset_admin_user;
-}
-
-
-function backup_database () {
-
-  if [ -z $1 ]
+  if [[ ! -z $result ]]
   then
-    db_name=$(get_user_input "Enter Database Name");
-  else
-    db_name=$1;
+    exists='true';
   fi;
 
-  user="wordpress";
-  password="wordpress";
-  date=$(date +"%Y_%b_%d");
-  host="localhost";
-  backup_path=~/Downloads;
-  output_file=$backup_path/$db_name"_db_"$date.sql;
-  echo $output_file;
-  umask 177;
-  echo "Backing up to... "$output_file;
-
-  # see: https://makandracards.com/makandra/595-dumping-and-importing-from-to-mysql-in-an-utf-8-safe-way
-  mysqldump --compatible=mysql4 --user=$user --password=$password --host=$host $db_name --skip-set-charset --add-drop-trigger --add-drop-database --default-character-set=utf8 -r $output_file;
-  replace "TYPE=InnoDB" "Engine=InnoDB" -- $output_file;
-  # replace "utf8mb4_unicode_520_ci" "utf8_general_ci" -- $output_file;
-  console.success "Backup finished :)";
-
-  # --default-character-set=latin1
-
-
-
-  #TODO show file size after backup
-  # Delete files older than 30 days
-  # find $backup_path/* -mtime +30 -exec rm {} \;
-  # --databases $DB_NAME
-  # TODO allow for multiple backups to separate files
-}
-
-
-
-function send_db_to_dev (){
-
-  console.danger "This will REPLACE the database on DEV!!!";
-  get_user_input "is that ok?" --default="yes";
-
-  if [ -z $1 ]
-  then
-    db_name=$(wp_db_name);
-  else
-    db_name=$1;
-  fi;
-
-  local_db_file_path=~/Downloads/backup-$db_name.sql;
-
-  site_url=$(wp_site_url);
-  wp search-replace "local.$site_url" "dev.$site_url" --export=$local_db_file_path;
-
-  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -e "DROP DATABASE IF EXISTS $db_name";
-
-  # backup_database $db_name;
-  # local_db_file_path=/$backup_path/$db_name"_db_"$date.sql;
-
-  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -e "CREATE DATABASE IF NOT EXISTS $db_name";
-  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -D $db_name --default-character-set=utf8 < $local_db_file_path;
-}
-
-
-function remove_submodule () {
-  submodule_name=$(get_user_input "Enter Submodule Name" --default=$1);
-
-  submodule_path=$(get_user_input "Enter Submodule Path" --default="wp-content/plugins/$submodule_name");
-
-  git submodule deinit $submodule_path;
-  git rm $submodule_path;
-
-  git rm -r --cached $submodule_path;
-  # overkill
-
-  git submodule status;
-
-  #overkill again (pedantic)
-  rm -rf $submodule_path;
-  git submodule init;
-  git submodule status;
-  git clean -d -f -f;
+  echo $exists;
 }
 
 
@@ -557,30 +382,6 @@ function add_submodule () {
 }
 
 
-function wp_build_themes () {
-  abspath=$(wp eval 'echo ABSPATH;' --allow-root);
-  wp_content_dir=$(wp eval 'echo WP_CONTENT_DIR;' --allow-root);
-  cd $abspath"wp-content/themes";
-  available_themes=$(ls -d */ | cut -f1 -d'/');
-  for theme in $available_themes;
-  do
-    cd $wp_content_dir/themes/$theme;
-    build_project;
-  done
-}
-
-
-# see here: https://wp-cli.org/commands/user/update/
-function wp_reset_admin_user () {
-  admin_pass=admin;
-  wp user create $(strip_email_domain) $(git config user.email) --role=administrator --display_name="$(git config user.name)" --first_name="$(git config user.name)" --last_name="";
-  wp user update $(strip_email_domain) --user_pass=$admin_pass --user_email=$(git config user.email) --allow-root --skip-email --skip-plugins --skip-theme;
-  echo "Admin Username = '$(strip_email_domain)'";
-  echo "Admin Password = '$admin_pass'";
-  wp option update 'admin_email' $(git config user.email);
-}
-
-
 
 function flush_dns_cache () {
   echo "todo";
@@ -590,11 +391,7 @@ function flush_dns_cache () {
 
 
 function create_and_link_nginx_entry () {
-  site_name=$1;
-  if [[ -z $site_name ]]
-  then
-    site_name=$(get_user_input "Site Domain?");
-  fi;
+  site_name=$(wp_site_name $1);
 
   web_root=$2;
   if [[ -z $web_root ]]
@@ -715,29 +512,6 @@ function php_lint {
 }
 
 
-function git () {
-
-  if [[ "$1" == "status" ]]
-  then
-    composer status -v;
-    files_changed="$(git diff --name-only)";
-    php_lint $files_changed;
-    # find_todos_and_fixmes $files_changed;
-    # wp_standards;
-    command git "$@"
-  elif [[ "$1" == "commit" ]]
-  then
-    echo "Have you done repo maintenance?";
-    command git "$@"
-  elif [[ "$1" == "log" ]]
-  then
-    command git "$@"  --decorate --oneline;
-  else
-    command git "$@"
-  fi
-}
-
-
 ##
 # Update your media library
 # using filebot's cli
@@ -773,33 +547,36 @@ function library_update_movies {
 }
 
 
-function library_update_series {
+function filebot_fix_series {
 
-    folder=/Volumes/MEDIA/Series;
-
-    # if [ -z $1 ]
-    # then
-    #   folder=$1;
-    # fi;
-
-    console.info "Updating media library...";
-
-    mv $folder/*/*.avi $folder
-    mv $folder/*/*.mp4 $folder
-    mv $folder/*/*.mkv $folder
-
-    rm $folder/*/*.torrent
-    rm -r $folder/*/*.jpeg
-    # rm -r $folder/*/*.jpg
-    # rm -r $folder/*/*.srt
-    # rm -r $folder/*/*.tbn
-    # rm -r $folder/*/*.nfo
-    # rm $folder/*sample*;
+    # folder=/Volumes/MEDIA/Series;
     #
-    # find $folder/ -type d -empty -delete;
-
-    filebot -r -rename -non-strict --db TheTVDB --format "{n}/Season {s}/{sxe} - {t}" $folder
-    filebot -r -rename -non-strict --db AniDB --format "{collection}/Season {s}/{sxe} - {t}" $folder
+    # # if [ -z $1 ]
+    # # then
+    # #   folder=$1;
+    # # fi;
+    #
+    # console.info "Updating media library...";
+    #
+    # mv $folder/*/*.avi $folder
+    # mv $folder/*/*.mp4 $folder
+    # mv $folder/*/*.mkv $folder
+    #
+    # rm $folder/*/*.torrent
+    # rm -r $folder/*/*.jpeg
+    # # rm -r $folder/*/*.jpg
+    # # rm -r $folder/*/*.srt
+    # # rm -r $folder/*/*.tbn
+    # # rm -r $folder/*/*.nfo
+    # # rm $folder/*sample*;
+    # #
+    # # find $folder/ -type d -empty -delete;
+    #
+    # filebot -r -rename -non-strict --db TheTVDB --format "{n}/Season {s}/{sxe} - {t}" $folder
+    # filebot -r -rename -non-strict --db AniDB --format "{collection}/Season {s}/{sxe} - {t}" $folder
+    filebot -r -rename -non-strict --db TheTVDB --format "{n}/Season {s}/{sxe} - {t}" .;
+    filebot -r -rename -non-strict --db anidb -non-strict --format "/Volumes/MEDIA/Series/{collection}/Season {s}/{sxe} - {t}" .
+    filebot -check /Volumes/MEDIA/Series
 }
 
 
@@ -850,57 +627,12 @@ function show_databases {
 }
 
 function mysql_database_sizess (){
-  mysql -uroot -e 'SELECT table_schema                                        "DB Name",
+  mysql -uroot -e 'SELECT table_schema "DB Name",
    Round(Sum(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB"
 FROM   information_schema.tables
 GROUP  BY table_schema;';
 }
 
-
-function wp_remove_core_keep_contents {
-
-  rm -rf wp-admin 
-  rm -rf wp-includes 
-  rm wp-*.php;
-  rm xmlrpc.php;
-  rm index.php;
-  rm license.txt;
-  rm readme.html;
-  rm google*.html;
-  rm test.php;
-  rm .gitignore;
-  touch .gitignore;
-  rm legacy-feed.xml;
-  echo "Replace the .gitignore file with the one from here: https://bitbucket.org/snippets/24dotcom/kkK8z";
-
-  git add wp-admin 
-  git add wp-includes 
-  git add wp-*.php
-  git add .gitignore;
-  git add index.php;
-  git add xmlrpc.php;
-  git add license.txt;
-  git add readme.html;
-  git add google*.html;
-  git add test.php;
-  git add legacy-feed.xml;
-  git commit -m "Removed WP Core files from the repo";
-
-  mv wp-content/* .;
-  rm -r wp-content;
-  git add wp-content 
-  git add themes/;
-  git add plugins/;
-  git add index.php;
-  git add languages/;
-
-  git commit -m "Moved contents of wp-content to repo root";
-
-  echo "Don't forget to push!!!";
-
-  remove_tracked_ignored_files;
-
-}
 
 
 function submodule_paths () {
@@ -1012,17 +744,6 @@ function tag_and_release () {
   git push --tags;
 
   git status;
-}
-
-
-function phpstorm () {
-
-  if [ -z $1 ]
-  then
-    open -a phpstorm;
-  else
-    open -a phpstorm $1;
-  fi;
 }
 
 
@@ -1268,6 +989,7 @@ function console.warn {
 
 function get_latest_code {
 
+  git reset --hard;
   if [ -z $1 ]
   then
     branch=$(git symbolic-ref --short -q HEAD);
@@ -1281,17 +1003,15 @@ function get_latest_code {
       branch=master;
   fi;
 
-  git fetch --all;
-  git checkout $branch;
-  git pull origin $branch;
+  git fetch --all --prune;
+  git checkout -b $branch origin/$branch;
+  git pull;
   submodules_initialize;
   maybe_install_bower;
-  maybe_install_npm;
   maybe_install_composer;
-}
+  maybe_install_npm;
 
-alias get_latest_code_from_dev="get_latest dev";
-alias get_latest_code_from_master="get_latest master";
+}
 
 
 function maybe_add_host_entry {
@@ -1323,21 +1043,18 @@ function maybe_add_host_entry {
 }
 
 
-function git_submodule_exists {
-  submodule_name=$(get_user_input "Enter Submodule Name" --default=$1);
-  result=$(git submodule status | grep $submodule_name | cut -d " " -f 2);
 
-  if [ $result == $submodule_name ]
-  then
-    return 0; # true
-  else
-    return 1; # false
-  fi;
-}
 
 
 function go_to_dev_server () {
-  ssh $DEV_WWW_USERNAME@$DEV_WWW_HOST;
+  # site_url=$(wp_site_url);
+
+  # if [[ -z $site_url ]]
+  # then
+    ssh $DEV_WWW_USERNAME@$DEV_WWW_HOST
+  # else
+    # ssh $DEV_WWW_USERNAME@$DEV_WWW_HOST:/var/www/$site_url;
+  # fi;
 }
 
 
@@ -1357,12 +1074,6 @@ function mysql {
 }
 
 
-function wp_config_sample () {
-    wp core config --dbname=fixit_tuis --dbuser=wordpress --dbpass=wordpress;
-    wget https://raw.githubusercontent.com/WordPress/WordPress/master/wp-config-sample.php
-    # wp eval 'get_home_path();';
-}
-
 
 function setup_dev_site () {
   #connect to dev
@@ -1370,14 +1081,6 @@ function setup_dev_site () {
   echo "test";
 }
 
-
-function git_get_version () {
-  version=$(git describe);
-  version=${version##*v};
-  version=${version%-*};
-  version=${version%-*};
-  echo $version;
-}
 
 
 function setup_grunt_for_work () {
@@ -1412,11 +1115,6 @@ function parse_boolean () {
     esac
 }
 
-
-function determine_git_root () {
-  [[ ! -z $1 ]] && start="$1" || start=".";
-  find $start -mindepth 1 -maxdepth 2 -type d -iname ".git" | head -n 1;
-}
 
 
 function nginx_conf () {
@@ -1456,46 +1154,13 @@ function nginx_conf () {
 }
 
 
-function wp_project_type () {
-  [[ ! -z $1 ]] && start="$1" || start=".";
-
-  if [[ -f "$1/composer.json" ]]
-  then
-    echo "composer";
-    return;
-  elif [[ -d "$1/themes" || -d "$1/plugins" || -d "$1/uploads" ]]
-  then
-    echo "wp-content";
-    return;
-  elif [[ -d "$1/wp-admin" ]]
-  then
-    echo "wp-full";
-    return;
-  fi;
-
-  echo "unknown";
-}
-
-
-function git_get_all_branches () {
-  git fetch --all;
-  git branch -v;
-}
-
-
-function git_show_all_branches () {
-  git branch -r;
-  # for b in `git branch -r | grep -v -- '->'`; do git branch --track ${b##origin/} $b; done
-}
-
-
 function get_temp_dir () {
-  if [[ ! -z $1 ]]
+  if [ ! -z $1 ]
   then
      base="$1"
    else
-     base="$(realpath ~/Downloads)";
-   fi
+     base="$(grealpath ~/Downloads)";
+  fi
 
   prefix=temp-dir;
   target=$base/$prefix;
@@ -1507,134 +1172,6 @@ function get_temp_dir () {
   done;
   mkdir -p $target;
   echo $target;
-}
-
-
-function wp_git_site () {
-  cd /;
-  console.info "Step 1 - Get Git URL";
-  git_url=$(get_user_input "Enter in the git url" --validate=git); #todo validate
-
-
-  console.info "Step 2 - Calculate required variables";
-  web_root=/usr/local/var/www; #todo autocalulate this
-  site_name=${git_url##*/};
-  site_name=${site_name%.*};
-  site_name=$(get_user_input "Enter in the Site Name" --default=$site_name)
-  site_url=local.$site_name;
-
-  db_name=$site_name;
-  db_name=$(strip_tld $db_name);
-  db_name=$(safe_db_name $db_name);
-  db_name=$(get_user_input "Enter in the DB Name" --default="$db_name");
-  temp_dir=$(get_temp_dir);
-
-
-  console.info "Step 3 - Check if site exists locally";
-  overwrite=false;
-  if [[ -d "$web_root/$site_name" ]]
-  then
-    console.info "Step 3Y - Ask the user to if they want to overwrite or not";
-    overwrite=$(get_user_input "This site folder already exists @ $web_root/$site_name! Would you like to ovewrite it?" --default=$overwrite);
-    overwrite=$(parse_boolean $overwrite);
-  fi;
-
-
-  console.info "Step 4 - Clone to Temp Dir... ($temp_dir)";
-  if [[ "$overwrite" == true || ! -d "$web_root/$site_name" ]]
-  then
-    rm -rf $web_root/$site_name;
-    git clone --recursive -b master $git_url "$temp_dir";
-  else
-    temp_dir="$web_root/$site_name";
-  fi;
-
-
-  project_type=$(wp_project_type $temp_dir);
-  console.info "Step 5 - Determine project type ($project_type)";
-  case "$project_type" in
-      wp-full)
-        mv $temp_dir $web_root/$site_name;
-      ;;
-
-      composer)
-        cd $temp_dir;
-        composer install;
-        cd /;
-        mv $temp_dir $web_root/$site_name;
-      ;;
-
-
-      wp-content)
-        mkdir -p $web_root/$site_name;
-        cd $web_root/$site_name;
-        wp core download --allow-root;
-        rm -rf wp-content;
-        mv $temp_dir $web_root/$site_name/wp-content;
-      ;;
-
-      *)
-        console.danger "Something went wrong in the case statement...";
-      ;;
-  esac
-
-  git_root=$(determine_git_root $web_root/$site_name);
-  console.info "Step 6 - Calculate Git Root ($git_root)";
-
-  console.info "Step 7 - Get All Branches"
-  cd $git_root;
-  git_get_all_branches;
-
-  console.info "Step 8 - Check if Develop exists";
-  develop_exists=$(git_show_all_branches | grep develop);
-  dev_exists=$(git_show_all_branches | grep dev);
-  source_branch=master;
-  if [[ ! -z "$develop_exists" ]]
-  then
-    source_branch=develop;
-  elif [[ ! -z "$dev_exists" ]]
-  then
-    source_branch=dev;
-  fi;
-
-  console.info "Step 9 - Get Latest Code from Develop branch";
-  get_latest_code $source_branch;
-
-
-  console.info "Step 10 - Configure WordPress"
-  cd $web_root/$site_name;
-  wp core config --dbname=$db_name --dbuser=wordpress --dbpass=wordpress;
-
-
-  console.info "Step 11 - Create the DB";
-  wp db create;
-
-
-  console.info "Step 12 - Finish Installing WordPress";
-  wp core install --url=$site_url --title=$site_name --admin_user=$(strip_email_domain) --admin_password=admin --admin_email=$(git config user.email);
-
-
-  console.info "Step 13 - Maybe activate first available theme";
-  wp theme activate $(wp theme list --field=name --skip-plugins --skip-themes | head -n 1) --skip-themes --skip-plugins;
-
-
-  console.info "(Skipping) Step 14 - Maybe Add Nginx Configs";
-  # # maybe_add_nginx_configs $site_name;
-
-
-  console.info "Step 15 - Maybe Add Host Entry";
-  maybe_add_host_entry $site_url "/etc/hosts";
-
-
-  # console.info "Step 15 - Maybe Import Database from DEV";
-  # git_url=$(get_user_input "Enter in the git url" --validate=git); #todo validate
-  #import_database_from_dev;
-
-  console.info "Last Step - Open in phpStorm and Browser";
-  phpstorm ~/www/$site_name;
-  open http://$site_url;
-
-  rm -rf $temp_dir;
 }
 
 
@@ -1669,13 +1206,6 @@ function update_locate_db () {
 }
 
 
-function git_delete_tag (){
-  tag_name=$(get_user_input "Enter Tag Name");
-  git tag -d $tag_name;
-  git push origin :refs/tags/$tag_name;
-}
-
-
 function mount_dev_server (){
   mkdir -p ~/devserver;
   sshfs -o allow_other,defer_permissions $DEV_WWW_USERNAME@$DEV_WWW_HOST: ~/devserver
@@ -1693,7 +1223,7 @@ function wpackagist_plugin_lookup () {
 }
 
 
-man() {
+function man() {
     env \
     LESS_TERMCAP_mb=$(printf "\e[1;31m") \
     LESS_TERMCAP_md=$(printf "\e[1;31m") \
@@ -1705,7 +1235,7 @@ man() {
     man "$@"
 }
 
-cat() {
+function cat() {
     local out colored
     out=$(/bin/cat $@)
     colored=$(echo $out | pygmentize -f console -g 2>/dev/null)
@@ -1722,4 +1252,32 @@ function disk_usage (){
 
 function locate_missing_assets_nginx (){
   echo "";
+}
+
+function mysql_create_user (){
+  username=wordpress
+  mysql -uroot -e "CREATE USER '$username'@'localhost' IDENTIFIED BY 'wordpress'";
+  mysql -uroot -e "GRANT ALL PRIVILEGES ON * . * TO '$username'@'localhost'";
+  mysql -uroot -e "FLUSH PRIVILEGES";
+}
+
+
+function copy_public_key () {
+  cat ~/.ssh/id_rsa.pub | pbcopy
+  console.success "Copied!!!";
+}
+
+
+function project_init (){
+  npm init;
+  npm install grunt --save-dev;
+  yarn init;
+  yarn add uikit -D;
+  mkdir -p assets/js;
+  touch assets/js/project.jsx;
+}
+
+# See: https://coolestguidesontheplanet.com/how-to-compress-and-uncompress-files-and-folders-in-os-x-lion-10-7-using-terminal/
+function compress (){
+  tar -zcvf archive_name.tar.gz $1
 }

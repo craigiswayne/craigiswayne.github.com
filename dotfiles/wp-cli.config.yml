@@ -9,7 +9,17 @@ core config:
         define( 'WP_DEBUG_DISPLAY', true );
         define( 'SCRIPT_DEBUG', true );
         define( 'WP_AUTO_UPDATE_CORE', false );
-        define( 'WP_HOME', 'http://'. $_SERVER['SERVER_NAME'] );
-        define( 'WP_SITEURL', 'http://'. $_SERVER['SERVER_NAME'] );
+        if( PHP_SAPI !== 'cli' ){
+            define( 'WP_HOME', 'http://'. $_SERVER['SERVER_NAME'] );
+            define( 'WP_SITEURL', 'http://'. $_SERVER['SERVER_NAME'] );
+        }
         define( 'SAVEQUERIES', true );
-        define( 'WP_MEMORY_LIMIT', '256M' );
+        define( 'WP_MEMORY_LIMIT', '128MB' );
+        ini_set('max_execution_time', '180' );
+        ini_set('memory_limit', '128M');
+        ini_set('post_max_size', '32M');
+        ini_set('upload_max_filesize','32M');
+        define('CONCATENATE_SCRIPTS', true );
+        define('COMPRESS_SCRIPTS',true);
+        define('COMPRESS_CSS',true);
+        if ( SHORTINIT ) return false;

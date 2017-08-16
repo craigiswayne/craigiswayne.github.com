@@ -1,0 +1,23 @@
+server
+{
+  server_name local.24dotcom.bitbucket.io;
+  root html/24dotcom.bitbucket.io;
+
+  index index.php index.html;
+  autoindex on;
+
+  location = /robots.txt
+  {
+    allow all;
+    log_not_found off;
+    access_log off;
+  }
+
+  location ~* \.(js|css|png|jpg|jpeg|gif|ico)$
+  {
+    expires max;
+    log_not_found off;
+  }
+
+
+}
