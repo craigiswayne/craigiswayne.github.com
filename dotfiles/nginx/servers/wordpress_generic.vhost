@@ -17,6 +17,7 @@ server
   #include global/default_locations.conf;
   #include global/restrictions.conf;
   autoindex on;
+  
   location = /favicon.ico
   {
     log_not_found off;
