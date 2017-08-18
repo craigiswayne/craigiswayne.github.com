@@ -362,7 +362,7 @@ function wp_uploads_to_dev (){
 }
 
 
-function wp_db_to_dev (){
+function wp_db_export_to_dev (){
 
   console.danger "This will REPLACE the database on DEV!!!";
   get_user_input "is that ok?" --default="yes";

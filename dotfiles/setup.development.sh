@@ -19,6 +19,7 @@ git config --global core.autocrlf input
 git config --global core.safecrlf true
 git config --global push.default current
 git config --global core.excludesfile ~/.gitignore_global
+git config --global github.user craigiswayne;
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.gitignore_global ~/;
 
 echo "Setting up NPM Defaults...";
