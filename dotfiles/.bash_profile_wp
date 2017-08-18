@@ -261,7 +261,7 @@ function wp_replace_urls () {
   done
 }
 
-function wp_import_database_from_dev () {
+function wp_db_import_dev () {
 
   if [ ! -f wp-config.php ]
   then
@@ -269,11 +269,8 @@ function wp_import_database_from_dev () {
     return;
   fi;
 
-  #todo maybe create db
-  #todo maybe core install
-
-  #wp db create;
-  #wp core install;
+  wp db create;
+  wp core install;
   db_name=$(get_user_input "Enter in Database Name" --default=$(wp_db_name));
   if [ $(dev_db_exists $db_name) == 'false' ]
   then
@@ -282,9 +279,10 @@ function wp_import_database_from_dev () {
   fi;
   mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name > ~/Downloads/$db_name-dev.sql
   wp db import ~/Downloads/$db_name-dev.sql;
-  #rm ~/Downloads/$db_name-dev.sql;
+  rm ~/Downloads/$db_name-dev.sql;
   wp_replace_urls;
   wp_reset_admin_user;
+
 }
 
 

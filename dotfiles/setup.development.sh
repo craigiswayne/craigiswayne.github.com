@@ -144,3 +144,8 @@ pip install --upgrade sqlparse
 ssh-keygen
 # then cat ~/.ssh/id_rsa.pub | pbcopy
 # and add it to your github and bitbucket accounts
+
+
+###
+# Composer Configs
+###
