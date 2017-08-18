@@ -986,6 +986,11 @@ function console.warn {
   echo $color_orange"$message"$color_none;
 }
 
+function console.error {
+  message=$1;
+  console.danger "$1";
+}
+
 
 function get_latest_code {
 
