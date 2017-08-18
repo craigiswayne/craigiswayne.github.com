@@ -14,10 +14,14 @@ function git () {
     # find_todos_and_fixmes $files_changed;
     # wp_standards;
     command git "$@"
-  elif [[ "$1" == "prune" ]]
+  elif [ "$1" == "prune" ]
   then
     git remote origin prune;
     command git "$@"
+  elif [ "$1" == "clone" ] && [ ! -z "$3"  ]
+  then
+    command git "$@"
+    cd $2;
   elif [[ "$1" == "commit" ]]
   then
     echo "Have you done repo maintenance?";

@@ -208,6 +208,10 @@ function wp_db_name () {
   echo $db_name;
 }
 
+function wp_fix_site_urls () {
+  wp search-replace 'celebratingwomen.w24.co.za' 'local.machinesofmining.news24.com' wp_*options
+}
+
 
 function wp_replace_urls () {
 
@@ -241,8 +245,8 @@ function wp_replace_urls () {
       then
         echo "";
         echo "Replacing $protocol://$sub_domain.$site -> http://$desired_sub_domain.$site";
-        wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes;
-        wp search-replace "$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes --allow-root;
+        wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
+        wp search-replace "$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
       fi;
 
     done
@@ -253,11 +257,17 @@ function wp_replace_urls () {
   do
     echo "";
     echo "Replacing $protocol://$site -> http://$desired_sub_domain.$site";
-    wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --skip-plugins --skip-themes --all-tables --precise --verbose;
+    wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
   done
 }
 
 function wp_import_database_from_dev () {
+
+  if [ ! -f wp-config.php ]
+  then
+    echo "install wp first";
+    exit 1;
+  fi;
 
   #todo maybe create db
   #todo maybe core install
@@ -369,24 +379,27 @@ function wp_db_to_dev (){
   db_name=$(get_user_input "Enter Local Database Name" --default=$db_name);
   dev_db_name=$(get_user_input "Enter Dev Database Name" --default=$db_name);
 
-  local_db_file_path=~/Downloads/backup-$db_name.sql;
-  local_db_file_path=/Users/craigiswayne/Downloads/rodale_db_2017_Jun_27.sql;
+  site_name=$(wp_site_name);
 
-  site_url=$(wp_site_url);
-  site_url=$(get_user_input "Enter in th Site URL with no environment prefixes" --default=$site_url);
+  export_file=~/Downloads/backup-$db_name.sql;
+  wp search-replace local.$site_name dev.$site_name --export=$export_file;
 
-  # wp search-replace local.$site_url dev.$site_url --export=$local_db_file_path;
+  local_db_file_path=$export_file;
+
+  # site_url=$(wp_site_url);
+  # site_url=$(get_user_input "Enter in th Site URL with no environment prefixes" --default=$site_url);
+
+  # wp search-replace local.$site_name dev.$site_name --export=$local_db_file_path;
 
 
   replace TYPE=MyISAM ENGINE=MyISAM -- $local_db_file_path;
-  replace local.$site_url dev.$site_url -- $local_db_file_path;
 
   # mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -e "DROP DATABASE IF EXISTS $dev_db_name";
 
   # backup_database $db_name;
   # local_db_file_path=/$backup_path/$db_name"_db_"$date.sql;
 
-  mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -e "CREATE DATABASE IF NOT EXISTS $dev_db_name";
+  #mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -e "CREATE DATABASE IF NOT EXISTS $dev_db_name";
   mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -D$dev_db_name --default-character-set=utf8 < $local_db_file_path;
 
   # if you get the following error:

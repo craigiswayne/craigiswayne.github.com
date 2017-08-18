@@ -78,6 +78,14 @@ open "http://127.0.0.1/";
 echo "MySQL Post Install...";
 
 
+echo "Create WordPress User...";
+# https://dev.mysql.com/doc/refman/5.6/en/sha256-pluggable-authentication.html
+mysql -uroot -e "CREATE USER 'wordpress'@'%' IDENTIFIED BY PASSWORD 'wordpress';"
+mysql -uroot -e "CREATE USER 'wordpress'@'%' IDENTIFIED WITH sha256_password;"
+mysql -uroot -e "SET old_passwords = 2;";
+mysql -uroot -e "SET PASSWORD FOR 'wordpress'@'%' = PASSWORD('wordpress');";
+mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%' WITH GRANT OPTION;";
+
 echo "Customizing PHPStorm...";
 # TODO link nginx server file
 # activation license server = http://idea.pjoc.pub/
