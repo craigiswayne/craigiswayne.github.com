@@ -1,3 +1,15 @@
+function wp (){
+
+  if [ "$1" == "core" ] && [ "$2" == "install" ]
+  then
+    command wp "$@"  --url=local.$(cwd) --title=local.$(cwd) --admin_user=craigiswayne --admin_email=$(git config user.email)
+    wp_reset_admin_user;
+  else
+    command wp "$@";
+  fi;
+
+}
+
 function wp_project_type () {
   [[ ! -z $1 ]] && start="$1" || start=".";
 
@@ -262,12 +274,6 @@ function wp_replace_urls () {
 }
 
 function wp_db_import_dev () {
-
-  if [ ! -f wp-config.php ]
-  then
-    console.error "Install WordPress First";
-    return;
-  fi;
 
   wp db create;
   wp core install;
