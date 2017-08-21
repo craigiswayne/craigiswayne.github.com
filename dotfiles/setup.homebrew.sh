@@ -40,3 +40,6 @@ echo "Cleaning up Homebrew...";
 brew doctor;
 brew cleanup;
 brew prune;
+
+
+gem install sass;
