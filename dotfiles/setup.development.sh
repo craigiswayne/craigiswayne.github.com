@@ -20,7 +20,10 @@ git config --global core.safecrlf true
 git config --global push.default current
 git config --global core.excludesfile ~/.gitignore_global
 git config --global github.user craigiswayne;
+git config --global alias.conflicts '!git ls-files -u | cut -f 2 | sort -u'
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.gitignore_global ~/;
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.jscsrc ~/www
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.eslintrc.json ~/www
 
 echo "Setting up NPM Defaults...";
 # http://iamsim.me/set-your-npm-init-defaults/
