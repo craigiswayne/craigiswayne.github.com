@@ -1,15 +1,6 @@
-# Upstream to abstract backend connection(s) for php
-upstream php
-{
-  server unix:/tmp/php-cgi.socket;
-  server 127.0.0.1:9000;
-}
-
 server
 {
-  #server_name  ^(?<subdomain>[a-z]+)\.?(?<domain>.*)\.(?<tld>.*);
-  # server_name local\.?(?<domain>.*)\.(?<tld>.{2,})$;
-  server_name ~^(?<subdomain>local)\.?(?<domain>.*)\.(?<tld>.*);
+  server_name ~^(?<subdomain>dev)\.?(?<domain>.*)\.(?<tld>.*);
   root html/$domain.$tld;
 
   index index.php index.html;

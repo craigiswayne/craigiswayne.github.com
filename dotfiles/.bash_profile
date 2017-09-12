@@ -22,6 +22,13 @@ color_blue_light=$'\e[94m';
 color_green_light=$'\e[92m';
 #http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
+DEV_WWW_USERNAME='root';
+DEV_WWW_HOST='152.111.240.157';
+LOCAL_MYSQL_USERNAME='root';
+DEV_MYSQL_USERNAME='root';
+DEV_MYSQL_PASSWORD='mysqlr00t';
+DEV_MYSQL_HOST='152.111.240.158';
+
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_wp';
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_git';
 
@@ -985,7 +992,16 @@ function console.error {
 }
 
 
+function get_latest_code_develop {
+  rm .git/refs/heads/origin/develop
+  git fetch --all --prune;
+  git checkout -B develop origin/develop;
+}
+
 function get_latest_code {
+
+  # deletes all merged in branches
+  git branch --merged master | grep -v '^ *master$' | xargs git branch -d
 
   git reset --hard;
   if [ -z $1 ]
@@ -1004,11 +1020,10 @@ function get_latest_code {
   git fetch --all --prune;
   git checkout -b $branch origin/$branch;
   git pull;
-  submodules_initialize;
-  maybe_install_bower;
-  maybe_install_composer;
-  maybe_install_npm;
-
+  #submodules_initialize;
+  #maybe_install_bower;
+  #maybe_install_composer;
+  #maybe_install_npm;
 }
 
 
@@ -1278,4 +1293,9 @@ function project_init (){
 # See: https://coolestguidesontheplanet.com/how-to-compress-and-uncompress-files-and-folders-in-os-x-lion-10-7-using-terminal/
 function compress (){
   tar -zcvf archive_name.tar.gz $1
+}
+
+function cwd () {
+  result=${PWD##*/};
+  echo $result;
 }

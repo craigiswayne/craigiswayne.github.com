@@ -6,6 +6,7 @@
 
 
 echo "IMPORTANT!! Install xcode from the app store before continuing...";
+sudo xcodebuild -license accept;
 
 echo "Setting up Development environment...";
 
@@ -20,7 +21,8 @@ git config --global core.safecrlf true
 git config --global push.default current
 git config --global core.excludesfile ~/.gitignore_global
 git config --global github.user craigiswayne;
-git config --global alias.conflicts '!git ls-files -u | cut -f 2 | sort -u'
+git config --glosudo xcodebuild -license acceptbal alias.conflicts '!git ls-files -u | cut -f 2 | sort -u'
+git config --global fetch.prune true;
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.gitignore_global ~/;
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.jscsrc ~/www
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.eslintrc.json ~/www
@@ -53,6 +55,7 @@ echo "Symlinking NGINX configuration files...";
 mkdir -p ~/www/logs/;
 ln -sfv /usr/local/var/log/nginx ~/www/logs/nginx
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/errors/ ~/www/errors
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers /usr/local/etc/nginx/servers
 
 # TODO dynamically fetch this
 #ln -sfv $(find /usr/local/Cellar/nginx -iname "homebrew.mxcl.nginx.plist") ~/Library/LaunchAgents/;
@@ -143,7 +146,8 @@ sudo cp /usr/local/opt/nginx/*.plist /Library/LaunchDaemons
 sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 
 # install sqlformat for atom beautifier
-pip install --upgrade sqlparse
+sudo easy_install pip
+sudo pip install --upgrade sqlparse
 
 ssh-keygen
 # then cat ~/.ssh/id_rsa.pub | pbcopy

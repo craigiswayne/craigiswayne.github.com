@@ -184,6 +184,7 @@ function wp_install_dev_tools () {
   wp plugin install wpperformancetester --activate
   wp plugin install simply-show-hooks --activate
   wp plugin install post-duplicator --activate
+  wp plugin install query-monitor --activate
   console.info "";
 }
 
@@ -213,10 +214,6 @@ function wp_site_name (){
 
 function wp_db_name () {
   db_name=$(wp eval 'echo DB_NAME;' --skip-themes --skip-plugins);
-  # db_name=$(wp_site_url);
-  # db_name=$(strip_tld $db_name);
-  # db_name=$(safe_db_name $db_name);
-  # db_name=$(get_user_input "Enter in the DB Name" --default="$db_name" --default=$db_name);
   echo $db_name;
 }
 
@@ -257,8 +254,10 @@ function wp_replace_urls () {
       then
         echo "";
         echo "Replacing $protocol://$sub_domain.$site -> http://$desired_sub_domain.$site";
-        wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
-        wp search-replace "$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
+        # wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
+        # wp search-replace "$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
+        wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site";
+        wp search-replace "$sub_domain.$site" "http://$desired_sub_domain.$site";
       fi;
 
     done
@@ -269,7 +268,8 @@ function wp_replace_urls () {
   do
     echo "";
     echo "Replacing $protocol://$site -> http://$desired_sub_domain.$site";
-    wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
+    # wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
+    wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site";
   done
 }
 
@@ -360,11 +360,19 @@ function wp_remove_core_keep_contents {
 }
 
 
+
 function wp_uploads_to_dev (){
   site_name=$(wp_site_name);
-  local_uploads_path=/usr/local/var/www/$site_name/wp-content/uploads/;
+  local_uploads_path=$(wp eval "echo trailingslashit(wp_upload_dir()['basedir']);");
   remote_wp_content_path=/var/www/$site_name/wp-content/;
   scp -r $local_uploads_path $DEV_WWW_USERNAME@$DEV_WWW_HOST:$remote_wp_content_path
+}
+
+function wp_uploads_from_dev () {
+ site_name=$(wp_site_name);
+ local_uploads_path=$(wp eval "echo trailingslashit(wp_upload_dir()['basedir']);");
+ remote_wp_content_path=/var/www/$site_name/wp-content/;
+ scp -r $DEV_WWW_USERNAME@$DEV_WWW_HOST:$remote_wp_content_path/uploads/ $local_uploads_path
 }
 
 
@@ -458,4 +466,22 @@ function wp_backup_database () {
   # find $backup_path/* -mtime +30 -exec rm {} \;
   # --databases $DB_NAME
   # TODO allow for multiple backups to separate files
+}
+
+
+# https://apple.stackexchange.com/questions/57412/how-can-i-trigger-a-notification-center-notification-from-an-applescript-or-shel
+# http://osxdaily.com/2016/09/06/trigger-alert-dialog-mac-via-command-line/
+function wp_watch_debug_log(){
+  debug_log_path=wp-content/debug.log;
+  rm $debug_log_path;
+  touch $debug_log_path;
+  #osascript -e 'display notification "Hello world!" with title "Hi!"'
+  #osascript -e 'display alert "Hello world!" with title "Hi!"'
+
+  # Always on Top with Ok and Cancel Buttons
+  #osascript -e 'display dialog "Im Always on Top!\n\nWith Cancel and Ok Buttons"'
+
+  ## Side Notification
+  #osascript -e 'display notification "All graphics have been converted." with title "My Graphic Processing Script" subtitle "Processing is complete." sound name "Frog"';
+  tail -f $debug_log_path | awk '/(.*)/ {system("osascript -e 'display dialog \"Error Found!\" ' ")}'
 }
