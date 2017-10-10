@@ -472,9 +472,14 @@ function wp_backup_database () {
 # https://apple.stackexchange.com/questions/57412/how-can-i-trigger-a-notification-center-notification-from-an-applescript-or-shel
 # http://osxdaily.com/2016/09/06/trigger-alert-dialog-mac-via-command-line/
 function wp_watch_debug_log(){
-  debug_log_path=wp-content/debug.log;
+  clear;
+  debug_log_path=$(wp eval "echo WP_CONTENT_DIR;")/debug.log;
+  touch $debug_log_path;
   rm $debug_log_path;
   touch $debug_log_path;
+  console.info "Watching your debug.log ...";
+  tail -f $debug_log_path;
+
   #osascript -e 'display notification "Hello world!" with title "Hi!"'
   #osascript -e 'display alert "Hello world!" with title "Hi!"'
 
@@ -483,5 +488,5 @@ function wp_watch_debug_log(){
 
   ## Side Notification
   #osascript -e 'display notification "All graphics have been converted." with title "My Graphic Processing Script" subtitle "Processing is complete." sound name "Frog"';
-  tail -f $debug_log_path | awk '/(.*)/ {system("osascript -e 'display dialog \"Error Found!\" ' ")}'
+  #tail -f $debug_log_path | awk '/(.*)/ {system("osascript -e 'display dialog \"Error Found!\" ' ")}'
 }

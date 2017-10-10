@@ -993,9 +993,16 @@ function console.error {
 
 
 function get_latest_code_develop {
-  rm .git/refs/heads/origin/develop
+
+  git_refs_develop_folder=.git/refs/heads/origin/develop;
+  if [ -f $git_refs_develop_folder ]
+  then
+    rm .git/refs/heads/origin/develop
+  fi;
+
   git fetch --all --prune;
   git checkout -B develop origin/develop;
+  git log -n 3;
 }
 
 function get_latest_code {
@@ -1018,7 +1025,7 @@ function get_latest_code {
   fi;
 
   git fetch --all --prune;
-  git checkout -b $branch origin/$branch;
+  git checkout -B $branch origin/$branch;
   git pull;
   #submodules_initialize;
   #maybe_install_bower;
