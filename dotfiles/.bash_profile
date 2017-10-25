@@ -22,12 +22,6 @@ color_blue_light=$'\e[94m';
 color_green_light=$'\e[92m';
 #http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
-DEV_WWW_USERNAME='root';
-DEV_WWW_HOST='152.111.240.157';
-LOCAL_MYSQL_USERNAME='root';
-DEV_MYSQL_USERNAME='root';
-DEV_MYSQL_PASSWORD='mysqlr00t';
-DEV_MYSQL_HOST='152.111.240.158';
 
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_wp';
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_git';
