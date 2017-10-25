@@ -273,6 +273,21 @@ function wp_replace_urls () {
   done
 }
 
+function wp_db_get_dev () {
+  wp db create;
+  wp core install;
+  db_name=$(get_user_input "Enter in Database Name" --default=$(wp_db_name));
+  if [ $(dev_db_exists $db_name) == 'false' ]
+  then
+    show_databases_dev;
+    dev_db_name=$(get_user_input "Enter in the Dev Database Name" --default=$db_name);
+  else
+    dev_db_name=$db_name;
+  fi;
+  site_root=$(wp eval "echo ABSPATH;");
+  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $dev_db_name > $site_root/$db_name-dev.sql
+}
+
 function wp_db_import_dev () {
 
   wp db create;
@@ -281,11 +296,13 @@ function wp_db_import_dev () {
   if [ $(dev_db_exists $db_name) == 'false' ]
   then
     show_databases_dev;
-    return;
+    dev_db_name=$(get_user_input "Enter in the Dev Database Name" --default=$db_name);
+  else
+    dev_db_name=$db_name;
   fi;
-  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name > ~/Downloads/$db_name-dev.sql
-  wp db import ~/Downloads/$db_name-dev.sql;
-  rm ~/Downloads/$db_name-dev.sql;
+  site_root=$(wp eval "echo ABSPATH;");
+  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $dev_db_name > $site_root/$db_name-dev.sql
+  wp db import $site_root/$db_name-dev.sql;
   wp_replace_urls;
   wp_reset_admin_user;
 

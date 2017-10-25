@@ -2,6 +2,8 @@
 # DEVELOPMENT ENVIRONMENT THINGS
 #==============================================================================
 
+ln -sfv /usr/local/var/www ~/www;
+
 #TODO clone all starred git repos onto my machine
 
 

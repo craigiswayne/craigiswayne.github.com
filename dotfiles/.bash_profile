@@ -106,7 +106,7 @@ function delete_dev_logs () {
   for i in `find /usr/local/var/www -name 'debug.log'` ; do sudo rm $i ;  done
   for i in `find /usr/local/var/log -name '*.log'` ; do sudo rm $i;  done
   for i in `find ~/.npm/_logs -name '*.log'` ; do sudo rm $i ;  done
-  echo "TODO delete npm logs @ ~/.npm/_logs";
+   
   brew services restart --all;
   sudo nginx -s reload;
   # delete_xdebug_logs;
@@ -521,99 +521,105 @@ function php_lint {
 # @link http://www.filebot.net/naming.html
 # @see http://kodi.wiki/view/Naming_video_files/Movies
 ##
-function library_update_movies {
+function kodi_library_update {
 
-    folder=~/Movies;
+  # working_directory="/Volumes/MEDIA/Movies";
+  #
+  # console.info "Updating media library...";
+  #
+  # # mv $folder/*/*.avi $folder #TODO with mkv, mp4
+  # # rm -r $folder/*/*.torrent
+  # # rm -r $folder/*/*.jpeg
+  # # rm -r $folder/*/*.jpg
+  # # rm -r $folder/*/*.srt
+  # # rm -r $folder/*/*.tbn
+  # # rm -r $folder/*/*.nfo
+  # # rm $folder/*sample*;
+  #
+  # # Look for files within the root folder and try to parse them
+  # find $working_directory/* -maxdepth 0 -type f  -print0 | while IFS= read -r -d '' file; do
+  #   console.info "Attempting to parse folder... $file";
+  #   filebot -rename --db TheMovieDB --format "$working_directory/{n} ({y})/{n}" "$file"
+  #   echo "";
+  #   echo "==========="
+  #   echo "";
+  # done
+  #
+  #
+  # # Iterate through all folders in the Movies directory and attempt to rename
+  # find $working_directory/* -maxdepth 1 -type d  -print0 | while IFS= read -r -d '' folder; do
+  #   console.info "Attempting to parse folder... $folder";
+  #   filebot -r -rename --db TheMovieDB --format "$working_directory/{n} ({y})/{n}" "$folder"
+  #   echo "";
+  #   echo "==========="
+  #   echo "";
+  # done
+  #
+  #
+  # # Remove all empty folders from the hard drive
+  # find $working_directory/ -type d -empty -delete
+  # filebot -check $working_directory;
+  #
+  # working_directory="/Volumes/MEDIA/TV Shows";
+  #
+  # console.info "Updating media library...";
+  #
+  # # Look for files within the root folder and try to parse them
+  # find $working_directory/* -maxdepth 0 -type f  -print0 | while IFS= read -r -d '' file; do
+  #   console.info "Attempting to parse folder... $file";
+  #   filebot -r -rename --db TheTVDB --format "$working_directory/{n}/Season {s}/{sxe} - {t}" "$file";
+  #   echo "";
+  #   echo "==========="
+  #   echo "";
+  # done
+  #
+  #
+  # # Iterate through all folders in the Movies directory and attempt to rename
+  # find $working_directory/* -maxdepth 1 -type d  -print0 | while IFS= read -r -d '' folder; do
+  #   console.info "Attempting to parse folder... $folder";
+  #   filebot -r -rename --db TheTVDB --format "$working_directory/{n}/Season {s}/{sxe} - {t}" "$folder";
+  #   echo "";
+  #   echo "==========="
+  #   echo "";
+  # done
+  #
+  #
+  # # Remove all empty folders from the hard drive
+  # find $working_directory/ -type d -empty -delete
+  # filebot -check $working_directory;
 
-    if [[ -z $1 ]]
-    then
-      folder=$1;
-    fi;
+  ###### ANIME #######
 
-    console.info "Updating media library...";
+  working_directory="/Volumes/MEDIA/Anime";
+  console.info "Updating media library with Anime..."
 
-    mv $folder/*/*.avi $folder #TODO with mkv, mp4
-    rm -r $folder/*/*.torrent
-    rm -r $folder/*/*.jpeg
-    rm -r $folder/*/*.jpg
-    rm -r $folder/*/*.srt
-    rm -r $folder/*/*.tbn
-    rm -r $folder/*/*.nfo
-    rm $folder/*sample*;
-
-    find $folder/ -type d -empty -delete
-
-    filebot -rename -non-strict --db TheMovieDB --format "$folder/{n} ({y})/{n}" $folder
-}
+  # Look for files within the root folder and try to parse them
+  find $working_directory/* -maxdepth 0 -type f  -print0 | while IFS= read -r -d '' file; do
+    console.info "Attempting to parse folder... $file";
+    filebot -r -rename --db anidb -non-strict --format "$working_directory/{n}/Season {s}/{sxe} - {t}" "$folder";
+    echo "";
+    echo "==========="
+    echo "";
+  done
 
 
-function filebot_fix_series {
-
-    # folder=/Volumes/MEDIA/Series;
-    #
-    # # if [ -z $1 ]
-    # # then
-    # #   folder=$1;
-    # # fi;
-    #
-    # console.info "Updating media library...";
-    #
-    # mv $folder/*/*.avi $folder
-    # mv $folder/*/*.mp4 $folder
-    # mv $folder/*/*.mkv $folder
-    #
-    # rm $folder/*/*.torrent
-    # rm -r $folder/*/*.jpeg
-    # # rm -r $folder/*/*.jpg
-    # # rm -r $folder/*/*.srt
-    # # rm -r $folder/*/*.tbn
-    # # rm -r $folder/*/*.nfo
-    # # rm $folder/*sample*;
-    # #
-    # # find $folder/ -type d -empty -delete;
-    #
-    # filebot -r -rename -non-strict --db TheTVDB --format "{n}/Season {s}/{sxe} - {t}" $folder
-    # filebot -r -rename -non-strict --db AniDB --format "{collection}/Season {s}/{sxe} - {t}" $folder
-    filebot -r -rename -non-strict --db TheTVDB --format "{n}/Season {s}/{sxe} - {t}" .;
-    filebot -r -rename -non-strict --db anidb -non-strict --format "/Volumes/MEDIA/Series/{collection}/Season {s}/{sxe} - {t}" .
-    filebot -check /Volumes/MEDIA/Series
-}
+  # Iterate through all folders in the Movies directory and attempt to rename
+  find $working_directory/* -maxdepth 1 -type d  -print0 | while IFS= read -r -d '' folder; do
+    console.info "Attempting to parse folder... $folder";
+    filebot -r -rename --db anidb -non-strict --format "$working_directory/{n}/Season {s}/{sxe} - {t}" "$folder";
+    echo "";
+    echo "==========="
+    echo "";
+  done
 
 
-function library_flatten {
-
-  folder=.;
-
-  if [ -d $1 ]
-  then
-    folder=$1;
-  fi;
-
-  find $folder -name '*.mp4' -exec sh -c 'mv "$@" $folder' _ {} +
-  find $folder -name '*.avi' -exec sh -c 'mv "$@" $folder' _ {} +
-  find $folder -name '*.mkv' -exec sh -c 'mv "$@" $folder' _ {} +
-
-}
+  # Remove all empty folders from the hard drive
+  find $working_directory/ -type d -empty -delete
+  filebot -check $working_directory;
 
 
-function library_cleanup {
+  # TODO find the failures and then ask the user which
 
-  folder=.;
-
-  if [ -d $1 ]
-  then
-    folder=$1;
-  fi;
-
-  find $folder -name "*.torrent" -delete;
-  find $folder -name "*.jpeg" -delete;
-  find $folder -name "*.jpg" -delete;
-  find $folder -name "*.srt" -delete;
-  find $folder -name "*.tbn" -delete;
-  find $folder -name "*.nfo" -delete;
-  find $folder -name "*sample*" -delete;
-  find $folder -name ".__*" -delete;
-  find $folder/ -type d -empty -delete;
 }
 
 
@@ -1000,7 +1006,20 @@ function get_latest_code_develop {
 
 function get_latest_code {
 
+  # notify that all merged in branches are getting deleted
+
+  # if there are any changes
+  # inform the user that they have uncommitted changes
+  # and ask if you would like to reset or you would you like to commit
+
+  # then check if the current branch you're on is either develop or master
+  # if not, prompt the user to choose from a list of existing remote branches
+
+  # user chooses branch then pulls that branch down and creates a new local branch set to track the remote branch
+
   # deletes all merged in branches
+
+  git fetch --all --prune;
   git branch --merged master | grep -v '^ *master$' | xargs git branch -d
 
   git reset --hard;
@@ -1017,7 +1036,6 @@ function get_latest_code {
       branch=master;
   fi;
 
-  git fetch --all --prune;
   git checkout -b $branch origin/$branch;
   git pull;
   #submodules_initialize;
@@ -1269,7 +1287,7 @@ function locate_missing_assets_nginx (){
 
 function mysql_create_user (){
   username=wordpress
-  mysql -uroot -e "CREATE USER '$username'@'localhost' IDENTIFIED BY 'wordpress'";
+  mysql -uroot -e "CREATE USER IF NOT EXISTS '$username'@'localhost' IDENTIFIED BY '$username'";
   mysql -uroot -e "GRANT ALL PRIVILEGES ON * . * TO '$username'@'localhost'";
   mysql -uroot -e "FLUSH PRIVILEGES";
 }

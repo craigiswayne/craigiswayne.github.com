@@ -11,7 +11,6 @@ sh setup.homebrew.sh;
 
 # Now that nginx is installed... clone my setup repo
 working_directory=$(pwd);
-ln -sfv /usr/local/var/www ~/www;
 cd ~/www;
 git clone https://github.com/craigiswayne/craigiswayne.github.com.git;
 cd $working_directory;

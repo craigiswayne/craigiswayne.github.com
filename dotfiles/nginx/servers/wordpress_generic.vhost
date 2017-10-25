@@ -1,13 +1,5 @@
-# Upstream to abstract backend connection(s) for php
-upstream php
-{
-  server unix:/tmp/php-cgi.socket;
-  server 127.0.0.1:9000;
-}
-
 server
 {
-  #server_name  ^(?<subdomain>[a-z]+)\.?(?<domain>.*)\.(?<tld>.*);
   # server_name local\.?(?<domain>.*)\.(?<tld>.{2,})$;
   server_name ~^(?<subdomain>local)\.?(?<domain>.*)\.(?<tld>.*);
   root html/$domain.$tld;
@@ -17,6 +9,15 @@ server
   #include global/default_locations.conf;
   #include global/restrictions.conf;
   autoindex on;
+
+  ###
+  # Caching logic
+  # - https://www.nginx.com/resources/admin-guide/content-caching/
+  ###
+  proxy_cache one;
+  proxy_cache_min_uses 5;
+  proxy_cache_methods GET HEAD POST;
+  proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
 
   location = /favicon.ico
   {
@@ -49,6 +50,7 @@ server
     fastcgi_param SERVER_NAME $subdomain.$domain.$tld;
     add_header XH-Profiling 'Enabled';
     add_header X-NGINX-Server 'wordpress_generic';
+    add_header X-NGINX-Cache-Status $upstream_cache_status;
   }
 
   location ~* \.(jpe?g|gif|css|png|js|ico|pdf|zip|tar|t?gz|mp3|wav|swf|woff|bmp)$
@@ -58,10 +60,10 @@ server
     #try_files $uri $uri/  @try_live_environment @try_www_environment;
 
     ## TRY LIVE
-    try_files $uri $uri/ @try_live_environment;
+    #try_files $uri $uri/ @try_live_environment;
 
     ## TRY DEV
-    #try_files $uri $uri/  @try_dev_environment;
+    try_files $uri $uri/  @try_dev_environment;
 
     ## TRY STAGING
     #try_files $uri $uri/ @try_staging_environment;
@@ -80,16 +82,19 @@ server
 
   location @try_www_environment
   {
+    expires max;
     rewrite ^(.*)/wp-content/uploads/(.*)$ http://www.$domain.$tld/wp-content/uploads/$2;
   }
 
   location @try_staging_environment
   {
+    expires max;
     rewrite ^(.*)/wp-content/uploads/(.*)$ http://staging.$domain.$tld/wp-content/uploads/$2;
   }
 
   location @try_dev_environment
   {
+    expires max;
     rewrite ^(.*)/wp-content/uploads/(.*)$ http://dev.$domain.$tld/wp-content/uploads/$2;
   }
 
