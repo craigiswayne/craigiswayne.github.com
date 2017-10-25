@@ -161,13 +161,7 @@ function wp_git_site () {
    fi;
   fi;
 
-
-  # console.info "Step 15 - Maybe Import Database from DEV";
-  # git_url=$(get_user_input "Enter in the git url" --validate=git); #todo validate
-  #import_database_from_dev;
-
   console.info "Last Step - Open in phpStorm and Browser";
-  pstorm ~/www/$site_name;
   open http://$site_url;
 
   rm -rf $temp_dir;
@@ -289,7 +283,7 @@ function wp_db_get_dev () {
 }
 
 function wp_db_import_dev () {
-
+  wp db reset --yes;
   wp db create;
   wp core install;
   db_name=$(get_user_input "Enter in Database Name" --default=$(wp_db_name));
@@ -306,6 +300,11 @@ function wp_db_import_dev () {
   wp_replace_urls;
   wp_reset_admin_user;
 
+}
+
+function wp_db_dump_dev (){
+  db_name=$(wp_db_name);
+  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name > $(wp eval "echo ABSPATH;";)$db_name.sql
 }
 
 
@@ -489,16 +488,27 @@ function wp_backup_database () {
 # https://apple.stackexchange.com/questions/57412/how-can-i-trigger-a-notification-center-notification-from-an-applescript-or-shel
 # http://osxdaily.com/2016/09/06/trigger-alert-dialog-mac-via-command-line/
 function wp_watch_debug_log(){
-  debug_log_path=wp-content/debug.log;
+  clear;
+  debug_log_path=$(wp eval "echo WP_CONTENT_DIR;")/debug.log;
+  touch $debug_log_path;
   rm $debug_log_path;
   touch $debug_log_path;
-  #osascript -e 'display notification "Hello world!" with title "Hi!"'
-  #osascript -e 'display alert "Hello world!" with title "Hi!"'
+  console.info "Watching your debug.log ...";
+  #105686695tail -f $debug_log_path;
+
+  #fswatch -o ~/path/to/watch | xargs -n1 ~/script/to/run/when/files/change.sh
+  fswatch -o $(wp eval "echo WP_CONTENT_DIR;") | xargs -n1 ~/Downloads/temp.sh
+  fswatch -o $debug_log_path | xargs -n1 ~/Downloads/temp.sh
+
+  #osascript -e 'display notification "Slide Out from Right Notification" with title "Hi!"'
+  #osascript -e 'display alert "Hello world" with title "Hi!"'
 
   # Always on Top with Ok and Cancel Buttons
   #osascript -e 'display dialog "Im Always on Top!\n\nWith Cancel and Ok Buttons"'
 
   ## Side Notification
   #osascript -e 'display notification "All graphics have been converted." with title "My Graphic Processing Script" subtitle "Processing is complete." sound name "Frog"';
-  tail -f $debug_log_path | awk '/(.*)/ {system("osascript -e 'display dialog \"Error Found!\" ' ")}'
+  #tail -f $debug_log_path | awk '/(.*)/ {system("osascript -e 'display dialog \"Error Found!\" ' ")}'
+
+  #osascript -e 'display dialog "Im Always on Top!\n\nWith Cancel and Ok Buttons"'
 }

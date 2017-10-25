@@ -14,10 +14,6 @@ function git () {
     # find_todos_and_fixmes $files_changed;
     # wp_standards;
     command git "$@"
-  elif [ "$1" == "prune" ]
-  then
-    git remote origin prune;
-    command git "$@"
   elif [ "$1" == "clone" ] && [ ! -z "$3"  ]
   then
     command git "$@"
@@ -78,6 +74,11 @@ function git_calc_root () {
 function git_get_all_branches () {
   git fetch --all;
   git branch -v;
+}
+
+function git_clean_branches() {
+  git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
+  git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
 }
 
 

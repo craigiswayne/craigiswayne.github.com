@@ -14,3 +14,4 @@ python
 wget
 php-cs-fixer
 watch
+fswatch
