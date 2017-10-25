@@ -13,7 +13,7 @@ alias lscw="ls -laGFH";
 
 alias whats_my_ip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | awk '{print $2}'";
 
-alias tree="find . -print | sed -e 's;[^/]* |____;g;s;____|; |;g'";
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'";
 
 color_red=$'\e[31m';
 color_none=$'\e[0m';
@@ -31,11 +31,6 @@ DEV_MYSQL_HOST='152.111.240.158';
 
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_wp';
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_git';
-
-function submodules_initialize () {
-  git submodule update --init --recursive
-}
-
 
 function maybe_install_composer () {
   if [ -f composer.json ]
@@ -238,13 +233,7 @@ function repo_maintenance () {
 
   );
 
-  #see https://www.kernel.org/pub/software/scm/git/docs/git-gc.html
-  git gc --prune;
-  echo "";
-
-
-  #see http://stackoverflow.com/questions/20106712/what-are-the-differences-between-git-remote-prune-git-prune-git-fetch-prune
-  git remote prune origin;
+  git pruner;
   echo "";
 
 
@@ -1000,7 +989,7 @@ function get_latest_code_develop {
     rm .git/refs/heads/origin/develop
   fi;
 
-  git fetch --all --prune;
+  git pruner;
   git checkout -B develop origin/develop;
   git log -n 3;
 }
@@ -1024,10 +1013,10 @@ function get_latest_code {
       branch=master;
   fi;
 
-  git fetch --all --prune;
+  git pruner;
   git checkout -B $branch origin/$branch;
   git pull;
-  #submodules_initialize;
+  git submodule update --init --recursive;
   #maybe_install_bower;
   #maybe_install_composer;
   #maybe_install_npm;

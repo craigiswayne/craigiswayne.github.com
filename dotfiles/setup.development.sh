@@ -18,14 +18,13 @@ git config --global core.editor "atom -w"
 git config --global color.ui true;
 git config --global core.autocrlf input
 git config --global core.safecrlf true
-git config --global push.default current
-git config --global core.excludesfile ~/.gitignore_global
 git config --global github.user craigiswayne;
 git config --global fetch.prune true;
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.gitignore_global ~/;
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/.gitconfig ~/.gitconfig
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.jscsrc ~/www
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.eslintrc.json ~/www
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/atom/config.cson ~/.atom/config.cson
 
 echo "Setting up NPM Defaults...";
 # http://iamsim.me/set-your-npm-init-defaults/
