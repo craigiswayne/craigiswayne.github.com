@@ -27,6 +27,7 @@ ln -sfv ~/www/craigiswayne.github.com/dotfiles/.gitconfig ~/.gitconfig
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.jscsrc ~/www
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.eslintrc.json ~/www
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/atom/config.cson ~/.atom/config.cson
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/markdown.php ~/www/
 
 echo "Setting up NPM Defaults...";
 # http://iamsim.me/set-your-npm-init-defaults/

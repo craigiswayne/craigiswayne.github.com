@@ -4,7 +4,7 @@ server
   server_name ~^(?<subdomain>local)\.?(?<domain>.*)\.(?<tld>.*);
   root html/$domain.$tld;
 
-  index index.php index.html;
+  index index.php index.html README.md Home.md;
   #include global/wordpress.conf;
   #include global/default_locations.conf;
   #include global/restrictions.conf;
@@ -41,14 +41,21 @@ server
 
   location ~ \.php$
   {
+    if ($uri = /markdown.php){
+      root html;
+    }
+
     #NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
     include fastcgi.conf;
     fastcgi_intercept_errors on;
     fastcgi_pass php;
+
     # fastcgi_param PHP_VALUE "auto_prepend_file=/usr/local/opt/php56-xhgui/external/header.php";
+    #add_header XH-Profiling 'Enabled';
+
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     fastcgi_param SERVER_NAME $subdomain.$domain.$tld;
-    add_header XH-Profiling 'Enabled';
+
     add_header X-NGINX-Server 'wordpress_generic';
     add_header X-NGINX-Cache-Status $upstream_cache_status;
   }
@@ -105,5 +112,12 @@ server
     log_not_found off;
   }
 
+  ###
+  # Default Locations
+  ###
+  ## Markdown Parser
+  location ~ .md$ {
+     rewrite ^ /markdown.php?$request_filename;
+  }
 
 }
