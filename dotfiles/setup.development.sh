@@ -157,6 +157,8 @@ ssh-keygen
 
 ###
 # Set up SSL
+# see here: http://www.benmccann.com/ssl-on-localhost-with-nginx/
+# see here: http://articles.slicehost.com/2007/12/19/ubuntu-gutsy-self-signed-ssl-certificates-and-nginx
 ###
 mkdir -p ~/ssl
 cd ssl
