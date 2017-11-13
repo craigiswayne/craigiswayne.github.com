@@ -7,7 +7,7 @@ export CLICOLOR=1;
 export LSCOLORS=ExFxBxDxCxegedabagacad;
 export LC_ALL=$LANG;
 
-export PATH="/usr/local/sbin:$PATH";
+export PATH="/usr/local/sbin:$HOME/.composer/vendor/bin:$PATH";
 
 alias lscw="ls -laGFH";
 
@@ -22,6 +22,21 @@ color_blue_light=$'\e[94m';
 color_green_light=$'\e[92m';
 #http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
+###
+# Disable Line Wrapping
+#
+# tput smam
+###
+# tput rmam
+
+
+DEV_MYSQL_USERNAME=root;
+DEV_MYSQL_PASSWORD=mysqlr00t
+DEV_MYSQL_HOST=152.111.240.158
+DEV_WWW_USERNAME=root
+DEV_WWW_HOST=152.111.240.159;
+
+
 source ~/.24.com;
 
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_wp';
@@ -30,8 +45,7 @@ source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_git';
 function maybe_install_composer () {
   if [ -f composer.json ]
   then
-    composer update;
-    composer install;
+    composer install --allow-root;
   fi;
 }
 
@@ -73,7 +87,7 @@ function sync_web_root () {
 function update_apps () {
   apm update --no-confirm;
   npm cache verify;
-  # npm i -g npm;
+  npm i -g npm;
   npm update;
   npm update -g;
   brew update;
@@ -86,12 +100,6 @@ function open_startup_apps () {
   open -a mail;
 }
 
-function find_and_delete () {
-  for i in `find /Volumes/MEDIA -name '._*'` ; do rm $i;  done
-}
-
-
-
 function delete_dev_logs () {
   for i in `find /usr/local/var/www -name 'debug.log'` ; do sudo rm $i ;  done
   for i in `find /usr/local/var/log -name '*.log'` ; do sudo rm $i;  done
@@ -99,7 +107,7 @@ function delete_dev_logs () {
 
   brew services restart --all;
   sudo nginx -s reload;
-  # delete_xdebug_logs;
+  delete_xdebug_logs;
 }
 
 
@@ -116,9 +124,11 @@ function dev_cleanup () {
   brew cleanup;
   brew cask cleanup;
   brew cask doctor;
+  yo doctor;
   delete_dev_logs;
   apm clean;
   npm prune;
+
 }
 
 
@@ -715,13 +725,6 @@ function update_changelog (){
 }
 
 
-function merge_release_into_master () {
-  git_get_all_branches;
-  get_latest_code master;
-  branch=$(git_get_latest_release_branch);
-}
-
-
 function tag_and_release () {
   release_number=$(get_user_input "New Version Number (previous $(git describe))" --default=$1);
   release_message=$(get_user_input "Enter your version message");
@@ -991,7 +994,9 @@ function get_latest_code_develop {
   fi;
 
   git pruner;
-  git checkout -B develop origin/develop;
+
+  branch_name=develop;
+  git fetch --all && git checkout origin/$branch_name -B $branch_name && git pull;
   git log -n 3;
 }
 
@@ -1010,6 +1015,7 @@ function get_latest_code {
 
   # deletes all merged in branches
 
+  git clean -fd;
   git fetch --all --prune;
   git branch --merged master | grep -v '^ *master$' | xargs git branch -d
 
@@ -1031,9 +1037,9 @@ function get_latest_code {
   git checkout -B $branch origin/$branch;
   git pull;
   git submodule update --init --recursive;
-  #maybe_install_bower;
-  #maybe_install_composer;
-  #maybe_install_npm;
+  maybe_install_bower;
+  maybe_install_composer;
+  maybe_install_npm;
 }
 
 
@@ -1094,23 +1100,6 @@ function mysql {
   else
     command mysql "$@"
   fi
-}
-
-
-
-function setup_dev_site () {
-  #connect to dev
-  #then do the wp_new_site on dev
-  echo "test";
-}
-
-
-
-function setup_grunt_for_work () {
-  echo git_get_version;
-  grunt-init cw-gruntfile;
-  touch manifest.json;
-  npm install;
 }
 
 
@@ -1285,19 +1274,12 @@ function mysql_create_user (){
 }
 
 
-function copy_public_key () {
-  cat ~/.ssh/id_rsa.pub | pbcopy
-  console.success "Copied!!!";
-}
-
-
 function project_init (){
+  # DO YEOMAN HERE
+  composer init;
   npm init;
-  npm install grunt --save-dev;
+  grunt init;
   yarn init;
-  yarn add uikit -D;
-  mkdir -p assets/js;
-  touch assets/js/project.jsx;
 }
 
 # See: https://coolestguidesontheplanet.com/how-to-compress-and-uncompress-files-and-folders-in-os-x-lion-10-7-using-terminal/

@@ -14,10 +14,6 @@ function git () {
     # find_todos_and_fixmes $files_changed;
     # wp_standards;
     command git "$@"
-  elif [ "$1" == "clone" ] && [ ! -z "$3"  ]
-  then
-    command git "$@"
-    cd $2;
   elif [[ "$1" == "commit" ]]
   then
     echo "Have you done repo maintenance?";
@@ -25,9 +21,6 @@ function git () {
   elif [[ "$1" == "log" ]]
   then
     command git "$@"  --decorate --oneline;
-  elif [[ "$1" == "clone" ]]
-  then
-    command git "$@";
   else
     command git "$@"
   fi

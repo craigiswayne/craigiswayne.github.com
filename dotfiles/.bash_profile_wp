@@ -265,6 +265,11 @@ function wp_replace_urls () {
     # wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site" --precise  --all-tables;
     wp search-replace "$protocol://$sub_domain.$site" "http://$desired_sub_domain.$site";
   done
+
+  wp search-replace //$site //$desired_sub_domain.$site
+  wp search-replace https:// http://
+  wp search-replace http://http:// http://  --precise --all-tables
+
 }
 
 function wp_db_get_dev () {
@@ -299,11 +304,12 @@ function wp_db_import_dev () {
   wp db import $site_root/$db_name-dev.sql;
   wp_replace_urls;
   wp_reset_admin_user;
-
 }
 
 function wp_db_dump_dev (){
   db_name=$(wp_db_name);
+  wp db create;
+  wp core install;
   mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name > $(wp eval "echo ABSPATH;";)$db_name.sql
 }
 
@@ -489,7 +495,7 @@ function wp_backup_database () {
 # http://osxdaily.com/2016/09/06/trigger-alert-dialog-mac-via-command-line/
 function wp_watch_debug_log(){
   clear;
-  debug_log_path=$(wp eval "echo WP_CONTENT_DIR;")/debug.log;
+  debug_log_path=$(wp eval "echo WP_CONTENT_DIR;" --skip-plugins --skip-themes)/debug.log;
   touch $debug_log_path;
   rm $debug_log_path;
   touch $debug_log_path;
@@ -497,8 +503,8 @@ function wp_watch_debug_log(){
   #105686695tail -f $debug_log_path;
 
   #fswatch -o ~/path/to/watch | xargs -n1 ~/script/to/run/when/files/change.sh
-  fswatch -o $(wp eval "echo WP_CONTENT_DIR;") | xargs -n1 ~/Downloads/temp.sh
-  fswatch -o $debug_log_path | xargs -n1 ~/Downloads/temp.sh
+  fswatch -o $(wp eval "echo WP_CONTENT_DIR;" --skip-plugins --skip-themes) | xargs -n1 ~/www/craigiswayne.github.com/dotfiles/wp_watch_debug_log_callback.sh
+  fswatch -o $debug_log_path | xargs -n1 ~/www/craigiswayne.github.com/dotfiles/wp_watch_debug_log_callback.sh
 
   #osascript -e 'display notification "Slide Out from Right Notification" with title "Hi!"'
   #osascript -e 'display alert "Hello world" with title "Hi!"'

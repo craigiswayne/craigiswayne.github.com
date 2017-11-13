@@ -8,7 +8,7 @@ class GitHubMarkdownRender {
 	const MARKDOWN_EXT = '.md';
 	const CACHE_SESSION_KEY = 'ghmarkdownrender';
 
-	const GITHUB_PERSONAL_ACCESS_TOKEN = '2b10429cd1c6f27672b56b8d3100ba6e60c13077';
+	const GITHUB_PERSONAL_ACCESS_TOKEN = '2397a5eee90416eaf7a556b70a74cea3e072d7fd';
 	const DOCUMENT_ROOT = '/usr/local/var/www';
 
 
@@ -70,6 +70,7 @@ class GitHubMarkdownRender {
 					'<li>Check your <strong>GITHUB_PERSONAL_ACCESS_TOKEN</strong> is correct (maybe revoked?)</li>' .
 					'<li>Is GitHub/GitHub API endpoint <strong>' . htmlspecialchars(self::API_URL) . '</strong> accessable?</li>' .
 					'<li>Has rate limit been exceeded? If so, wait until next hour</li>' .
+          '<li>OR: Go to <a href="https://github.com/settings/tokens">GitHub Personal Access tokens</a></li>'.
 				'</ul>'
 			);
 

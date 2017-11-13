@@ -154,3 +154,17 @@ sudo pip install --upgrade sqlparse
 ssh-keygen
 # then cat ~/.ssh/id_rsa.pub | pbcopy
 # and add it to your github and bitbucket accounts
+
+###
+# Set up SSL
+###
+mkdir -p ~/ssl
+cd ssl
+openssl genrsa -des3 -out myssl.key 1024
+openssl req -new -key myssl.key -out myssl.csr
+cp myssl.key myssl.key.org
+openssl rsa -in myssl.key.org -out myssl.key
+openssl x509 -req -days 365 -in myssl.csr -signkey myssl.key -out myssl.crt
+sudo cp myssl.crt /etc/ssl/certs/
+sudo mkdir -p /etc/ssl/private
+sudo cp myssl.key /etc/ssl/private/
