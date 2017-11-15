@@ -222,10 +222,7 @@ function wp_replace_urls () {
   desired_sub_domain=local;
 
   protocols=( http https );
-  site_url=$(wp_site_url);
-  site=""; # leave unchanged
-  site_temp="$site_url";
-  site_temp=$(strip_tld $site_temp);
+  site_name=$(wp_site_name);
   site_temp=$(get_user_input "Enter Site Name without any environment prefixes" --default="$site_temp");
 
   for sub_domain in "${sub_domains[@]}"
@@ -329,11 +326,11 @@ function wp_build_themes () {
 # see here: https://wp-cli.org/commands/user/update/
 function wp_reset_admin_user () {
   admin_pass=admin;
-  wp user create $(strip_email_domain) $(git config user.email) --role=administrator --display_name="$(git config user.name)" --first_name="$(git config user.name)" --last_name="";
+  wp user create $(strip_email_domain) $(git config user.email) --role=administrator --display_name="$(git config user.name)" --first_name="$(git config user.name)" --last_name="" --skip-themes --skip-plugins;
   wp user update $(strip_email_domain) --user_pass=$admin_pass --user_email=$(git config user.email) --allow-root --skip-email --skip-plugins --skip-theme;
+  wp option update 'admin_email' $(git config user.email) --skip-themes --skip-plugins;
   echo "Admin Username = '$(strip_email_domain)'";
   echo "Admin Password = '$admin_pass'";
-  wp option update 'admin_email' $(git config user.email);
 }
 
 function wp_remove_core_keep_contents {

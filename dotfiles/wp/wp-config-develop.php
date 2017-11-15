@@ -24,6 +24,8 @@ foreach( $debug_configs as $index => $value ){
 }
 
 if( PHP_SAPI !== 'cli' ){
-    define( 'WP_HOME', 'http://'. $_SERVER['SERVER_NAME'] );
-    define( 'WP_SITEURL', 'http://'. $_SERVER['SERVER_NAME'] );
+  define( 'WP_SITEURL', 'http://' . $_SERVER[ 'HTTP_HOST' ] );
+  define('WP_HOME', 'http://' . $_SERVER[ 'HTTP_HOST' ] );
 }
+
+ini_set("html_errors", 1);

@@ -39,13 +39,14 @@ DEV_WWW_HOST=152.111.240.159;
 
 source ~/.24.com;
 
-source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_wp';
+source '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/.bash_profile_wp';
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_git';
 
 function maybe_install_composer () {
   if [ -f composer.json ]
   then
-    composer install --allow-root;
+    composer update;
+    composer install;
   fi;
 }
 

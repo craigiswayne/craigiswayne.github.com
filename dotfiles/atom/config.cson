@@ -6,7 +6,7 @@
     telemetryConsent: "limited"
     warnOnLargeFileLimit: 2
   editor:
-    fontSize: 11
+    fontSize: 12
     softWrap: false
   "exception-reporting":
     userId: "46e679f8-da8f-43b8-aadf-84526e6e1f48"

@@ -170,3 +170,17 @@ openssl x509 -req -days 365 -in myssl.csr -signkey myssl.key -out myssl.crt
 sudo cp myssl.crt /etc/ssl/certs/
 sudo mkdir -p /etc/ssl/private
 sudo cp myssl.key /etc/ssl/private/
+
+###
+# then turn this chrome setting on
+# Allow invalid certificates for resources loaded from localhost
+# #allow-insecure-localhost
+# go to chrome://flags/#allow-insecure-localhost
+# click enable
+###
+
+
+###
+# for service worker testing
+# /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://local.prototype.io
+###
