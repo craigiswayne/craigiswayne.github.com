@@ -22,7 +22,9 @@ color_blue_light=$'\e[94m';
 color_green_light=$'\e[92m';
 #http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
+touch ~/.24.com;
 source ~/.24.com;
+
 
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_wp';
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_git';

@@ -202,7 +202,6 @@ function wp_site_name (){
   # site_name=${git_url##*/};
   # site_name=${site_name%.*};
   site_name=$(git_repo_name);
-  site_name=$(get_user_input "Enter in the Site Name" --default=$site_name)
   echo $site_name;
 }
 
@@ -222,11 +221,7 @@ function wp_replace_urls () {
   desired_sub_domain=local;
 
   protocols=( http https );
-  site_url=$(wp_site_url);
-  site=""; # leave unchanged
-  site_temp="$site_url";
-  site_temp=$(strip_tld $site_temp);
-  site_temp=$(get_user_input "Enter Site Name without any environment prefixes" --default="$site_temp");
+  site_temp=$(get_user_input "Enter Site Name without any environment prefixes" --default="$(wp_site_name)");
 
   for sub_domain in "${sub_domains[@]}"
   do
@@ -267,36 +262,9 @@ function wp_replace_urls () {
   done
 }
 
-function wp_db_get_dev () {
-  wp db create;
-  wp core install;
-  db_name=$(get_user_input "Enter in Database Name" --default=$(wp_db_name));
-  if [ $(dev_db_exists $db_name) == 'false' ]
-  then
-    show_databases_dev;
-    dev_db_name=$(get_user_input "Enter in the Dev Database Name" --default=$db_name);
-  else
-    dev_db_name=$db_name;
-  fi;
-  site_root=$(wp eval "echo ABSPATH;");
-  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $dev_db_name > $site_root/$db_name-dev.sql
-}
-
 function wp_db_import_dev () {
-  wp db reset --yes;
-  wp db create;
-  wp core install;
-  db_name=$(get_user_input "Enter in Database Name" --default=$(wp_db_name));
-  if [ $(dev_db_exists $db_name) == 'false' ]
-  then
-    show_databases_dev;
-    dev_db_name=$(get_user_input "Enter in the Dev Database Name" --default=$db_name);
-  else
-    dev_db_name=$db_name;
-  fi;
-  site_root=$(wp eval "echo ABSPATH;");
-  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $dev_db_name > $site_root/$db_name-dev.sql
-  wp db import $site_root/$db_name-dev.sql;
+  wp_db_dump_dev;
+  wp db import;
   wp_replace_urls;
   wp_reset_admin_user;
 
