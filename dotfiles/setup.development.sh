@@ -117,12 +117,13 @@ defaults write com.apple.Terminal 'Startup Window Settings' 'tomorrow-night';
 xdebug_config_file=$(php --ini | grep xdebug | cut -d ":" -f 2 | tr -d '[:space:]');
 touch $xdebug_config_file;
 
-echo "xdebug.force_display_errors=1" >> $xdebug_config_file;
-echo "xdebug.remote_enable=true" >> $xdebug_config_file;
-echo "xdebug.remote_port=9001" >> $xdebug_config_file;
-echo "xdebug.profiler_enable=0" >> $xdebug_config_file;
-echo "xdebug.scream=1" >> $xdebug_config_file;
-echo "xdebug.cli_color=1" >> $xdebug_config_file;
+# echo "xdebug.force_display_errors=1" >> $xdebug_config_file;
+# echo "xdebug.remote_enable=true" >> $xdebug_config_file;
+# echo "xdebug.remote_port=9001" >> $xdebug_config_file;
+# echo "xdebug.profiler_enable=0" >> $xdebug_config_file;
+# echo "xdebug.scream=1" >> $xdebug_config_file;
+# echo "xdebug.cli_color=1" >> $xdebug_config_file;
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/php/php.ini /usr/local/etc/php/7.1/conf.d/php.ini
 brew services restart php56;
 
 #echo "Custom Paths...";
