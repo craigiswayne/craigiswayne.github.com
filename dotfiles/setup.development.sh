@@ -107,7 +107,7 @@ echo "Customizing PHPStorm...";
 echo "Terminal Customization...";
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile ~/.bash_profile
 mkdir -p ~/.wp-cli/;
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/config.yml ~/.wp-cli/config.yml
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/wp/config.yml ~/.wp-cli/config.yml
 
 echo "Applying Terminal Theme...";
 open $(curl -fsSL https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal);
@@ -151,6 +151,7 @@ sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 # install sqlformat for atom beautifier
 sudo easy_install pip
 sudo pip install --upgrade sqlparse
+pip install beautysh
 
 ssh-keygen
 # then cat ~/.ssh/id_rsa.pub | pbcopy

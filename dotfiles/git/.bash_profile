@@ -8,11 +8,6 @@ function git () {
     then
       composer status -v;
     fi;
-
-    files_changed="$(git diff --name-only)";
-    php_lint $files_changed;
-    # find_todos_and_fixmes $files_changed;
-    # wp_standards;
     command git "$@"
   elif [[ "$1" == "commit" ]]
   then

@@ -15,3 +15,5 @@ wget
 php-cs-fixer
 watch
 fswatch
+osxfuse
+sshfs

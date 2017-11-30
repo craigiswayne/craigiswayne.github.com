@@ -25,8 +25,9 @@ color_green_light=$'\e[92m';
 touch ~/.24.com;
 source ~/.24.com;
 
-source '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/.bash_profile_wp';
-source '/usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile_git';
+source '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/.bash_profile';
+source '/usr/local/var/www/craigiswayne.github.com/dotfiles/git/.bash_profile';
+source '/usr/local/var/www/craigiswayne.github.com/dotfiles/filebot/.bash_profile';
 
 function maybe_install_composer () {
   if [ -f composer.json ]

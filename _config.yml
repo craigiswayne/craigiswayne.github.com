@@ -1,5 +1,5 @@
 title: Craig is Wayne
-description: Craig finds description fields silly
-show_downloads: true
+description: whatever you need to know about me; and semicolons
+show_downloads: false
 google_analytics:
-theme: jekyll-theme-minima
+theme: jekyll-theme-minimal

@@ -3,6 +3,7 @@
     general:
       _analyticsUserId: "01dc9ff5-f159-4e7b-b332-ed306cfb8fae"
   core:
+    projectHome: "~/www"
     telemetryConsent: "limited"
     warnOnLargeFileLimit: 2
   editor:
