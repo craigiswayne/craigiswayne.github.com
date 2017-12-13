@@ -14,7 +14,9 @@ function wp (){
 function wp_db_dump_dev (){
   db_name=$(wp_db_name);
   wp db create;
-  wp core install;
+  if ! $(wp core is-installed); then
+    wp core install
+  fi
   db_filename=$db_name.sql;
   mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name --verbose > $(wp eval "echo ABSPATH;";)$db_filename;
   echo "DB File Saved in root as : $db_filename";
@@ -51,21 +53,32 @@ function wp_db_name () {
 
 function wp_replace_urls () {
 
-  sub_domains=( dev staging www );
-  desired_sub_domain=local;
+  sub_domains=( local dev staging www );
+
+  desired_sub_domain=$(get_user_input "Enter desired sub_domain" --default="local");
+
   desired_protocol=https;
+
 
   protocols=( http https );
   site_temp=$(get_user_input "Enter Site Name without any environment prefixes" --default="$(wp_site_name)");
 
+
+  if ! $(wp core is-installed); then
+    wp core install
+  fi
+
   for sub_domain in "${sub_domains[@]}"
   do
-    for protocol in "${protocols[@]}"
-    do
-      search="$protocol://$sub_domain";
-      site=${site_temp##$search.};
-      site_temp=$site;
-    done
+    if [[ $desired_sub_domain != $sub_domain ]]
+    then
+      for protocol in "${protocols[@]}"
+      do
+        search="$protocol://$sub_domain";
+        site=${site_temp##$search.};
+        site_temp=$site;
+      done
+    fi;
   done
 
 
@@ -78,8 +91,8 @@ function wp_replace_urls () {
       then
         echo "";
         echo "Replacing $protocol://$sub_domain.$site -> $desired_protocol://$desired_sub_domain.$site";
-        wp search-replace "$protocol://$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site";
-        wp search-replace "$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site";
+        wp search-replace "$protocol://$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site" --skip-packages --skip-plugins --skip-themes;
+        wp search-replace "$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site" --skip-packages --skip-plugins --skip-themes;
       fi;
 
     done
@@ -90,14 +103,14 @@ function wp_replace_urls () {
   do
     echo "";
     echo "Replacing $protocol://$site -> $desired_protocol://$desired_sub_domain.$site";
-    wp search-replace "$protocol://$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site";
+    wp search-replace "$protocol://$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site" --skip-packages --skip-plugins --skip-themes;
   done
 
-  wp search-replace //$site //$desired_sub_domain.$site
-  wp search-replace https:// http://
-  wp search-replace http://http:// http:// --precise --all-tables
+  wp search-replace //$site //$desired_sub_domain.$site --skip-packages --skip-plugins --skip-themes;
+  wp search-replace https:// http:// --skip-packages --skip-plugins --skip-themes;
+  wp search-replace http://http:// http:// --precise --all-tables --skip-packages --skip-plugins --skip-themes;
   site_url=$desired_protocol://$desired_sub_domain.$site;
-  wp option update 'siteurl' $site_url;
+  wp option update 'siteurl' $site_url --skip-packages --skip-plugins --skip-themes;
   echo "SITE URL is now: $site_url";
 }
 
@@ -203,7 +216,7 @@ function wp_db_export_to_dev (){
 
   site_name=$(wp_site_name);
 
-  export_file=$(wp eval "echo ABSPATH;";)export-$db_name.sql;
+  export_file=$(wp eval "echo ABSPATH;" --skip-plugins --skip-themes --skip-packages;)export-$db_name.sql;
   wp search-replace local.$site_name dev.$site_name --export=$export_file --verbose;
 
   local_db_file_path=$export_file;

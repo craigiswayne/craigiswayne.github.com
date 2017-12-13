@@ -15,8 +15,14 @@ $debug_configs = [
 	'memory_limit'        => '128M',
 	'post_max_size'       => '32M',
 	'upload_max_filesize' => '32M',
-	'DISALLOW_FILE_MODS'  => false
+	'DISALLOW_FILE_MODS'  => false,
+	// 'DB_HOST'							=> 'localhost',
+	// 'DB_USER'							=> 'wordpress',
+	// 'DB_PASSWORD'					=> 'wordpress'
 ];
+
+// $debug_configs = [];
+
 foreach ( $debug_configs as $index => $value ) {
 	$constant       = is_int( $index ) ? $value : $index;
 	$constant_value = is_int( $index ) ? true : $value;

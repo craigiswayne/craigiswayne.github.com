@@ -1,3 +1,4 @@
 dotfiles/phpstorm/objects/
 wiki/
 .DS_Store
+node_modules/

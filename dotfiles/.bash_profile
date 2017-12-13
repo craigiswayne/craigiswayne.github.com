@@ -5,11 +5,9 @@ function parse_git_branch () {
 export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\$(parse_git_branch):\[\033[33;1m\]\w\[\033[m\]\$ ";
 export CLICOLOR=1;
 export LSCOLORS=ExFxBxDxCxegedabagacad;
-export LC_ALL=$LANG;
+# export LC_ALL=$LANG;
 
 export PATH="/usr/local/sbin:$HOME/.composer/vendor/bin:$PATH";
-
-alias lscw="ls -laGFH";
 
 alias whats_my_ip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | awk '{print $2}'";
 
@@ -1206,17 +1204,6 @@ function update_locate_db () {
 }
 
 
-function mount_dev_server (){
-  mkdir -p ~/devserver;
-  sshfs -o allow_other,defer_permissions $DEV_WWW_USERNAME@$DEV_WWW_HOST: ~/devserver
-  #sudo sshfs -o allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa root@xxx.xxx.xxx.xxx:/ /mnt/droplet
-}
-
-function unmount_dev_server (){
-  sudo umount ~/devserver;
-}
-
-
 function wpackagist_plugin_lookup () {
   # https://wpackagist.org/search?q=advanced-cron-manager&type=plugin
   echo "todo";
@@ -1246,7 +1233,7 @@ function cat() {
 function disk_usage (){
   echo "see here: http://osxdaily.com/2007/03/20/command-line-disk-usage-utilities-df-and-du/";
   cd /;
-  sudo du | sort -n > /tmp/du.txt;
+  sudo du | sort -n > /Users/craigiswayne/Downloads/du.txt;
 }
 
 

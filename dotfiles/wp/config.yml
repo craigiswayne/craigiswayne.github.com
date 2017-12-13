@@ -1,7 +1,4 @@
 # See here for more info: https://make.wordpress.org/cli/handbook/config/
-
-user: craigiswayne
-
 color: true
 
 core config:

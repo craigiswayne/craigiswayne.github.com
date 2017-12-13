@@ -22,8 +22,8 @@ git config --global core.autocrlf input
 git config --global core.safecrlf true
 git config --global github.user craigiswayne;
 git config --global fetch.prune true;
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.gitignore_global ~/;
-ln -sfv ~/www/craigiswayne.github.com/dotfiles/.gitconfig ~/.gitconfig
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/git/.gitignore_global ~/;
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/git/.gitconfig ~/.gitconfig
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.jscsrc ~/www
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.eslintrc.json ~/www
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/atom/config.cson ~/.atom/config.cson
