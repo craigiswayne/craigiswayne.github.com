@@ -8,6 +8,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad;
 # export LC_ALL=$LANG;
 
 export PATH="/usr/local/sbin:$HOME/.composer/vendor/bin:$PATH";
+export NODE_PATH=/usr/local/lib/node_modules;
 
 alias whats_my_ip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | awk '{print $2}'";
 
@@ -617,31 +618,6 @@ function mysql_database_sizess (){
    Round(Sum(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB"
 FROM   information_schema.tables
 GROUP  BY table_schema;';
-}
-
-
-
-function submodule_paths () {
-  if [ -d ".git" ]
-  then
-    echo "is a valid git root";
-  else
-    echo "Not a valid git root";
-  fi;
-}
-
-
-function remove_submodule () {
-  submodule_relative_path=$(get_user_input "Enter in the relative path for your submodule");
-  git submodule deinit -f $submodule_relative_path;
-  git rm --cached $submodule_relative_path;
-  rm -rf .git/modules/$submodule_relative_path;
-  nano .gitmodules;
-
-  echo "You should do the following:";
-  echo "git add .gitmodules";
-  echo 'git commit -m "Removed submodule $submodule_relative_path"';
-  echo "git push";
 }
 
 

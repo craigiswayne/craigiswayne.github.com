@@ -21,29 +21,9 @@ function git () {
   fi
 }
 
-function git_submodule_exists {
-  submodule_name=$(get_user_input "Enter Submodule Name" --default=$1);
-  result=$(git submodule status | grep $submodule_name | cut -d " " -f 2);
-
-  if [ $result == $submodule_name ]
-  then
-    return 0; # true
-  else
-    return 1; # false
-  fi;
-}
-
-function git_get_version () {
-  version=$(git describe);
-  version=${version##*v};
-  version=${version%-*};
-  version=${version%-*};
-  echo $version;
-}
-
-function git_repo_url (){
-  echo $(git remote get-url --push origin);
-}
+# function git_repo_url (){
+#   echo $(git remote get-url --push origin);
+# }
 
 function git_repo_name (){
   repo_url=$(git_repo_url);
@@ -52,17 +32,17 @@ function git_repo_name (){
   echo $repo_name;
 }
 
-function git_calc_root () {
-  [[ ! -z $1 ]] && start="$1" || start=".";
-  git_config_dir=$(find $start -mindepth 1 -maxdepth 2 -type d -iname ".git" | head -n 1);
-  git_config_root=$( dirname $git_config_dir )
-  echo $git_config_root;
-}
+# function git_calc_root () {
+#   [[ ! -z $1 ]] && start="$1" || start=".";
+#   git_config_dir=$(find $start -mindepth 1 -maxdepth 2 -type d -iname ".git" | head -n 1);
+#   git_config_root=$( dirname $git_config_dir )
+#   echo $git_config_root;
+# }
 
-function git_get_all_branches () {
-  git fetch --all;
-  git branch -v;
-}
+# function git_get_all_branches () {
+#   git fetch --all;
+#   git branch -v;
+# }
 
 function git_clean_branches() {
   git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
@@ -83,25 +63,5 @@ function git_delete_tag (){
 }
 
 function git_remove_submodule () {
-  submodule_name=$(get_user_input "Enter Submodule Name" --default=$1);
-
-  submodule_path=$(get_user_input "Enter Submodule Path" --default="wp-content/plugins/$submodule_name");
-
-  git submodule deinit $submodule_path;
-  git rm $submodule_path;
-
-  git rm -r --cached $submodule_path;
-  # overkill
-
-  git submodule status;
-
-  #overkill again (pedantic)
-  rm -rf $submodule_path;
-  git submodule init;
-  git submodule status;
-  git clean -d -f -f;
-}
-
-function git_merge_develop() {
-  git fetch --all && git merge origin/develop
+  node ~/www/craigiswayne.github.com/dotfiles/git/remove_submodule.js
 }
