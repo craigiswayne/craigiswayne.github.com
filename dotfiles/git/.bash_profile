@@ -21,15 +21,8 @@ function git () {
   fi
 }
 
-# function git_repo_url (){
-#   echo $(git remote get-url --push origin);
-# }
-
 function git_repo_name (){
-  repo_url=$(git_repo_url);
-  repo_name=${repo_url##*/};
-  repo_name=${repo_name%.*};
-  echo $repo_name;
+  node ~/www/craigiswayne.github.com/dotfiles/git/git_repo_name.js
 }
 
 # function git_calc_root () {
@@ -63,5 +56,5 @@ function git_delete_tag (){
 }
 
 function git_remove_submodule () {
-  node ~/www/craigiswayne.github.com/dotfiles/git/remove_submodule.js
+  node ~/www/craigiswayne.github.com/dotfiles/git/git_remove_submodule.js
 }

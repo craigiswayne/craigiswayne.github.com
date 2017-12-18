@@ -5,9 +5,12 @@
  */
 require( 'manakin' ).global;
 
+/**
+ * Used for shell execution in node
+ */
 const sh = require( 'shelljs' );
 
-if (!sh.which( 'git' )) {
+if ( !sh.which( 'git' ) ) {
   console.error( 'Sorry, this script requires git' );
   sh.exit(1);
 }
@@ -16,7 +19,7 @@ var git_root = sh.test( '-d', '.git' );
 
 if( !git_root ){
   console.error( 'You need to be in the git root to run this command' );
-  sh.exit(1);
+  sh.exit( git_root.code );
 }
 
 var status = sh.exec( 'git submodule status', {
@@ -25,7 +28,7 @@ var status = sh.exec( 'git submodule status', {
 
 if( 0 !== status.code ){
   console.error( 'You need to be within your git project for this to work...' );
-  sh.exit(1);
+  sh.exit( status.code );
 }
 
 var submodule_list = [];

@@ -76,11 +76,12 @@ function filebot_cleanup (){
 }
 
 function filebot_amc (){
-  source_directory="$(pwd)";
-  find "$source_directory" ._* -delete;
-  destination_directory="/Volumes/MEDIA"
-  filebot -script fn:amc --output "$destination_directory" --conflict index --action move --mode interactive "$source_directory" --log-file ~/Downloads/amc.log --def movieFormat="$destination_directory/Movies/{n} ({y})/{n}" seriesFormat="$destination_directory/Series/{n}/Season {s}/{sxe} - {t}" animeFormat="$destination_directory/Anime/{n}/Season {s}/{sxe} - {t}" musicFormat="$destination_directory/Music/{n} ({y})/{n}" artwork="y" minFileSize=1000 minLengthMS=100
-  filebot -script fn:cleaner "$source_directory"
+  source_directory="/media/MEDIA/Unsorted";
+  mkdir -p "$source_directory";
+  # find "$source_directory" ._* -delete;
+  destination_directory="/media/MEDIA";
+  filebot -script fn:amc --output "$destination_directory" --conflict index --action hardlink --mode interactive "$source_directory" --log-file ~/log/amc.log --def movieFormat="$destination_directory/Movies/{n} ({y})/{n}" seriesFormat="$destination_directory/Series/{n}/Season {s}/{sxe} - {t}" animeFormat="$destination_directory/Anime/{n}/Season {s}/{sxe} - {t}" musicFormat="$destination_directory/Music/{n} ({y})/{n}" artwork="y" minFileSize=1000 minLengthMS=100 subtitles=en;
+  filebot -script fn:cleaner "$source_directory";
 }
 
 

@@ -41,8 +41,7 @@ function wp_install_dev_tools () {
 
 
 function wp_site_name (){
-  site_name=$(git_repo_name);
-  echo $site_name;
+    node ~/www/craigiswayne.github.com/dotfiles/wp/wp_site_name.js
 }
 
 # Independent
@@ -130,9 +129,9 @@ function wp_build_themes () {
 # see here: https://wp-cli.org/commands/user/update/
 function wp_reset_admin_user () {
   admin_pass=admin;
-  wp user create $(strip_email_domain) $(git config user.email) --role=administrator --display_name="$(git config user.name)" --first_name="$(git config user.name)" --last_name="" --skip-themes --skip-plugins;
-  wp user update $(strip_email_domain) --user_pass=$admin_pass --user_email=$(git config user.email) --allow-root --skip-email --skip-plugins --skip-theme;
-  wp option update 'admin_email' $(git config user.email) --skip-themes --skip-plugins;
+  wp user create $(strip_email_domain) $(git config user.email) --role=administrator --display_name="$(git config user.name)" --first_name="$(git config user.name)" --last_name="" --skip-themes --skip-plugins --skip-packages;
+  wp user update $(strip_email_domain) --user_pass=$admin_pass --user_email=$(git config user.email) --allow-root --skip-email --skip-plugins --skip-theme --skip-packages;
+  wp option update 'admin_email' $(git config user.email) --skip-themes --skip-plugins --skip-packages;
   echo "Admin Username = '$(strip_email_domain)'";
   echo "Admin Password = '$admin_pass'";
 }
@@ -214,14 +213,21 @@ function wp_db_export_to_dev (){
   db_name=$(get_user_input "Enter Local Database Name" --default=$db_name);
   dev_db_name=$(get_user_input "Enter Dev Database Name" --default=$db_name);
 
-  site_name=$(wp_site_name);
+  site_name=$(get_user_input "Enter Site Name with no environment prefixes" --default=$(wp_site_name));
 
   export_file=$(wp eval "echo ABSPATH;" --skip-plugins --skip-themes --skip-packages;)export-$db_name.sql;
-  wp search-replace local.$site_name dev.$site_name --export=$export_file --verbose;
+  echo "Export File is: $export_file";
+
+  echo "Beginning search and replace for dev.$site_name";
+  wp search-replace local.$site_name dev.$site_name --export=$export_file --verbose --skip-packages --skip-plugins --skip-themes;
 
   local_db_file_path=$export_file;
+  echo "Search and replace finished...";
+  echo "Local DB File is: $local_db_file_path";
 
   replace TYPE=MyISAM ENGINE=MyISAM -- $local_db_file_path;
+
+  echo "Beginning exporting the local db file to dev...";
   mysql -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST -D$dev_db_name --default-character-set=utf8 < $local_db_file_path;
 
   # if you get the following error:
@@ -276,4 +282,9 @@ function wp_db_import_dev () {
   wp db import;
   wp_replace_urls;
   wp_reset_admin_user;
+}
+
+function wp_install () {
+  db_name=$(git_repo_name);
+  wp core config --dbname=$db_name
 }

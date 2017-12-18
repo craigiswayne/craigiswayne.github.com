@@ -16,6 +16,7 @@ $debug_configs = [
 	'post_max_size'       => '32M',
 	'upload_max_filesize' => '32M',
 	'DISALLOW_FILE_MODS'  => false,
+	'DISALLOW_FILE_EDIT'	=> true
 	// 'DB_HOST'							=> 'localhost',
 	// 'DB_USER'							=> 'wordpress',
 	// 'DB_PASSWORD'					=> 'wordpress'
