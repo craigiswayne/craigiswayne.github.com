@@ -63,6 +63,10 @@ ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers /usr/local/etc/ngin
 #ln -sfv $(find /usr/local/Cellar/nginx -iname "homebrew.mxcl.nginx.plist") ~/Library/LaunchAgents/;
 # TODO autostart nginx
 
+chsh -s /bin/zsh;
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh;
+
+
 sudo nginx;
 open "http://localhost/";
 
@@ -145,7 +149,7 @@ brew services restart php56;
 #git clone https://github.com/craigiswayne/cw-grunt-init-gruntfile.git ~/.grunt-init/cw-gruntfile
 
 
-sudo cp /usr/local/opt/nginx/*.plist /Library/LaunchDaemons
+sudo cp -fv $(locate nginx.plist) /Library/LaunchDaemons
 sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 
 # install sqlformat for atom beautifier
@@ -186,3 +190,18 @@ sudo cp myssl.key /etc/ssl/private/
 # for service worker testing
 # /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://local.prototype.io
 ###
+
+
+###
+# Configure the dynamic dns with dnsmasq
+# See here: http://asciithoughts.com/posts/2014/02/23/setting-up-a-wildcard-dns-domain-on-mac-os-x/
+###
+# Create the etc dir if needed
+mkdir -p /usr/local/etc
+echo "address=/.dev/127.0.0.1" > /usr/local/etc/dnsmasq.conf
+sudo cp -fv /usr/local/opt/dnsmasq/*.plist \
+  /Library/LaunchDaemons
+sudo launchctl load \
+  /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+sudo mkdir -p /etc/resolver
+sudo sh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'

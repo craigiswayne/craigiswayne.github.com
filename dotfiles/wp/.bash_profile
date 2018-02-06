@@ -1,26 +1,31 @@
-function wp (){
-
-  if [ "$1" == "core" ] && [ "$2" == "install" ]
-  then
-    command wp "$@"  --url=local.$(cwd) --title=local.$(cwd) --admin_user=$(npm whoami) --admin_email=$(git config user.email)
-    wp_reset_admin_user;
-  else
-    command wp "$@";
-  fi;
-}
+# function wp (){
+#
+#   if [[ "$1" == "core" ] && [ "$2" == "install" ]]
+#   then
+#     command wp "$@"  --url=local.$(cwd) --title=local.$(cwd) --admin_user=$(npm whoami) --admin_email=$(git config user.email)
+#     wp_reset_admin_user;
+#   else
+#     echo "$1";
+#     command wp "$@";
+#   fi;
+# }
 
 
 # Independent
 function wp_db_dump_dev (){
-  db_name=$(wp_db_name);
+  echo "################################################";
+  echo "Dumping DB from Dev...";
+  db_name="$(wp_db_name)";
+  echo "DB Name: [$db_name]";
   wp db create;
   if ! $(wp core is-installed); then
     wp core install
   fi
-  db_filename=$db_name.sql;
+  db_filename="$db_name".sql;
   mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name --verbose > $(wp eval "echo ABSPATH;";)$db_filename;
   echo "DB File Saved in root as : $db_filename";
   echo "You can now simply just run $ wp db import";
+  echo "################################################";
 }
 
 function wp_install_dev_tools () {
@@ -46,11 +51,13 @@ function wp_site_name (){
 
 # Independent
 function wp_db_name () {
-  db_name=$(wp eval 'echo DB_NAME;' --skip-themes --skip-plugins);
+  db_name=$(wp config get --constant=DB_NAME --skip-plugins --skip-themes);
   echo $db_name;
 }
 
 function wp_replace_urls () {
+  echo "########################################################"
+  echo "Replacing URLS..."
 
   sub_domains=( local dev staging www );
 
@@ -124,16 +131,25 @@ function wp_build_themes () {
     cd $wp_content_dir/themes/$theme;
     build_project;
   done
+
+  echo "########################################################"
 }
 
 # see here: https://wp-cli.org/commands/user/update/
 function wp_reset_admin_user () {
+  echo "#################################";
+  echo "Resetting the Admin User...";
   admin_pass=admin;
-  wp user create $(strip_email_domain) $(git config user.email) --role=administrator --display_name="$(git config user.name)" --first_name="$(git config user.name)" --last_name="" --skip-themes --skip-plugins --skip-packages;
-  wp user update $(strip_email_domain) --user_pass=$admin_pass --user_email=$(git config user.email) --allow-root --skip-email --skip-plugins --skip-theme --skip-packages;
-  wp option update 'admin_email' $(git config user.email) --skip-themes --skip-plugins --skip-packages;
-  echo "Admin Username = '$(strip_email_domain)'";
+  email=$(git config user.email);
+  username=$(strip_email_domain);
+  name=$(git config user.name);
+
+  wp user create $username $email --role=administrator --display_name="$name" --first_name="$name)" --last_name="" --skip-themes --skip-plugins --skip-packages;
+  wp user update $username --user_pass=$admin_pass --user_email=$email --allow-root --skip-email --skip-plugins --skip-theme --skip-packages;
+  wp option update 'admin_email' $email --skip-themes --skip-plugins --skip-packages;
+  echo "Admin Username = '$username'";
   echo "Admin Password = '$admin_pass'";
+  echo "#################################";
 }
 
 function wp_remove_core_keep_contents {
@@ -278,9 +294,20 @@ function wp_watch_debug_log(){
 
 
 function wp_db_import_dev () {
+
+  if ! $(wp core is-installed); then
+    wp core install --url=$site_url --title=$site_title --admin_email=$(git config user.email) --admin_password=admin --admin_user=$(npm whoami) --allow-root
+    echo "Install WordPress first"
+    return;
+  fi
+
   wp_db_dump_dev;
+
+  echo "Importing DB from project root...";
   wp db import;
+
   wp_replace_urls;
+
   wp_reset_admin_user;
 }
 

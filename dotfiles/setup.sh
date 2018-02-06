@@ -8,6 +8,7 @@ sh setup.os.sh;
 
 # Setup 3rd Party Apps via homebrew
 sh setup.homebrew.sh;
+sh setup.gems.sh;
 
 # Now that nginx is installed... clone my setup repo
 working_directory=$(pwd);

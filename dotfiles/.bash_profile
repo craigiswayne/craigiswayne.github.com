@@ -1005,38 +1005,6 @@ function get_latest_code {
 }
 
 
-function maybe_add_host_entry {
-  if [[ -z $1 ]]
-  then
-    new_host_entry=$(get_user_input "Enter in your new host entry");
-  else
-    new_host_entry=$1;
-  fi;
-
-  if [[ -z $2 ]]
-  then
-    hosts_file=$(get_user_input "Hosts file location?" --default="$(locate */hosts)");
-  else
-    hosts_file=$2;
-  fi;
-
-  host_entry=$(cat $hosts_file | grep $new_host_entry);
-
-  if [[ -z $host_entry ]]
-  then
-    console.danger "No host entry exists for $new_host_entry";
-    # sudo -s;
-    # echo "127.0.0.1 $new_host_entry" >> $hosts_file;
-    # echo "";
-    # console.success "Host entry created successfully...";
-    # echo "";
-  fi;
-}
-
-
-
-
-
 function go_to_dev_server () {
   # site_url=$(wp_site_url);
 

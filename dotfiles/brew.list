@@ -15,5 +15,9 @@ wget
 php-cs-fixer
 watch
 fswatch
-osxfuse
 sshfs
+zsh
+zsh-completions
+dnsmasq
+python
+cheatsheet

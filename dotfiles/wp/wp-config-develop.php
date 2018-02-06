@@ -1,25 +1,26 @@
 <?php
 $debug_configs = [
-	'WP_DEBUG',
-	'IMPORT_DEBUG',
-	'WP_DEBUG_LOG',
-	'WP_DEBUG_DISPLAY',
-	'WP_AUTO_UPDATE_CORE',
+	'WP_DEBUG' => true,
+	'WP_DEBUG_LOG' => true,
+	'WP_DEBUG_DISPLAY' => true,
+	'WP_AUTO_UPDATE_CORE' => true,
 	'AUTOMATIC_UPDATER_DISABLED' => false,
-	'SAVEQUERIES',
-	'CONCATENATE_SCRIPTS',
-	'COMPRESS_SCRIPTS',
-	'COMPRESS_CSS',
+	'SAVEQUERIES' => true,
+	'CONCATENATE_SCRIPTS' => true,
+	'COMPRESS_SCRIPTS' => true,
+	'COMPRESS_CSS' => true,
 	'WP_MEMORY_LIMIT'     => '128MB',
 	'max_execution_time'  => '180',
 	'memory_limit'        => '128M',
 	'post_max_size'       => '32M',
 	'upload_max_filesize' => '32M',
 	'DISALLOW_FILE_MODS'  => false,
-	'DISALLOW_FILE_EDIT'	=> true
+	'DISALLOW_FILE_EDIT'	=> true,
+	'ALLOW_UNFILTERED_UPLOADS' => true,
 	// 'DB_HOST'							=> 'localhost',
 	// 'DB_USER'							=> 'wordpress',
-	// 'DB_PASSWORD'					=> 'wordpress'
+	// 'DB_PASSWORD'					=> 'wordpress',
+	'IMPORT_DEBUG'
 ];
 
 // $debug_configs = [];
