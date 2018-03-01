@@ -5,16 +5,8 @@ root = true
 
 [*]
 end_of_line = lf
-trim_trailing_whitespace = true
 charset = utf-8
-
-[*.php]
-indent_style = tab
-indent_size = 4
-
-[*.{js,json}]
 indent_style = space
 indent_size = 2
-
-# charset
-charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true

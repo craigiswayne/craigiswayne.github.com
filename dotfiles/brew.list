@@ -4,6 +4,7 @@ node
 mysql
 nginx
 git
+phantomjs
 php71
 php71-xdebug
 ruby

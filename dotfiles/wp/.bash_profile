@@ -13,19 +13,7 @@
 
 # Independent
 function wp_db_dump_dev (){
-  echo "################################################";
-  echo "Dumping DB from Dev...";
-  db_name="$(wp_db_name)";
-  echo "DB Name: [$db_name]";
-  wp db create;
-  if ! $(wp core is-installed); then
-    wp core install
-  fi
-  db_filename="$db_name".sql;
-  mysqldump -u$DEV_MYSQL_USERNAME -p$DEV_MYSQL_PASSWORD -h$DEV_MYSQL_HOST $db_name --verbose > $(wp eval "echo ABSPATH;";)$db_filename;
-  echo "DB File Saved in root as : $db_filename";
-  echo "You can now simply just run $ wp db import";
-  echo "################################################";
+  command node ~/www/craigiswayne.github.com/dotfiles/wp/wp_db_dump_dev.js "$@";
 }
 
 function wp_install_dev_tools () {
@@ -46,7 +34,7 @@ function wp_install_dev_tools () {
 
 
 function wp_site_name (){
-    node ~/www/craigiswayne.github.com/dotfiles/wp/wp_site_name.js
+    comamdn node ~/www/craigiswayne.github.com/dotfiles/wp/wp_site_name.js "$@";
 }
 
 # Independent
@@ -56,68 +44,7 @@ function wp_db_name () {
 }
 
 function wp_replace_urls () {
-  echo "########################################################"
-  echo "Replacing URLS..."
-
-  sub_domains=( local dev staging www );
-
-  desired_sub_domain=$(get_user_input "Enter desired sub_domain" --default="local");
-
-  desired_protocol=https;
-
-
-  protocols=( http https );
-  site_temp=$(get_user_input "Enter Site Name without any environment prefixes" --default="$(wp_site_name)");
-
-
-  if ! $(wp core is-installed); then
-    wp core install
-  fi
-
-  for sub_domain in "${sub_domains[@]}"
-  do
-    if [[ $desired_sub_domain != $sub_domain ]]
-    then
-      for protocol in "${protocols[@]}"
-      do
-        search="$protocol://$sub_domain";
-        site=${site_temp##$search.};
-        site_temp=$site;
-      done
-    fi;
-  done
-
-
-  for sub_domain in "${sub_domains[@]}"
-  do
-    for protocol in "${protocols[@]}"
-    do
-
-      if [ $sub_domain != $desired_sub_domain ]
-      then
-        echo "";
-        echo "Replacing $protocol://$sub_domain.$site -> $desired_protocol://$desired_sub_domain.$site";
-        wp search-replace "$protocol://$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site" --skip-packages --skip-plugins --skip-themes;
-        wp search-replace "$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site" --skip-packages --skip-plugins --skip-themes;
-      fi;
-
-    done
-  done
-
-
-  for protocol in "${protocols[@]}"
-  do
-    echo "";
-    echo "Replacing $protocol://$site -> $desired_protocol://$desired_sub_domain.$site";
-    wp search-replace "$protocol://$sub_domain.$site" "$desired_protocol://$desired_sub_domain.$site" --skip-packages --skip-plugins --skip-themes;
-  done
-
-  wp search-replace //$site //$desired_sub_domain.$site --skip-packages --skip-plugins --skip-themes;
-  wp search-replace https:// http:// --skip-packages --skip-plugins --skip-themes;
-  wp search-replace http://http:// http:// --precise --all-tables --skip-packages --skip-plugins --skip-themes;
-  site_url=$desired_protocol://$desired_sub_domain.$site;
-  wp option update 'siteurl' $site_url --skip-packages --skip-plugins --skip-themes;
-  echo "SITE URL is now: $site_url";
+  command node ~/www/craigiswayne.github.com/dotfiles/wp/wp_replace_urls.js "$@"
 }
 
 
@@ -145,7 +72,7 @@ function wp_reset_admin_user () {
   name=$(git config user.name);
 
   wp user create $username $email --role=administrator --display_name="$name" --first_name="$name)" --last_name="" --skip-themes --skip-plugins --skip-packages;
-  wp user update $username --user_pass=$admin_pass --user_email=$email --allow-root --skip-email --skip-plugins --skip-theme --skip-packages;
+  wp user update $username --user_pass=$admin_pass --user_email=$email --allow-root --skip-email --skip-plugins --skip-themes --skip-packages;
   wp option update 'admin_email' $email --skip-themes --skip-plugins --skip-packages;
   echo "Admin Username = '$username'";
   echo "Admin Password = '$admin_pass'";
@@ -294,21 +221,7 @@ function wp_watch_debug_log(){
 
 
 function wp_db_import_dev () {
-
-  if ! $(wp core is-installed); then
-    wp core install --url=$site_url --title=$site_title --admin_email=$(git config user.email) --admin_password=admin --admin_user=$(npm whoami) --allow-root
-    echo "Install WordPress first"
-    return;
-  fi
-
-  wp_db_dump_dev;
-
-  echo "Importing DB from project root...";
-  wp db import;
-
-  wp_replace_urls;
-
-  wp_reset_admin_user;
+  command node ~/www/craigiswayne.github.com/dotfiles/wp/wp_db_import_dev.js "$@";
 }
 
 function wp_install () {

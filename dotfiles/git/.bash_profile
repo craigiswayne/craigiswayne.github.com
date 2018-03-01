@@ -13,9 +13,9 @@ function git () {
   then
     echo "Have you done repo maintenance?";
     command git "$@"
-  elif [[ "$1" == "log" ]]
-  then
-    command git "$@"  --decorate --oneline;
+  # elif [[ "$1" == "log" ]]
+  # then
+    # command git "$@"  --decorate --oneline;
   else
     command git "$@"
   fi
@@ -48,11 +48,8 @@ function git_show_all_branches () {
   # for b in `git branch -r | grep -v -- '->'`; do git branch --track ${b##origin/} $b; done
 }
 
-function git_delete_tag (){
-  git fetch --all;
-  tag_name=$(get_user_input "Enter Tag Name");
-  git tag -d $tag_name;
-  git push origin :refs/tags/$tag_name;
+function git_tag_delete (){
+  command node ~/www/craigiswayne.github.com/dotfiles/git/git_tag_delete.js "$@"
 }
 
 function git_remove_submodule () {
