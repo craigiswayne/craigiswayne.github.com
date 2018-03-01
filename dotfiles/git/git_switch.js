@@ -17,7 +17,7 @@ var questions = [
   {
     type: 'list',
     name: 'branch',
-    message: 'Choose Branch to Delete...',
+    message: 'Choose a Branch to switch to...',
     choices: git.branches.list(),
     required: true
   }
