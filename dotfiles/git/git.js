@@ -39,7 +39,7 @@ module.exports = {
 
       let nice_name = branch.replace(/(origin\/)/g,'');
 
-      sh.exec( 'git checkout -B ' + branch + ' ' + nice_name );
+      sh.exec( 'git checkout ' + branch + ' -B ' + nice_name );
       sh.exec( 'git pull');
 
     },
