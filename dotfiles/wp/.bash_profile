@@ -34,7 +34,7 @@ function wp_install_dev_tools () {
 
 
 function wp_site_name (){
-    comamdn node ~/www/craigiswayne.github.com/dotfiles/wp/wp_site_name.js "$@";
+    command node ~/www/craigiswayne.github.com/dotfiles/wp/wp_site_name.js "$@";
 }
 
 # Independent
@@ -70,6 +70,7 @@ function wp_reset_admin_user () {
   email=$(git config user.email);
   username=$(strip_email_domain);
   name=$(git config user.name);
+  name=admin;
 
   wp user create $username $email --role=administrator --display_name="$name" --first_name="$name)" --last_name="" --skip-themes --skip-plugins --skip-packages;
   wp user update $username --user_pass=$admin_pass --user_email=$email --allow-root --skip-email --skip-plugins --skip-themes --skip-packages;
@@ -227,4 +228,8 @@ function wp_db_import_dev () {
 function wp_install () {
   db_name=$(git_repo_name);
   wp core config --dbname=$db_name
+}
+
+function wp_config (){
+  command node ~/www/craigiswayne.github.com/dotfiles/wp/wp.js "config";
 }

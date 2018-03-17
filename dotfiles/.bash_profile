@@ -28,6 +28,10 @@ source '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/.bash_profile';
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/git/.bash_profile';
 source '/usr/local/var/www/craigiswayne.github.com/dotfiles/filebot/.bash_profile';
 
+function dev (){
+  command node ~/www/craigiswayne.github.com/dotfiles/dev.js "$@"
+}
+
 function maybe_install_composer () {
   if [ -f composer.json ]
   then
@@ -1192,15 +1196,6 @@ function mysql_create_user (){
   mysql -uroot -e "FLUSH PRIVILEGES";
 }
 
-
-function project_init (){
-  # DO YEOMAN HERE
-  composer init;
-  npm init;
-  grunt init;
-  yarn init;
-}
-
 # See: https://coolestguidesontheplanet.com/how-to-compress-and-uncompress-files-and-folders-in-os-x-lion-10-7-using-terminal/
 function compress (){
   tar -zcvf archive_name.tar.gz $1
@@ -1209,4 +1204,12 @@ function compress (){
 function cwd () {
   result=${PWD##*/};
   echo $result;
+}
+
+function 24_help (){
+    command node /usr/local/var/www/craigiswayne.github.com/dotfiles/24/24_help.js "$@";
+}
+
+function 24_dev_databases (){
+  mysql -uroot -pntsqlr00t -h152.111.240.158 -e "SHOW DATABASES";
 }

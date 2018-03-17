@@ -22,7 +22,7 @@ function git () {
 }
 
 function git_repo_name (){
-  node ~/www/craigiswayne.github.com/dotfiles/git/git_repo_name.js
+  command node ~/www/craigiswayne.github.com/dotfiles/git/git_repo_name.js "$@";
 }
 
 # function git_calc_root () {
@@ -49,9 +49,9 @@ function git_show_all_branches () {
 }
 
 function git_tag_delete (){
-  command node ~/www/craigiswayne.github.com/dotfiles/git/git_tag_delete.js "$@"
+  command node ~/www/craigiswayne.github.com/dotfiles/git/git_tag_delete.js "$@";
 }
 
 function git_remove_submodule () {
-  node ~/www/craigiswayne.github.com/dotfiles/git/git_remove_submodule.js
+  command node ~/www/craigiswayne.github.com/dotfiles/git/git_remove_submodule.js "$@";
 }

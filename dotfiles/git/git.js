@@ -1,5 +1,11 @@
 'use strict';
 
+const sh = require( 'shelljs' );
+if ( !sh.which( 'git' ) ) {
+  console.error( 'Sorry, this script requires git' );
+  sh.exit(1);
+}
+
 module.exports = {
 
   branches: {
@@ -30,6 +36,7 @@ module.exports = {
     },
 
     checkout: function( branch ){
+
       if( !branch ){
         console.warn( "No Branch provided..." );
         return;
@@ -39,8 +46,38 @@ module.exports = {
 
       let nice_name = branch.replace(/(origin\/)/g,'');
 
-      sh.exec( 'git checkout ' + branch + ' -B ' + nice_name );
+      let checkout_result = sh.exec( 'git checkout ' + branch + ' -B ' + nice_name );
+
+      if( 0 !== checkout_result.code && -1 !== checkout_result.stderr.indexOf('commit your changes or stash') ){
+
+        var questions = [
+          {
+            type: 'confirm',
+            name: 'discard',
+            message: 'Would you like to discard your changes?',
+            default: true,
+            required: true
+          }
+        ];
+
+
+        var inquirer = require('inquirer');
+        inquirer.prompt( questions ).then(answers => {
+          if( answers.discard ){
+              sh.exec( 'git reset --hard' );
+          }
+        });
+
+      }
+
+      if( 0 !== checkout_result.code ){
+        return false;
+      }
+
+      console.info( 'Pulling changes from remote...');
       sh.exec( 'git pull');
+      return true;
+
 
     },
   },
@@ -91,11 +128,6 @@ module.exports = {
      * Used for shell execution in node
      */
     const sh = require( 'shelljs' );
-
-    if ( !sh.which( 'git' ) ) {
-      console.error( 'Sorry, this script requires git' );
-      sh.exit(1);
-    }
 
     var git_root = sh.test( '-d', '.git' );
 

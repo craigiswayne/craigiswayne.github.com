@@ -17,9 +17,9 @@ $debug_configs = [
 	'DISALLOW_FILE_MODS'  => false,
 	'DISALLOW_FILE_EDIT'	=> true,
 	'ALLOW_UNFILTERED_UPLOADS' => true,
-	// 'DB_HOST'							=> 'localhost',
-	// 'DB_USER'							=> 'wordpress',
-	// 'DB_PASSWORD'					=> 'wordpress',
+	'DB_HOST'							=> 'localhost',
+	'DB_USER'							=> 'wordpress',
+	'DB_PASSWORD'					=> 'wordpress',
 	'IMPORT_DEBUG'
 ];
 
