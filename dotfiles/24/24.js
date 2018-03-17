@@ -44,7 +44,7 @@ module.exports = {
       host: '152.111.240.159',
       web_root: '/var/www'
     }
-    
+
   },
 
   dev_databases: function(){

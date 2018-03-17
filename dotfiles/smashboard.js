@@ -52,6 +52,11 @@ let Smashboard = {
               //get site name
 
               let siteName = wp.siteName();
+              if( !siteName ){
+                console.warn( 'Doesn\'t seem to be a valid wordpress installation...' );
+                return;
+              }
+
               console.info( 'Site Name is: ' + siteName );
               console.info( 'Checking if ' + siteName + ' exists on the dev server ('+ work.dev.www.host+')' );
               let siteCheck = sh.exec( 'ssh -o ConnectTimeout=10 '+work.dev.www.username + '@' + work.dev.www.host + ' ls -1 ' + work.dev.www.web_root + '/' + siteName, { silent: true }  );

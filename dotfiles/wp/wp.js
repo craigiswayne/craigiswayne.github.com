@@ -147,15 +147,20 @@ let SmashWP = {
         });
 
         if( 0 !== command.code ){
-          return null;
+          return false;
         }
 
-        return command.stdout;
+        return command.stdout.trim();
       }
     },
 
     siteName: function(){
       let siteURL = SmashWP.option.siteurl();
+
+      if( !siteURL ){
+        return false;
+      }
+
       const extractDomain = /^https?:\/\/(?:\w*).(.*)/g;
       let siteName = !siteURL ? null : siteURL.replace(extractDomain, `$1`).trim();
       return siteName;
