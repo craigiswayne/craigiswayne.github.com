@@ -4,7 +4,7 @@ require( 'manakin' ).global;
 
 const sh = require( 'shelljs' );
 
-// const git = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/git/git.js' );
+const git = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/git/git.js' );
 const inquirer = require( 'inquirer' );
 
 // const work = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/24/24.js' );
@@ -17,7 +17,10 @@ let Smashboard = {
       sites: {
         new: 'Setup a new site',
         delete: 'Delete an existing site',
-        update_dev: 'Update this respective dev site',
+        updateDev: 'Update this respective dev site',
+        importDev: 'Import this respective dev DB',
+        goToDev: 'Go to the Dev Server',
+        mergeDevelop: 'Merge in latest changes from the develop branch'
       },
       system_mail: 'System Mail'
     },
@@ -32,7 +35,7 @@ let Smashboard = {
         var questions = [
             {
                 type: 'list',
-                choices: [Smashboard.tasks.sites.new, Smashboard.tasks.sites.delete, Smashboard.tasks.system_mail, Smashboard.tasks.sites.update_dev ],
+                choices: [Smashboard.tasks.sites.new, Smashboard.tasks.sites.delete, Smashboard.tasks.system_mail, Smashboard.tasks.sites.updateDev, Smashboard.tasks.sites.importDev, Smashboard.tasks.sites.mergeDevelop ],
                 name: 'task',
                 message: 'What would you like to do today?'
             }
@@ -40,12 +43,24 @@ let Smashboard = {
 
         inquirer.prompt( questions ).then(answers => {
 
+            if( Smashboard.tasks.sites.mergeDevelop === answers.task ){
+
+                git.merge.develop();
+
+                return;
+            }
+
             if( Smashboard.tasks.sites.new === answers.task ){
                 Smashboard.setup_wp_site();
                 return;
             }
 
-            if( Smashboard.tasks.sites.update_dev === answers.task ){
+            if( Smashboard.tasks.sites.importDev === answers.task ){
+                wp.db.import_dev();
+                return;
+            }
+
+            if( Smashboard.tasks.sites.updateDev === answers.task ){
               //check if relevant folder exists on dev
               //if not, throw error message
               //if it does
@@ -54,6 +69,7 @@ let Smashboard = {
               let siteName = wp.siteName();
               if( !siteName ){
                 console.warn( 'Doesn\'t seem to be a valid wordpress installation...' );
+                console.warn( 'Site Name [' + siteName + '] invalid.' );
                 return;
               }
 
@@ -70,18 +86,16 @@ let Smashboard = {
                 console.success( 'Updated dev.' + siteName + 'with latest changes in the develop branch' );
               }
 
-
-
               return;
 
             }
-
-
 
             if( Smashboard.tasks.system_mail === answers.task ){
               sh.exec( 'cat /private/var/mail/$(whoami)' );
               return;
             }
+
+            console.log('Coming soon...');
         });
     },
 

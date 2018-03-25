@@ -15,7 +15,8 @@ if( target_branch ){
 }
 
 if( target_switch_result ){
-  return;
+    console.error('Could not find this branch...')
+    return;
 }
 
 

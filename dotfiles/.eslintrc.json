@@ -1,11 +1,4 @@
 {
-  "env": {
-    "browser": true,
-    "commonjs": true,
-    "es6": true,
-    "node": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 6
-  }
+  //see: https://www.npmjs.com/package/eslint-config-wordpress
+  "extends": "wordpress"
 }

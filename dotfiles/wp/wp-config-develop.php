@@ -1,6 +1,7 @@
 <?php
 $debug_configs = [
 	'WP_DEBUG' => true,
+	'GF_DEBUG' => true,
 	'WP_DEBUG_LOG' => true,
 	'WP_DEBUG_DISPLAY' => true,
 	'WP_AUTO_UPDATE_CORE' => true,
