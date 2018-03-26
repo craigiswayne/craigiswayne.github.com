@@ -7,23 +7,25 @@ const sh = require( 'shelljs' );
 const git = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/git/git.js' );
 const inquirer = require( 'inquirer' );
 
-// const work = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/24/24.js' );
 const wp = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/wp.js' );
 const work = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/24/24.js' );
 
 let Smashboard = {
 
     tasks: {
-      sites: {
-        new: 'Setup a new site',
-        delete: 'Delete an existing site',
-        updateDev: 'Update this respective dev site',
-        importDev: 'Import this respective dev DB',
-        goToDev: 'Go to the Dev Server',
-        mergeDevelop: 'Merge in latest changes from the develop branch'
-      },
-      system_mail: 'System Mail'
+        sites: {
+            new: 'Setup a new site',
+            delete: 'Delete an existing site',
+            updateDev: 'Update this respective dev site',
+            importDev: 'Import this respective dev DB',
+            goToDev: 'Go to the Dev Server',
+            flushDevCache: 'Flush Dev Cache',
+            mergeDevelop: 'Merge in latest changes from the develop branch'
+        },
+        system_mail: 'System Mail'
     },
+
+    _verbose: null,
 
     web_root: '/usr/local/var/www',
 
@@ -35,13 +37,18 @@ let Smashboard = {
         var questions = [
             {
                 type: 'list',
-                choices: [Smashboard.tasks.sites.new, Smashboard.tasks.sites.delete, Smashboard.tasks.system_mail, Smashboard.tasks.sites.updateDev, Smashboard.tasks.sites.importDev, Smashboard.tasks.sites.mergeDevelop ],
+                choices: [ Smashboard.tasks.sites.new, Smashboard.tasks.sites.delete, Smashboard.tasks.system_mail, Smashboard.tasks.sites.updateDev, Smashboard.tasks.sites.importDev, Smashboard.tasks.sites.flushDevCache, Smashboard.tasks.sites.mergeDevelop ],
                 name: 'task',
                 message: 'What would you like to do today?'
             }
         ];
 
         inquirer.prompt( questions ).then(answers => {
+
+            if( answers.task === Smashboard.tasks.sites.flushDevCache ){
+                work.dev.flushCache();
+                return;
+            }
 
             if( Smashboard.tasks.sites.mergeDevelop === answers.task ){
 
@@ -68,6 +75,7 @@ let Smashboard = {
 
               let siteName = wp.siteName();
               if( !siteName ){
+                Smashboard.verbose.log( 'siteName is: ' + siteName );
                 console.warn( 'Doesn\'t seem to be a valid wordpress installation...' );
                 console.warn( 'Site Name [' + siteName + '] invalid.' );
                 return;
@@ -178,10 +186,25 @@ let Smashboard = {
         }
 
         sh.exec( 'composer update && composer install' );
-    }
+    },
 
+    isVerbose: function(){
+        return Smashboard._verbose || ( -1 !== process.argv.indexOf( '-vc' ) );
+    },
+
+    verbose: {
+
+        log: function( message ){
+
+            if( !Smashboard.isVerbose() ){
+                return
+            }
+
+            console.info( message );
+        }
+    }
 };
 
-if( 2 === process.argv.length ){
+if( 2 <= process.argv.length ){
     Smashboard.welcome();
 }

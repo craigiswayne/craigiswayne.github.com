@@ -156,7 +156,7 @@ let SmashWP = {
 
     siteName: function(){
       let siteURL = SmashWP.option.siteurl();
-
+        console.log( 'siteURL is ' + siteURL );
       if( !siteURL ){
         return false;
       }

@@ -4,7 +4,7 @@
 //sudo sshfs -o allow_other,defer_permissions root@152.111.240.157:/var/www/ /Volumes/DEV_OLD
 //sudo sshfs -o allow_other,defer_permissions root@152.111.240.159:/var/www/ /Volumes/DEV_NEW
 
-module.exports = {
+let SmashWork = {
 
   local: {
     mysql: {
@@ -20,22 +20,20 @@ module.exports = {
       password: 'mysqlr00t',
       ip: '152.111.240.158',
 
-      dump: function( db_name ){
+      dump: function( dbName ){
 
-        if( !db_name ){
-          console.error( 'A DB Name is required for this to work...');
-          return false;
-        }
+          if ( ! dbName ) {
+              console.error( 'A DB Name is required for this to work...' );
+              return false;
+          }
 
+          const wp = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/wp.js' );
+          let destination = dbName + '.sql';
+          destination = wp.is_installed() ? wp.abspath() + destination : destination;
 
-
-        const wp = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/wp.js' );
-        let destination = db_name + '.sql';
-        destination = wp.is_installed() ? wp.abspath() + destination : destination;
-
-        const sh = require( 'shelljs' );
-        sh.exec( 'mysqldump -u'+module.exports.dev.mysql.username+' -p'+module.exports.dev.mysql.password+' -h'+module.exports.dev.mysql.ip+' '+db_name+' --verbose > ' + destination  );
-        return destination;
+          const sh = require( 'shelljs' );
+          sh.exec( 'mysqldump -u' + module.exports.dev.mysql.username + ' -p' + module.exports.dev.mysql.password + ' -h' + module.exports.dev.mysql.ip + ' ' + dbName + ' --verbose > ' + destination );
+          return destination;
       }
     },
 
@@ -43,8 +41,12 @@ module.exports = {
       username: 'root',
       host: '152.111.240.159',
       web_root: '/var/www'
-    }
+    },
 
+    flushCache: function(){
+        const sh = require( 'shelljs' );
+        sh.exec( 'ssh -o ConnectTimeout=10 ' + SmashWork.dev.www.username + '@' + SmashWork.dev.www.host + ' "service varnish restart && service php7.0-fpm restart" ' );
+    }
   },
 
   dev_databases: function(){
@@ -82,3 +84,5 @@ module.exports = {
   }
 
 };
+
+module.exports = SmashWork;

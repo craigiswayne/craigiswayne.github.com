@@ -192,16 +192,13 @@ let SmashGit = {
 
 
       var inquirer = require('inquirer');
-      inquirer.prompt( questions ).then(answers => {
-          git.branches.checkout( answers.branch );
-  });
+          inquirer.prompt( questions ).then(answers => {
+              git.branches.checkout( answers.branch );
+      });
 
   }
 
 };
 
 module.exports = SmashGit;
-
-if( 2 >= process.argv.length && undefined !== SmashWP[process.argv[2]] && typeof SmashWP[process.argv[2]] === 'function'){
-    SmashWP[process.argv[2]]();
-}
+//
