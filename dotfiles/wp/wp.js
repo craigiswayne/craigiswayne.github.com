@@ -236,6 +236,19 @@ let SmashWP = {
         let domain = cwd.stdout();
         console.log(domain);
 
+    },
+
+    import: {
+        demo: function(){
+            const sh = require( 'shelljs' );
+            sh.exec( 'wp plugin install wordpress-importer --activate --allow-root ' +
+                '&& curl -fsSL https://rawgit.com/craigiswayne/wp-theme-unit-test/master/uikit-v2.xml -o uikit-v2.xml ' +
+                '&& wp import uikit-v2.xml --authors=create --allow-root' +
+                '&& rm uikit-v2.xml ' +
+                '&& curl -fsSL https://rawgit.com/craigiswayne/wp-theme-unit-test/master/themeunittestdata.wordpress.xml -o themeunittestdata.wordpress.xml ' +
+                '&& wp import themeunittestdata.wordpress.xml --authors=create --allow-root ' +
+                '&& rm themeunittestdata.wordpress.xml;\n' )
+        }
     }
 };
 

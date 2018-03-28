@@ -96,8 +96,6 @@ let SmashGit = {
           console.info( 'Pulling changes from remote...');
           sh.exec( 'git pull');
           return true;
-
-
       },
   },
 
@@ -196,6 +194,13 @@ let SmashGit = {
               git.branches.checkout( answers.branch );
       });
 
+  },
+
+  remote: {
+    url: function(){
+        const sh = require( 'shelljs' );
+        return sh.exec( 'git remote get-url --push origin', { silent: true } ).trim();
+    }
   }
 
 };

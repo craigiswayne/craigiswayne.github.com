@@ -9,6 +9,7 @@
 	excludesfile = ~/.gitignore_global
 	autocrlf = false
 	safecrlf = true
+	hooksPath = ~/www/craigiswayne.github.com/dotfiles/git/hooks
 [color]
 	diff = true
 	status = true

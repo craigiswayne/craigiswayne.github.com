@@ -12,16 +12,18 @@ const work = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/24/24
 
 let Smashboard = {
 
+    wp: require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/wp.js' ),
+
     tasks: {
-        sites: {
-            new: 'Setup a new site',
-            delete: 'Delete an existing site',
-            updateDev: 'Update this respective dev site',
-            importDev: 'Import this respective dev DB',
-            goToDev: 'Go to the Dev Server',
-            flushDevCache: 'Flush Dev Cache',
-            mergeDevelop: 'Merge in latest changes from the develop branch'
-        },
+        importDemo: 'Import Demo Data',
+        new: 'Setup a new site',
+        delete: 'Delete an existing site',
+        updateDev: 'Update this respective dev site',
+        importDev: 'Import this respective dev DB',
+        goToDev: 'Go to the Dev Server',
+        flushDevCache: 'Flush Dev Cache',
+        mergeDevelop: 'Merge in latest changes from the develop branch',
+        deploymentTicket: 'Log a Deployment Ticket for this site',
         system_mail: 'System Mail'
     },
 
@@ -31,13 +33,21 @@ let Smashboard = {
 
     welcome: function() {
 
+        var i = 0;
+
         console.info( "" +
             " _ _ _  _  _|_    \n" +
             "_\\| | |(_|_\\| |..." );
-        var questions = [
+
+        let choices = [];
+        for( i; i < Object.keys( Smashboard.tasks ).length; i++ ){
+            choices.push( Smashboard.tasks[ Object.keys( Smashboard.tasks )[i]] );
+        }
+
+        let questions = [
             {
                 type: 'list',
-                choices: [ Smashboard.tasks.sites.new, Smashboard.tasks.sites.delete, Smashboard.tasks.system_mail, Smashboard.tasks.sites.updateDev, Smashboard.tasks.sites.importDev, Smashboard.tasks.sites.flushDevCache, Smashboard.tasks.sites.mergeDevelop ],
+                choices: choices,
                 name: 'task',
                 message: 'What would you like to do today?'
             }
@@ -45,57 +55,41 @@ let Smashboard = {
 
         inquirer.prompt( questions ).then(answers => {
 
-            if( answers.task === Smashboard.tasks.sites.flushDevCache ){
-                work.dev.flushCache();
+            if( answers.task === Smashboard.tasks.importDemo ){
+                Smashboard.wp.import.demo();
                 return;
             }
 
-            if( Smashboard.tasks.sites.mergeDevelop === answers.task ){
+            if( answers.task === Smashboard.tasks.deploymentTicket ){
+                work.deploymentTicket();
+                return;
+            }
+
+            if( answers.task === Smashboard.tasks.flushDevCache ){
+                work.dev.restartVarnish();
+                return;
+            }
+
+            if( Smashboard.tasks.mergeDevelop === answers.task ){
 
                 git.merge.develop();
 
                 return;
             }
 
-            if( Smashboard.tasks.sites.new === answers.task ){
+            if( Smashboard.tasks.new === answers.task ){
                 Smashboard.setup_wp_site();
                 return;
             }
 
-            if( Smashboard.tasks.sites.importDev === answers.task ){
+            if( Smashboard.tasks.importDev === answers.task ){
                 wp.db.import_dev();
                 return;
             }
 
-            if( Smashboard.tasks.sites.updateDev === answers.task ){
-              //check if relevant folder exists on dev
-              //if not, throw error message
-              //if it does
-              //get site name
-
-              let siteName = wp.siteName();
-              if( !siteName ){
-                Smashboard.verbose.log( 'siteName is: ' + siteName );
-                console.warn( 'Doesn\'t seem to be a valid wordpress installation...' );
-                console.warn( 'Site Name [' + siteName + '] invalid.' );
+            if( Smashboard.tasks.updateDev === answers.task ){
+                work.dev.updateSite();
                 return;
-              }
-
-              console.info( 'Site Name is: ' + siteName );
-              console.info( 'Checking if ' + siteName + ' exists on the dev server ('+ work.dev.www.host+')' );
-              let siteCheck = sh.exec( 'ssh -o ConnectTimeout=10 '+work.dev.www.username + '@' + work.dev.www.host + ' ls -1 ' + work.dev.www.web_root + '/' + siteName, { silent: true }  );
-
-              if( 0 !== siteCheck.code ){
-                console.warn( 'The site: ' + siteName + ' cannot be found on the dev server. You will have to do this manually... sadsies' );
-              }else{
-                console.info( 'Updating ' + work.dev.www.web_root + '/' + siteName );
-                console.log();
-                sh.exec( 'ssh -o ConnectTimeout=10 '+work.dev.www.username + '@' + work.dev.www.host + ' "cd ' + work.dev.www.web_root + '/' + siteName + ' && git reset --hard && git fetch --all && git checkout origin/develop -B develop && git pull && composer update && composer install" ' );
-                console.success( 'Updated dev.' + siteName + 'with latest changes in the develop branch' );
-              }
-
-              return;
-
             }
 
             if( Smashboard.tasks.system_mail === answers.task ){
@@ -103,7 +97,7 @@ let Smashboard = {
               return;
             }
 
-            console.log('Coming soon...');
+            console.log( 'Coming soon...' );
         });
     },
 
@@ -127,7 +121,7 @@ let Smashboard = {
 
         inquirer.prompt( questions ).then( answers_p1 => {
 
-            let autoSiteName = answers_p1.gitURL.replace( /(?:.*)\/(.*).git$/g, '$1' );
+            let autoSiteName = answersP1.gitURL.replace( /(?:.*)\/(.*).git$/g, '$1' );
 
             inquirer.prompt( [
                 {
@@ -136,16 +130,16 @@ let Smashboard = {
                     message: 'Enter in the Site Name',
                     default: autoSiteName
                 }
-            ]).then( answers_p2 => {
-                let destination = Smashboard.web_root + '/' + answers_p2.siteName;
+            ]).then( answersP2 => {
+                let destination = Smashboard.web_root + '/' + answersP2.siteName;
 
 
-                console.log( 'Git URL: ' + answers_p1.gitURL );
-                console.log( 'Site Name: ' + answers_p2.siteName );
+                console.log( 'Git URL: ' + answersP1.gitURL );
+                console.log( 'Site Name: ' + answersP2.siteName );
                 console.log( 'Destination: ' + destination );
 
                 //clone the site
-                sh.exec( 'git clone ' + answers_p1.gitURL + ' -b develop ' + destination );
+                sh.exec( 'git clone ' + answersP1.gitURL + ' -b develop ' + destination );
 
                 // if( sh.test( '-d', destination ) ){
                 //   inquirer.prompt( [
@@ -189,15 +183,15 @@ let Smashboard = {
     },
 
     isVerbose: function(){
-        return Smashboard._verbose || ( -1 !== process.argv.indexOf( '-vc' ) );
+        return Smashboard._verbose || ( -1 !== process.argv.indexOf( '-v' ) );
     },
 
     verbose: {
 
         log: function( message ){
 
-            if( !Smashboard.isVerbose() ){
-                return
+            if( ! Smashboard.isVerbose() ){
+                return;
             }
 
             console.info( message );
