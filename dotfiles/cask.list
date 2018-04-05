@@ -1,35 +1,17 @@
+osfxfuse
+java
 google-chrome
-google-drive
-google-photos-backup
+google-photos-backup-and-sync
 atom
 phpstorm
 transmission
-kodi
 spectacle
-
 vlc
 firefox
-
-#android-file-transfer
-# fliqlo
-# filebot
-# filezilla
-# genymotion
-# github-desktop
-# googleappengine
-# gulp
-# java
-# linein
-# mysqlworkbench
-# osxfuse
-# paintbrush
-# prefs-editor
-# remote-play
-# slack
-# skype
-# sony-ericsson-bridge
-# sourcetree
-# sshfs
-# teamviewer
-# unrarx
-# virtualbox
+filebot
+licecap
+virtualbox
+genymotion
+filezilla
+remote-play
+caskroom/versions/java8

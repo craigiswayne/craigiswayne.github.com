@@ -1,32 +1,24 @@
-brew-cask
 wp-cli
 composer
 node
 mysql
 nginx
 git
-php56
-php56-xdebug
-
-# autoconf
-# coreutils
-# curl
-# libxml2
-# makedepend
-# mcrypt
-# pcre
-# pkg-config
-# ruby
-# sqlformat
-# svn
-# symfony-installer
-# wget
-# xz
-# php56-igbinary
-# php56-intl
-# php56-mcrypt
-# php56-mongo
-# php56-xhgui
-# php56-xhprof
-# python
-# watch
+phantomjs
+php71
+php71-xdebug
+ruby
+coreutils
+yarn
+autoconf
+python
+wget
+php-cs-fixer
+watch
+fswatch
+sshfs
+zsh
+zsh-completions
+dnsmasq
+python
+cheatsheet

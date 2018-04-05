@@ -1,0 +1,12 @@
+{
+  "preset": "wordpress",
+  "requireSpaceAfterKeywords": false,
+  "requireSpaceBeforeBlockStatements": false,
+  "requireSpacesInAnonymousFunctionExpression": false,
+  "requireSpacesInFunctionExpression": false,
+  "disallowArrowFunctions": false,
+  "requireShorthandArrowFunctions": true,
+  "disallowUnusedVariables": true,
+  "requireCapitalizedComments": false,
+  "requirePaddingNewLinesBeforeLineComments": true
+}

@@ -1,0 +1,18 @@
+"*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "01dc9ff5-f159-4e7b-b332-ed306cfb8fae"
+  core:
+    telemetryConsent: "limited"
+    warnOnLargeFileLimit: 2
+  editor:
+    fontSize: 12
+    softWrap: false
+  "exception-reporting":
+    userId: "46e679f8-da8f-43b8-aadf-84526e6e1f48"
+  "linter-ui-default":
+    panelHeight: 69
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false

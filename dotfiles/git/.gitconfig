@@ -1,0 +1,45 @@
+[user]
+	email = craigiswayne@gmail.com
+	name = Craig Wayne
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = false
+	safecrlf = true
+	hooksPath = ~/www/craigiswayne.github.com/dotfiles/git/hooks
+[color]
+	diff = true
+	status = true
+	branch = true
+	interactive = true
+	ui = true
+	pager = true
+[color "status"]
+	added = green
+	changed = red bold
+	untracked = magenta bold
+[color "branch"]
+	remote = yellow
+[push]
+	default = current
+[diff]
+  tool = meld
+[difftool]
+  prompt = false
+[difftool "meld"]
+  trustExitCode = true
+  cmd = open -W -a Meld --args \"$LOCAL\" \"$PWD/$REMOTE\"
+[merge]
+  tool = meld
+[mergetool]
+  prompt = false
+[mergetool "meld"]
+  trustExitCode = true
+  cmd = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
+[alias]
+  conflicts = !git ls-files -u | cut -f 2 | sort -u && echo "Finished git conflicts"
+	pruner = !git prune --expire=now && git reflog expire --expire-unreachable=now --rewrite --all && git fetch --all --prune && git gc --prune && git remote prune origin && echo "Finished git pruner"
+	switch = !command node ~/www/craigiswayne.github.com/dotfiles/git/git.js switch "$@"

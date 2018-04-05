@@ -1,0 +1,4 @@
+{
+  //see: https://www.npmjs.com/package/eslint-config-wordpress
+  "extends": "wordpress"
+}
