@@ -51,6 +51,13 @@ let SmashGit = {
           result = result.split(' ');
           result = result.filter(n => n)
 
+          /**
+           * If no branches are found, add the default master branch
+           */
+          if( 0 === result.length ){
+              result.push( 'master' );
+          }
+
           return result;
       },
 
