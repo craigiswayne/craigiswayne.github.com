@@ -108,94 +108,132 @@ let SmashWork = {
       const git = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/git/git.js' );
       const wp = require( '/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/wp.js' );
       const inquirer = require( 'inquirer' );
+      const sh = require( 'shelljs' );
 
       let siteName = wp.siteName();
       let fullSiteURL = 'https://www.' + siteName;
+      let repoOverview = 'https://bitbucket.org/24dotcom/' + siteName + '/overview';
       let gitURL = git.remote.url();
       let releaseBranch = 'release/v1.0.0';
-      let repoOverview = 'https://bitbucket.org/24dotcom/' + siteName + '/overview';
       let releaseBranchURL = 'https://bitbucket.org/24dotcom/' + siteName + '/branch/' + releaseBranch;
 
-      let questions = [
+      let questionsP1 = [
           {
               type: 'text',
               name: 'siteName',
               message: 'Site Name?',
               default: siteName,
               required: true
-          },
-          {
-              type: 'text',
-              name: 'fullSiteURL',
-              message: 'Full Site URL?',
-              default: fullSiteURL,
-              required: true
-          },
-          {
-              type: 'text',
-              name: 'gitURL',
-              message: 'Git URL?',
-              default: gitURL,
-              required: true
-          },
-          {
-              type: 'list',
-              choices: git.branches.list(),
-              name: 'releaseBranch',
-              message: 'Choose your release branch?',
-              required: true
-          },
-          {
-              type: 'text',
-              name: 'repoOverview',
-              message: 'Repo Overview URL?',
-              default: repoOverview,
-              required: true
-          },
-          {
-              type: 'text',
-              name: 'releaseBranchURL',
-              message: 'Release Branch URL?',
-              default: releaseBranchURL,
-              required: true
-          }
-      ];
+          }];
 
-      inquirer.prompt( questions ).then(function( answers ){
-          let ticket = 'Hello :)\n' +
-              '\n' +
-              'could you please deploy [' + answers.fullSiteURL + '|' + answers.fullSiteURL + ']\n' +
-              '\n' +
-              'with the latest changes in the release branch *' + answers.releaseBranch + '*\n' +
-              '\n' +
-              '\n' +
-              '\n' +
-              '| *Repository URL*               | ' + answers.repoOverview +                              '|\n' +
-              '| *Git URL*                      | ' + answers.gitURL + '|\n' +
-              '| *Release Branch*               | [' + answers.releaseBranch + '|' + answers.releaseBranchURL + '] |\n' +
-              '| *Requires Composer?*           | YES                                              |\n' +
-              '| *Submodules?*                  | NO                                               |\n' +
-              '| *DB Changes?*                  | UNCHANGED                                        |\n' +
-              '| *WP Core Version*              | SET IN COMPOSER                                  |\n' +
-              '| *Run Bower?*                   | NO                                               |\n' +
-              '| *Run NPM?*                     | NO                                               |\n' +
-              '| *Run Grunt?*                   | NO                                               |\n' +
-              '| *Skip Varnish for these URLs*  | IMPORT FROM STAGING                              |\n' +
-              '| *PHP Version*                  | SET IN COMPOSER                                  |\n' +
-              '| *SSL*                          | YES                                              |\n' +
-              '\n' +
-              '\n' +
-              'h3. Post Deploy Checks for Developers\n' +
-              '# Remove Customizer Styles\n' +
-              '# Remove Text Widget Styles\n' +
-              '# Tag and Release\n' +
-              '# Merge Branches\n' +
-              '# Prune Branches\n' +
-              '\n' +
-              'Thanks :)';
+      inquirer.prompt( questionsP1 ).then(function( answers ){
+        siteName = answers.siteName;
 
-          console.log( ticket );
+        fullSiteURL = 'https://www.' + siteName;
+        repoOverview = 'https://bitbucket.org/24dotcom/' + siteName + '/overview';
+
+        let questionsP2 = [
+            {
+                type: 'text',
+                name: 'fullSiteURL',
+                message: 'Full Site URL?',
+                default: fullSiteURL,
+                required: true
+            },
+            {
+                type: 'text',
+                name: 'gitURL',
+                message: 'Git URL?',
+                default: gitURL,
+                required: true
+            },
+            {
+                type: 'text',
+                name: 'repoOverview',
+                message: 'Repo Overview URL?',
+                default: repoOverview,
+                required: true
+            },
+            {
+                  type: 'list',
+                  choices: git.branches.list(),
+                  name: 'releaseBranch',
+                  message: 'Choose your release branch?',
+                  required: true
+            }
+        ];
+
+        inquirer.prompt( questionsP2 ).then(function( answers ){
+          fullSiteURL = answers.fullSiteURL;
+          gitURL = answers.gitURL;
+          repoOverview = answers.repoOverview;
+          releaseBranch = answers.releaseBranch;
+
+          releaseBranchURL = 'https://bitbucket.org/24dotcom/' + siteName + '/branch/' + releaseBranch;
+
+          let questionsP3 = [
+              {
+                  type: 'text',
+                  name: 'releaseBranchURL',
+                  message: 'Release Branch URL?',
+                  default: releaseBranchURL,
+                  required: true
+              }
+          ];
+
+
+          inquirer.prompt( questionsP3 ).then(function( answers ){
+            releaseBranchURL = answers.releaseBranchURL;
+
+            let ticket = 'Hello :)\n' +
+                '\n' +
+                'could you please deploy [' + fullSiteURL + '|' + fullSiteURL + ']\n' +
+                '\n' +
+                'with the latest changes in the release branch *' + releaseBranch + '*\n' +
+                '\n' +
+                '\n' +
+                '\n' +
+                '| *Repository URL*               | ' + repoOverview +                              '|\n' +
+                '| *Git URL*                      | ' + gitURL + '|\n' +
+                '| *Release Branch*               | [' + releaseBranch + '|' + releaseBranchURL + '] |\n' +
+                '| *Requires Composer?*           | YES                                              |\n' +
+                '| *Submodules?*                  | NO                                               |\n' +
+                '| *DB Changes?*                  | UNCHANGED                                        |\n' +
+                '| *WP Core Version*              | SET IN COMPOSER                                  |\n' +
+                '| *Run Bower?*                   | NO                                               |\n' +
+                '| *Run NPM?*                     | NO                                               |\n' +
+                '| *Run Grunt?*                   | NO                                               |\n' +
+                '| *Skip Varnish for these URLs*  | IMPORT FROM STAGING                              |\n' +
+                '| *PHP Version*                  | SET IN COMPOSER                                  |\n' +
+                '| *SSL*                          | YES                                              |\n' +
+                '\n' +
+                '\n' +
+                'h3. Post Deploy Checks for Developers\n' +
+                '# Remove Customizer Styles\n' +
+                '# Remove Text Widget Styles\n' +
+                '# Tag and Release\n' +
+                '# Merge Branches\n' +
+                '# Prune Branches\n' +
+                '\n' +
+                'Thanks :)';
+            sh.exec( 'echo "' + ticket + '" | pbcopy' );
+            console.log( ticket );
+            console.info( "The Ticket has been copied to your clipboard :) ");
+
+          });
+        });
+
       });
+
+
+
+
+
+
+
+
+
+
   }
 
 };

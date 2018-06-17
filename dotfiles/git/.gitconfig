@@ -42,4 +42,4 @@
 [alias]
   conflicts = !git ls-files -u | cut -f 2 | sort -u && echo "Finished git conflicts"
 	pruner = !git prune --expire=now && git reflog expire --expire-unreachable=now --rewrite --all && git fetch --all --prune && git gc --prune && git remote prune origin && echo "Finished git pruner"
-	switch = !command node ~/www/craigiswayne.github.com/dotfiles/git/git.js switch "$@"
+	switch = !node ~/www/craigiswayne.github.com/dotfiles/git/git.js switch "$@"
