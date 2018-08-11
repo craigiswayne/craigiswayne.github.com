@@ -33,10 +33,6 @@ function wp_install_dev_tools () {
 }
 
 
-function wp_site_name (){
-    command node ~/www/craigiswayne.github.com/dotfiles/wp/wp_site_name.js "$@";
-}
-
 # Independent
 function wp_db_name () {
   db_name=$(wp config get --constant=DB_NAME --skip-plugins --skip-themes);
@@ -47,34 +43,23 @@ function wp_replace_urls () {
   command node ~/www/craigiswayne.github.com/dotfiles/wp/wp_replace_urls.js "$@"
 }
 
-
-function wp_build_themes () {
-  abspath=$(wp eval 'echo ABSPATH;' --allow-root);
-  wp_content_dir=$(wp eval 'echo WP_CONTENT_DIR;' --allow-root);
-  cd $abspath"wp-content/themes";
-  available_themes=$(ls -d */ | cut -f1 -d'/');
-  for theme in $available_themes;
-  do
-    cd $wp_content_dir/themes/$theme;
-    build_project;
-  done
-
-  echo "########################################################"
-}
-
 # see here: https://wp-cli.org/commands/user/update/
 function wp_reset_admin_user () {
   echo "#################################";
   echo "Resetting the Admin User...";
-  admin_pass=admin;
-  email=$(git config user.email);
-  username=$(strip_email_domain);
-  name=$(git config user.name);
-  name=admin;
+  # admin_pass=admin;
+  # email=$(git config user.email);
+  # username=$(strip_email_domain);
+  # name=$(git config user.name);
 
-  wp user create $username $email --role=administrator --display_name="$name" --first_name="$name)" --last_name="" --skip-themes --skip-plugins --skip-packages;
-  wp user update $username --user_pass=$admin_pass --user_email=$email --allow-root --skip-email --skip-plugins --skip-themes --skip-packages;
-  wp option update 'admin_email' $email --skip-themes --skip-plugins --skip-packages;
+  email="opensourcetwentyfour@gmail.com"
+  username=admin;
+  name=$username;
+  admin_pass=$username;
+
+  wp user create $username $email --role=administrator --display_name="$name" --first_name="$name)" --last_name="" --skip-themes --skip-plugins --skip-packages --allow-root;
+  wp user update $username --user_pass=$admin_pass --user_email=$email --skip-email --skip-plugins --skip-themes --skip-packages --allow-root;
+  wp option update 'admin_email' $email --skip-themes --skip-plugins --skip-packages --allow-root;
   echo "Admin Username = '$username'";
   echo "Admin Password = '$admin_pass'";
   echo "#################################";

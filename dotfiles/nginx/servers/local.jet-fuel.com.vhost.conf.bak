@@ -1,0 +1,110 @@
+server {
+    listen 80;
+    access_log html/logs/nginx/access-verbose.log verbose;
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /usr/local/etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /usr/local/etc/nginx/ssl/nginx.key;
+    server_name local.netnuus.com;
+    location / {
+      proxy_pass https://netnuus.local.jet-fuel.com;
+    }
+
+}
+
+server {
+    listen 80;
+    access_log html/logs/nginx/access-verbose.log verbose;
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /usr/local/etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /usr/local/etc/nginx/ssl/nginx.key;
+    server_name local.dailykick.co.za;
+    location / {
+      proxy_pass https://dailykick.local.jet-fuel.com;
+    }
+
+}
+
+
+server {
+    listen 80;
+    access_log html/logs/nginx/access-verbose.log verbose;
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /usr/local/etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /usr/local/etc/nginx/ssl/nginx.key;
+    server_name local.news24edge.com;
+    location / {
+      proxy_pass https://news24edge.local.jet-fuel.com;
+    }
+}
+
+###
+# Redirects all http traffic to https
+###
+server
+{
+  listen 80;
+  access_log html/logs/nginx/access-verbose.log verbose;
+  server_name local.jet-fuel.com *.local.jet-fuel.com;
+  return 301 https://$server_name$request_uri;
+}
+
+server
+{
+  listen 443;
+  access_log html/logs/nginx/access-verbose.log verbose;
+  ssl on;
+  ssl_certificate /usr/local/etc/nginx/ssl/nginx.crt;
+  ssl_certificate_key /usr/local/etc/nginx/ssl/nginx.key;
+  keepalive_timeout 70;
+  server_name local.jet-fuel.com *.local.jet-fuel.com;
+
+  root html/jet-fuel;
+
+  index index.html index.php README.md Home.md;
+  autoindex on;
+
+  location / {
+      try_files $uri $uri/ /index.php?$args;
+  }
+
+  rewrite /files/$ /index.php last;
+
+  if ($uri !~ wp-content/plugins) {
+      rewrite /files/(.+)$ /wp-includes/ms-files.php?file=$1 last;
+  }
+
+  # Rewrite multisite '.../wp-.*' and '.../*.php'.
+  if (!-e $request_filename) {
+      rewrite ^/[_0-9a-zA-Z-]+(/wp-.*) $1 last;
+      rewrite ^/[_0-9a-zA-Z-]+.*(/wp-admin/.*\.php)$ $1 last;
+      rewrite ^/[_0-9a-zA-Z-]+(/.*\.php)$ $1 last;
+  }
+
+
+  location ~ \.php$
+  {
+    if ($uri = /markdown.php)
+    {
+      root html;
+    }
+
+    include fastcgi.conf;
+    fastcgi_intercept_errors on;
+    fastcgi_pass php;
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_index index.php;
+    fastcgi_param PHP_VALUE "auto_prepend_file=/usr/local/var/www/craigiswayne.github.com/dotfiles/wp/wp-config-develop.php";
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  }
+
+  location ~* \.(jpe?g|gif|css|png|js|ico|pdf|zip|tar|t?gz|mp3|wav|swf|woff|bmp|svg)$
+  {
+    access_log off;
+    try_files $uri $uri/;
+    expires off;
+  }
+
+}

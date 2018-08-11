@@ -1,0 +1,12 @@
+{
+  //see: https://www.npmjs.com/package/eslint-config-wordpress
+  "extends": "google",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules":{
+    //changed maximum length of line from 80->100
+    //see: https://eslint.org/docs/1.0.0/rules/max-len
+    "max-len": ["error", 500, 4]
+  }
+}

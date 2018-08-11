@@ -2,12 +2,12 @@
 color: true
 
 core config:
-    dbuser: wordpress
-    dbpass: wordpress
+    dbuser: root
+    dbpass: root
 
 config create:
-    dbuser: wordpress
-    dbpass: wordpress
+    dbuser: root
+    dbpass: root
 
 @dev-old:
     ssh: root@152.111.240.157
