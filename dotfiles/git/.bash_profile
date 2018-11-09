@@ -1,26 +1,3 @@
-# Git Overrides
-function git () {
-
-  if [[ "$1" == "status" ]]
-  then
-
-    if [ -f composer.json ]
-    then
-      composer status -v;
-    fi;
-    command git "$@"
-  elif [[ "$1" == "commit" ]]
-  then
-    echo "Have you done repo maintenance?";
-    command git "$@"
-  # elif [[ "$1" == "log" ]]
-  # then
-    # command git "$@"  --decorate --oneline;
-  else
-    command git "$@"
-  fi
-}
-
 function git_repo_name (){
   command node ~/www/craigiswayne.github.com/dotfiles/git/git_repo_name.js "$@";
 }

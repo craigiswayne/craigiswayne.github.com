@@ -2,5 +2,6 @@
 .idea/
 .sass-cache/
 node_modules/
-vendor/
-.map
+/vendor/
+**/*.map
+error.log

@@ -208,8 +208,8 @@ let Smashboard = {
     },
 };
 
-if ( 2 <= process.argv.length ) {
-    Smashboard.welcome();
-
-  // wp.db.importDev();
-}
+// if ( 2 <= process.argv.length ) {
+//     Smashboard.welcome();
+//
+//   // wp.db.importDev();
+// }
