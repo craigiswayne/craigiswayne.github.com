@@ -185,8 +185,6 @@ let SmashWP = {
 
   grabFileFromEnv: function(env) {
     this.option.siteName();
-
-    // rsync -aruv "root@152.111.240.159:/var/www/paws.24.com/*sql" ~/www/paws.24.com
   },
 };
 
