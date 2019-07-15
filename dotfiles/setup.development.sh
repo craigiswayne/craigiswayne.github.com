@@ -58,6 +58,7 @@ mkdir -p ~/www/logs/;
 ln -sfv /usr/local/var/log/nginx ~/www/logs/nginx
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/errors/ ~/www/errors
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers /usr/local/etc/nginx/servers
+sudo ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/nginx.crt /usr/local/etc/nginx/ssl/nginx.crt
 
 # TODO dynamically fetch this
 #ln -sfv $(find /usr/local/Cellar/nginx -iname "homebrew.mxcl.nginx.plist") ~/Library/LaunchAgents/;
