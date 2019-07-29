@@ -22,8 +22,8 @@ git config --global core.autocrlf input
 git config --global core.safecrlf true
 git config --global github.user craigiswayne;
 git config --global fetch.prune true;
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.gitignore_global ~/;
-ln -sfv ~/www/craigiswayne.github.com/dotfiles/.gitconfig ~/.gitconfig
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/git/.gitignore_global ~/;
+ln -sfv ~/www/craigiswayne.github.com/dotfiles/git/.gitconfig ~/.gitconfig
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.jscsrc ~/www
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.eslintrc.json ~/www
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/atom/config.cson ~/.atom/config.cson
@@ -58,10 +58,15 @@ mkdir -p ~/www/logs/;
 ln -sfv /usr/local/var/log/nginx ~/www/logs/nginx
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/errors/ ~/www/errors
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/servers /usr/local/etc/nginx/servers
+sudo ln -sfv ~/www/craigiswayne.github.com/dotfiles/nginx/nginx.crt /usr/local/etc/nginx/ssl/nginx.crt
 
 # TODO dynamically fetch this
 #ln -sfv $(find /usr/local/Cellar/nginx -iname "homebrew.mxcl.nginx.plist") ~/Library/LaunchAgents/;
 # TODO autostart nginx
+
+chsh -s /bin/zsh;
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh;
+
 
 sudo nginx;
 open "http://localhost/";
@@ -107,7 +112,7 @@ echo "Customizing PHPStorm...";
 echo "Terminal Customization...";
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.bash_profile ~/.bash_profile
 mkdir -p ~/.wp-cli/;
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/config.yml ~/.wp-cli/config.yml
+ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/wp/config.yml ~/.wp-cli/config.yml
 
 echo "Applying Terminal Theme...";
 open $(curl -fsSL https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal);
@@ -145,7 +150,7 @@ brew services restart php56;
 #git clone https://github.com/craigiswayne/cw-grunt-init-gruntfile.git ~/.grunt-init/cw-gruntfile
 
 
-sudo cp /usr/local/opt/nginx/*.plist /Library/LaunchDaemons
+sudo cp -fv $(locate nginx.plist) /Library/LaunchDaemons
 sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 
 # install sqlformat for atom beautifier
@@ -186,3 +191,18 @@ sudo cp myssl.key /etc/ssl/private/
 # for service worker testing
 # /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://local.prototype.io
 ###
+
+
+###
+# Configure the dynamic dns with dnsmasq
+# See here: http://asciithoughts.com/posts/2014/02/23/setting-up-a-wildcard-dns-domain-on-mac-os-x/
+###
+# Create the etc dir if needed
+mkdir -p /usr/local/etc
+echo "address=/.dev/127.0.0.1" > /usr/local/etc/dnsmasq.conf
+sudo cp -fv /usr/local/opt/dnsmasq/*.plist \
+  /Library/LaunchDaemons
+sudo launchctl load \
+  /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+sudo mkdir -p /etc/resolver
+sudo sh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'

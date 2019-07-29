@@ -1,11 +1,10 @@
+osfxfuse
 java
 google-chrome
-google-drive
 google-photos-backup-and-sync
 atom
 phpstorm
 transmission
-kodi
 spectacle
 vlc
 firefox
@@ -15,3 +14,5 @@ virtualbox
 genymotion
 filezilla
 remote-play
+caskroom/versions/java8
+visual-studio-code

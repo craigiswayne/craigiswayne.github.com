@@ -3,16 +3,18 @@
     general:
       _analyticsUserId: "01dc9ff5-f159-4e7b-b332-ed306cfb8fae"
   core:
+    projectHome: "~/www"
     telemetryConsent: "limited"
     warnOnLargeFileLimit: 2
   editor:
-    fontSize: 12
+    fontSize: 13
     softWrap: false
   "exception-reporting":
     userId: "46e679f8-da8f-43b8-aadf-84526e6e1f48"
-  "linter-ui-default":
-    panelHeight: 69
+  "linter-ui-default": {}
   "tree-view":
     hideVcsIgnoredFiles: true
+  wakatime:
+    apikey: "Saved in your ~/.wakatime.cfg file"
   welcome:
     showOnStartup: false
