@@ -216,8 +216,8 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-feed (~> 0.6)
-  jekyll-theme-minimal
+  minima (~> 2.0)
   tzinfo-data
 
 BUNDLED WITH
-   1.16.0
+   2.0.2
