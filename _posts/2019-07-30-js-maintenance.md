@@ -17,8 +17,14 @@ tsconfig.json changes
 
 This above snippet will prevent the use of unused variables, libraries and parameters
 
+<br/>
+
+---
+
+<br/>
+
 ## DotNet Angular Lint intergration
-To maintain coding standards for everyone, you can integrate npm lint tests in your pipeline directly after dotnet publishes its dll's
+To maintain coding standards for everyone, you can integrate `npm lint` tests so that when your dotnet project publishes, an `npm lint` is run
 
 in your `*.csproj` file
 
