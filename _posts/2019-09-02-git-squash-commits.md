@@ -15,3 +15,6 @@ Squash all commits **AFTER** `$commitHash` till now
 ```
 git rebase --interactive $commitHash
 ```
+
+### References:
+1. https://www.internalpointers.com/post/squash-commits-into-one-git
