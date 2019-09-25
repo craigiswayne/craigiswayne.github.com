@@ -1,3 +1,6 @@
+## Preview
+Test your site locally by running the command below
+
 ```
 bundle exec jekyll serve
 ```

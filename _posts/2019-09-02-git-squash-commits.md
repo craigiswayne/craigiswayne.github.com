@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Git Squash Commits"
+date:   2019-09-02
+categories: git
+---
+
 ## Steps:
 1. Choose starting commit / the number of commits you want to combine
 2. `git rebase --interative $valueFromAbove`
