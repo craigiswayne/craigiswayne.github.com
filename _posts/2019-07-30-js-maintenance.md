@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "Javascript Maintenance"
+date:   2019-07-30
+categories: javascript maintenance housekeeping
+---
+
+
 see: https://gist.github.com/craigiswayne/62ec315e91a885417d87a4801d8c705e
 
 Managing undocumented and convoluted front-end angular applications is a nightmare as many of you know...
