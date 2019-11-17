@@ -8,7 +8,7 @@ tags: formgroup formcontrol validation
 
 Barebones setup of angular reactive forms with form groups, form controls and validation
 
-### app.component.html
+### custom.component.html
 ```
 
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
@@ -25,7 +25,7 @@ Barebones setup of angular reactive forms with form groups, form controls and va
 </form>
 ```
 
-### app.component.ts
+### custom.component.ts
 ```
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -42,14 +42,54 @@ onSubmit(){
 }
 ```
 
-### app.module.ts
+### custom.module.ts
 ```
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgModule } from '@angular/core';
 
 @NgModule({
-   imports: [
+  declarations: [],
+  imports: [
     ReactiveFormsModule
-   ]
-});
+  ],
+  providers: [],
+  bootstrap: []
+})
+export class MyFormsModule { }
+```
+
+### app.module.ts
+```
+import { CustomModule } from './custom/custom.module'
+
+@NgModule({
+  imports: [
+    MyFormsModule
+  ]
+})
+```
+
+### CLI
+```
+ng add @angular/material
+```
+
+### custom.module.ts
+```
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material';
+
+@NgModule({
+  imports: [
+    MatFormFieldModule,
+    MatInputModule
+  ]
+})
+```
+
+### custom.component.html
+```
+<mat-form-field>
+  <input matInput placeholder="First Name" formControlName="firstName">
+</mat-form-field>
 ```
