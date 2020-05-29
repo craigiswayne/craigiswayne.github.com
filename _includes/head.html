@@ -6,8 +6,7 @@
   <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
   <meta name="author" content="{{site.author}}">
-  <!-- TODO FIX THIS -->
-  <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT">
+  <meta http-equiv="expires" content="Sun, 01 Jan 2020 00:00:00 GMT">
 
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
@@ -43,8 +42,7 @@
   {% comment %}
     Stylesheets
   {% endcomment %}
-  <!-- TODO: COMBINE STYLESHEETS FOR PRODUCTION -->
-  <!-- TODO: MINIFY STYLESHEETS FOR PRODUCTION -->
+
   <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli:400,400i,800,800i">
