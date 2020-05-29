@@ -1,0 +1,114 @@
+{
+  "siteURL": "https://craigiswayne.com",
+  "firstName": "Craig",
+  "lastName": "Wayne",
+  "pictureUrl": "/img/avatar.svg",
+  "cellphoneNumber": "0716865307",
+  "linkedinID": "craigiswayne",
+  "twitterUsername": "craigiswayne",
+  "summary": "Front End Developer whose passion lies in creating seamless and rich experiences for users. Iteratively building MVPs whilst leveraging the most suitable technologies have ensured that I am able to deliver sustainable and quality solutions.",
+  "theme_color": "#086375",
+  "social": [
+    {
+      "url": "https://linkedin.com/in/craigiswayne/",
+      "icon": "linkedin-in"
+    },
+    {
+      "url": "https://gitlab.com/craigiswayne",
+      "icon": "gitlab"
+    },
+    {
+      "url": "https://codepen.io/craigiswayne",
+      "icon": "codepen"
+    },
+    {
+      "url": "https://stackoverflow.com/users/1654250/craig-wayne",
+      "icon": "stack-overflow"
+    }
+  ],
+
+  "experience": [
+    {
+      "title": "Senior WordPress Developer",
+      "employer": "24.com",
+      "startDate": "Feb 2017",
+      "description": "After proving himself as a solid and reliable WordPress developer, Craig had been giving the role of senior developer which encompassed more of the same with additional mentorship, leadership and greater responsibility of the sites in which his team had developed. This role not only expected that a developer had an expert understanding of WordPress but it also required Leadership and Direction. Examining new ways to engage clients, upskilling team members, hosting tech talks.<br><br>1. PHP<br>2. WordPress<br>3. Custom Built WordPress Themes<br>4. Custom Built WordPress Plugins<br>5. Custom Built Addons for WordPress Plugins<br>6. Laravel<br>7. CSS<br>8. JavaScript<br>9. Composer<br>10. Vue.js<br>11. React<br>12. Interacting with RESTful APIs<br>13. Git<br>14. Travis<br>15. Jenkins<br>16. SCRUM and Agile"
+    },
+    {
+      "title": "Junior Wordpress Developer",
+      "employer": "24.com",
+      "startDate": "Feb 2016",
+      "endDate": "Jun 2017",
+      "description": "Having become a proven frontend developer, Craig pursued his career in PHP in which he was tasked with updating, maintaining and creating new WordPress sites for the various brands within Media24<br><br>This role required frontend feature updates and bug fixes to existing web mediums under the media24 umbrella.<br><br>1. PHP<br>2. WordPress<br>3. Laravel<br>4. CSS<br>5. JavaScript<br>6. Composer<br>7. Vue.js<br>8. React<br>9. Interacting with RESTful APIs<br>10. Git<br>11. Travis<br>12. Jenkins<br>13. SCRUM and Agile"
+    },
+    {
+      "title": "Frontend Developer",
+      "employer": "24.com",
+      "startDate": "Mar 2015",
+      "endDate": "Feb 2016",
+      "description": "This role required frontend feature updates and bug fixes to existing web mediums under the media24 umbrella.<br><br>Technologies and methodologies used were:<br>1. CSS<br>2. JavaScript<br>3. Basic understanding of C# and .Net<br>4. Interacting with RESTful APIs<br>5. Git and SVN<br>6. SCRUM and Agile"
+    },
+    {
+      "title": "Junior Web Developer",
+      "employer": "The BlueBox",
+      "startDate": "Aug 2013",
+      "endDate": "Oct 2014",
+      "description": "Maintenance and support for Supply Chain Management Companies and Media Houses. This role required a basic knowledge of PHP, Frontend (CSS and JavaScript) and competency with external APIs."
+    }
+  ],
+
+  "education": [
+    {
+      "startDate": "2007",
+      "endDate": "2012",
+      "institute": "University of KwaZulu-Natal",
+      "qualification": "Bachelor of Commerce",
+      "major": "Information Systems and Technology"
+    },
+    {
+      "startDate": "1994",
+      "endDate": "2005",
+      "institute": "St. Henry's Marist Brothers College",
+      "qualification": "Matric"
+    }
+  ],
+
+  "skills": {
+    "PROGRAMMING LANGUAGES & TOOLS": [
+      "PHP",
+      "HTML5",
+      "CSS3",
+      "JS",
+      "Angular",
+      "VueJs",
+      "SASS",
+      "LESS",
+      "WordPress",
+      "GIT",
+      "GitHub",
+      "GitLab",
+      "Node JS",
+      "Gulp",
+      "Grunt",
+      "npm",
+      "Docker",
+      "Jenkins",
+      "Markdown"
+    ],
+    "WORKFLOW": [
+      "Mobile-First, Responsive Design",
+      "Feature Phone Design",
+      "Cross Browser Testing & Debugging",
+      "Cross Functional Teams",
+      "Agile Development & Scrum",
+      "Continuous Integration & Development"
+    ]
+  },
+
+  "interests": [
+    "When i'm not developing, I'm either in a silent disco at home or watching football... most likely watching football. In the off season I try to find new anime to watch or a series on netflix that's thought provoking... However watching Vikings conquer other lands is entertaining too!",
+    "When Cape Town's wind behaves, I will venture out beyond my driveway to a mountain that needs hiking, a beach that needs swimming or a travelled area that needs sightseeing"
+  ],
+
+  "awards": null
+}
