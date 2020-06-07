@@ -16,13 +16,18 @@
 title: Craig (is) Wayne
 author: Craig Wayne
 email: craigiswayne@gmail.com
-logo: /assets/images/avatar.svg
+logo: /assets/images/avatar.png
 description: >- # this means to ignore newlines until "baseurl:"
   A little github pages experiment
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: craigiswayne
-github_username:  craigiswayne
+twitter:
+  username: craigiswayne
+github:
+  username:  craigiswayne
+wakatime:
+  username: craigiswayne
+  shareID: 259d6e52-3683-4102-a313-3a777ccc3614
 
 # Build settings
 markdown: kramdown
@@ -33,7 +38,7 @@ plugins:
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
+exclude:
 #   - Gemfile
 #   - Gemfile.lock
 #   - node_modules
@@ -41,3 +46,10 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+  - .idea/
+  - dotfiles/
+  - src/
+  - package.json
+  - package-lock.json
+  - README.md
+  - LICENSE

@@ -6,10 +6,9 @@
   "scripts": {
     "start": "bundle exec jekyll serve",
     "postinstall": "copy-files-from-to && npm run build",
-    "build": "npm run minify-scripts",
-    "minify-assets": "",
-    "lint": "",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-sass": "node-sass src/styles -o dist/styles --output-style compressed",
+    "lint": "stylelint '**/*.scss'",
+    "test": "npm run lint",
     "lighthouse-ci": "npm run 'test-lighthouse-mobile' http://localhost:4000 && npm run 'test-lighthouse-desktop' http://localhost:4000",
     "lighthouse": "npm run 'verbose-test-lighthouse-mobile' http://localhost:4000 && npm run 'verbose-test-lighthouse-desktop' http://localhost:4000",
     "test-lighthouse-mobile": "lighthouse-ci $1 --budget-path=budget.json --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors' --score=75 --performance=75 --accessibility=75 --best-practices=75 --seo=75 --pwa=75",
@@ -42,6 +41,9 @@
     "jquery": "^3.5.0",
     "jquery-easing": "0.0.1",
     "lighthouse-ci": "^1.10.0",
+    "node-sass": "^4.14.1",
+    "stylelint": "^13.6.0",
+    "stylelint-config-standard": "^20.0.0",
     "vue": "^2.6.11",
     "vue-chartkick": "^0.6.0"
   },

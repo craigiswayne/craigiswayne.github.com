@@ -1,6 +1,4 @@
-import { WakaTime } from '/assets/scripts/wakatime.js'
-
-Resume.WakaTime = WakaTime;
+Resume.WakaTime = WakaTime; // This value comes from a the wakatime.html file
 
 Resume.vm = new Vue({
   el: '#latest-9-languages',

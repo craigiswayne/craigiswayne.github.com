@@ -7,7 +7,9 @@ categories: npm scripts maintenance
 
 Managing and maintaining stylesheets can become daunting especially for large files. 
 
-The following is a script i use to lint my `*.scss` files
+The following is a script i use to lint my stylesheets.
+
+This helps maintain an uniform coding standard across my stylesheets.
 
 
 ### Installation
@@ -51,10 +53,10 @@ This text basically states that your own rules should inherit from the `stylelin
 
 Everything you've read up until here is taken from [Stylelint GitHub Documentation](https://github.com/stylelint/stylelint/blob/HEAD/docs/user-guide/get-started.md).
 
-At this point we can run the following script to run lint checks on our `*.scss` files
+At this point we can run the following script to run lint checks on our `*.css` files
 
 ```
-node_modules/.bin/stylelint "**/*.scss"
+node_modules/.bin/stylelint "**/*.css"
 ```
 
 But that's not really ideal... 
@@ -67,7 +69,7 @@ In your `package.json`, add this new config to the `scripts`
 
 ```
 "scripts": {
-    "lint": "stylelint '**/*.scss'"
+    "lint": "stylelint '**/*.css'"
 }
 ```
 

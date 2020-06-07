@@ -1,0 +1,8 @@
+{% comment %}
+    Twitter Meta
+    see: https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup
+{% endcomment %}<meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+<meta name="twitter:description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+<meta name="twitter:image" content="{{site.logo}}"> {% comment %} the image comes from the og:image tag {% endcomment %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="{{site.twitter.username}}">

@@ -265,12 +265,6 @@ layout: default
       </ul>
     </div>
   </section>
-  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="latest-9-languages">
-    <div class="my-auto">
-      <h2 class="mb-5">Recent Languages</h2>
-      <bar-chart :data="WakaTimeLanguages" :colors="WakaTimeLanguagesColors" :messages="{empty: 'Loading...'}" :download="true" download="Craig-languages"></bar-chart>
-      <div class="subheading mb-3">Powered by <a href="https://wakatime.com/@craigiswayne">wakatime</a></div>
-    </div>
-  </section>
+  {% include wakatime.html %}
 </div>
 <script type="module" src="/assets/scripts/project.js"></script>
