@@ -1,34 +1,18 @@
 <footer class="py-4 text-center">
     <h2 class="footer-heading">{{ site.title | escape }}</h2>
+    <p>{{ site.description | escape }}</p>
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-            {% if site.contact.email %}
-            <li><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></li>
-            {% endif %}
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          {% if site.social.github.username %}
-          <li>
-            {% include icon-github.html username=site.social.github.username %}
-          </li>
-          {% endif %}
-
-          {% if site.social.twitter.username %}
-          <li>
-            {% include icon-twitter.html username=site.social.twitter.username %}
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description | escape }}</p>
-      </div>
+    <div style="justify-content: space-evenly; display:flex">
+      {% if site.social.github.username %}
+        <a href="https://github.com/{{site.social.github.username}}/" data-toggle="tooltip" title="GitHub Profile" aria-label="GitHub Profile">
+            <i class="fab fa-github"></i><span>&nbsp;{{site.social.github.username}}</span>
+        </a>
+      {% endif %}
+      {% if site.social.twitter.username %}
+        <a href="https://twitter.com/{{site.social.twitter.username}}/" data-toggle="tooltip" title="Twitter Profile" aria-label="Twitter Profile">
+            <i class="fab fa-twitter"></i><span>&nbsp;{{site.social.twitter.username}}</span>
+        </a>
+      {% endif %}
     </div>
 </footer>
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
