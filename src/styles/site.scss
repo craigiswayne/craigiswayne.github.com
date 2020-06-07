@@ -7,10 +7,8 @@ body {
   font-family: "Muli", Tahoma, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   padding-top: 56px;
   color: #868e96;
-}
 
-@media (min-width: 992px) {
-  body {
+  @media (min-width: 992px) {
     padding-top: 0;
     padding-left: 17rem;
   }
@@ -53,14 +51,16 @@ p.lead {
   font-size: 1.5rem;
 }
 
-#sideNav .navbar-nav .nav-item .nav-link {
-  font-weight: 800;
-  letter-spacing: 0.05rem;
-  text-transform: uppercase;
-}
+#sideNav {
+  .navbar-nav .nav-item .nav-link {
+    font-weight: 800;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+  }
 
-#sideNav .navbar-toggler:focus {
-  outline-color: #0da0bd;
+  .navbar-toggler:focus {
+    outline-color: #0da0bd;
+  }
 }
 
 @media (min-width: 992px) {
@@ -130,32 +130,26 @@ section.resume-section {
   padding-bottom: 5rem !important;
   max-width: 75rem;
   border-bottom: 1px solid #e5e5e5;
-}
 
-section.resume-section .resume-item .resume-date {
-  min-width: 0;
-}
-
-@media (max-width: 991px) {
-  section.resume-section {
+  @media (max-width: 991px) {
     min-height: calc(100vh - 56px);
   }
-}
 
-@media (min-width: 768px) {
-  section.resume-section {
-    min-height: 100vh;
-  }
-
-  section.resume-section .resume-item .resume-date {
-    min-width: 18rem;
-  }
-}
-
-@media (min-width: 992px) {
-  section.resume-section {
+  @media (min-width: 992px) {
     padding-top: 1rem !important;
     padding-bottom: 3rem !important;
+  }
+
+  @media (min-width: 768px) {
+    min-height: 100vh;
+
+    .resume-item .resume-date {
+      min-width: 18rem;
+    }
+  }
+
+  .resume-item .resume-date {
+    min-width: 0;
   }
 }
 
@@ -192,24 +186,24 @@ a {
   font-size: 1.5rem;
   line-height: 3.5rem;
   margin-right: 1rem;
-}
 
-.social-icons a:last-child {
-  margin-right: 0;
-}
+  &:last-child {
+    margin-right: 0;
+  }
 
-.social-icons a:hover {
-  background-color: $primaryColor;
-}
+  &:hover {
+    background-color: $primaryColor;
+  }
 
-.social-icons a i {
-  line-height: unset;
+  i {
+    line-height: unset;
+  }
 }
 
 .dev-icons {
   font-size: 3rem;
-}
 
-.dev-icons .list-inline-item i:hover {
-  color: $primaryColor;
+  .list-inline-item i:hover {
+    color: $primaryColor;
+  }
 }

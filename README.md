@@ -5,8 +5,8 @@ A Resume Template based of the [Resume Bootstrap Template](https://startbootstra
 
 | **DEVICE**    | **PERFORMANCE**   | **ACCESSIBILITY** | **BEST PRACTICES**    | **SEO**   | **PWA**   |
 | ------------- | ----------------- | ----------------- | --------------------- | --------- | --------- |
-| Desktop       | 20                | 94                | 92                    | 90        | n/a       |
-| Mobile        | 48                | 94                | 92                    | 87        | n/a       |
+| Desktop       | 21                | 94                | 100                   | 90        | n/a       |
+| Mobile        | 45                | 94                | 100                   | 88        | n/a       |
 
 ## Getting Started
 Install dependencies and start serving your site

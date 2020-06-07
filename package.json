@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "bundle exec jekyll serve",
-    "postinstall": "copy-files-from-to && npm run build",
+    "postinstall": "npm run build",
+    "build": "copy-files-from-to --when-file-exists overwrite",
     "compile-sass": "node-sass src/styles -o dist/styles --output-style compressed",
+    "watch-sass": "npm run compile-sass && node-sass --watch src/styles -o dist/styles",
     "lint": "stylelint '**/*.scss'",
     "test": "npm run lint && npm run test-lighthouse && npm run test-lighthouse-desktop",
     "test-lighthouse": "lighthouse $SITE_URL --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors'",
-    "test-lighthouse-desktop" : "npm run test-lighthouse -- --emulated-form-factor=desktop"
+    "test-lighthouse-desktop": "npm run test-lighthouse -- --emulated-form-factor=desktop"
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,7 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "copy-files-from-to": "^2.1.0",
-    "jquery": "^3.5.0",
+    "jquery": "^3.5.1",
     "jquery-easing": "0.0.1",
     "lighthouse": "^6.0.0",
     "node-sass": "^4.14.1",
