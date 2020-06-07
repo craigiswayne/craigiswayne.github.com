@@ -7,7 +7,7 @@
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
   <meta name="author" content="{{site.author}}">
   <meta http-equiv="expires" content="Sun, 01 Jan 2020 00:00:00 GMT">
-  {% if jekyl.environment != 'production' %}
+  {% if jekyll.environment != 'production' %}
   <meta http-equiv="pragma" content="no-cache" />
   {% endif %}
 

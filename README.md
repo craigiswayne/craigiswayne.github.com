@@ -36,6 +36,18 @@ Override to your hearts content.
 > See here for the official docs on how to override templates
 > https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
+### Debugging
+you can dump the value of any variable using the following syntax
+
+```
+{{ site | inspect }}
+```
+
+or alternatively print out the objects value with
+
+```
+{{ jekyll | jsonify }}
+```
 
 ### References:
 1. https://help.github.com/en/articles/setting-up-your-github-pages-site-locally-with-jekyll
