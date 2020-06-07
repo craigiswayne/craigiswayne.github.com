@@ -9,8 +9,8 @@
     "compile-sass": "node-sass src/styles -o dist/styles --output-style compressed",
     "lint": "stylelint '**/*.scss'",
     "test": "npm run lint && npm run test-lighthouse && npm run test-lighthouse-desktop",
-    "test-lighthouse": "lighthouse $1 --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors'",
-    "test-lighthouse-desktop" : "npm run test-lighthouse -- $1 --emulated-form-factor=desktop"
+    "test-lighthouse": "lighthouse $SITE_URL --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors'",
+    "test-lighthouse-desktop" : "npm run test-lighthouse -- --emulated-form-factor=desktop"
   },
   "repository": {
     "type": "git",

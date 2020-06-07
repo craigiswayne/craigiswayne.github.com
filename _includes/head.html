@@ -6,9 +6,11 @@
   <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
   <meta name="author" content="{{site.author}}">
-  <meta http-equiv="expires" content="Sun, 01 Jan 2020 00:00:00 GMT">
+
   {% if jekyll.environment != 'production' %}
   <meta http-equiv="pragma" content="no-cache" />
+  {% else %}
+  <!--<meta http-equiv="expires" content="Sun, 01 Jan 2021 00:00:00 GMT" />-->
   {% endif %}
 
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
@@ -17,10 +19,10 @@
 
   {% comment %}Cosmetic Meta{% endcomment %}
   <meta name="theme-color" content="#086375">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
-  <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32x32.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png" />
+  <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32x32.png" />
 
   {% include meta/og.html %}
   {% include meta/twitter.html %}

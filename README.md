@@ -5,7 +5,7 @@ A Resume Template based of the [Resume Bootstrap Template](https://startbootstra
 
 | **DEVICE**    | **PERFORMANCE**   | **ACCESSIBILITY** | **BEST PRACTICES**    | **SEO**   | **PWA**   |
 | ------------- | ----------------- | ----------------- | --------------------- | --------- | --------- |
-| Desktop       | 25                | 94                | 85                    | 90        | n/a       |
+| Desktop       | 27                | 94                | 85                    | 90        | n/a       |
 | Mobile        | 34                | 94                | 85                    | 87        | n/a       |
 
 ## Getting Started
@@ -83,3 +83,4 @@ or alternatively print out the objects value with
 * validate og tags here
 * percy.io for visual testing?
 * bring back addthis see footer.html
+* make use of env config files to set the siteurl
