@@ -4,13 +4,6 @@
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
-          <li>
-            {% if site.author %}
-              {{ site.author | escape }}
-            {% else %}
-              {{ site.title | escape }}
-            {% endif %}
-            </li>
             {% if site.email %}
             <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
             {% endif %}
@@ -19,15 +12,15 @@
 
       <div class="footer-col footer-col-2">
         <ul class="social-media-list">
-          {% if site.github.username %}
+          {% if site.social.github.username %}
           <li>
-            {% include icon-github.html username=site.github.username %}
+            {% include icon-github.html username=site.social.github.username %}
           </li>
           {% endif %}
 
-          {% if site.twitter.username %}
+          {% if site.social.twitter.username %}
           <li>
-            {% include icon-twitter.html username=site.twitter.username %}
+            {% include icon-twitter.html username=site.social.twitter.username %}
           </li>
           {% endif %}
         </ul>

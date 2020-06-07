@@ -8,13 +8,9 @@
     "postinstall": "copy-files-from-to && npm run build",
     "compile-sass": "node-sass src/styles -o dist/styles --output-style compressed",
     "lint": "stylelint '**/*.scss'",
-    "test": "npm run lint",
-    "lighthouse-ci": "npm run 'test-lighthouse-mobile' http://localhost:4000 && npm run 'test-lighthouse-desktop' http://localhost:4000",
-    "lighthouse": "npm run 'verbose-test-lighthouse-mobile' http://localhost:4000 && npm run 'verbose-test-lighthouse-desktop' http://localhost:4000",
-    "test-lighthouse-mobile": "lighthouse-ci $1 --budget-path=budget.json --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors' --score=75 --performance=75 --accessibility=75 --best-practices=75 --seo=75 --pwa=75",
-    "test-lighthouse-desktop": "lighthouse-ci $1 --budget-path=budget.json --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors' --score=75 --performance=75 --accessibility=75 --best-practices=75 --seo=75 --pwa=75 --emulated-form-factor=desktop",
-    "verbose-test-lighthouse-mobile": "lighthouse $1 --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors'",
-    "verbose-test-lighthouse-desktop": "lighthouse $1 --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors' --emulated-form-factor=desktop"
+    "test": "npm run lint && npm run test-lighthouse && npm run test-lighthouse-desktop",
+    "test-lighthouse": "lighthouse $1 --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors'",
+    "test-lighthouse-desktop" : "npm run test-lighthouse -- $1 --emulated-form-factor=desktop"
   },
   "repository": {
     "type": "git",
@@ -40,7 +36,7 @@
     "copy-files-from-to": "^2.1.0",
     "jquery": "^3.5.0",
     "jquery-easing": "0.0.1",
-    "lighthouse-ci": "^1.10.0",
+    "lighthouse": "^6.0.0",
     "node-sass": "^4.14.1",
     "stylelint": "^13.6.0",
     "stylelint-config-standard": "^20.0.0",
@@ -48,10 +44,6 @@
     "vue-chartkick": "^0.6.0"
   },
   "copyFiles": [
-    {
-      "from": "node_modules/bootstrap/dist/css/*",
-      "to": "assets/vendor/bootstrap/css/"
-    },
     {
       "from": "node_modules/bootstrap/dist/js/*",
       "to": "assets/vendor/bootstrap/js/"
@@ -84,5 +76,6 @@
       "from": "node_modules/jquery-easing/*.js",
       "to": "assets/vendor/jquery-easing/"
     }
-  ]
+  ],
+  "dependencies": {}
 }

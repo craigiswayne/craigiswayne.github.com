@@ -1,11 +1,7 @@
 {
+  "name": "Craig Wayne Resume",
+  "background_color": "Craig Wayne Resume",
   "siteURL": "https://craigiswayne.com",
-  "firstName": "Craig",
-  "lastName": "Wayne",
-  "pictureUrl": "/img/avatar.svg",
-  "cellphoneNumber": "0716865307",
-  "linkedinID": "craigiswayne",
-  "twitterUsername": "craigiswayne",
   "summary": "Front End Developer whose passion lies in creating seamless and rich experiences for users. Iteratively building MVPs whilst leveraging the most suitable technologies have ensured that I am able to deliver sustainable and quality solutions.",
   "theme_color": "#086375",
   "social": [
@@ -26,7 +22,6 @@
       "icon": "stack-overflow"
     }
   ],
-
   "experience": [
     {
       "title": "Senior WordPress Developer",
@@ -56,7 +51,6 @@
       "description": "Maintenance and support for Supply Chain Management Companies and Media Houses. This role required a basic knowledge of PHP, Frontend (CSS and JavaScript) and competency with external APIs."
     }
   ],
-
   "education": [
     {
       "startDate": "2007",
@@ -72,7 +66,6 @@
       "qualification": "Matric"
     }
   ],
-
   "skills": {
     "PROGRAMMING LANGUAGES & TOOLS": [
       "PHP",
@@ -104,11 +97,9 @@
       "Continuous Integration & Development"
     ]
   },
-
   "interests": [
     "When i'm not developing, I'm either in a silent disco at home or watching football... most likely watching football. In the off season I try to find new anime to watch or a series on netflix that's thought provoking... However watching Vikings conquer other lands is entertaining too!",
     "When Cape Town's wind behaves, I will venture out beyond my driveway to a mountain that needs hiking, a beach that needs swimming or a travelled area that needs sightseeing"
   ],
-
   "awards": null
 }

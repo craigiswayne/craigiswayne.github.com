@@ -5,24 +5,24 @@ layout: default
 <div class="container-fluid p-0">
   <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
     <div class="my-auto">
-      <h1 class="mb-0">Craig
-        <span class="text-primary">Wayne</span>
+      <h1 class="mb-0">{{ site.author | truncatewords: 1, ""}}
+        <span class="text-primary">{{ site.author | split: " " | last }}</span>
       </h1>
-      <div class="subheading mb-5"><a href="tel:0716865307">0716865307</a> · <a href="mailto:craigiswayne@gmail.com">craigiswayne@gmail.com</a></div>
+      <div class="subheading mb-5"><a href="tel:{{site.contact.mobile}}">{{site.contact.mobile}}</a> · <a href="mailto:{{site.contact.email}}">{{site.contact.email}}</a></div>
       <p class="lead mb-2">Front End Developer whose passion lies in creating seamless and rich experiences for users.</p>
       <p class="lead mb-5">Iteratively improving upon existing flows whilst leveraging the most suitable technologies have ensured that Craig is able to deliver sustainable and quality solutions.</p>
       <!-- TODO: include chart of pedantic, orangized, documenter - maybe a bar graph? maybe like an ash ketchum pokemon badge -->
       <div class="social-icons">
-        <a href="https://linkedin.com/in/craigiswayne/" class="mb-1" data-toggle="tooltip" title="linkedin-in">
+        <a href="https://linkedin.com/in/{{site.social.linkedin.username}}/" class="mb-1" data-toggle="tooltip" title="linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
-        <a href="https://gitlab.com/craigiswayne" class="mb-1" data-toggle="tooltip" title="gitlab">
+        <a href="https://gitlab.com/{{site.social.gitlab.username}}" class="mb-1" data-toggle="tooltip" title="gitlab">
           <i class="fab fa-gitlab"></i>
         </a>
-        <a href="https://codepen.io/craigiswayne" class="mb-1" data-toggle="tooltip" title="codepen">
+        <a href="https://codepen.io/{{site.social.codepen.username}}" class="mb-1" data-toggle="tooltip" title="codepen">
           <i class="fab fa-codepen"></i>
         </a>
-        <a href="https://stackoverflow.com/users/1654250/craig-wayne" class="mb-1" data-toggle="tooltip" title="stack-overflow">
+        <a href="https://stackoverflow.com/users/{{site.social.stackoverflow.userID}}" class="mb-1" data-toggle="tooltip" title="stack-overflow">
           <i class="fab fa-stack-overflow"></i>
         </a>
       </div>
@@ -32,7 +32,7 @@ layout: default
     <div class="my-auto">
       <h2 class="mb-5">
         experience
-        <div class="subheading" style="display: inline-block;font-size: 1.5rem;margin-left: 1em;font-style: italic;">...6 Years and counting...</div>
+        <div class="subheading" style="display: inline-block;font-size: 1.5rem;margin-left: 1em;font-style: italic;">...{{ 'now' | date: "%Y"  | minus: 2013 }} Years and counting...</div>
       </h2>
       <div class="resume-item d-flex flex-column flex-md-row mb-5">
         <div class="resume-content mr-auto">
@@ -107,7 +107,6 @@ layout: default
           <span class="text-primary">Aug 2013 - Oct 2014</span>
         </div>
       </div>
-
     </div>
   </section>
   <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
@@ -251,17 +250,12 @@ layout: default
       <h2 class="mb-5">Built With</h2>
       <div class="subheading mb-3">This resume was built with the following technologies...</div>
       <ul class="fa-ul mb-0">
-        <li><i class="fa-li fa fa-check text-primary"></i>HTML5</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>CSS3</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>JS</li>
+        <li><i class="fa-li fa fa-check text-primary"></i>Jekyll</li>
+        <li><i class="fa-li fa fa-check text-primary"></i>Liquid</li>
+        <li><i class="fa-li fa fa-check text-primary"></i>GitHub Pages</li>
         <li><i class="fa-li fa fa-check text-primary"></i>SASS</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>Grunt</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>GIT</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>Bootstrap 4</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>Twig</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>LinkedIN API</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>AddThis</li>
-        <li><i class="fa-li fa fa-check text-primary"></i>PHP</li>
+        <li><i class="fa-li fa fa-check text-primary"></i>VueJS</li>
+        <li><i class="fa-li fa fa-check text-primary"></i>Bootstrap</li>
       </ul>
     </div>
   </section>
