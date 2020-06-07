@@ -61,6 +61,7 @@ exclude:
   - .idea/
   - dotfiles/
   - src/
+  - budget.json
   - package.json
   - package-lock.json
   - README.md
