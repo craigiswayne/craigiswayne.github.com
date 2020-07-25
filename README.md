@@ -84,3 +84,7 @@ or alternatively print out the objects value with
 * percy.io for visual testing?
 * bring back addthis see footer.html
 * make use of env config files to set the siteurl
+* post about verified site owner: https://search.google.com/search-console
+* https://search.google.com/search-console/not-verified?original_url=/search-console/ownership&original_resource_id
+* CV Generation from the site
+* Available for hire badge

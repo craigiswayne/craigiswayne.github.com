@@ -3,7 +3,7 @@ author: Craig Wayne
 contact:
   mobile: +27716865307
   email: craigiswayne@gmail.com
-logo: /assets/images/avatar.png
+logo: /assets/images/avatar-compressed.png
 description: >- # this means to ignore newlines until "baseurl:"
   A little github pages experiment
 baseurl: "" # the subpath of your site, e.g. /blog
