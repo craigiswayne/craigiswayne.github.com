@@ -1,21 +1,44 @@
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
-  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
+  <meta name="author" content="{{site.author}}" />
+  <meta name="theme-color" content="#086375" />
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
-  <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32x32.png"/>
+  {% if jekyll.environment != 'production' %}
+  <meta http-equiv="pragma" content="no-cache" />
+  {% else %}
+  <meta http-equiv="expires" content="Sun, 01 Jan 2021 00:00:00 GMT" />
+  {% endif %}
 
-  <link rel="manifest" href="/assets/site.webmanifest">
-
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
+  <link rel="manifest" href="/manifest.json">
+
+  {% comment %}Cosmetic Meta{% endcomment %}
+  {% include head/favicons.html %}
+
+  {% include head/meta/og.html %}
+  {% include head/meta/twitter.html %}
+
+  {% comment %}Stylesheets{% endcomment %}
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" />
+  <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/dist/styles/site.css" />
+
+
+
+  {% comment %}
+    Scripts
+  {% endcomment %}
+  <script type="text/javascript" src="/assets/vendor/vue/vue.min.js"></script>
+  <script type="text/javascript" src="/assets/vendor/chart.js/Chart.bundle.min.js"></script>
+  <script type="text/javascript" src="/assets/vendor/vue-chartkick/vue-chartkick.min.js"></script>
+
 
   {% if jekyll.environment == 'production' and site.google_analytics %}
   {% include google-analytics.html %}

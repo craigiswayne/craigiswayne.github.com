@@ -5,7 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "bundle exec jekyll serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "npm run build",
+    "build": "copy-files-from-to --when-file-exists overwrite",
+    "compile-sass": "node-sass src/styles -o dist/styles --output-style compressed",
+    "watch-sass": "npm run compile-sass && node-sass --watch src/styles -o dist/styles",
+    "lint:styles": "stylelint '**/*.scss'",
+    "test": "npm run lint && npm run test-lighthouse && npm run test-lighthouse-desktop",
+    "test-lighthouse": "lighthouse $SITE_URL --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors'",
+    "test-lighthouse-desktop": "npm run test-lighthouse -- --emulated-form-factor=desktop"
   },
   "repository": {
     "type": "git",
@@ -14,12 +21,63 @@
   "keywords": [
     "jekyll",
     "github",
-    "pages"
+    "pages",
+    "markdown",
+    "resume"
   ],
   "author": "Craig Wayne",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/craigiswayne/craigiswayne.github.com/issues"
   },
-  "homepage": "https://github.com/craigiswayne/craigiswayne.github.com#readme"
+  "homepage": "https://github.com/craigiswayne/craigiswayne.github.com#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
+    "copy-files-from-to": "^2.1.0",
+    "jquery": "^3.5.1",
+    "jquery-easing": "0.0.1",
+    "lighthouse": "^6.0.0",
+    "node-sass": "^4.14.1",
+    "stylelint": "^13.6.0",
+    "stylelint-config-standard": "^20.0.0",
+    "vue": "^2.6.11",
+    "vue-chartkick": "^0.6.0"
+  },
+  "copyFiles": [
+    {
+      "from": "node_modules/bootstrap/dist/js/*",
+      "to": "assets/vendor/bootstrap/js/"
+    },
+    {
+      "from": "node_modules/@fortawesome/fontawesome-free/css/*",
+      "to": "assets/vendor/fontawesome-free/css/"
+    },
+    {
+      "from": "node_modules/@fortawesome/fontawesome-free/webfonts/*",
+      "to": "assets/vendor/fontawesome-free/webfonts/"
+    },
+    {
+      "from": "node_modules/vue/dist/*.js",
+      "to": "assets/vendor/vue/"
+    },
+    {
+      "from": "node_modules/chart.js/dist/*",
+      "to": "assets/vendor/chart.js/"
+    },
+    {
+      "from": "node_modules/vue-chartkick/dist/*",
+      "to": "assets/vendor/vue-chartkick/"
+    },
+    {
+      "from": "node_modules/jquery/dist/*",
+      "to": "assets/vendor/jquery/"
+    },
+    {
+      "from": "node_modules/jquery-easing/*.js",
+      "to": "assets/vendor/jquery-easing/"
+    }
+  ],
+  "dependencies": {}
 }
