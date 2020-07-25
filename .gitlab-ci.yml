@@ -1,12 +1,18 @@
-# Using this convenient image which uses Node.js as a base
-image: alekzonder/puppeteer:latest
-# This folder is cached between builds for faster runs
-# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
-cache:
-  paths:
-  - node_modules/
-# The pipeline which should run our unit tests on every commit
-unit_tests:
+stages:
+  - lint
+  - build
+  - test
+
+default:
+  image: node:latest
   script:
-    - npm install
-    - npm run ci-test
+    - npm ci
+  cache:
+    paths: [node_modules/]
+
+lint:styles:
+  stage: lint
+  only:
+    - merge_requests
+  script:
+    - npm run lint:styles
