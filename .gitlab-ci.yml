@@ -1,13 +1,18 @@
-image: alekzonder/puppeteer:latest
+stages:
+  - lint
+  - build
+  - test
 
-cache:
-  paths:
-  - node_modules/
+default:
+  image: node:latest
+  script:
+    - npm ci
+  cache:
+    paths: [node_modules/]
 
-lint:
-  stage: test
+lint:styles:
+  stage: lint
   only:
     - merge_requests
   script:
-    - npm ci
-    - npm lint
+    - npm run lint:styles
