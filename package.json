@@ -7,10 +7,11 @@
     "start": "bundle exec jekyll serve",
     "postinstall": "npm run build",
     "build": "copy-files-from-to --when-file-exists overwrite",
-    "compile-sass": "node-sass src/styles -o dist/styles --output-style compressed",
-    "watch-sass": "npm run compile-sass && node-sass --watch src/styles -o dist/styles",
-    "lint:styles": "stylelint '**/*.scss'",
-    "test": "npm run lint && npm run test-lighthouse && npm run test-lighthouse-desktop",
+    "compile:sass": "node-sass src/styles -o dist/styles --source-comments=false --source-map=true --output-style=compressed --error-bell",
+    "watch:sass": "npm run compile:sass -- --watch",
+    "lint": "npm run lint:styles'",
+    "lint:styles": "stylelint 'src/styles/*.scss'",
+    "test": "npm run test-lighthouse && npm run test-lighthouse-desktop",
     "test-lighthouse": "lighthouse $SITE_URL --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors'",
     "test-lighthouse-desktop": "npm run test-lighthouse -- --emulated-form-factor=desktop"
   },
@@ -49,6 +50,10 @@
     {
       "from": "node_modules/bootstrap/dist/js/*",
       "to": "assets/vendor/bootstrap/js/"
+    },
+    {
+      "from": "node_modules/bootstrap/dist/css/*",
+      "to": "assets/vendor/bootstrap/css/"
     },
     {
       "from": "node_modules/@fortawesome/fontawesome-free/css/*",
