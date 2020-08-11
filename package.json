@@ -52,6 +52,10 @@
       "to": "assets/vendor/bootstrap/js/"
     },
     {
+      "from": "node_modules/bootstrap/dist/css/*",
+      "to": "assets/vendor/bootstrap/css/"
+    },
+    {
       "from": "node_modules/@fortawesome/fontawesome-free/css/*",
       "to": "assets/vendor/fontawesome-free/css/"
     },
