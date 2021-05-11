@@ -13,7 +13,18 @@ Install dependencies and start serving your site
 
 ```
 npm ci
+bundle install
 npm start
+```
+
+*MAKE SURE YOU HAVE THE BUNDLER GEM INSTALLED*
+```bash
+echo $GEM_HOME;
+# this should be in your user profile home folder
+# fix it by
+export GEM_HOME="$HOME/.gem";
+# add this to your ~/.bash_profile or ~/.zshrc
+gem install bundler:2.1.4
 ```
 
 ## Changes
