@@ -23,6 +23,7 @@ ngAfterContentInit()
 ngAfterContentChecked()
 
 ngAfterViewInit()
+* ViewChild Accessible here
 
 ngAfterViewChecked()
 * Called Multiple Times

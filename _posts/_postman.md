@@ -86,7 +86,7 @@ body.letsGoDark svg {
 
 and even better with sass
 
-```css
+```scss
 body.letsGoDark{
   background-color: #0c0c0c !important;
 
@@ -185,6 +185,22 @@ pm.test('Schema is valid', () => {
 });
 
 ```
+
+
+ALTERNATIVE METHOD
+```
+const schema = {
+    "type": "object"
+};
+pm.test("Validate schema", () => {
+    pm.response.to.have.jsonSchema(schema);
+});
+```
+
+### REF:
+* https://postman-quick-reference-guide.readthedocs.io/en/latest/schema-validation.html
+* https://json-schema.org/understanding-json-schema/reference/string.html
+* https://json-schema.org/understanding-json-schema/reference/numeric.html
 
 You'll notice now that there is a green dot icon on the Test Results tab.
 
@@ -328,3 +344,203 @@ All with 1 request...
 If you still have questions, please shout, i'll be more than happy to answer them and then i'll update the document.
 
 TODO: Include GitHub Example attachment
+
+
+
+
+======
+
+
+
+More examples:
+
+```
+var jsonData = pm.response.json();
+pm.globals.set("01_access_token", jsonData.access_token);
+pm.globals.set("01_session_id", jsonData.SessionID);
+pm.globals.set("01_player_id", jsonData.PlayerID);
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+/**
+ * Schema Validation
+ */
+const schema = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+        access_token: {
+            type: "string",
+            pattern: "^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$"
+        },
+        token_type: {
+            type: "string",
+            enum: ["bearer"]
+        },
+        refresh_token: {
+            type: "string"
+        },
+        expires_in: {
+            type: "integer",
+            minimum: 1
+        },
+        scope: {
+            type: "string"
+        },
+        jti: {
+            type: "string"
+        },
+        PlayerID: {
+            type: "integer"
+        },
+        Username: {
+            type: "string"
+        },
+        SessionID: {
+            type: "string"
+        },
+        Firstname: {
+            type: "string"
+        },
+        Email: {
+            type: "string"
+        },
+        Balance: {
+            type: "integer",
+            minimum: 0,
+        },
+        Points: {
+            type: "integer",
+            minimum: 0,
+        },
+        Class: {
+            type: "integer",
+            minimum: 0,
+        },
+        Bonus: {
+            type: "integer",
+            minimum: 0,
+        },
+        BonusWins: {
+            type: "integer",
+            minimum: 0,
+        },
+        Real: {
+            type: "integer",
+            minimum: 0,
+        },
+        URUVerificationStatus: {
+            type: "integer",
+            enum: [0,1]
+        },
+        Max_SubCampaignId: {
+            type: "integer"
+        },
+        Max_VipLevel: {
+            type: "integer"
+        },
+        iss: {
+            type: "string"
+        },
+        DepositCount: {
+            type: "integer",
+            minimum: 0
+        },
+        SkinID: {
+            type: "integer",
+            minimum: 1,
+            maximum: 16
+        },
+        DisplayPDUpdatePopup: {
+            type: "boolean"
+        },
+        Source: {
+            type: "null"
+        },
+        IPAddress: {
+            type: "string"
+        },
+        AspersCustomerNumber: {
+            type: "integer"
+        },
+        ShowPropensityNotification: {
+            type: "boolean"
+        },
+        RelatedPlayerString: {
+            type: ["null","string"]
+        },
+        LimitConfirmation: {
+            type: "boolean"
+        },
+        LimitConfirmationMessage: {
+            type: "string"
+        },
+        MobileVerified: {
+            type: "boolean"
+        },
+        RedirectURL: {
+            type: "string"
+        },
+        AffID: {
+            type: "string"
+        },
+        AffiliateID: {
+            type: "null"
+        },
+        RegistrationDate: {
+            type: "string"
+        },
+        Avatar: {
+            type: "string"
+        },
+        CurrencyCode: {
+            type: "string"
+        }
+    },
+    required: [
+        "access_token",
+        "token_type",
+        "refresh_token",
+        "expires_in",
+        "scope",
+        "jti",
+        "PlayerID",
+        "Username",
+        "SessionID",
+        "Firstname",
+        "Email",
+        "Balance",
+        "Points",
+        "Class",
+        "Bonus",
+        "BonusWins",
+        "Real",
+        "URUVerificationStatus",
+        "Max_SubCampaignId",
+        "Max_VipLevel",
+        "iss",
+        "DepositCount",
+        "SkinID",
+        "DisplayPDUpdatePopup",
+        "Source",
+        "IPAddress",
+        "AspersCustomerNumber",
+        "ShowPropensityNotification",
+        "RelatedPlayerString",
+        "LimitConfirmation",
+        "LimitConfirmationMessage",
+        "MobileVerified",
+        "RedirectURL",
+        "AffID",
+        "AffiliateID",
+        "RegistrationDate",
+        "Avatar",
+        "CurrencyCode"
+    ]
+};
+pm.test("Schema Validates", () => {
+    pm.response.to.have.jsonSchema(schema);
+});
+```

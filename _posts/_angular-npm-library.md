@@ -1,7 +1,7 @@
 name="moocw";
 prefix="mina";
-
-ng g library $name -p $prefix;
+folder_name=modules; # this is relative to src/app
+ng g library $folder_name/$name -p $prefix;
 ng lint $name;
 ng build $name;
 ng test $name;
