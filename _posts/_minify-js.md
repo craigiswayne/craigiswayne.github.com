@@ -3,7 +3,7 @@ Minify / Uglify JS
 https://www.npmjs.com/package/uglify
 
 ```bash
-npm i uglify
+npm i -D uglify
 ```
 
 ```json
@@ -16,6 +16,8 @@ npm i uglify
 
 ------
 
+https://www.npmjs.com/package/uglify-js
+
 ```bash
 npm i uglify-js --save-dev
 ```
@@ -26,4 +28,10 @@ npm i uglify-js --save-dev
     "uglify:js": "uglifyjs --compress --mangle -o dist/scripts.js -- dist/scripts.js"
   }
 }
+```
+
+```
+uglifyjs js/file1.js js/file2.js \
+         -o foo.min.js -c -m \
+         --source-map "root='http://foo.com/src',url='foo.min.js.map'"
 ```

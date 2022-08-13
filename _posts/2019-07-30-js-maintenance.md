@@ -42,3 +42,23 @@ in your `*.csproj` file
   <Exec WorkingDirectory="$(SpaRoot)" Command="npm run lint" /> <!----- ADD THIS LINE AFTER npm install runs -->
 </Target>
 ```
+
+
+----
+
+
+```
+npm i -D eslint
+touch .eslintrc.json
+touch .eslintignore
+```
+
+in package.json
+```
+{
+  "scripts": {
+    "lint:js": "eslint -c ./.eslintrc.json"
+  }
+}
+
+```

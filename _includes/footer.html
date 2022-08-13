@@ -4,12 +4,12 @@
 
     <div style="justify-content: space-evenly; display:flex">
       {% if site.social.github.username %}
-        <a href="https://github.com/{{site.social.github.username}}/" data-toggle="tooltip" title="GitHub Profile" aria-label="GitHub Profile">
+        <a target="_blank" href="https://github.com/{{site.social.github.username}}/" data-toggle="tooltip" title="GitHub Profile" aria-label="GitHub Profile">
             <i class="fab fa-github"></i><span>&nbsp;{{site.social.github.username}}</span>
         </a>
       {% endif %}
       {% if site.social.twitter.username %}
-        <a href="https://twitter.com/{{site.social.twitter.username}}/" data-toggle="tooltip" title="Twitter Profile" aria-label="Twitter Profile">
+        <a target="_blank" href="https://twitter.com/{{site.social.twitter.username}}/" data-toggle="tooltip" title="Twitter Profile" aria-label="Twitter Profile">
             <i class="fab fa-twitter"></i><span>&nbsp;{{site.social.twitter.username}}</span>
         </a>
       {% endif %}
@@ -18,4 +18,3 @@
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/scripts/resume.js"></script>
-<!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c03b35ec7691206"></script>-->

@@ -35,7 +35,7 @@ making any config changes require restarting the server
 ### Overriding the template defaults
 Run the following command in your terminal
 ```
-bundle show minima
+bundle info minima
 ```
 
 This will show you where the actual files used for minima reside.

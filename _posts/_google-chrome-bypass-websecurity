@@ -1,1 +1,6 @@
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security --disable-gpu --user-data-dir=~/Library/Application\ Support/Google/Chrome/Guest\ Profile
+
+
+open -a Google\ Chrome --args --disable-web-security --user-data-dir=""
+
+https://stackoverflow.com/questions/35432749/disable-web-security-in-chrome-48?answertab=modifieddesc#tab-top

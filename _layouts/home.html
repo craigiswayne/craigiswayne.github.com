@@ -4,27 +4,32 @@ layout: default
 <div class="container-fluid p-0">
   <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
     <div class="my-auto">
-      <h1 class="mb-0">{{ site.author | truncatewords: 1, ""}}
-        <span class="text-primary">{{ site.author | split: " " | last }}</span>
-      </h1>
-      <div class="subheading mb-5"><a href="tel:{{site.contact.mobile}}">{{site.contact.mobile}}</a> · <a href="mailto:{{site.contact.email}}">{{site.contact.email}}</a></div>
-      <p class="lead mb-2">Front End Developer whose passion lies in creating seamless and rich experiences for users.</p>
-      <p class="lead mb-5">Iteratively improving upon existing flows whilst leveraging the most suitable technologies have ensured that Craig is able to deliver sustainable and quality solutions.</p>
-      <!-- TODO: include chart of pedantic, orangized, documenter - maybe a bar graph? maybe like an ash ketchum pokemon badge -->
-      <div class="social-icons">
-        <a href="https://linkedin.com/in/{{site.social.linkedin.username}}/" class="mb-1" data-toggle="tooltip" title="linkedin" aria-label="LinkedIn Profile">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="https://gitlab.com/{{site.social.gitlab.username}}" class="mb-1" data-toggle="tooltip" title="gitlab" aria-label="GitLab Profile">
-          <i class="fab fa-gitlab"></i>
-        </a>
-        <a href="https://codepen.io/{{site.social.codepen.username}}" class="mb-1" data-toggle="tooltip" title="codepen" aria-label="CodePen Profile">
-          <i class="fab fa-codepen"></i>
-        </a>
-        <a href="https://stackoverflow.com/users/{{site.social.stackoverflow.userID}}" class="mb-1" data-toggle="tooltip" title="stack-overflow" aria-label="StackOverflow Profile">
-          <i class="fab fa-stack-overflow"></i>
-        </a>
-      </div>
+        <h1 class="mb-0">{{ site.author | truncatewords: 1, ""}}
+            <span class="text-primary">{{ site.author | split: " " | last }}</span>
+        </h1>
+
+        <div class="subheading mb-5">
+            <a href="tel:{{site.contact.mobile}}">{{site.contact.mobile}}</a> · <a href="mailto:{{site.contact.email}}">{{site.contact.email}}</a>
+        </div>
+
+        <p class="lead mb-2">Web Developer whose passion lies in creating seamless and rich experiences for users.</p>
+        <p class="lead mb-5">Iteratively improving upon existing flows whilst leveraging the most suitable technologies have ensured that Craig is able to deliver sustainable and quality solutions.</p>
+
+        <!-- TODO: include chart of pedantic, orangized, documenter - maybe a bar graph? maybe like an ash ketchum pokemon badge -->
+        <div class="social-icons">
+            <a target="_blank" href="https://linkedin.com/in/{{site.social.linkedin.username}}/" class="mb-1" data-toggle="tooltip" title="linkedin" aria-label="LinkedIn Profile">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a target="_blank" href="https://gitlab.com/{{site.social.gitlab.username}}" class="mb-1" data-toggle="tooltip" title="gitlab" aria-label="GitLab Profile">
+                <i class="fab fa-gitlab"></i>
+            </a>
+            <a target="_blank" href="https://codepen.io/{{site.social.codepen.username}}" class="mb-1" data-toggle="tooltip" title="codepen" aria-label="CodePen Profile">
+                <i class="fab fa-codepen"></i>
+            </a>
+            <a target="_blank" href="https://stackoverflow.com/users/{{site.social.stackoverflow.userID}}" class="mb-1" data-toggle="tooltip" title="stack-overflow" aria-label="StackOverflow Profile">
+                <i class="fab fa-stack-overflow"></i>
+            </a>
+        </div>
     </div>
   </section>
   <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">

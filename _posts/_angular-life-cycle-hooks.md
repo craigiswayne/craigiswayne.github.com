@@ -21,6 +21,7 @@ ngDoCheck()
 ngAfterContentInit()
 
 ngAfterContentChecked()
+* this is where you'd wanna update form values via parameters so that the validation checks can kick in
 
 ngAfterViewInit()
 * ViewChild Accessible here

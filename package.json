@@ -84,5 +84,7 @@
       "to": "assets/vendor/jquery-easing/"
     }
   ],
-  "dependencies": {}
+  "dependencies": {
+    "puppeteer": "^10.1.0"
+  }
 }
