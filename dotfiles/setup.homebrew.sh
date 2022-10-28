@@ -11,7 +11,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 echo "Installing Homebrew taps...";
 brew_taps=$(cat brew_taps.list);
-for tap in $brew_taps 
+for tap in $brew_taps
 do
    brew tap install "$tap";
 done;

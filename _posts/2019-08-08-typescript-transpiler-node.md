@@ -12,7 +12,7 @@ This snippet will allow you to transpile (convert) typescript code into valid ES
 ```
 mkdir -p ./assets/scripts;
 touch ./assets/scripts/scripts.ts;
-npm install typescript --save
+npm install typescript --save-dev
 ```
 
 ### package.json
