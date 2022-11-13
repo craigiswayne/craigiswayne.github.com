@@ -99,3 +99,10 @@ or alternatively print out the objects value with
 * https://search.google.com/search-console/not-verified?original_url=/search-console/ownership&original_resource_id
 * CV Generation from the site
 * Available for hire badge
+
+---
+
+### Setup
+1. Run setup.os.sh 
+2. Run setup.homebrew.sh
+3. Run setup.development.sh

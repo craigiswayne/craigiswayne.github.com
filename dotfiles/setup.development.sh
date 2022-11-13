@@ -2,15 +2,14 @@
 # DEVELOPMENT ENVIRONMENT THINGS
 #==============================================================================
 
-ln -sfv /usr/local/var/www ~/www;
+# ln -sfv /usr/local/var/www ~/www;
 
 #TODO clone all starred git repos onto my machine
 
-echo "IMPORTANT!! Install xcode from the app store before continuing...";
-sudo xcodebuild -license accept;
+# echo "IMPORTANT!! Install xcode from the app store before continuing...";
+# sudo xcodebuild -license accept;
 
 echo "Setting up Development environment...";
-
 echo "Git customizations...";
 git config --global user.name "Craig Wayne"
 git config --global user.email "craigiswayne@gmail.com"
@@ -19,12 +18,12 @@ git config --global core.autocrlf input
 git config --global core.safecrlf true
 git config --global github.user craigiswayne;
 git config --global fetch.prune true;
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/git/.gitignore_global ~/;
-ln -sfv ~/www/craigiswayne.github.com/dotfiles/git/.gitconfig ~/.gitconfig
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.jscsrc ~/www
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/.eslintrc.json ~/www
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/atom/config.cson ~/.atom/config.cson
-ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/nginx/markdown.php ~/www/
+ln -sfv ~/code/craigiswayne.github.com/dotfiles/git/.gitignore_global ~/.gitignore;
+git config --global core.excludesFile '~/.gitignore'
+# ln -sfv ~/code/craigiswayne.github.com/dotfiles/git/.gitconfig ~/.gitconfig
+ln -sfv ~/code/craigiswayne.github.com/dotfiles/.jscsrc ~/www
+ln -sfv ~/code/craigiswayne.github.com/dotfiles/.eslintrc.json ~/www
+ln -sfv ~/code/craigiswayne.github.com/dotfiles/nginx/markdown.php ~/www/
 
 echo "Setting up NPM Defaults...";
 # http://iamsim.me/set-your-npm-init-defaults/
@@ -150,14 +149,6 @@ brew services restart php56;
 sudo cp -fv $(locate nginx.plist) /Library/LaunchDaemons
 sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 
-# install sqlformat for atom beautifier
-sudo easy_install pip
-sudo pip install --upgrade sqlparse
-pip install beautysh
-
-ssh-keygen
-# then cat ~/.ssh/id_rsa.pub | pbcopy
-# and add it to your github and bitbucket accounts
 
 ###
 # Set up SSL

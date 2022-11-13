@@ -3,20 +3,15 @@
 #==============================================================================
 echo "Installing Homebrew...";
 # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install phpstorm
-brew install --cask rectangle
+brew install firefox licecap node phpstorm rectangle spotify transmission vlc visual-studio-code postman
+brew install tree wget
+
+open -a Firefox
+open -a licecap
+open -a PHPStorm
+open -a Postman
 open -a Rectangle
-brew install spotify
+open -a Spotify
 echo "Don't forget to download your playlists"
-brew install node
-brew install --cask transmission
-brew install --cask vlc
-brew install licecap
-brew install firefox
-brew install visual-studio-code
-brew install --cask postman
-
-echo "Installing Homebrew Commands"
-brew install tree
-brew install wget
-
+open -a Visual\ Studio\ Code
+open -a vlc
