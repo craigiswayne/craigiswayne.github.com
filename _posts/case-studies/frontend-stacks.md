@@ -22,3 +22,11 @@ Things to compare:
 * Load Times
 * Difficulty in building assets
 * Files in directory (like config files)
+
+
+### What I don't like about:
+1. Vue
+   1. The html / javascript and styles are in specific vue components
+   1. I'd prefer the html to be separate from the typescript in a separate file
+   1. How do you perform style checks or typescript linting on Vue files
+   2. Angular has this separation of concerns

@@ -6,7 +6,6 @@ ln -sfv /usr/local/var/www ~/www;
 
 #TODO clone all starred git repos onto my machine
 
-
 echo "IMPORTANT!! Install xcode from the app store before continuing...";
 sudo xcodebuild -license accept;
 
@@ -15,8 +14,6 @@ echo "Setting up Development environment...";
 echo "Git customizations...";
 git config --global user.name "Craig Wayne"
 git config --global user.email "craigiswayne@gmail.com"
-git config --global core.editor "atom -w"
-# git config --global core.editor "nano"
 git config --global color.ui true;
 git config --global core.autocrlf input
 git config --global core.safecrlf true
