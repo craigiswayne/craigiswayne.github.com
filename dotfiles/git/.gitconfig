@@ -6,7 +6,7 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore
 	autocrlf = false
 	safecrlf = true
 	hooksPath = ~/code/craigiswayne.github.com/dotfiles/git/hooks
@@ -24,7 +24,9 @@
 [color "branch"]
 	remote = yellow
 [push]
-	default = current
+	default = simple
+[pull]
+	rebase = true
 [diff]
   tool = meld
 [difftool]
@@ -44,3 +46,5 @@
   pruner = !git prune --expire=now && git reflog expire --expire-unreachable=now --rewrite --all && git fetch --all --prune && git gc --prune && git remote prune origin && echo "Finished git pruner"
   switch = !node ~/www/craigiswayne.github.com/dotfiles/git/git.js switch "$@"
   pushall = !git remote | xargs -L1 git push --all
+[fetch]
+	prune = true

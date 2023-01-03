@@ -3,7 +3,7 @@
 #==============================================================================
 echo "Installing Homebrew...";
 # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install firefox licecap node phpstorm rectangle spotify transmission vlc visual-studio-code postman
+brew install firefox licecap node phpstorm postman rectangle spotify transmission vlc visual-studio-code zoom
 brew install tree wget
 
 open -a Firefox

@@ -18,7 +18,7 @@ git config --global core.autocrlf input
 git config --global core.safecrlf true
 git config --global github.user craigiswayne;
 git config --global fetch.prune true;
-ln -sfv ~/code/craigiswayne.github.com/dotfiles/git/.gitignore_global ~/.gitignore;
+ln -sfv ~/code/craigiswayne.github.com/dotfiles/git/.gitignore ~/.gitignore;
 git config --global core.excludesFile '~/.gitignore'
 # ln -sfv ~/code/craigiswayne.github.com/dotfiles/git/.gitconfig ~/.gitconfig
 ln -sfv ~/code/craigiswayne.github.com/dotfiles/.jscsrc ~/www
@@ -126,9 +126,6 @@ touch $xdebug_config_file;
 # echo "xdebug.cli_color=1" >> $xdebug_config_file;
 ln -sfv ~/www/craigiswayne.github.com/dotfiles/php/php.ini /usr/local/etc/php/7.1/conf.d/php.ini
 brew services restart php56;
-
-#echo "Custom Paths...";
-#echo "export PATH=~/.composer/vendor/bin:$PATH" >> ~/.bash_profile;
 
 #TODO list this
 #http://krypted.com/mac-os-x/adding-objects-to-the-dock/
