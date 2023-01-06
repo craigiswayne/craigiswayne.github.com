@@ -40,7 +40,7 @@
     "jquery": "^3.5.1",
     "jquery-easing": "0.0.1",
     "lighthouse": "^6.0.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^8.0.0",
     "stylelint": "^13.6.0",
     "stylelint-config-standard": "^20.0.0",
     "vue": "^2.6.11",
