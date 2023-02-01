@@ -30,3 +30,11 @@ Then to get up and running, just do the following in your command line \ termina
 npm run compile:sass
 npm run watch:sass
 ```
+
+
+If you wish to compile just one file
+```
+"scripts": {
+  "compile:sass": "node-sass input-file.css output-file.css"
+}
+```
