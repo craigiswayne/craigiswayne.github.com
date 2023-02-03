@@ -51,7 +51,7 @@ stages:
 Instead of `CopyFiles@2` you could use `ArchiveFiles@2`
 
 ```
-- task: ArchiveFiles@2
+          - task: ArchiveFiles@2
             displayName: 'Archive Strapi'
             inputs:
               rootFolderOrFile: ./
