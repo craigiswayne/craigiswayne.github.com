@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <title>Copy files after npm install</title>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The example below shows you how to copy bootstrap files to another folder within your project." />
+  <meta name="author" content="Craig Wayne" />
+  <meta name="theme-color" content="#086375" />
+  <meta name="version" content="2023" />
+
+  
+  <meta http-equiv="expires" content="Sun, 01 Jan 2021 00:00:00 GMT" />
+  
+
+  <link rel="canonical" href="/javascript/npm/scripts/2019/11/18/copy-files-after-npm-install.html">
+  <link rel="alternate" type="application/rss+xml" title="Craig (is) Wayne" href="/feed.xml">
+  <link rel="manifest" href="/manifest.json">
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png" />
+<link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32x32.png" />
+
+
+  
+<meta property="og:site_name" content="Craig (is) Wayne" />
+<meta property="og:title" content="Copy files after npm install" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="The example below shows you how to copy bootstrap files to another folder within your project." />
+<meta property="og:image" content="/assets/images/avatar-compressed.png" />
+<meta property="og:image:alt" content="Craig (is) Wayne" />
+<meta property="og:url" content="/javascript/npm/scripts/2019/11/18/copy-files-after-npm-install.html" />
+<meta property="og:locale" content="en_GB" />
+
+  <meta name="twitter:title" content="Copy files after npm install">
+<meta name="twitter:description" content="The example below shows you how to copy bootstrap files to another folder within your project.">
+<meta name="twitter:image" content="/assets/images/avatar-compressed.png"> 
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="craigiswayne">
+
+
+  
+  <link rel="stylesheet" href="/assets/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" />
+  <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/dist/styles/site.css" />
+
+  
+  <script type="text/javascript" src="/assets/vendor/vue/vue.min.js"></script>
+  <script type="text/javascript" src="/assets/vendor/chart.js/Chart.bundle.min.js"></script>
+  <script type="text/javascript" src="/assets/vendor/vue-chartkick/vue-chartkick.min.js"></script>
+
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PVEKKHWL6B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PVEKKHWL6B');
+</script>
+
+
+</head>
+
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+  <a class="navbar-brand" href="/">
+    <span class="d-block d-lg-none">Craig Wayne</span>
+    <span class="d-none d-lg-block">
+      <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="/assets/images/avatar-compressed.png" alt="Craig Wayne">
+    </span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav m-0">
+      
+        <li class="nav-item">
+          <a class="nav-link" href="/">home</a>
+        </li>
+        
+        
+        
+          
+            
+            
+          
+            
+            
+              <li class="nav-item">
+                <a class="nav-link" href="/blog/">Blog</a>
+              </li>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+
+      
+    </ul>
+  </div>
+</nav>
+
+  <main aria-label="Content">
+      <div class="py-3 py-lg-4 px-lg-5 px-md-4 px-3">
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">Copy files after npm install</h1>
+      <p class="post-meta">
+        <time datetime="2019-11-18T00:00:00+00:00" itemprop="datePublished">
+          
+          Nov 18, 2019
+        </time>
+        </p>
+    </header>
+
+    <div class="post-content" itemprop="articleBody">
+      <p>The example below shows you how to copy bootstrap files to another folder within your project.</p>
+
+<p>Things to note:</p>
+<ol>
+  <li>The library <strong>**WILL CREATE DIRECTORIES**</strong> for you</li>
+  <li>It will output to the console straight after you run <code class="language-plaintext highlighter-rouge">npm i</code></li>
+  <li>The library <strong>**WILL NOT**</strong> run after installing a specific package</li>
+  <li><strong>**DOES NOT**</strong> remove files if you update the search strings</li>
+</ol>
+
+<hr />
+
+<h3 id="step-1-install-copy-files-from-to-package">STEP 1: install <code class="language-plaintext highlighter-rouge">copy-files-from-to</code> package</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i <span class="nt">-D</span> copy-files-from-to
+</code></pre></div></div>
+
+<h3 id="step-2-configure-packagejson">STEP 2: configure <code class="language-plaintext highlighter-rouge">package.json</code></h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">postinstall</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">copy-files-from-to</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">copyFiles</span><span class="dl">"</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">from</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">node_modules/bootstrap/dist/css/*</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">to</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">assets/vendor/bootstrap/css/</span><span class="dl">"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="step-3-install-packages">STEP 3: install packages</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i
+</code></pre></div></div>
+
+<blockquote>
+  <p>See Package Page for more info:
+https://www.npmjs.com/package/copy-files-from-to</p>
+</blockquote>
+
+    </div>
+  </article>
+</div>
+
+  </main>
+  <footer class="py-4 text-center">
+    <h2 class="footer-heading">Craig (is) Wayne</h2>
+    <p>A little github pages experiment</p>
+
+    <div style="justify-content: space-evenly; display:flex">
+      
+        <a target="_blank" href="https://github.com/craigiswayne/" data-toggle="tooltip" title="GitHub Profile" aria-label="GitHub Profile">
+            <i class="fab fa-github"></i><span>&nbsp;craigiswayne</span>
+        </a>
+      
+      
+        <a target="_blank" href="https://twitter.com/craigiswayne/" data-toggle="tooltip" title="Twitter Profile" aria-label="Twitter Profile">
+            <i class="fab fa-twitter"></i><span>&nbsp;craigiswayne</span>
+        </a>
+      
+    </div>
+</footer>
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/scripts/resume.js"></script>
+
+</body>
+</html>
