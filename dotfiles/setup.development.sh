@@ -111,7 +111,7 @@ mkdir -p ~/.wp-cli/;
 ln -sfv /usr/local/var/www/craigiswayne.github.com/dotfiles/wp/config.yml ~/.wp-cli/config.yml
 
 echo "Applying Terminal Theme...";
-open $(curl -fsSL https://raw.githubusercontent.com/lysyi3m/osx-terminal-themes/master/schemes/Tomorrow%20Night.terminal);
+open $(curl -fsSL https://raw.githubusercontent.com/chriskempson/tomorrow-theme/master/OS%20X%20Terminal/Tomorrow%20Night.terminal -o "tomorrow-night.terminal");
 defaults write com.apple.Terminal 'Default Window Settings' 'tomorrow-night';
 defaults write com.apple.Terminal 'Startup Window Settings' 'tomorrow-night';
 

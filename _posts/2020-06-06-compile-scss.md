@@ -18,9 +18,10 @@ In your generated package.json add the following to your **scripts** entry
 
 ```
 "scripts": {
-  "compile:sass": "node-sass src/styles -o dist/styles --source-comments=false --source-map=true --output-style=compressed --error-bell",
-  "watch:sass": "npm run compile:sass -- --watch",  
-  "watch": "npm run watch:sass"
+  "compile:sass:dev":   "node-sass assets/css -o assets/css --output-style=compressed --error-bell --source-comments=false --source-map=true",
+  "compile:sass":       "node-sass assets/css -o assets/css --output-style=compressed --error-bell",
+  "watch:sass":         "npm run compile:sass -- --watch",  
+  "watch":              "npm run watch:sass"
 }
 ```
 

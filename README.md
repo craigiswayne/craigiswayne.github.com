@@ -1,21 +1,17 @@
-# Persona Github Page
-A Resume Template based of the [Resume Bootstrap Template](https://startbootstrap.com/themes/resume/) with the [Minima Jekyll Template](https://jekyll.github.io/minima/)
+# Portfolio
+
+### Avatar
+I used https://readyplayer.me/hub to create my avatar
 
 ## Lighthouse Ratings
 
-| **DEVICE**    | **PERFORMANCE**   | **ACCESSIBILITY** | **BEST PRACTICES**    | **SEO**   | **PWA**   |
-| ------------- | ----------------- | ----------------- | --------------------- | --------- | --------- |
-| Desktop       | 25                | 97                | 100                   | 100       | n/a       |
-| Mobile        | 33                | 97                | 100                   | 100       | n/a       |
+| **DEVICE** | **PERFORMANCE** | **ACCESSIBILITY** | **BEST PRACTICES** | **SEO** | **PWA** |
+|------------|-----------------|-------------------|--------------------|---------|---------|
+| Desktop    | 25              | 97                | 100                | 100     | n/a     |
+| Mobile     | 33              | 97                | 100                | 100     | n/a     |
 
 ## Getting Started
 Install dependencies and start serving your site
-
-```
-npm ci
-bundle install
-npm start
-```
 
 *MAKE SURE YOU HAVE THE BUNDLER GEM INSTALLED*
 ```bash
@@ -25,6 +21,12 @@ echo $GEM_HOME;
 export GEM_HOME="$HOME/.gem";
 # add this to your ~/.bash_profile or ~/.zshrc
 gem install bundler:2.1.4
+```
+
+```
+npm ci
+bundle install
+npm start
 ```
 
 ## Changes
