@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2023-06-19T21:22:56+00:00</updated><id>/feed.xml</id><title type="html">Craig (is) Wayne</title><subtitle>A little github pages experiment</subtitle><author><name>Craig Wayne</name></author><entry><title type="html">How to run a Pipeline for Merge Requests Only</title><link href="/gitlab/2020/06/08/gitlab-pipeline-merge-request-only.html" rel="alternate" type="text/html" title="How to run a Pipeline for Merge Requests Only" /><published>2020-06-08T00:00:00+00:00</published><updated>2020-06-08T00:00:00+00:00</updated><id>/gitlab/2020/06/08/gitlab-pipeline-merge-request-only</id><content type="html" xml:base="/gitlab/2020/06/08/gitlab-pipeline-merge-request-only.html">&lt;p&gt;Your job should look like this&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;test:
+  stage: test
+  script:
+    - echo &quot;Running this pipeline only for merge requests&quot;
+  only:
+    - merge_requests
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Craig Wayne</name></author><category term="gitlab" /><summary type="html">Your job should look like this</summary></entry><entry><title type="html">Compile scss Files</title><link href="/npm/scripts/compile/scss/2020/06/06/compile-scss.html" rel="alternate" type="text/html" title="Compile scss Files" /><published>2020-06-06T00:00:00+00:00</published><updated>2020-06-06T00:00:00+00:00</updated><id>/npm/scripts/compile/scss/2020/06/06/compile-scss</id><content type="html" xml:base="/npm/scripts/compile/scss/2020/06/06/compile-scss.html">&lt;p&gt;refer to https://gist.github.com/craigiswayne/8d72ad807fd7d00af568eaa5f280cec8&lt;/p&gt;
+
+&lt;h1 id=&quot;how-to-setup-npm-and-scss--sass&quot;&gt;How to Setup npm and scss \ sass&lt;/h1&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install node-sass --save-dev
+mkdir -p src/styles
+touch src/styles/styles.scss
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In your generated package.json add the following to your &lt;strong&gt;scripts&lt;/strong&gt; entry&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;scripts&quot;: {
+  &quot;compile:sass&quot;: &quot;node-sass src/styles -o dist/styles --source-comments=false --source-map=true --output-style=compressed --error-bell&quot;,
+  &quot;watch:sass&quot;: &quot;npm run compile:sass -- --watch&quot;,  
+  &quot;watch&quot;: &quot;npm run watch:sass&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then to get up and running, just do the following in your command line \ terminal&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm run compile:sass
+npm run watch:sass
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you wish to compile just one file&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;scripts&quot;: {
+  &quot;compile:sass&quot;: &quot;node-sass input-file.css output-file.css&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Craig Wayne</name></author><category term="npm" /><category term="scripts" /><category term="compile" /><category term="scss" /><summary type="html">refer to https://gist.github.com/craigiswayne/8d72ad807fd7d00af568eaa5f280cec8</summary></entry><entry><title type="html">Linting Styles</title><link href="/npm/scripts/maintenance/2020/06/06/style-lint.html" rel="alternate" type="text/html" title="Linting Styles" /><published>2020-06-06T00:00:00+00:00</published><updated>2020-06-06T00:00:00+00:00</updated><id>/npm/scripts/maintenance/2020/06/06/style-lint</id><content type="html" xml:base="/npm/scripts/maintenance/2020/06/06/style-lint.html">&lt;p&gt;Managing and maintaining stylesheets can become daunting especially for large files.&lt;/p&gt;
+
+&lt;p&gt;The following is a script i use to lint my stylesheets.&lt;/p&gt;
+
+&lt;p&gt;This helps maintain an uniform coding standard across my stylesheets.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install --save-dev stylelint stylelint-config-standard
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will install the node package &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stylelint&lt;/code&gt; for running the actual lint check.&lt;/p&gt;
+
+&lt;p&gt;Additionally to get you started, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stylelint-config-standard&lt;/code&gt; is installed which is a set of rules with which the stylelint uses.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuration&quot;&gt;Configuration&lt;/h3&gt;
+&lt;p&gt;Now that you’ve installed the necessary packages, you’ll want to configure you project to reference these packakges&lt;/p&gt;
+
+&lt;p&gt;These next steps will create your own lint config for your project&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;touch .stylelintrc.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create an empty file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.stylelintrc.json&lt;/code&gt;. This file will be used when deciding on what rules to check against when running the lint.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo '{
+  &quot;extends&quot;: &quot;stylelint-config-standard&quot;
+}' &amp;gt; .stylelintrc.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will add the following text to this newly created file&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+    &quot;extends&quot;: &quot;stylelint-config-standard&quot;,
+    &quot;rules&quot;: {
+        &quot;selector-pseudo-element-no-unknown&quot;: [true, {
+            &quot;ignorePseudoElements&quot;: [&quot;ng-deep&quot;]
+        }]
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Since we don’t have any rules yet, it’s helpful to inherit a set of rules from somewhere to get started.&lt;/p&gt;
+
+&lt;p&gt;This text basically states that your own rules should inherit from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stylelint-config-standard&lt;/code&gt; we installed earlier.&lt;/p&gt;
+
+&lt;p&gt;Everything you’ve read up until here is taken from &lt;a href=&quot;https://github.com/stylelint/stylelint/blob/HEAD/docs/user-guide/get-started.md&quot;&gt;Stylelint GitHub Documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;At this point we can run the following script to run lint checks on our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.css&lt;/code&gt; files&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;node_modules/.bin/stylelint &quot;**/*.css&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;But that’s not really ideal…&lt;/p&gt;
+
+&lt;h3 id=&quot;creating-the-script-alias&quot;&gt;Creating the script alias&lt;/h3&gt;
+
+&lt;p&gt;Now that you’ve installed and configured &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stylelint&lt;/code&gt;, we’ll want an easy to reference way to run our lint checks&lt;/p&gt;
+
+&lt;p&gt;In your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt;, add this new config to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scripts&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;scripts&quot;: {
+    &quot;lint&quot;: &quot;stylelint '**/*.css'&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you can simply run&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm run lint
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;references&quot;&gt;References&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/stylelint/stylelint/blob/HEAD/docs/user-guide/get-started.md&quot;&gt;Stylelint Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Craig Wayne</name></author><category term="npm" /><category term="scripts" /><category term="maintenance" /><summary type="html">Managing and maintaining stylesheets can become daunting especially for large files.</summary></entry><entry><title type="html">Copy files after npm install</title><link href="/javascript/npm/scripts/2019/11/18/copy-files-after-npm-install.html" rel="alternate" type="text/html" title="Copy files after npm install" /><published>2019-11-18T00:00:00+00:00</published><updated>2019-11-18T00:00:00+00:00</updated><id>/javascript/npm/scripts/2019/11/18/copy-files-after-npm-install</id><content type="html" xml:base="/javascript/npm/scripts/2019/11/18/copy-files-after-npm-install.html">&lt;p&gt;The example below shows you how to copy bootstrap files to another folder within your project.&lt;/p&gt;
+
+&lt;p&gt;Things to note:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The library &lt;strong&gt;**WILL CREATE DIRECTORIES**&lt;/strong&gt; for you&lt;/li&gt;
+  &lt;li&gt;It will output to the console straight after you run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;The library &lt;strong&gt;**WILL NOT**&lt;/strong&gt; run after installing a specific package&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;**DOES NOT**&lt;/strong&gt; remove files if you update the search strings&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;step-1-install-copy-files-from-to-package&quot;&gt;STEP 1: install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;copy-files-from-to&lt;/code&gt; package&lt;/h3&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm i &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; copy-files-from-to
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;step-2-configure-packagejson&quot;&gt;STEP 2: configure &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;scripts&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;postinstall&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;copy-files-from-to&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;copyFiles&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;node_modules/bootstrap/dist/css/*&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;assets/vendor/bootstrap/css/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;step-3-install-packages&quot;&gt;STEP 3: install packages&lt;/h3&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;See Package Page for more info:
+https://www.npmjs.com/package/copy-files-from-to&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Craig Wayne</name></author><category term="javascript" /><category term="npm" /><category term="scripts" /><summary type="html">The example below shows you how to copy bootstrap files to another folder within your project.</summary></entry><entry><title type="html">Testing using npm and Lighthouse CLI</title><link href="/npm/lighthouse/audit/scripts/2019/11/18/npm-lighthouse-cli.html" rel="alternate" type="text/html" title="Testing using npm and Lighthouse CLI" /><published>2019-11-18T00:00:00+00:00</published><updated>2019-11-18T00:00:00+00:00</updated><id>/npm/lighthouse/audit/scripts/2019/11/18/npm-lighthouse-cli</id><content type="html" xml:base="/npm/lighthouse/audit/scripts/2019/11/18/npm-lighthouse-cli.html">&lt;h3 id=&quot;install-lighthouse-cli-package&quot;&gt;Install Lighthouse CLI package&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm i -D lighthouse-ci
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;update-packagejson&quot;&gt;Update &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt;&lt;/h3&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;scripts&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;test-lighthouse-mobile&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;lighthouse-ci $1 --budget-path=budget.json --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors' --score=75 --performance=75 --accessibility=75 --best-practices=75 --seo=75 --pwa=75&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;test-lighthouse-desktop&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;lighthouse-ci $1 --budget-path=budget.json --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors' --emulated-form-factor=desktop --score=75 --performance=75 --accessibility=75 --best-practices=75 --seo=75 --pwa=75&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;verbose-test-lighthouse-mobile&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;lighthouse $1 --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors'&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;verbose-test-lighthouse-desktop&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;lighthouse $1 --quiet --no-enable-error-reporting --budget-path=budget.json --save-assets=false --chrome-flags='--headless --allow-insecure-localhost --ignore-certificate-errors' --emulated-form-factor=desktop&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Craig Wayne</name></author><category term="npm" /><category term="lighthouse" /><category term="audit" /><category term="scripts" /><summary type="html">Install Lighthouse CLI package npm i -D lighthouse-ci</summary></entry><entry><title type="html">Patch from git diff</title><link href="/javascript/maintenance/housekeeping/2019/09/16/git-patch.html" rel="alternate" type="text/html" title="Patch from git diff" /><published>2019-09-16T00:00:00+00:00</published><updated>2019-09-16T00:00:00+00:00</updated><id>/javascript/maintenance/housekeeping/2019/09/16/git-patch</id><content type="html" xml:base="/javascript/maintenance/housekeeping/2019/09/16/git-patch.html">&lt;p&gt;Create a patch file from your git diff&lt;/p&gt;
+
+&lt;h2 id=&quot;tldr&quot;&gt;TLDR;&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git diff --no-prefix &amp;gt; my.patch
+git reset --hard
+patch -p0 &amp;lt; my.patch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;step-1-make-changes&quot;&gt;Step 1: Make Changes&lt;/h3&gt;
+
+&lt;p&gt;make changes to your files&lt;/p&gt;
+
+&lt;h3 id=&quot;step-2-verify-your-changes&quot;&gt;Step 2: Verify your changes&lt;/h3&gt;
+
+&lt;p&gt;Make sure that the changes you’ve made are showing in the git diff&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git status
+git diff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;step-3-create-the-patch&quot;&gt;Step 3: Create the patch&lt;/h3&gt;
+
+&lt;p&gt;This will create a patch for ALL the changes in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff&lt;/code&gt; output&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git diff &lt;span class=&quot;nt&quot;&gt;--no-prefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; my.patch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;step-4&quot;&gt;Step 4:&lt;/h3&gt;
+
+&lt;p&gt;Reset the files to their original state.&lt;/p&gt;
+
+&lt;p&gt;We do this so that we can verify our patch works with a fresh code base.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git reset &lt;span class=&quot;nt&quot;&gt;--hard&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;step-5-apply-your-patch&quot;&gt;Step 5: Apply your patch&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;patch &lt;span class=&quot;nt&quot;&gt;-p0&lt;/span&gt; &amp;lt; my.patch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Craig Wayne</name></author><category term="javascript" /><category term="maintenance" /><category term="housekeeping" /><summary type="html">Create a patch file from your git diff</summary></entry><entry><title type="html">Git Squash Commits</title><link href="/git/2019/09/02/git-squash-commits.html" rel="alternate" type="text/html" title="Git Squash Commits" /><published>2019-09-02T00:00:00+00:00</published><updated>2019-09-02T00:00:00+00:00</updated><id>/git/2019/09/02/git-squash-commits</id><content type="html" xml:base="/git/2019/09/02/git-squash-commits.html">&lt;h2 id=&quot;steps&quot;&gt;Steps:&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Choose starting commit / the number of commits you want to combine&lt;/li&gt;
+  &lt;li&gt;You can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log --oneline&lt;/code&gt; to see all commits in a short version&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git rebase --interative $valueFromAbove&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Commits will be shown in the order: Oldest First&lt;/li&gt;
+  &lt;li&gt;Change the word &lt;strong&gt;pick&lt;/strong&gt; to &lt;strong&gt;s&lt;/strong&gt; so that those commits can get squashed&lt;/li&gt;
+  &lt;li&gt;Next will show the editor message, enter in your new message&lt;/li&gt;
+  &lt;li&gt;Push your git changes&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;/h2&gt;
+&lt;p&gt;Squash the last 3 commits&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git rebase --interactive HEAD~3
+git push --force-with-lease
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Squash all commits &lt;strong&gt;AFTER&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$commitHash&lt;/code&gt; till now&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git rebase --interactive $commitHash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;to-squash-everything-just-do&quot;&gt;To squash everything just do…&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git reset $(git commit-tree HEAD^{tree} -m &quot;Initial commit.&quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References:&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://www.internalpointers.com/post/squash-commits-into-one-git&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Craig Wayne</name></author><category term="git" /><summary type="html">Steps: Choose starting commit / the number of commits you want to combine You can run git log --oneline to see all commits in a short version git rebase --interative $valueFromAbove Commits will be shown in the order: Oldest First Change the word pick to s so that those commits can get squashed Next will show the editor message, enter in your new message Push your git changes</summary></entry><entry><title type="html">Transpile Typescript to Javascript</title><link href="/typescript/javascript/node/npm/2019/08/08/typescript-transpiler-node.html" rel="alternate" type="text/html" title="Transpile Typescript to Javascript" /><published>2019-08-08T00:00:00+00:00</published><updated>2019-08-08T00:00:00+00:00</updated><id>/typescript/javascript/node/npm/2019/08/08/typescript-transpiler-node</id><content type="html" xml:base="/typescript/javascript/node/npm/2019/08/08/typescript-transpiler-node.html">&lt;p&gt;This snippet will allow you to transpile (convert) typescript code into valid ES2015 code&lt;/p&gt;
+
+&lt;h3 id=&quot;terminal--command-line&quot;&gt;terminal / command line&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir -p ./assets/scripts;
+touch ./assets/scripts/scripts.ts;
+npm install typescript --save-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;packagejson&quot;&gt;package.json&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;scripts:{
+  &quot;ts&quot;: &quot;tsc ./assets/scripts/scripts.ts --outDir ./dist&quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;using-babel&quot;&gt;Using Babel&lt;/h2&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--save-dev&lt;/span&gt; @babel/cli @babel/plugin-proposal-class-properties @babel/plugin-transform-spread
+&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;babel.config.json
+&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;babel.config.dev.json
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+  &quot;presets&quot;: [&quot;@babel/preset-env&quot;],
+  &quot;plugins&quot;: [
+    &quot;@babel/plugin-proposal-class-properties&quot;,
+    &quot;@babel/plugin-transform-spread&quot;
+  ],
+  &quot;comments&quot;: false
+}'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; babel.config.json
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+  &quot;extends&quot;: &quot;./babel.config.json&quot;,
+  &quot;comments&quot;: true,
+  &quot;sourceMaps&quot;: &quot;inline&quot;
+}'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; babel.config.dev.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;compile:js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;babel scripts.js -o dist/scripts.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;compile:js:dev&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;babel --config-file ./babel.config.dev.json -o dist/scripts.js scripts.js&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Craig Wayne</name></author><category term="typescript" /><category term="javascript" /><category term="node" /><category term="npm" /><summary type="html">This snippet will allow you to transpile (convert) typescript code into valid ES2015 code</summary></entry><entry><title type="html">Javascript Maintenance</title><link href="/javascript/maintenance/housekeeping/2019/07/30/js-maintenance.html" rel="alternate" type="text/html" title="Javascript Maintenance" /><published>2019-07-30T00:00:00+00:00</published><updated>2019-07-30T00:00:00+00:00</updated><id>/javascript/maintenance/housekeeping/2019/07/30/js-maintenance</id><content type="html" xml:base="/javascript/maintenance/housekeeping/2019/07/30/js-maintenance.html">&lt;p&gt;see: https://gist.github.com/craigiswayne/62ec315e91a885417d87a4801d8c705e&lt;/p&gt;
+
+&lt;p&gt;Managing undocumented and convoluted front-end angular applications is a nightmare as many of you know…&lt;/p&gt;
+
+&lt;p&gt;However this document will serve to help those tasked with this management.&lt;/p&gt;
+
+&lt;p&gt;tsconfig.json changes&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+  &quot;compilerOptions&quot;: {
+    &quot;noUnusedLocals&quot;: true,
+    &quot;noUnusedParameters&quot;: true
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This above snippet will prevent the use of unused variables, libraries and parameters&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;dotnet-angular-lint-intergration&quot;&gt;DotNet Angular Lint intergration&lt;/h2&gt;
+&lt;p&gt;To maintain coding standards for everyone, you can integrate &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm lint&lt;/code&gt; tests so that when your dotnet project publishes, an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm lint&lt;/code&gt; is run&lt;/p&gt;
+
+&lt;p&gt;in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.csproj&lt;/code&gt; file&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;Target Name=&quot;PublishRunWebpack&quot; AfterTargets=&quot;ComputeFilesToPublish&quot;&amp;gt;
+  &amp;lt;Exec WorkingDirectory=&quot;$(SpaRoot)&quot; Command=&quot;npm install&quot; /&amp;gt;
+  &amp;lt;Exec WorkingDirectory=&quot;$(SpaRoot)&quot; Command=&quot;npm run lint&quot; /&amp;gt; &amp;lt;!----- ADD THIS LINE AFTER npm install runs --&amp;gt;
+&amp;lt;/Target&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm i -D eslint
+touch .eslintrc.json
+touch .eslintignore
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;in package.json&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+  &quot;scripts&quot;: {
+    &quot;lint:js&quot;: &quot;eslint -c ./.eslintrc.json&quot;
+  }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Craig Wayne</name></author><category term="javascript" /><category term="maintenance" /><category term="housekeeping" /><summary type="html">see: https://gist.github.com/craigiswayne/62ec315e91a885417d87a4801d8c705e</summary></entry><entry><title type="html">Typescript Maps</title><link href="/2019/07/30/typescript-maps.html" rel="alternate" type="text/html" title="Typescript Maps" /><published>2019-07-30T00:00:00+00:00</published><updated>2019-07-30T00:00:00+00:00</updated><id>/2019/07/30/typescript-maps</id><content type="html" xml:base="/2019/07/30/typescript-maps.html">&lt;h2 id=&quot;typescript&quot;&gt;typescript&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export class TypeScriptMapType {
+
+  method1 = new Map&amp;lt;string, boolean&amp;gt;();
+
+  method2: Map&amp;lt;string, boolean&amp;gt; = new Map([
+      [&quot;Checkbox 3&quot;, true],
+      [&quot;Checkbox 4&quot;, true]
+  ]);
+
+  constructor(){
+    this.method1.set(&quot;Checkbox 1&quot;, true);
+    this.method1.set(&quot;Checkbox 2&quot;, false);
+  }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;html&quot;&gt;html&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;div *ngFor=&quot;let cb of this.method1 | keyvalue&quot;&amp;gt;
+  &amp;lt;input type=&quot;checkbox&quot; [checked]=&quot;cb.value&quot; /&amp;gt;
+  &amp;lt;label&amp;gt;&amp;lt;/label&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div *ngFor=&quot;let cb of this.method2 | keyvalue&quot;&amp;gt;
+  &amp;lt;input type=&quot;checkbox&quot; [checked]=&quot;cb.value&quot; /&amp;gt;
+  &amp;lt;label&amp;gt;&amp;lt;/label&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Craig Wayne</name></author><summary type="html">typescript ``` export class TypeScriptMapType {</summary></entry></feed>
