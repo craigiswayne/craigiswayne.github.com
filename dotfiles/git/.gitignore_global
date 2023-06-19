@@ -1,7 +1,0 @@
-.DS_Store
-.idea/
-.sass-cache/
-node_modules/
-/vendor/
-**/*.map
-error.log
