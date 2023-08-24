@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <title>Patch from git diff</title>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Create a patch file from your git diff" />
+  <meta name="author" content="Craig Wayne" />
+  <meta name="theme-color" content="#086375" />
+  <meta name="version" content="2023-05-01" />
+
+  
+  <meta http-equiv="expires" content="Sun, 01 Jan 2021 00:00:00 GMT" />
+  
+
+  <link rel="canonical" href="/javascript/maintenance/housekeeping/2019/09/16/git-patch.html">
+  <link rel="alternate" type="application/rss+xml" title="Craig (is) Wayne" href="/feed.xml">
+  <link rel="manifest" href="/manifest.json">
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png" />
+<link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32x32.png" />
+
+
+  
+<meta property="og:site_name" content="Craig (is) Wayne" />
+<meta property="og:title" content="Patch from git diff" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Create a patch file from your git diff" />
+<meta property="og:image" content="/assets/images/avatar-compressed.png" />
+<meta property="og:image:alt" content="Craig (is) Wayne" />
+<meta property="og:url" content="/javascript/maintenance/housekeeping/2019/09/16/git-patch.html" />
+<meta property="og:locale" content="en_GB" />
+
+  <meta name="twitter:title" content="Patch from git diff">
+<meta name="twitter:description" content="Create a patch file from your git diff">
+<meta name="twitter:image" content="/assets/images/avatar-compressed.png"> 
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="craigiswayne">
+
+
+  
+  <link rel="stylesheet" href="/assets/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" />
+  <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="/dist/styles/site.css" />
+
+  
+  <script type="text/javascript" src="/assets/vendor/vue/vue.min.js"></script>
+  <script type="text/javascript" src="/assets/vendor/chart.js/Chart.bundle.min.js"></script>
+  <script type="text/javascript" src="/assets/vendor/vue-chartkick/vue-chartkick.min.js"></script>
+
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PVEKKHWL6B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PVEKKHWL6B');
+</script>
+
+
+</head>
+
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+  <a class="navbar-brand" href="/">
+    <span class="d-block d-lg-none">Craig Wayne</span>
+    <span class="d-none d-lg-block">
+      <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="/assets/images/avatar-compressed.png" alt="Craig Wayne">
+    </span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav m-0">
+      
+        <li class="nav-item">
+          <a class="nav-link" href="/">home</a>
+        </li>
+        
+        
+        
+          
+            
+            
+          
+            
+            
+              <li class="nav-item">
+                <a class="nav-link" href="/blog/">Blog</a>
+              </li>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        
+
+      
+    </ul>
+  </div>
+</nav>
+
+  <main aria-label="Content">
+      <div class="py-3 py-lg-4 px-lg-5 px-md-4 px-3">
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">Patch from git diff</h1>
+      <p class="post-meta">
+        <time datetime="2019-09-16T00:00:00+00:00" itemprop="datePublished">
+          
+          Sep 16, 2019
+        </time>
+        </p>
+    </header>
+
+    <div class="post-content" itemprop="articleBody">
+      <p>Create a patch file from your git diff</p>
+
+<h2 id="tldr">TLDR;</h2>
+
+<pre><code class="language-git">git diff --no-prefix &gt; my.patch
+git reset --hard
+patch -p0 &lt; my.patch
+</code></pre>
+
+<hr />
+
+<h3 id="step-1-make-changes">Step 1: Make Changes</h3>
+
+<p>make changes to your files</p>
+
+<h3 id="step-2-verify-your-changes">Step 2: Verify your changes</h3>
+
+<p>Make sure that the changes you’ve made are showing in the git diff</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+git diff
+</code></pre></div></div>
+
+<h3 id="step-3-create-the-patch">Step 3: Create the patch</h3>
+
+<p>This will create a patch for ALL the changes in the <code class="language-plaintext highlighter-rouge">git diff</code> output</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff <span class="nt">--no-prefix</span> <span class="o">&gt;</span> my.patch
+</code></pre></div></div>
+
+<h3 id="step-4">Step 4:</h3>
+
+<p>Reset the files to their original state.</p>
+
+<p>We do this so that we can verify our patch works with a fresh code base.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset <span class="nt">--hard</span>
+</code></pre></div></div>
+
+<h3 id="step-5-apply-your-patch">Step 5: Apply your patch</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>patch <span class="nt">-p0</span> &lt; my.patch
+</code></pre></div></div>
+
+    </div>
+  </article>
+</div>
+
+  </main>
+  <footer class="py-4 text-center">
+    <h2 class="footer-heading">Craig (is) Wayne</h2>
+    <p>A little github pages experiment</p>
+
+    <div style="justify-content: space-evenly; display:flex">
+      
+        <a target="_blank" href="https://github.com/craigiswayne/" data-toggle="tooltip" title="GitHub Profile" aria-label="GitHub Profile">
+            <i class="fab fa-github"></i><span>&nbsp;craigiswayne</span>
+        </a>
+      
+      
+        <a target="_blank" href="https://twitter.com/craigiswayne/" data-toggle="tooltip" title="Twitter Profile" aria-label="Twitter Profile">
+            <i class="fab fa-twitter"></i><span>&nbsp;craigiswayne</span>
+        </a>
+      
+    </div>
+</footer>
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/scripts/resume.js"></script>
+
+</body>
+</html>

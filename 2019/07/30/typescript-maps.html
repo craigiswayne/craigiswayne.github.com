@@ -1,0 +1,29 @@
+<h2 id="typescript">typescript</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export class TypeScriptMapType {
+
+  method1 = new Map&lt;string, boolean&gt;();
+
+  method2: Map&lt;string, boolean&gt; = new Map([
+      ["Checkbox 3", true],
+      ["Checkbox 4", true]
+  ]);
+
+  constructor(){
+    this.method1.set("Checkbox 1", true);
+    this.method1.set("Checkbox 2", false);
+  }
+}
+
+</code></pre></div></div>
+
+<h2 id="html">html</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div *ngFor="let cb of this.method1 | keyvalue"&gt;
+  &lt;input type="checkbox" [checked]="cb.value" /&gt;
+  &lt;label&gt;&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div *ngFor="let cb of this.method2 | keyvalue"&gt;
+  &lt;input type="checkbox" [checked]="cb.value" /&gt;
+  &lt;label&gt;&lt;/label&gt;
+&lt;/div&gt;
+</code></pre></div></div>
