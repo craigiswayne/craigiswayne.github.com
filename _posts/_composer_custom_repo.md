@@ -58,7 +58,7 @@ have a look at the composer.json file in the repo for these values
 ```
 
 OR 
-
+```
 {
    ...
    "require": {
@@ -66,3 +66,4 @@ OR
    }
    ...
 }
+```
