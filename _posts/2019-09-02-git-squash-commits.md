@@ -7,12 +7,13 @@ categories: git
 
 ## Steps:
 1. Choose starting commit / the number of commits you want to combine
-  1. You can run `git log --oneline` to see all commits in a short version
+   * You can run `git log --oneline` to see all commits in a short version
+   * This list is shown in the order Newest first
 2. `git rebase --interative $valueFromAbove`
-3. Commits will be shown in the order: Oldest First
-3. Change the word **pick** to **s** so that those commits can get squashed
-4. Next will show the editor message, enter in your new message
-5. Push your git changes
+3. Commits will be shown in the order: Oldest -> Newest
+4. Change the word **pick** to **s** so that those commits can get squashed
+5. Next will show the editor message, enter in your new message
+6. Push your git changes
 
 ## Examples
 Squash the last 3 commits
@@ -30,7 +31,8 @@ git rebase --interactive $commitHash
 
 #### To squash everything just do...
 ```
-git reset $(git commit-tree HEAD^{tree} -m "Initial commit.")
+git reset $(git commit-tree HEAD^{tree} -m "Resetting commits...")
+git push -f
 ```
 
 ### References:
