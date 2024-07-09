@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "your_site_name": {
+            "value": null
+        },
+        "your_app_service_plan_id": {
+            "value": null
+        },
+        "your_virtual_network_id": {
+            "value": null
+        }
+    }
+}
