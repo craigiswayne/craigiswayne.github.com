@@ -10,7 +10,7 @@ categories: [azure, storage account, devops]
 
 ```bash
 # Define variables
-subscription="your-subscription-name";
+subscription_name="your-subscription-name";
 resource_group="your-resource-group-name";
 deployment_name="name-of-your-deployment";
 storage_account_name="your-storage-account-name";
@@ -20,7 +20,7 @@ container_name="your-container-name"
 ```bash
 # login to your azure account and select the relevant subscription
 az login
-az account set --subscription $subscription;
+az account set --subscription $subscription_name;
 ```
 
 ```bash

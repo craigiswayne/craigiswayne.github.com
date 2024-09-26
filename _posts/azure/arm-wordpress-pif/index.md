@@ -28,5 +28,15 @@ az network vnet list --resource-group "MyResourceGroup" --query "[].id" --output
 $subscription_name="enterprise_solutions_prod"
 $resource_group_name="rg-playitforward-prod-uksouth-001"
 
-az deployment group create --resource-group $resource_group_name --subscription $subscription_name --template-file template.json --parameters @parameters.json
+az deployment group create --resource-group $resource_group_name --subscription $subscription_name --template-file template.json --parameters parameters.json
 ````
+
+
+----
+
+notes: 
+
+creating a service principle
+
+> az login
+> az ad sp create-for-rbac --name MyGitHubActionsApp --role contributor --scopes /subscriptions/{subscription-id}
