@@ -14,3 +14,6 @@ IntelliJ
 Arguments: $FileName$ --outDir ./
 Output Paths to Refresh: empty
 Working Directory: $FileDir$
+
+
+$FileName$:$FileNameWithoutExtension$.css --style compressed

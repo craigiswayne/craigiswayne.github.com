@@ -11,12 +11,6 @@ A Resume Template based of the [Resume Bootstrap Template](https://startbootstra
 ## Getting Started
 Install dependencies and start serving your site
 
-```
-npm ci
-bundle install
-npm start
-```
-
 *MAKE SURE YOU HAVE THE BUNDLER GEM INSTALLED*
 ```bash
 echo $GEM_HOME;
@@ -25,6 +19,12 @@ echo $GEM_HOME;
 export GEM_HOME="$HOME/.gem";
 # add this to your ~/.bash_profile or ~/.zshrc
 gem install bundler:2.1.4
+```
+
+```
+npm ci
+bundle install
+npm start
 ```
 
 ## Changes
@@ -73,6 +73,7 @@ or alternatively print out the objects value with
 * CSS Coverage
 * JS Coverage
 * Lighthouse in pipeline
+* Lighthouse coverage tests in pipeline
 * lighthouse bade on project page
 * [ ] Lighthouse report
 * Pipeline tests before trying to merge
@@ -101,8 +102,3 @@ or alternatively print out the objects value with
 * Available for hire badge
 
 ---
-
-### Setup
-1. Run setup.os.sh 
-2. Run setup.homebrew.sh
-3. Run setup.development.sh

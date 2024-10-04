@@ -30,3 +30,11 @@ Things to compare:
    1. I'd prefer the html to be separate from the typescript in a separate file
    1. How do you perform style checks or typescript linting on Vue files
    2. Angular has this separation of concerns
+
+---
+
+### Cross Benefit Analysis
+
+| Thing        | Angular | React      | Vue |
+|--------------|---------|------------|-----|
+| SPA Routing  | OOTB    | via plugin | ?   |
