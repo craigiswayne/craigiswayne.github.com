@@ -4,7 +4,8 @@ name: Build and Deploy to Github Pages
 on:
   push:
     branches:
-      - dev  # Here source code branch is `dev`, it could be other branch
+      - develop
+      - main
 
 jobs:
   build_and_deploy:
