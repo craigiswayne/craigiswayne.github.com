@@ -82,7 +82,7 @@ export function Contact({ data, socialLinks, cvData }: ContactProps) {
   return (
     <section className="py-20 bg-secondary/10">
       <div className="container mx-auto px-4 max-w-4xl">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ export function Contact({ data, socialLinks, cvData }: ContactProps) {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="flex justify-center mb-12"
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -108,7 +108,7 @@ export function Contact({ data, socialLinks, cvData }: ContactProps) {
             return (
               <Card key={index} className="hover:shadow-lg transition-shadow max-w-md w-full">
                 <CardContent className="p-8 text-center space-y-4">
-                  <motion.div 
+                  <motion.div
                     className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto"
                     initial={{ opacity: 0, scale: 0, rotate: -10 }}
                     whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -121,8 +121,8 @@ export function Contact({ data, socialLinks, cvData }: ContactProps) {
                   <p className="text-muted-foreground text-sm">
                     {method.description}
                   </p>
-                  <Button 
-                    variant={method.type === 'email' ? 'default' : 'outline'} 
+                  <Button
+                    variant={method.type === 'email' ? 'default' : 'outline'}
                     className="w-full gap-2"
                     asChild={method.actionType === 'email'}
                   >
@@ -145,7 +145,7 @@ export function Contact({ data, socialLinks, cvData }: ContactProps) {
         </motion.div>
 
         <div className="text-center space-y-8">
-          <motion.div 
+          <motion.div
             className="flex justify-center gap-6"
             variants={socialContainerVariants}
             initial="hidden"
@@ -172,20 +172,20 @@ export function Contact({ data, socialLinks, cvData }: ContactProps) {
               <Button variant="outline" size="lg" className="gap-2" asChild>
                 <a href={cvData.path} download={cvData.fileName}>
                   <Download className="w-5 h-5" />
-                  Resume PDF
+                  Download CV
                 </a>
               </Button>
             </motion.div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="bg-card rounded-2xl p-8 shadow-lg"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <motion.h3 
+            <motion.h3
               className="mb-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -194,7 +194,7 @@ export function Contact({ data, socialLinks, cvData }: ContactProps) {
             >
               What I'm Looking For
             </motion.h3>
-            <motion.div 
+            <motion.div
               className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm"
               variants={lookingForVariants}
               initial="hidden"
