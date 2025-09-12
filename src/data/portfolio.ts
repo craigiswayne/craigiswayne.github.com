@@ -6,12 +6,12 @@ export const portfolioData = {
     "description": "Crafting exceptional digital experiences with modern web technologies. Specializing in React, TypeScript, and creating scalable frontend architectures that drive business growth.",
     "yearsOfExperience": 8,
     "email": "craigiswayne@gmail.com",
-    "cvPath": "/path-to-your-cv.pdf",
-    "cvFileName": "Alex-Rodriguez-CV.pdf",
+    "cvPath": "/CV-CraigWayne.pdf",
+    "cvFileName": "CV-CraigWayne.pdf",
     "profileImage": "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzU1NTk2Nzc3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     "socialLinks": {
-      "github": "#",
-      "linkedin": "#"
+      "github": "https://github.com/craigiswayne",
+      "linkedin": "https://www.linkedin.com/in/craigiswayne"
     }
   },
   "about": {
@@ -70,7 +70,7 @@ export const portfolioData = {
       {
         "title": "Frontend Technologies",
         "skills": [
-          "React", "Next.js", "TypeScript", "JavaScript (ES6+)", 
+          "React", "Next.js", "TypeScript", "JavaScript (ES6+)",
           "HTML5", "CSS3", "Tailwind CSS", "Styled Components",
           "Redux", "Zustand", "React Query", "GraphQL"
         ]
@@ -92,7 +92,7 @@ export const portfolioData = {
       {
         "title": "Backend & Cloud",
         "skills": [
-          "Node.js", "REST APIs", "Firebase", "Supabase", 
+          "Node.js", "REST APIs", "Firebase", "Supabase",
           "AWS", "Vercel", "Netlify", "Docker"
         ]
       }

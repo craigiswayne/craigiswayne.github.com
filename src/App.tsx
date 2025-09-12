@@ -43,16 +43,16 @@ export default function App() {
 
   // Animation variants for scroll transitions
   const sectionVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50 
+    hidden: {
+      opacity: 0,
+      y: 50
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
-        duration: 0.6, 
-        ease: "easeOut" 
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
@@ -71,7 +71,7 @@ export default function App() {
   return (
     <div className="min-h-screen">
       {/* Navigation Header */}
-      <motion.nav 
+      <motion.nav
         className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -79,13 +79,13 @@ export default function App() {
       >
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="flex items-center justify-between h-16">
-            <button 
+            <button
               onClick={scrollToTop}
               className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
             >
               {portfolioData.personal.name}
             </button>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
@@ -111,7 +111,7 @@ export default function App() {
                 </a>
               </Button>
             </div>
-            
+
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
@@ -122,17 +122,17 @@ export default function App() {
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
-          
+
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <motion.div 
+            <motion.div
               className="md:hidden py-4 border-t"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <motion.div 
+              <motion.div
                 className="flex flex-col gap-4"
                 initial="hidden"
                 animate="visible"
@@ -188,8 +188,8 @@ export default function App() {
         >
           <Hero data={portfolioData.personal} />
         </motion.div>
-        
-        <motion.section 
+
+        <motion.section
           id="about"
           initial="hidden"
           whileInView="visible"
@@ -198,8 +198,8 @@ export default function App() {
         >
           <About data={portfolioData.about} />
         </motion.section>
-        
-        <motion.section 
+
+        <motion.section
           id="skills"
           initial="hidden"
           whileInView="visible"
@@ -208,8 +208,8 @@ export default function App() {
         >
           <Skills data={portfolioData.skills} />
         </motion.section>
-        
-        <motion.section 
+
+        <motion.section
           id="projects"
           initial="hidden"
           whileInView="visible"
@@ -218,8 +218,8 @@ export default function App() {
         >
           <Projects data={portfolioData.projects} />
         </motion.section>
-        
-        <motion.section 
+
+        <motion.section
           id="experience"
           initial="hidden"
           whileInView="visible"
@@ -228,8 +228,8 @@ export default function App() {
         >
           <Experience data={portfolioData.experience} />
         </motion.section>
-        
-        <motion.section 
+
+        <motion.section
           id="contact"
           initial="hidden"
           whileInView="visible"
@@ -241,7 +241,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <motion.footer 
+      <motion.footer
         className="bg-primary text-primary-foreground py-8"
         initial="hidden"
         whileInView="visible"
