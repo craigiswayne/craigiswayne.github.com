@@ -1,0 +1,218 @@
+export const portfolioData = {
+  "personal": {
+    "name": "Craig Wayne",
+    "title": "Senior Frontend Web Developer",
+    "availabilityStatus": "Available for new opportunities",
+    "description": "Crafting exceptional digital experiences with modern web technologies. Specializing in React, TypeScript, and creating scalable frontend architectures that drive business growth.",
+    "yearsOfExperience": 8,
+    "email": "craigiswayne@gmail.com",
+    "cvPath": "/path-to-your-cv.pdf",
+    "cvFileName": "Alex-Rodriguez-CV.pdf",
+    "profileImage": "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzU1NTk2Nzc3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    "socialLinks": {
+      "github": "#",
+      "linkedin": "#"
+    }
+  },
+  "about": {
+    "subtitle": "Building the Future of Web",
+    "description": "With over 8 years of experience in frontend development, I've helped startups and enterprise companies create digital products that users love. My passion lies in crafting intuitive interfaces and scalable architectures.",
+    "journey": [
+      "I started my career as a curious developer fascinated by the intersection of design and technology. Over the years, I've evolved from writing my first HTML page to architecting complex React applications used by millions.",
+      "Today, I focus on building scalable frontend systems, mentoring teams, and staying at the forefront of web technology. I believe great software is not just about code—it's about solving real problems for real people."
+    ],
+    "highlights": [
+      {
+        "icon": "Code",
+        "title": "Clean Code Advocate",
+        "description": "Writing maintainable, scalable code that follows industry best practices and modern standards."
+      },
+      {
+        "icon": "Users",
+        "title": "Team Leadership",
+        "description": "Leading frontend teams and mentoring junior developers to achieve collective success."
+      },
+      {
+        "icon": "Zap",
+        "title": "Performance Focused",
+        "description": "Optimizing applications for speed, accessibility, and exceptional user experiences."
+      },
+      {
+        "icon": "Target",
+        "title": "Business Impact",
+        "description": "Translating business requirements into technical solutions that drive measurable results."
+      }
+    ],
+    "expertise": [
+      {
+        "skill": "JavaScript/TypeScript",
+        "level": "Expert"
+      },
+      {
+        "skill": "React/Next.js",
+        "level": "Expert"
+      },
+      {
+        "skill": "Frontend Architecture",
+        "level": "Advanced"
+      },
+      {
+        "skill": "Team Leadership",
+        "level": "Advanced"
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1728598909887-2d983a8889b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjB3ZWIlMjBkZXZlbG9wbWVudCUyMHNldHVwfGVufDF8fHx8MTc1NTYyMTM4M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+  },
+  "skills": {
+    "subtitle": "Technologies I Work With",
+    "description": "A comprehensive toolkit built over years of experience, constantly evolving with the latest industry trends and best practices.",
+    "categories": [
+      {
+        "title": "Frontend Technologies",
+        "skills": [
+          "React", "Next.js", "TypeScript", "JavaScript (ES6+)", 
+          "HTML5", "CSS3", "Tailwind CSS", "Styled Components",
+          "Redux", "Zustand", "React Query", "GraphQL"
+        ]
+      },
+      {
+        "title": "Development Tools",
+        "skills": [
+          "Git", "Webpack", "Vite", "npm/yarn", "ESLint", "Prettier",
+          "Jest", "Cypress", "Storybook", "Figma", "Adobe XD"
+        ]
+      },
+      {
+        "title": "Architecture & Best Practices",
+        "skills": [
+          "Component Architecture", "Design Patterns", "Performance Optimization",
+          "Accessibility (WCAG)", "SEO", "Code Review", "CI/CD", "Agile/Scrum"
+        ]
+      },
+      {
+        "title": "Backend & Cloud",
+        "skills": [
+          "Node.js", "REST APIs", "Firebase", "Supabase", 
+          "AWS", "Vercel", "Netlify", "Docker"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "subtitle": "Recent Work",
+    "description": "A selection of projects that showcase my expertise in building scalable web applications and solving complex technical challenges.",
+    "featured": [
+      {
+        "title": "E-Commerce Platform",
+        "description": "Built a scalable React/Next.js e-commerce platform with real-time inventory, payment processing, and admin dashboard. Improved conversion rates by 35% through UX optimization.",
+        "image": "https://images.unsplash.com/photo-1670057046254-3b5095eb4b66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxyZWFjdCUyMGphdmFzY3JpcHQlMjBjb2Rpbmd8ZW58MXx8fHwxNzU1NjIxMzgzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        "technologies": ["React", "Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+      },
+      {
+        "title": "SaaS Dashboard",
+        "description": "Developed a comprehensive analytics dashboard for a fintech startup. Features real-time data visualization, user management, and responsive design. Serves 10K+ active users.",
+        "image": "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzU1NTk2Nzc3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        "technologies": ["React", "D3.js", "Redux", "Node.js", "PostgreSQL"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+      },
+      {
+        "title": "Design System & Component Library",
+        "description": "Created a comprehensive design system and React component library used across 5+ products. Includes Storybook documentation, automated testing, and npm distribution.",
+        "image": "https://images.unsplash.com/photo-1728598909887-2d983a8889b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjB3ZWIlMjBkZXZlbG9wbWVudCUyMHNldHVwfGVufDF8fHx8MTc1NTYyMTM4M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        "technologies": ["React", "Storybook", "TypeScript", "Rollup", "Jest"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+      }
+    ]
+  },
+  "experience": {
+    "subtitle": "Professional Journey",
+    "description": "Over 8 years of experience building exceptional web applications, leading teams, and driving technical innovation.",
+    "positions": [
+      {
+        "company": "TechFlow Solutions",
+        "position": "Senior Frontend Developer & Team Lead",
+        "duration": "2022 - Present",
+        "location": "San Francisco, CA (Remote)",
+        "description": "Leading a team of 6 frontend developers building next-generation SaaS platforms. Architected micro-frontend solutions serving 100K+ users daily.",
+        "achievements": [
+          "Reduced application load time by 60% through performance optimization",
+          "Established frontend architecture standards across 4 product teams",
+          "Mentored 3 junior developers who were promoted to mid-level roles",
+          "Led migration from legacy codebase to modern React/TypeScript stack"
+        ],
+        "technologies": ["React", "TypeScript", "Next.js", "AWS", "GraphQL"]
+      },
+      {
+        "company": "Innovation Labs",
+        "position": "Frontend Developer",
+        "duration": "2019 - 2022",
+        "location": "Austin, TX",
+        "description": "Developed user-facing features for multiple B2B applications, focusing on creating intuitive interfaces and seamless user experiences.",
+        "achievements": [
+          "Built responsive design system used across 5+ products",
+          "Improved user engagement by 40% through UX/UI enhancements",
+          "Implemented automated testing, reducing bugs by 50%",
+          "Collaborated with design team to establish component guidelines"
+        ],
+        "technologies": ["React", "JavaScript", "Styled Components", "Jest", "Storybook"]
+      },
+      {
+        "company": "StartupXYZ",
+        "position": "Junior Frontend Developer",
+        "duration": "2017 - 2019",
+        "location": "Austin, TX",
+        "description": "Started my career building modern web applications in a fast-paced startup environment. Gained experience in full-stack development and agile methodologies.",
+        "achievements": [
+          "Developed 3 major features from concept to production",
+          "Contributed to 25% increase in user retention through UX improvements",
+          "Learned and implemented modern JavaScript frameworks",
+          "Participated in code reviews and knowledge sharing sessions"
+        ],
+        "technologies": ["JavaScript", "React", "HTML/CSS", "Node.js", "MongoDB"]
+      }
+    ]
+  },
+  "contact": {
+    "subtitle": "Let's Work Together",
+    "description": "I'm always interested in new opportunities and exciting projects. Whether you're looking for a team lead, consultant, or collaborator, let's discuss how we can create something amazing together.",
+    "methods": [
+      {
+        "type": "email",
+        "icon": "Mail",
+        "title": "Email Me",
+        "description": "For project inquiries and collaboration opportunities",
+        "action": "alex.developer@email.com",
+        "actionType": "email"
+      }
+    ],
+    "lookingFor": [
+      {
+        "title": "Senior/Lead Roles",
+        "description": "Technical leadership positions where I can mentor teams and drive architectural decisions."
+      },
+      {
+        "title": "Innovative Projects",
+        "description": "Cutting-edge applications using the latest web technologies and modern development practices."
+      },
+      {
+        "title": "Remote-First Culture",
+        "description": "Companies with strong remote collaboration practices and flexible work arrangements."
+      }
+    ]
+  },
+  "navigation": [
+    { "label": "About", "target": "about" },
+    { "label": "Skills", "target": "skills" },
+    { "label": "Projects", "target": "projects" },
+    { "label": "Experience", "target": "experience" },
+    { "label": "Contact", "target": "contact" }
+  ],
+  "footer": {
+    "copyright": "© 2025 Alex Rodriguez. Built with React, TypeScript, and Tailwind CSS.",
+    "tagline": "Open to new opportunities • Available for freelance projects"
+  }
+};
