@@ -60,7 +60,7 @@ export function Hero({data}: HeroProps) {
                         animate="visible"
                     >
                         <motion.div className="space-y-2" variants={itemVariants}>
-                            <Badge variant="secondary" className="mb-4">
+                            <Badge variant="secondary" className="mb-4 mt-8 md:mt-0">
                                 {data.availabilityStatus}
                             </Badge>
                             <h1 className="text-4xl lg:text-5xl xl:text-6xl tracking-tight">
