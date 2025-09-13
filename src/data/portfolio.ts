@@ -116,28 +116,28 @@ export const portfolioData = {
         "description": "A selection of projects that showcase my expertise in building scalable web applications and solving complex technical challenges.",
         "featured": [
             {
-                "title": "E-Commerce Platform",
-                "description": "Built a scalable React/Next.js e-commerce platform with real-time inventory, payment processing, and admin dashboard. Improved conversion rates by 35% through UX optimization.",
-                "image": "https://images.unsplash.com/photo-1670057046254-3b5095eb4b66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxyZWFjdCUyMGphdmFzY3JpcHQlMjBjb2Rpbmd8ZW58MXx8fHwxNzU1NjIxMzgzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                "technologies": ["React", "Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
-                "liveUrl": "#",
-                "githubUrl": "#"
+                "title": "Teefz Crash Game",
+                "description": "Casino Web Crash Game developed using Three.JS",
+                "image": "/teefz.png",
+                "technologies": ["Three.JS", "Angular", "TypeScript", "WebGL"],
+                "liveUrl": "",
+                "githubUrl": "https://github.com/craigiswayne/angular-casino"
             },
             {
-                "title": "SaaS Dashboard",
-                "description": "Developed a comprehensive analytics dashboard for a fintech startup. Features real-time data visualization, user management, and responsive design. Serves 10K+ active users.",
-                "image": "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzU1NTk2Nzc3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                "technologies": ["React", "D3.js", "Redux", "Node.js", "PostgreSQL"],
-                "liveUrl": "#",
-                "githubUrl": "#"
+                "title": "SAASQuash",
+                "description": "Locally hosted image compression tool",
+                "image": "/saasquash.png",
+                "technologies": ["Angular", "Typescript", "Node.js", "Node.js", "Agentic"],
+                "liveUrl": "",
+                "githubUrl": "https://github.com/craigiswayne/saasquash"
             },
             {
-                "title": "Design System & Component Library",
-                "description": "Created a comprehensive design system and React component library used across 5+ products. Includes Storybook documentation, automated testing, and npm distribution.",
-                "image": "https://images.unsplash.com/photo-1728598909887-2d983a8889b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjB3ZWIlMjBkZXZlbG9wbWVudCUyMHNldHVwfGVufDF8fHx8MTc1NTYyMTM4M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                "technologies": ["React", "Storybook", "TypeScript", "Rollup", "Jest"],
-                "liveUrl": "#",
-                "githubUrl": "#"
+                "title": "UROC Demo Launcher",
+                "description": "Album Cover style demo launcher for games built within UROC",
+                "image": "/uroc_demo_launcher.png",
+                "technologies": ["TypeScript", "GSAP", "SCSS"],
+                "liveUrl": "http://gamedemos.uroc.com",
+                "githubUrl": "https://github.com/craigiswayne/uroc-demo-launcher-coverflow"
             }
         ]
     },

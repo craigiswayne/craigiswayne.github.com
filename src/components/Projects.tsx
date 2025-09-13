@@ -108,14 +108,24 @@ export function Projects({data}: ProjectsProps) {
                                         className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
                                     <div
                                         className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <Button size="sm" variant="secondary" className="gap-1">
-                                            <ExternalLink className="w-3 h-3"/>
-                                            Live
-                                        </Button>
-                                        <Button size="sm" variant="secondary" className="gap-1">
-                                            <Github className="w-3 h-3"/>
-                                            Code
-                                        </Button>
+                                        {
+                                            project.liveUrl ?
+                                            <Button size="sm" variant="secondary" className="gap-1">
+                                                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1">
+                                                    <ExternalLink/>
+                                                    Live
+                                                </a>
+                                            </Button> : <></>
+                                        }
+                                        {
+                                            project.githubUrl ?
+                                            <Button size="sm" variant="secondary" className="gap-1">
+                                                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1">
+                                                <Github className="w-3 h-3"/>
+                                                Code
+                                                </a>
+                                            </Button> : <></>
+                                        }
                                     </div>
                                 </div>
 
@@ -155,18 +165,18 @@ export function Projects({data}: ProjectsProps) {
                     transition={{duration: 0.6, delay: 0.3}}
                 >
 
-                        <Button variant="outline" size="lg" className="gap-2">
-                            <a
-                                href={portfolioData.personal.socialLinks.github}
-                                className="flex items-center gap-1"
-                                target="_blank"
-                            >
+                    <Button variant="outline" size="lg" className="gap-2">
+                        <a
+                            href={portfolioData.personal.socialLinks.github}
+                            className="flex items-center gap-1"
+                            target="_blank"
+                        >
                             <Github className="w-4 h-4"/>
 
                             View All Projects on GitHub
-                            </a>
+                        </a>
 
-                        </Button>
+                    </Button>
 
                 </motion.div>
             </div>
