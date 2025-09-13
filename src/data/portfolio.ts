@@ -9,7 +9,7 @@ export const portfolioData = {
         "name": abstracted_data.name,
         "title": "Senior Frontend Web Developer",
         "availabilityStatus": "Available for new opportunities",
-        "description": "Crafting exceptional digital experiences with modern web technologies. Specializing in React, TypeScript, and creating scalable frontend architectures that drive business growth.",
+        "description": "Crafting exceptional digital experiences with modern web technologies. Specializing in TypeScript stacks, and creating scalable frontend architectures that drive business growth.",
         "yearsOfExperience": 8,
         "email": abstracted_data.email,
         "cvPath": "/CV-CraigWayne.pdf",
@@ -24,7 +24,7 @@ export const portfolioData = {
         "subtitle": "Building the Future of Web",
         "description": "With over 10 years of experience in frontend development, I've helped startups and enterprise companies create digital products that users love. My passion lies in crafting intuitive interfaces and scalable architectures.",
         "journey": [
-            "I started my career as a curious developer fascinated by the intersection of design and technology. Over the years, I've evolved from writing my first HTML page to architecting complex React applications used by millions.",
+            "I started my career as a curious developer fascinated by the intersection of design and technology. Over the years, I've evolved from writing my first HTML page to architecting complex applications used by millions.",
             "Today, I focus on building scalable frontend systems, mentoring teams, and staying at the forefront of web technology. I believe great software is not just about code—it's about solving real problems for real people."
         ],
         "highlights": [
@@ -55,11 +55,19 @@ export const portfolioData = {
                 "level": "Expert"
             },
             {
-                "skill": "React/Next.js",
+                "skill": "CSS/SCSS",
                 "level": "Expert"
             },
             {
                 "skill": "Frontend Architecture",
+                "level": "Expert"
+            },
+            {
+                "skill": "API Design",
+                "level": "Expert"
+            },
+            {
+                "skill": "React/Vue/Next.js",
                 "level": "Advanced"
             },
             {
@@ -76,9 +84,8 @@ export const portfolioData = {
             {
                 "title": "Frontend Technologies",
                 "skills": [
-                    "React", "Next.js", "TypeScript", "JavaScript (ES6+)",
-                    "HTML5", "CSS3", "Tailwind CSS", "Styled Components",
-                    "Redux", "Zustand", "React Query", "GraphQL"
+                    "TypeScript", "Angular", "React", "Vue", "CSS3", "SCSS", "Next.js", "JavaScript (ES6+)",
+                    "HTML5", "Tailwind CSS", "Styled Components", "WebGL", "WordPress"
                 ]
             },
             {
@@ -98,8 +105,8 @@ export const portfolioData = {
             {
                 "title": "Backend & Cloud",
                 "skills": [
-                    "Node.js", "REST APIs", "Firebase", "Supabase",
-                    "AWS", "Vercel", "Netlify", "Docker"
+                    "Node.js", "REST APIs", "Firebase", "PHP", ".NET",
+                    "AWS", "Netlify", "Docker", "Azure DevOps"
                 ]
             }
         ]
