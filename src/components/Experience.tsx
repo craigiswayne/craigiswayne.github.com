@@ -193,8 +193,8 @@ export function Experience({data}: ExperienceProps) {
 
                 {/* Timeline Container */}
                 <div className="relative">
-                    {/* Vertical Timeline Line */}
-                    <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border overflow-hidden">
+                    {/* Vertical Timeline Line - Hidden on mobile */}
+                    <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border overflow-hidden hidden md:block">
                         <motion.div
                             className="w-full bg-gradient-to-b from-primary via-primary to-primary/60"
                             variants={timelineLineVariants}
@@ -219,11 +219,11 @@ export function Experience({data}: ExperienceProps) {
                                 <motion.div
                                     key={index}
                                     variants={cardVariants}
-                                    className="relative pl-24"
+                                    className="relative pl-0 md:pl-24"
                                 >
-                                    {/* Timeline Date */}
+                                    {/* Timeline Date - Hidden on mobile */}
                                     <motion.div
-                                        className="absolute left-0 top-6 flex flex-col items-center text-center min-w-16"
+                                        className="absolute left-0 top-6 flex flex-col items-center text-center min-w-16 hidden md:flex"
                                         variants={timelineDotVariants}
                                     >
                                         <div
@@ -244,7 +244,7 @@ export function Experience({data}: ExperienceProps) {
                                         className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 relative">
                                         {/* Card Connector Line */}
                                         <div
-                                            className="absolute left-0 top-9 w-6 h-0.5 bg-border -translate-x-full"></div>
+                                            className="absolute left-0 top-9 w-6 h-0.5 bg-border -translate-x-full hidden md:block"></div>
 
                                         {/* Location in top right */}
                                         <motion.div
@@ -341,9 +341,9 @@ export function Experience({data}: ExperienceProps) {
                         })}
                     </motion.div>
 
-                    {/* Timeline End Marker */}
+                    {/* Timeline End Marker - Hidden on mobile */}
                     <motion.div
-                        className="absolute left-6 -bottom-2 w-4 h-4 bg-gradient-to-br from-primary/60 to-primary/30 rounded-full border-4 border-background shadow-sm"
+                        className="absolute left-6 -bottom-2 w-4 h-4 bg-gradient-to-br from-primary/60 to-primary/30 rounded-full border-4 border-background shadow-sm hidden md:block"
                         initial={{scale: 0, opacity: 0}}
                         whileInView={{scale: 1, opacity: 1}}
                         viewport={{once: true}}
