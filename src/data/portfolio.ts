@@ -14,7 +14,7 @@ export const portfolioData = {
         "email": abstracted_data.email,
         "cvPath": "/CV-CraigWayne.pdf",
         "cvFileName": "CV-CraigWayne.pdf",
-        "profileImage": "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzU1NTk2Nzc3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        "profileImage": "profile.png",
         "socialLinks": {
             "github": "https://github.com/craigiswayne",
             "linkedin": "https://www.linkedin.com/in/craigiswayne"
@@ -75,7 +75,7 @@ export const portfolioData = {
                 "level": "Advanced"
             }
         ],
-        "image": "https://images.unsplash.com/photo-1728598909887-2d983a8889b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjB3ZWIlMjBkZXZlbG9wbWVudCUyMHNldHVwfGVufDF8fHx8MTc1NTYyMTM4M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+        "image": "workspace.png"
     },
     "skills": {
         "subtitle": "Technologies I Work With",
