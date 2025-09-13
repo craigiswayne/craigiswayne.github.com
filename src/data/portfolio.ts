@@ -153,7 +153,7 @@ export const portfolioData = {
                     "Build bespoke tools to facilitate with development of our games",
                     "Maintenance and development of the corporate website",
                 ],
-                "technologies": ["React", "TypeScript", "Next.js", "AWS", "GraphQL"]
+                "technologies": ["PixiJS", "Unity", "WebGL", "2D/3D", "Angular", "Three.JS", "Typescript", "Game Development"]
             },
             {
                 "company": "Microgaming",
@@ -174,7 +174,7 @@ export const portfolioData = {
                     "Studio Website Development and Maintenance",
                     "Project Management"
                 ],
-                "technologies": ["React", "TypeScript", "Next.js", "AWS", "GraphQL"]
+                "technologies": [".NET", "PHP", "TypeScript", "Angular", "React", "Typescript", "Docker", "Azure DevOps", "Shell Scripting", "Back Office"]
             },
             {
                 "company": "Rank Interactive",
@@ -190,11 +190,11 @@ export const portfolioData = {
                     "Our cashier app is built to withstand large amounts of traffic whilst implementing UI and UX best practices. On any given day, it handles approximately 80,000 transactions.",
                     "Maintaining unit tests coupled with continuous integration pipelines",
                 ],
-                "technologies": ["React", "JavaScript", "Styled Components", "Jest", "Storybook"]
+                "technologies": ["Angular", "Typescript", "Elastic Stack (ELK)", "Docker", "Node.js", "CI/CD", "Docker"]
             },
             {
                 "company": "Digioutsource",
-                "companyLogo": "/digioutsource_logo.jpeg",
+                "companyLogo": "/logo_digioutsource.webp",
                 "position": "Intermediate Web Developer",
                 "date_start": "2019-02",
                 "date_end": "2020-08",
@@ -206,7 +206,25 @@ export const portfolioData = {
                     "2IC to the Team Lead and responsible for mentoring the junior / intermediate colleagues.",
                     "The CI/CD process leverages GitLabs Pipelines integrating tightly with Kubernetes"
                 ],
-                "technologies": ["JavaScript", "React", "HTML/CSS", "Node.js", "MongoDB"]
+                "technologies": [".NET", "MongoDB", "Elastic Stack (ELK)", "Angular", "Typescript", "Typescript"]
+            },
+            {
+                "company": "Media24",
+                "companyLogo": "/logo_media24.png",
+                "position": "Senior WordPress Developer",
+                "date_start": "2015-03",
+                "date_end": "2018-12",
+                "location": "Cape Town, South Africa",
+                "description": "Design and Develop WordPress Sites to promote the various media brands under the Media24 umbrella",
+                "achievements": [
+                    "Design and Develop WordPress Websites",
+                    "Develop bespoke Themes and Plugins",
+                    "Collaborate with Designers to bring their ideas to fruition",
+                    "Mentoring Juniors and upskilling team members",
+                    "Evaluate and provide solutions to security concerns",
+                    "Manage the infrastructure and deployment of over 20 brands"
+                ],
+                "technologies": ["PHP", "WordPress", "React", "SCSS", "Typescript", "Javascript", "CI/CD", "Docker"]
             }
         ]
     },
