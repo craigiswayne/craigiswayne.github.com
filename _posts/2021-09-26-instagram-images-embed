@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "Embed Instagram Images on your site"
+date:   2021-09-26
+categories: instagram
+---
+
+1. Create an APP on Facebook Developers
+2. Get the APP ID
+
+
+https://developers.facebook.com/docs/instagram-basic-display-api/guides/getting-access-tokens-and-permissions
+3. Make a request to `https://api.instagram.com/oauth/authorize?client_id={{instagram_app_id}}&redirect_uri={{redirect_uri}}&scope={{scope}}&response_type=code&state={state}`
+
+
+https://api.instagram.com/oauth/authorize?client_id=4960139244015587&redirect_uri=https://brothers-in-vine.github.io&scope={{scope}}&response_type=code&state={state}
