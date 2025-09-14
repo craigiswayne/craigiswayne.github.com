@@ -11,7 +11,7 @@ interface ExperienceProps {
             companyLogo: string;
             position: string;
             date_start: string;
-            date_end: string;
+            date_end?: string;
             location: string;
             description: string;
             achievements: string[];
