@@ -1,9 +1,9 @@
-import { Card, CardContent } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Code, Users, Zap, Target, Loader2 } from "lucide-react";
-import { motion } from "motion/react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { useState, useEffect } from "react";
+import {Card, CardContent} from "./ui/card";
+import {Badge} from "./ui/badge";
+import {Code, Users, Zap, Target, Loader2} from "lucide-react";
+import {motion} from "motion/react";
+import {PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip} from "recharts";
+import {useState, useEffect} from "react";
 
 interface AboutProps {
     data: {
@@ -23,7 +23,7 @@ interface AboutProps {
     };
 }
 
-export function About({ data }: AboutProps) {
+export function About({data}: AboutProps) {
     const [chartData, setChartData] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -72,7 +72,7 @@ export function About({ data }: AboutProps) {
                     color: colors[index] ?? item.color
                 }));
 
-                setChartData({ data: transformedData });
+                setChartData({data: transformedData});
             } catch (err) {
                 console.error('Error fetching WakaTime data:', err);
                 setError('Failed to load language statistics');
@@ -80,11 +80,11 @@ export function About({ data }: AboutProps) {
                 // Fallback data in case of error
                 setChartData({
                     data: [
-                        { name: "TypeScript", percent: 35.2, color: "#3178c6" },
-                        { name: "JavaScript", percent: 25.8, color: "#f1e05a" },
-                        { name: "HTML", percent: 15.1, color: "#e34c26" },
-                        { name: "CSS", percent: 12.4, color: "#563d7c" },
-                        { name: "Other", percent: 11.5, color: "#8ecae6" }
+                        {name: "TypeScript", percent: 35.2, color: "#3178c6"},
+                        {name: "JavaScript", percent: 25.8, color: "#f1e05a"},
+                        {name: "HTML", percent: 15.1, color: "#e34c26"},
+                        {name: "CSS", percent: 12.4, color: "#563d7c"},
+                        {name: "Other", percent: 11.5, color: "#8ecae6"}
                     ]
                 });
             } finally {
@@ -114,7 +114,7 @@ export function About({ data }: AboutProps) {
         color: item.color || chartColors[index % chartColors.length]
     }));
 
-    const CustomTooltip = ({ active, payload }: any) => {
+    const CustomTooltip = ({active, payload}: any) => {
         if (active && payload && payload.length) {
             const data = payload[0].payload;
             return (
@@ -129,14 +129,14 @@ export function About({ data }: AboutProps) {
         return null;
     };
 
-    const CustomLegend = ({ payload }: any) => {
+    const CustomLegend = ({payload}: any) => {
         return (
             <div className="flex flex-wrap justify-center gap-4 mt-6">
                 {payload.map((entry: any, index: number) => (
                     <div key={index} className="flex items-center gap-2">
                         <div
                             className="w-3 h-3 rounded-full"
-                            style={{ backgroundColor: entry.color }}
+                            style={{backgroundColor: entry.color}}
                         />
                         <span className="text-xs text-foreground">{entry.value}</span>
                     </div>
@@ -146,7 +146,7 @@ export function About({ data }: AboutProps) {
     };
 
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: {opacity: 0},
         visible: {
             opacity: 1,
             transition: {
@@ -157,17 +157,17 @@ export function About({ data }: AboutProps) {
     };
 
     const cardVariants = {
-        hidden: { opacity: 0, y: 30, scale: 0.95 },
+        hidden: {opacity: 0, y: 30, scale: 0.95},
         visible: {
             opacity: 1,
             y: 0,
             scale: 1,
-            transition: { duration: 0.5, ease: "easeOut" }
+            transition: {duration: 0.5, ease: "easeOut"}
         }
     };
 
     const journeyVariants = {
-        hidden: { opacity: 0 },
+        hidden: {opacity: 0},
         visible: {
             opacity: 1,
             transition: {
@@ -178,11 +178,11 @@ export function About({ data }: AboutProps) {
     };
 
     const journeyItemVariants = {
-        hidden: { opacity: 0, x: -30 },
+        hidden: {opacity: 0, x: -30},
         visible: {
             opacity: 1,
             x: 0,
-            transition: { duration: 0.5, ease: "easeOut" }
+            transition: {duration: 0.5, ease: "easeOut"}
         }
     };
 
@@ -191,10 +191,10 @@ export function About({ data }: AboutProps) {
             <div className="container mx-auto px-4 max-w-6xl">
                 <motion.div
                     className="text-center mb-16"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    initial={{opacity: 0, y: 20}}
+                    whileInView={{opacity: 1, y: 0}}
+                    viewport={{once: true}}
+                    transition={{duration: 0.6}}
                 >
                     <Badge variant="outline" className="mb-4">About Me</Badge>
                     <h2 className="mb-6">{data.subtitle}</h2>
@@ -208,7 +208,7 @@ export function About({ data }: AboutProps) {
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{once: true, margin: "-50px"}}
                 >
                     {highlights.map((item, index) => {
                         const Icon = item.icon;
@@ -216,8 +216,9 @@ export function About({ data }: AboutProps) {
                             <motion.div key={index} variants={cardVariants}>
                                 <Card className="text-center hover:shadow-lg transition-shadow h-full">
                                     <CardContent className="p-6">
-                                        <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                                            <Icon className="w-6 h-6 text-primary" />
+                                        <div
+                                            className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                            <Icon className="w-6 h-6 text-primary"/>
                                         </div>
                                         <h3 className="mb-2">{item.title}</h3>
                                         <p className="text-sm text-muted-foreground">{item.description}</p>
@@ -234,7 +235,7 @@ export function About({ data }: AboutProps) {
                         variants={journeyVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
+                        viewport={{once: true, margin: "-50px"}}
                     >
                         <motion.h3 variants={journeyItemVariants}>My Journey</motion.h3>
                         {data.journey.map((paragraph, index) => (
@@ -255,10 +256,10 @@ export function About({ data }: AboutProps) {
                                 <motion.div
                                     key={index}
                                     className="flex justify-between"
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                                    initial={{opacity: 0, x: -20}}
+                                    whileInView={{opacity: 1, x: 0}}
+                                    viewport={{once: true}}
+                                    transition={{duration: 0.4, delay: index * 0.1}}
                                 >
                                     <span>{item.skill}</span>
                                     <span className="text-primary">{item.level}</span>
@@ -269,10 +270,10 @@ export function About({ data }: AboutProps) {
 
                     <motion.div
                         className="relative"
-                        initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
-                        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7, ease: "easeOut" }}
+                        initial={{opacity: 0, scale: 0.9, rotate: 2}}
+                        whileInView={{opacity: 1, scale: 1, rotate: 0}}
+                        viewport={{once: true}}
+                        transition={{duration: 0.7, ease: "easeOut"}}
                     >
                         <Card className="w-full h-[500px] bg-background/50 backdrop-blur-sm border-border">
                             <CardContent className="p-8 h-full flex flex-col">
@@ -291,8 +292,9 @@ export function About({ data }: AboutProps) {
                                     {isLoading ? (
                                         <div className="h-full flex items-center justify-center">
                                             <div className="flex flex-col items-center gap-3">
-                                                <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                                                <p className="text-sm text-muted-foreground">Loading language stats...</p>
+                                                <Loader2 className="w-8 h-8 animate-spin text-primary"/>
+                                                <p className="text-sm text-muted-foreground">Loading language
+                                                    stats...</p>
                                             </div>
                                         </div>
                                     ) : processedChartData.length > 0 ? (
@@ -319,9 +321,9 @@ export function About({ data }: AboutProps) {
                                                         />
                                                     ))}
                                                 </Pie>
-                                                <Tooltip content={<CustomTooltip />} />
+                                                <Tooltip content={<CustomTooltip/>}/>
                                                 <Legend
-                                                    content={<CustomLegend />}
+                                                    content={<CustomLegend/>}
                                                 />
                                             </PieChart>
                                         </ResponsiveContainer>
