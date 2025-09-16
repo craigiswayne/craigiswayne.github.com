@@ -75,7 +75,6 @@ export const portfolioData = {
                 "level": "Advanced"
             }
         ],
-        "image": "https://craigiswayne.github.io/workspace.png"
     },
     "skills": {
         "subtitle": "Technologies I Work With",
