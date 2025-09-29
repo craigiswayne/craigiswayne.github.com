@@ -27,14 +27,18 @@ jobs:
       - name: Build Project 🏗️
         run: npm run build
         env:
-          PUBLIC_URL: /${{ github.event.repository.name }}
+          PUBLIC_URL: 'craigiswayne.com'
 
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          exclude_assets: '.map, .DS_Store'
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Automated deployment to GitHub Pages'
+          cname: 'craigiswayne.com'
+          exclude_assets: '.map, .DS_Store'
+
+      - name: Tests
+        run: npm run cy:run
