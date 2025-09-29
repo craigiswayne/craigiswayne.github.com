@@ -31,4 +31,4 @@ jobs:
       - name: Build Project 🏗️
         run: npm run build
         env:
-          PUBLIC_URL: /${{ github.event.repository.name }}
+          PUBLIC_URL: 'craigiswayne.com'

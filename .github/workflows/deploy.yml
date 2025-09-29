@@ -39,3 +39,6 @@ jobs:
           commit_message: 'Automated deployment to GitHub Pages'
           cname: 'craigiswayne.com'
           exclude_assets: '.map, .DS_Store'
+
+      - name: Tests 🧪
+        run: npm run cy:run
