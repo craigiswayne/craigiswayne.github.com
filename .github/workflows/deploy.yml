@@ -40,5 +40,5 @@ jobs:
           cname: 'craigiswayne.com'
           exclude_assets: '.map, .DS_Store'
 
-      - name: Tests
+      - name: Tests 🧪
         run: npm run cy:run
