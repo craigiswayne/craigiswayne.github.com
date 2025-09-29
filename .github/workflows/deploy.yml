@@ -27,7 +27,7 @@ jobs:
       - name: Build Project 🏗️
         run: npm run build
         env:
-          PUBLIC_URL: /${{ github.event.repository.name }}
+          PUBLIC_URL: 'craigiswayne.com'
 
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v4

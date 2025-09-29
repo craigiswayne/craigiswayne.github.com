@@ -14,7 +14,7 @@ export const portfolioData = {
         "email": abstracted_data.email,
         "cvPath": "/CV-CraigWayne.pdf",
         "cvFileName": "CV-CraigWayne.pdf",
-        "profileImage": "https://craigiswayne.github.io/profile.png",
+        "profileImage": "/profile.png",
         "socialLinks": {
             "github": "https://github.com/craigiswayne",
             "linkedin": "https://www.linkedin.com/in/craigiswayne"
@@ -117,7 +117,7 @@ export const portfolioData = {
             {
                 "title": "Teefz Crash Game",
                 "description": "Casino Web Crash Game developed using Three.JS",
-                "image": "https://craigiswayne.github.io/teefz.png",
+                "image": "/teefz.png",
                 "technologies": ["Three.JS", "Angular", "TypeScript", "WebGL"],
                 "liveUrl": "",
                 "githubUrl": "https://github.com/craigiswayne/angular-casino"
@@ -125,7 +125,7 @@ export const portfolioData = {
             {
                 "title": "SAASQuash",
                 "description": "Locally hosted image compression tool",
-                "image": "https://craigiswayne.github.io/saasquash.png",
+                "image": "/saasquash.png",
                 "technologies": ["Angular", "Typescript", "Node.js", "Node.js", "Agentic"],
                 "liveUrl": "",
                 "githubUrl": "https://github.com/craigiswayne/saasquash"
@@ -133,7 +133,7 @@ export const portfolioData = {
             {
                 "title": "UROC Demo Launcher",
                 "description": "Album Cover style demo launcher for games built within UROC",
-                "image": "https://craigiswayne.github.io/uroc_demo_launcher.png",
+                "image": "/uroc_demo_launcher.png",
                 "technologies": ["TypeScript", "GSAP", "SCSS"],
                 "liveUrl": "http://gamedemos.uroc.com",
                 "githubUrl": "https://github.com/craigiswayne/uroc-demo-launcher-coverflow"
@@ -146,7 +146,7 @@ export const portfolioData = {
         "positions": [
             {
                 "company": "UROC Studios",
-                "companyLogo": "https://craigiswayne.github.io/logo_uroc_studios.jpeg",
+                "companyLogo": "/logo_uroc_studios.jpeg",
                 "position": "Senior Frontend Developer",
                 "date_start": "2024-11",
                 "location": "Douglas, Isle of Man",
@@ -163,7 +163,7 @@ export const portfolioData = {
             },
             {
                 "company": "Microgaming",
-                "companyLogo": "https://craigiswayne.github.io/logo_microgaming.png",
+                "companyLogo": "/logo_microgaming.png",
                 "position": "Senior Frontend Developer",
                 "date_start": "2022-10",
                 "date_end": "2024-10",
@@ -184,7 +184,7 @@ export const portfolioData = {
             },
             {
                 "company": "Rank Interactive",
-                "companyLogo": "https://craigiswayne.github.io/rank_interactive_logo.jpeg",
+                "companyLogo": "/rank_interactive_logo.jpeg",
                 "position": "Senior Frontend Engineer",
                 "date_start": "2020-09",
                 "date_end": "2022-08",
@@ -200,7 +200,7 @@ export const portfolioData = {
             },
             {
                 "company": "Digioutsource",
-                "companyLogo": "https://craigiswayne.github.io/logo_digioutsource.webp",
+                "companyLogo": "/logo_digioutsource.webp",
                 "position": "Intermediate Web Developer",
                 "date_start": "2019-02",
                 "date_end": "2020-08",
@@ -216,7 +216,7 @@ export const portfolioData = {
             },
             {
                 "company": "Media24",
-                "companyLogo": "https://craigiswayne.github.io/logo_media24.png",
+                "companyLogo": "/logo_media24.png",
                 "position": "Senior WordPress Developer",
                 "date_start": "2015-03",
                 "date_end": "2018-12",
