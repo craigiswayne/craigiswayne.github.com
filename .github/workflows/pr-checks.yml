@@ -31,4 +31,7 @@ jobs:
       - name: Build Project 🏗️
         run: npm run build
         env:
-          PUBLIC_URL: /${{ github.event.repository.name }}
+          PUBLIC_URL: 'craigiswayne.com'
+
+      - name: Run E2E (Cypress) ✅
+        run: npm run test:e2e
