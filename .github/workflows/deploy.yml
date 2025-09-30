@@ -5,14 +5,17 @@ on:
     branches:
       - develop
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout 🛒
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -42,3 +45,10 @@ jobs:
 
       - name: Tests 🧪
         run: npm run cy:run
+
+  tests:
+    needs: build-and-deploy
+    uses: craigiswayne/ci-cd/.github/workflows/_npm-install-build-lint-test.yml@v0.0.9
+    with:
+      test_command: 'cy:run'
+

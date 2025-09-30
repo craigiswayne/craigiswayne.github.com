@@ -1,0 +1,17 @@
+name: Build and Deploy React App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - feature/easy-npm-actions
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    uses: craigiswayne/ci-cd/.github/workflows/_npm-install-build-lint-test.yml@v0.0.9
+    with:
+      test_command: 'cy:run'
+      run_lint: false

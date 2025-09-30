@@ -48,7 +48,7 @@ export function About({data}: AboutProps) {
                 setError(null);
 
                 const url_last_year = 'https://wakatime.com/share/@craigiswayne/b62296b8-3cd1-42bc-8288-cbbe4e25f00e.json';
-                const url_all_time = 'https://wakatime.com/share/@craigiswayne/593b87c6-38f5-40a0-9db0-420e856f13d3.json';
+                // const url_all_time = 'https://wakatime.com/share/@craigiswayne/593b87c6-38f5-40a0-9db0-420e856f13d3.json';
                 const response = await fetch(url_last_year);
 
                 if (!response.ok) {
@@ -80,11 +80,7 @@ export function About({data}: AboutProps) {
                 // Fallback data in case of error
                 setChartData({
                     data: [
-                        {name: "TypeScript", percent: 35.2, color: "#3178c6"},
-                        {name: "JavaScript", percent: 25.8, color: "#f1e05a"},
-                        {name: "HTML", percent: 15.1, color: "#e34c26"},
-                        {name: "CSS", percent: 12.4, color: "#563d7c"},
-                        {name: "Other", percent: 11.5, color: "#8ecae6"}
+                        {name: "Unknown", percent: 100, color: "#3178c6"}
                     ]
                 });
             } finally {
