@@ -138,7 +138,7 @@ export default function App() {
                 animate="visible"
                 variants={staggerVariants}
               >
-                {navItems.map((item, index) => (
+                {navItems.map((item) => (
                   <motion.button
                     key={item.label}
                     onClick={() => scrollToSection(item.target)}

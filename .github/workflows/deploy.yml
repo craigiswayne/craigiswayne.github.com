@@ -5,14 +5,17 @@ on:
     branches:
       - develop
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout 🛒
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -38,7 +41,13 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Automated deployment to GitHub Pages'
           cname: 'craigiswayne.com'
-          exclude_assets: '.map, .DS_Store'
 
-      - name: Tests 🧪
-        run: npm run cy:run
+  tests:
+    name: Tests 🧪
+    needs: build-and-deploy
+    uses: craigiswayne/ci-cd/.github/workflows/_npm-install-build-lint-test.yml@v0.0.10
+    with:
+      run_build: false
+      run_lint: false
+      test_command: 'cy:run'
+

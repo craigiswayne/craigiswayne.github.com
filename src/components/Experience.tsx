@@ -2,31 +2,29 @@ import {Badge} from "./ui/badge";
 import {motion} from "motion/react";
 import {ImageWithFallback} from "./figma/ImageWithFallback";
 
+interface Experience {
+    company: string;
+    companyLogo: string;
+    position: string;
+    date_start: string;
+    date_end?: string;
+    location: string;
+    description: string;
+    achievements: string[];
+    technologies: string[];
+}
 interface ExperienceProps {
     data: {
         subtitle: string;
         description: string;
-        positions: Array<{
-            company: string;
-            companyLogo: string;
-            position: string;
-            date_start: string;
-            date_end?: string;
-            location: string;
-            description: string;
-            achievements: string[];
-            technologies: string[];
-        }>;
+        positions: Array<Experience>;
     };
 }
 
 
-// Function to extract and format start date from duration string
-function formatTimelineDate(date_start: string, date_end: string): { year: number; month: string } {
-    // Handle different duration formats
-    const start_date_obj = new Date(date_start);
+function formatTimelineDate(experience: Experience): { year: number; month: string } {
+    const start_date_obj = new Date(experience.date_start);
     const month_index = start_date_obj.getMonth();
-
     const month_lists = [
         'Jan',
         'Feb',
@@ -41,38 +39,7 @@ function formatTimelineDate(date_start: string, date_end: string): { year: numbe
         'Nov',
         'Dec'
     ];
-
     const month = month_lists[month_index];
-
-
-    // If it's a month and year (like "March 2022" or "Mar 2022")
-    // const monthYearMatch = startDate.match(/^(\w+)\s+(\d{4})$/);
-    // if (monthYearMatch) {
-    //     const monthName = monthYearMatch[1];
-    //     const year = monthYearMatch[2];
-    //
-    //     // Convert full month names to abbreviations
-    //     // const monthAbbreviations: { [key: string]: string } = {
-    //     //     'January': 'Jan', 'February': 'Feb', 'March': 'Mar', 'April': 'Apr',
-    //     //     'May': 'May', 'June': 'Jun', 'July': 'Jul', 'August': 'Aug',
-    //     //     'September': 'Sep', 'October': 'Oct', 'November': 'Nov', 'December': 'Dec',
-    //     //     'Jan': 'Jan', 'Feb': 'Feb', 'Mar': 'Mar', 'Apr': 'Apr',
-    //     //     'Jun': 'Jun', 'Jul': 'Jul', 'Aug': 'Aug', 'Sep': 'Sep', 'Oct': 'Oct', 'Nov': 'Nov', 'Dec': 'Dec'
-    //     // };
-    //
-    //     return {
-    //         year: startDate.getFullYear(),
-    //         month: monthAbbreviations[monthName] || monthName.slice(0, 3)
-    //     };
-    // }
-    //
-    // // Default fallback - just use the year if available
-    // const yearMatch = startDate.match(/(\d{4})/);
-    // if (yearMatch) {
-    //     return { year: yearMatch[1], month: 'Jan' };
-    // }
-
-    // Ultimate fallback
     return {year: start_date_obj.getFullYear(), month};
 }
 
@@ -213,7 +180,7 @@ export function Experience({data}: ExperienceProps) {
                         viewport={{once: true, margin: "-50px"}}
                     >
                         {experiences.map((exp, index) => {
-                            const timelineDate = formatTimelineDate(exp.date_start, exp.date_end);
+                            const timelineDate = formatTimelineDate(exp);
 
                             return (
                                 <motion.div
