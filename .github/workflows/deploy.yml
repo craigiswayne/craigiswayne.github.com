@@ -47,6 +47,7 @@ jobs:
     needs: build-and-deploy
     uses: craigiswayne/ci-cd/.github/workflows/_npm-install-build-lint-test.yml@v0.0.10
     with:
+      run_build: false
       run_lint: false
       test_command: 'cy:run'
 
