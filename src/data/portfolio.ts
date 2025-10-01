@@ -7,9 +7,9 @@ const abstracted_data = {
 export const portfolioData = {
     "personal": {
         "name": abstracted_data.name,
-        "title": "Senior Frontend Web Developer",
+        "title": "Full Stack Javascript Engineer",
         "availabilityStatus": "Available for new opportunities",
-        "description": "Crafting exceptional digital experiences with modern web technologies. Specializing in TypeScript stacks, and creating scalable frontend architectures that drive business growth.",
+        "description": "Crafting exceptional digital experiences with modern web technologies. Specializing in TypeScript stacks, and creating scalable architectures that drive business growth.",
         "yearsOfExperience": 8,
         "email": abstracted_data.email,
         "cvPath": "/CV-CraigWayne.pdf",
@@ -22,10 +22,10 @@ export const portfolioData = {
     },
     "about": {
         "subtitle": "Building the Future of Web",
-        "description": "With over 10 years of experience in frontend development, I've helped startups and enterprise companies create digital products that users love. My passion lies in crafting intuitive interfaces and scalable architectures.",
+        "description": "With over 10 years of experience in javascript development, I've helped startups and enterprise companies create digital products that users love. My passion lies in crafting intuitive interfaces and scalable architectures.",
         "journey": [
             "I started my career as a curious developer fascinated by the intersection of design and technology. Over the years, I've evolved from writing my first HTML page to architecting complex applications used by millions.",
-            "Today, I focus on building scalable frontend systems, mentoring teams, and staying at the forefront of web technology. I believe great software is not just about code—it's about solving real problems for real people."
+            "Today, I focus on building scalable full stack systems, mentoring teams, and staying at the forefront of web technology. I believe great software is not just about code—it's about solving real problems for real people."
         ],
         "highlights": [
             {
@@ -59,7 +59,7 @@ export const portfolioData = {
                 "level": "Expert"
             },
             {
-                "skill": "Frontend Architecture",
+                "skill": "Cloud Architecture",
                 "level": "Expert"
             },
             {
@@ -135,7 +135,7 @@ export const portfolioData = {
                 "description": "Album Cover style demo launcher for games built within UROC",
                 "image": "/uroc_demo_launcher.png",
                 "technologies": ["TypeScript", "GSAP", "SCSS"],
-                "liveUrl": "http://gamedemos.uroc.com",
+                "liveUrl": "https://gamedemos.uroc.com",
                 "githubUrl": "https://github.com/craigiswayne/uroc-demo-launcher-coverflow"
             }
         ]
@@ -147,7 +147,7 @@ export const portfolioData = {
             {
                 "company": "UROC Studios",
                 "companyLogo": "/logo_uroc_studios.jpeg",
-                "position": "Senior Frontend Developer",
+                "position": "Full Stack Javascript Engineer",
                 "date_start": "2024-11",
                 "location": "Douglas, Isle of Man",
                 "description": "Design and Develop Slot, Scratch and Crash Games",
@@ -164,7 +164,7 @@ export const portfolioData = {
             {
                 "company": "Microgaming",
                 "companyLogo": "/logo_microgaming.png",
-                "position": "Senior Frontend Developer",
+                "position": "Full Stack Javascript Engineer",
                 "date_start": "2022-10",
                 "date_end": "2024-10",
                 "location": "Cape Town, South Africa",
@@ -185,7 +185,7 @@ export const portfolioData = {
             {
                 "company": "Rank Interactive",
                 "companyLogo": "/rank_interactive_logo.jpeg",
-                "position": "Senior Frontend Engineer",
+                "position": "Full Stack Javascript Engineer",
                 "date_start": "2020-09",
                 "date_end": "2022-08",
                 "location": "Cape Town, South Africa",
