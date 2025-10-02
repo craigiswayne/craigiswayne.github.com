@@ -146,6 +146,7 @@ export const portfolioData = {
         "positions": [
             {
                 "company": "UROC Studios",
+                "company_url": "https://uroc.com/",
                 "companyLogo": "/logo_uroc_studios.jpeg",
                 "position": "Full Stack Javascript Engineer",
                 "date_start": "2024-11",
@@ -163,6 +164,7 @@ export const portfolioData = {
             },
             {
                 "company": "Microgaming",
+                "company_url": "https://www.microgaming.co.uk/",
                 "companyLogo": "/logo_microgaming.png",
                 "position": "Full Stack Javascript Engineer",
                 "date_start": "2022-10",
@@ -184,6 +186,7 @@ export const portfolioData = {
             },
             {
                 "company": "Rank Interactive",
+                "company_url": "https://www.rank.com/",
                 "companyLogo": "/rank_interactive_logo.jpeg",
                 "position": "Full Stack Javascript Engineer",
                 "date_start": "2020-09",
@@ -200,6 +203,7 @@ export const portfolioData = {
             },
             {
                 "company": "Digioutsource",
+                "company_url": "https://supergroup.com/companies/digi-outsource/",
                 "companyLogo": "/logo_digioutsource.webp",
                 "position": "Intermediate Web Developer",
                 "date_start": "2019-02",
@@ -216,6 +220,7 @@ export const portfolioData = {
             },
             {
                 "company": "Media24",
+                "company_url": "https://www.media24.com/",
                 "companyLogo": "/logo_media24.png",
                 "position": "Senior WordPress Developer",
                 "date_start": "2015-03",

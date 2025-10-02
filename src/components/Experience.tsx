@@ -4,6 +4,7 @@ import {ImageWithFallback} from "./figma/ImageWithFallback";
 
 interface Experience {
     company: string;
+    company_url: string;
     companyLogo: string;
     position: string;
     date_start: string;
@@ -247,7 +248,9 @@ export function Experience({data}: ExperienceProps) {
                                                     {exp.position}
                                                 </h3>
                                                 <p className="text-lg text-primary font-medium mb-2">
-                                                    {exp.company}
+                                                    <a href={exp.company_url} target="_blank">
+                                                        {exp.company}
+                                                    </a>
                                                 </p>
                                             </div>
                                         </div>
