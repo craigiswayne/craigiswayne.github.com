@@ -9,6 +9,7 @@ import { Menu, X, Download } from "lucide-react";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { portfolioData } from "./data/portfolio";
+import GitHubCorner from './components/GitHubCorner';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -70,6 +71,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <GitHubCorner url={portfolioData.personal.socialLinks.github} />
+
       {/* Navigation Header */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b"
