@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './GitHubCorner.css'
 interface GitHubCornerProps {
     url: string;
 }

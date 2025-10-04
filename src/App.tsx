@@ -9,7 +9,7 @@ import { Menu, X, Download } from "lucide-react";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { portfolioData } from "./data/portfolio";
-import GitHubCorner from './components/GitHubCorner';
+import GitHubCorner from './components/GitHubCorner/GitHubCorner';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
