@@ -1,0 +1,52 @@
+### https://craigiswayne.com
+GET https://craigiswayne.com
+
+> {%
+    client.test('Request executed successfully', () => {
+        const expected_code = 200;
+        client.assert(response.status === expected_code, `Response status is not ${expected_code}`);
+    });
+
+    client.test('Response content-type is correct', () => {
+        const expected_type = 'text/html';
+        const type = response.contentType.mimeType;
+        client.assert(type === expected_type, `Expected '${expected_type}' but received '${type}'`);
+    });
+%}
+
+### http redirects to https
+# @no-redirect
+GET http://craigiswayne.com
+
+> {%
+    client.test('Request redirects', () => {
+        const expected_code = 301;
+        client.assert(response.status === expected_code, `Response status is ${response.status} instead of ${expected_code}`);
+    });
+
+    client.test('Redirects to correct location', () => {
+        const location = response.headers.valueOf("location");
+
+        client.assert(location === 'https://craigiswayne.com/', `Client is not being redirected to correct site: ${location}`)
+    });
+%}
+
+### www redirects to https
+# @no-redirect
+GET https://www.craigiswayne.com
+
+> {%
+    client.test('Request redirects', () => {
+        const expected_code = 301;
+        client.assert(response.status === expected_code, `Response status is ${response.status} instead of ${expected_code}`);
+    });
+
+    client.test('Redirects to correct location', () => {
+        const location = response.headers.valueOf("location");
+
+        client.assert(location === 'https://craigiswayne.com/', `Client is not being redirected to correct site: ${location}`)
+    });
+%}
+
+
+### https://www.jetbrains.com/help/idea/http-client-variables.html#system-environment-variables

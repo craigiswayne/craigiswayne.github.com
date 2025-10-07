@@ -1,0 +1,1 @@
+https://www.jetbrains.com/help/idea/http-client-variables.html#system-environment-variables

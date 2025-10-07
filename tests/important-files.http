@@ -1,0 +1,31 @@
+### robots.txt exists
+GET https://craigiswayne.com/robots.txt
+
+> {%
+    client.test('Request executed successfully', () => {
+        const expected_code = 200;
+        client.assert(response.status === expected_code, `Response status is not ${expected_code}`);
+    });
+
+    client.test('Response content-type is correct', () => {
+        const expected_type = 'text/plain';
+        const type = response.contentType.mimeType;
+        client.assert(type === expected_type, `Expected '${expected_type}' but received '${type}'`);
+    });
+%}
+
+### sitemap.xml exists
+GET https://craigiswayne.com/sitemap.xml
+
+> {%
+    client.test('Request executed successfully', () => {
+        const expected_code = 200;
+        client.assert(response.status === expected_code, `Response status is not ${expected_code}`);
+    });
+
+    client.test('Response content-type is correct', () => {
+        const expected_type = 'application/xml';
+        const type = response.contentType.mimeType;
+        client.assert(type === expected_type, `Expected '${expected_type}' but received '${type}'`);
+    });
+%}
