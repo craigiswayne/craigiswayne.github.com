@@ -43,6 +43,41 @@ jobs:
           cname: 'craigiswayne.com'
 
   tests:
+    needs: build-and-deploy
+    strategy:
+      fail-fast: false
+      matrix:
+        iteration: [ 1 ]
+
+    name: 'Tests (iteration ${{matrix.iteration}})'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v5
+
+      - name: 'API requests'
+        uses: madhead/intellij-http-client-action@latest
+        with:
+          files: |-
+            ./tests/important-files.http
+            ./tests/site-response.http
+          report: true
+
+      - name: 'Rename Test Report'
+        # This step prevents report files from overwriting each other in parallel runs
+        if: (!cancelled()) # Run this even if the previous step fails
+        run: |
+          mv ${{ steps.http-client.outputs.report-path }} reports/report-${{ matrix.iteration }}.xml
+
+      - name: 'Publish Test Results'
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: (!cancelled())
+        with:
+          files: |
+            reports/**/*.xml
+
+  tests-cypress:
     name: Tests 🧪
     needs: build-and-deploy
     uses: craigiswayne/ci-cd/.github/workflows/_npm-install-build-lint-test.yml@v0.0.10
