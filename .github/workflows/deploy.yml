@@ -57,6 +57,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: 'API requests'
+        id: 'http-client'
         uses: madhead/intellij-http-client-action@latest
         with:
           files: |-
