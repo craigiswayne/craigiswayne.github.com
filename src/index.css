@@ -5214,3 +5214,24 @@ html {
         border-radius: 33% 67% 58% 42%/63% 68% 32% 37%;
     }
 }
+
+
+.jhey-background-grid {
+    position: relative;
+}
+
+.jhey-background-grid:before {
+    --size: 40px;
+    --line: light-dark( color-mix(in hsl, canvasText, #0000 90%), color-mix(in hsl, canvasText, #0000 80%));
+    content: "";
+    background: linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) calc(var(--size) * .36) 50% / var(--size) var(--size), linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0% calc(var(--size) * .32) / var(--size) var(--size);
+    transform-style: flat;
+    pointer-events: none;
+    z-index: -1;
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    -webkit-mask: linear-gradient(125deg, #0000 60%, #fff);
+    mask: linear-gradient(125deg, #0000 60%, #fff);
+}

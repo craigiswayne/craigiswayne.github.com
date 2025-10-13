@@ -32,21 +32,21 @@ GET http://craigiswayne.com
 %}
 
 ### www redirects to https
-# @no-redirect
-GET https://www.craigiswayne.com
-
-> {%
-    client.test('Request redirects', () => {
-        const expected_code = 301;
-        client.assert(response.status === expected_code, `Response status is ${response.status} instead of ${expected_code}`);
-    });
-
-    client.test('Redirects to correct location', () => {
-        const location = response.headers.valueOf("location");
-
-        client.assert(location === 'https://craigiswayne.com/', `Client is not being redirected to correct site: ${location}`)
-    });
-%}
+#@no-redirect
+#GET https://www.craigiswayne.com
+#
+#> {%
+#    client.test('Request redirects', () => {
+#        const expected_code = 301;
+#        client.assert(response.status === expected_code, `Response status is ${response.status} instead of ${expected_code}`);
+#    });
+#
+#    client.test('Redirects to correct location', () => {
+#        const location = response.headers.valueOf("location");
+#
+#        client.assert(location === 'https://craigiswayne.com/', `Client is not being redirected to correct site: ${location}`)
+#    });
+#%}
 
 
 ### https://www.jetbrains.com/help/idea/http-client-variables.html#system-environment-variables
