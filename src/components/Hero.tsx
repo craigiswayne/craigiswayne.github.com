@@ -144,7 +144,7 @@ export function Hero({data}: HeroProps) {
                         initial="hidden"
                         animate="visible"
                     >
-                        <div className="relative w-full h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+                        <div className="relative w-full h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl morphing-border">
                             <ImageWithFallback
                                 src={data.profileImage}
                                 alt="Professional developer workspace"
