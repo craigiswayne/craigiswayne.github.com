@@ -44,12 +44,8 @@ jobs:
 
   tests:
     needs: build-and-deploy
-    strategy:
-      fail-fast: false
-      matrix:
-        iteration: [ 1 ]
 
-    name: 'Tests (iteration ${{matrix.iteration}})'
+    name: 'Tests'
     runs-on: ubuntu-latest
 
     steps:
@@ -64,12 +60,6 @@ jobs:
             ./tests/important-files.http
             ./tests/site-response.http
           report: true
-
-      - name: 'Rename Test Report'
-        # This step prevents report files from overwriting each other in parallel runs
-        if: (!cancelled()) # Run this even if the previous step fails
-        run: |
-          mv ${{ steps.http-client.outputs.report-path }} reports/report-${{ matrix.iteration }}.xml
 
       - name: 'Publish Test Results'
         uses: EnricoMi/publish-unit-test-result-action@v2
