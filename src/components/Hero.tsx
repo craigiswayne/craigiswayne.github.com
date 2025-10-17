@@ -1,7 +1,6 @@
 import {Button} from "./ui/button";
 import {Badge} from "./ui/badge";
 import {ArrowDown, Github, Linkedin, Mail} from "lucide-react";
-import {ImageWithFallback} from "./figma/ImageWithFallback";
 import {motion} from "motion/react";
 import HeroProfileImage from './HeroProfileImage/HeroProfileImage';
 
