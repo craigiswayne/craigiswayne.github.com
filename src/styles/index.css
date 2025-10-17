@@ -5193,13 +5193,30 @@ html {
     }
 }
 
+@property --mask-size {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 60%;
+}
+
+
+@keyframes jhey_background_mask_sway {
+    from {
+        --mask-size: 60%;
+    }
+
+    to {
+        --mask-size: 30%;
+    }
+}
+
 .jhey-background-grid {
     position: relative;
 }
 
 .jhey-background-grid:before {
     --size: 40px;
-    --line: light-dark( color-mix(in hsl, canvasText, #0000 90%), color-mix(in hsl, canvasText, #0000 80%));
+    --line: light-dark( color-mix(in hsl, canvasText, #a1a1a2 90%), color-mix(in hsl, canvasText, #0000 80%));
     content: "";
     background: linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) calc(var(--size) * .36) 50% / var(--size) var(--size), linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0% calc(var(--size) * .32) / var(--size) var(--size);
     transform-style: flat;
@@ -5209,6 +5226,8 @@ html {
     height: 100%;
     position: absolute;
     right: 0;
-    -webkit-mask: linear-gradient(125deg, #0000 60%, #fff);
-    mask: linear-gradient(125deg, #0000 60%, #fff);
+    --mask-size: 60%;
+    -webkit-mask: linear-gradient(125deg, #0000 var(--mask-size), #fff);
+    mask: linear-gradient(125deg, #0000 var(--mask-size), #fff);
+    animation: jhey_background_mask_sway 10s infinite alternate ease-in-out;
 }
