@@ -1,4 +1,8 @@
-**Add your own guidelines here**
+## Code Structure Guidelines
+* Use css variables where possible
+* components should be in a components folder
+* pages should be in a pages folder
+
 <!--
 
 System Guidelines
