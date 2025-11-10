@@ -19,7 +19,6 @@ interface AboutProps {
             skill: string;
             level: string;
         }>;
-        image: string;
     };
 }
 

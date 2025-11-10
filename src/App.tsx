@@ -16,6 +16,17 @@ export default function App() {
 
   const navItems = portfolioData.navigation;
 
+  const trackDownloadCV = () => {
+      setIsMenuOpen(!isMenuOpen)
+      if(window['gta'] !== undefined) {
+          window['gtag']('event', 'button_click', {
+              'event_category': 'Engagement',
+              'event_label': 'Download CV',
+              'value': 1
+          });
+      }
+  }
+
   // Smooth scroll function
   const scrollToSection = (targetId: string) => {
     const element = document.getElementById(targetId);
@@ -108,6 +119,7 @@ export default function App() {
                   href={portfolioData.personal.cvPath}
                   download={portfolioData.personal.cvFileName}
                   className="flex items-center gap-1"
+                  onClick={() => trackDownloadCV()}
                 >
                   <Download className="w-3 h-3" />
                   Download CV
@@ -120,7 +132,7 @@ export default function App() {
               variant="ghost"
               size="icon"
               className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => trackDownloadCV()}
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
@@ -169,7 +181,7 @@ export default function App() {
                       href={portfolioData.personal.cvPath}
                       download={portfolioData.personal.cvFileName}
                       className="flex items-center gap-1"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => trackDownloadCV()}
                     >
                       <Download className="w-3 h-3" />
                       Download CV
