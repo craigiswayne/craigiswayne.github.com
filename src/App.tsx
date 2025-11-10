@@ -17,7 +17,6 @@ export default function App() {
   const navItems = portfolioData.navigation;
 
   const trackDownloadCV = () => {
-      setIsMenuOpen(!isMenuOpen)
       if(window['gta'] !== undefined) {
           window['gtag']('event', 'button_click', {
               'event_category': 'Engagement',
