@@ -11,6 +11,7 @@ const fs = require('node:fs/promises');
 // Import the 'ignore' library to handle .figmaignore rules
 // Run: npm install ignore
 const { Ignore } = require('ignore');
+const ignore = require("ignore");
 // --- END NEW DEPENDENCY ---
 
 // --- Configuration ---
@@ -139,7 +140,7 @@ async function main() {
             // --- Path A: .figmaignore EXISTS ---
             console.log('Found .figmaignore. Applying ignore rules...');
             // Create an 'ignore' instance and add the file content
-            const ig = new Ignore().add(ignore_content);
+            const ig = ignore().add(ignore_content);
 
             // Use our new copy function that respects these rules
             await copy_with_ignore(absolute_intermediate, absolute_destination, ig);
