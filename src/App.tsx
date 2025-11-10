@@ -4,6 +4,8 @@ import { Skills } from "./components/Skills";
 import { Projects } from "./components/Projects";
 import { Experience } from "./components/Experience";
 import { Contact } from "./components/Contact";
+import { BlogList } from "./components/BlogList";
+import { BlogPost } from "./components/BlogPost";
 import { Button } from "./components/ui/button";
 import { Menu, X, Download } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -13,6 +15,8 @@ import GitHubCorner from './components/GitHubCorner/GitHubCorner';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<'portfolio' | 'blog' | 'blogPost'>('portfolio');
+  const [currentBlogPostId, setCurrentBlogPostId] = useState<string | null>(null);
 
   const navItems = portfolioData.navigation;
 
@@ -26,18 +30,61 @@ export default function App() {
       }
   }
 
+  // Handle hash changes for routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      
+      if (hash.startsWith('#/blog/')) {
+        const postId = hash.replace('#/blog/', '');
+        setCurrentBlogPostId(postId);
+        setCurrentView('blogPost');
+      } else if (hash === '#/blog') {
+        setCurrentView('blog');
+        setCurrentBlogPostId(null);
+      } else {
+        setCurrentView('portfolio');
+        setCurrentBlogPostId(null);
+      }
+    };
+
+    // Handle initial load
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   // Smooth scroll function
   const scrollToSection = (targetId: string) => {
-    const element = document.getElementById(targetId);
-    if (element) {
-      const headerOffset = 80; // Account for fixed header height + padding
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    // Handle blog navigation
+    if (targetId === 'blog') {
+      window.location.hash = '/blog';
+      setIsMenuOpen(false);
+      return;
+    }
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+    // Reset to portfolio view if not already there
+    if (currentView !== 'portfolio') {
+      window.location.hash = '';
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
     }
     
     setIsMenuOpen(false);
@@ -51,6 +98,16 @@ export default function App() {
       behavior: "smooth",
     });
     setIsMenuOpen(false);
+  };
+
+  // Handle blog post navigation
+  const handleBlogPostClick = (postId: string) => {
+    window.location.hash = `/blog/${postId}`;
+  };
+
+  // Handle back to blog list
+  const handleBackToBlog = () => {
+    window.location.hash = '/blog';
   };
 
   // Animation variants for scroll transitions
@@ -194,63 +251,82 @@ export default function App() {
 
       {/* Main Content */}
       <main>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerVariants}
-        >
-          <Hero data={portfolioData.personal} />
-        </motion.div>
+        {currentView === 'portfolio' && (
+          <>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={staggerVariants}
+            >
+              <Hero data={portfolioData.personal} />
+            </motion.div>
 
-        <motion.section
-          id="about"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <About data={portfolioData.about} />
-        </motion.section>
+            <motion.section
+              id="about"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={sectionVariants}
+            >
+              <About data={portfolioData.about} />
+            </motion.section>
 
-        <motion.section
-          id="skills"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <Skills data={portfolioData.skills} />
-        </motion.section>
+            <motion.section
+              id="skills"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={sectionVariants}
+            >
+              <Skills data={portfolioData.skills} />
+            </motion.section>
 
-        <motion.section
-          id="projects"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <Projects data={portfolioData.projects} />
-        </motion.section>
+            <motion.section
+              id="projects"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={sectionVariants}
+            >
+              <Projects data={portfolioData.projects} />
+            </motion.section>
 
-        <motion.section
-          id="experience"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <Experience data={portfolioData.experience} />
-        </motion.section>
+            <motion.section
+              id="experience"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={sectionVariants}
+            >
+              <Experience data={portfolioData.experience} />
+            </motion.section>
 
-        <motion.section
-          id="contact"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <Contact data={portfolioData.contact} socialLinks={portfolioData.personal.socialLinks} cvData={{ path: portfolioData.personal.cvPath, fileName: portfolioData.personal.cvFileName }} />
-        </motion.section>
+            <motion.section
+              id="contact"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={sectionVariants}
+            >
+              <Contact
+                data={portfolioData.contact}
+                socialLinks={portfolioData.personal.socialLinks}
+                cvData={{
+                  path: portfolioData.personal.cvPath,
+                  fileName: portfolioData.personal.cvFileName,
+                }}
+              />
+            </motion.section>
+          </>
+        )}
+
+        {currentView === 'blog' && (
+          <BlogList onPostClick={handleBlogPostClick} />
+        )}
+
+        {currentView === 'blogPost' && currentBlogPostId && (
+          <BlogPost postId={currentBlogPostId} onBackClick={handleBackToBlog} />
+        )}
       </main>
 
       {/* Footer */}
