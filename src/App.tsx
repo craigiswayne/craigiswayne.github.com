@@ -1,73 +1,51 @@
-import { Hero } from "./components/Hero";
-import { About } from "./components/About";
-import { Skills } from "./components/Skills";
-import { Projects } from "./components/Projects";
-import { Experience } from "./components/Experience";
-import { Contact } from "./components/Contact";
-import { BlogList } from "./components/BlogList";
-import { BlogPost } from "./components/BlogPost";
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./components/ui/button";
 import { Menu, X, Download } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { portfolioData } from "./data/portfolio";
 import GitHubCorner from './components/GitHubCorner/GitHubCorner';
+import { PortfolioPage } from "./pages/PortfolioPage";
+import { BlogListPage } from "./pages/BlogListPage";
+import { BlogPostPage } from "./pages/BlogPostPage";
 
-export default function App() {
+function AppContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'portfolio' | 'blog' | 'blogPost'>('portfolio');
-  const [currentBlogPostId, setCurrentBlogPostId] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = portfolioData.navigation;
 
   const trackDownloadCV = () => {
-      if(window['gta'] !== undefined) {
-          window['gtag']('event', 'button_click', {
-              'event_category': 'Engagement',
-              'event_label': 'Download CV',
-              'value': 1
-          });
-      }
-  }
+    if (window['gtag'] !== undefined) {
+      window['gtag']('event', 'button_click', {
+        'event_category': 'Engagement',
+        'event_label': 'Download CV',
+        'value': 1
+      });
+    }
+  };
 
-  // Handle hash changes for routing
+  // Determine if we're on a blog page
+  const isBlogPage = location.pathname.startsWith('/blog');
+
+  // Scroll to top on route change
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      
-      if (hash.startsWith('#/blog/')) {
-        const postId = hash.replace('#/blog/', '');
-        setCurrentBlogPostId(postId);
-        setCurrentView('blogPost');
-      } else if (hash === '#/blog') {
-        setCurrentView('blog');
-        setCurrentBlogPostId(null);
-      } else {
-        setCurrentView('portfolio');
-        setCurrentBlogPostId(null);
-      }
-    };
-
-    // Handle initial load
-    handleHashChange();
-
-    // Listen for hash changes
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   // Smooth scroll function
   const scrollToSection = (targetId: string) => {
     // Handle blog navigation
     if (targetId === 'blog') {
-      window.location.hash = '/blog';
+      navigate('/blog');
       setIsMenuOpen(false);
       return;
     }
 
-    // Reset to portfolio view if not already there
-    if (currentView !== 'portfolio') {
-      window.location.hash = '';
+    // If we're on blog page, navigate to home first
+    if (isBlogPage) {
+      navigate('/');
       setTimeout(() => {
         const element = document.getElementById(targetId);
         if (element) {
@@ -86,28 +64,18 @@ export default function App() {
         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
       }
     }
-    
+
     setIsMenuOpen(false);
   };
 
   // Scroll to top function
   const scrollToTop = () => {
-    window.location.hash = '';
+    navigate('/');
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
     setIsMenuOpen(false);
-  };
-
-  // Handle blog post navigation
-  const handleBlogPostClick = (postId: string) => {
-    window.location.hash = `/blog/${postId}`;
-  };
-
-  // Handle back to blog list
-  const handleBackToBlog = () => {
-    window.location.hash = '/blog';
   };
 
   // Animation variants for scroll transitions
@@ -232,9 +200,7 @@ export default function App() {
                   <Button size="sm" className="w-fit" asChild>
                     <a
                       href={portfolioData.personal.cvPath}
-                      download={
-                        portfolioData.personal.cvFileName
-                      }
+                      download={portfolioData.personal.cvFileName}
                       className="flex items-center gap-1"
                       onClick={() => trackDownloadCV()}
                     >
@@ -251,82 +217,11 @@ export default function App() {
 
       {/* Main Content */}
       <main>
-        {currentView === 'portfolio' && (
-          <>
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={staggerVariants}
-            >
-              <Hero data={portfolioData.personal} />
-            </motion.div>
-
-            <motion.section
-              id="about"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={sectionVariants}
-            >
-              <About data={portfolioData.about} />
-            </motion.section>
-
-            <motion.section
-              id="skills"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={sectionVariants}
-            >
-              <Skills data={portfolioData.skills} />
-            </motion.section>
-
-            <motion.section
-              id="projects"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={sectionVariants}
-            >
-              <Projects data={portfolioData.projects} />
-            </motion.section>
-
-            <motion.section
-              id="experience"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={sectionVariants}
-            >
-              <Experience data={portfolioData.experience} />
-            </motion.section>
-
-            <motion.section
-              id="contact"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={sectionVariants}
-            >
-              <Contact
-                data={portfolioData.contact}
-                socialLinks={portfolioData.personal.socialLinks}
-                cvData={{
-                  path: portfolioData.personal.cvPath,
-                  fileName: portfolioData.personal.cvFileName,
-                }}
-              />
-            </motion.section>
-          </>
-        )}
-
-        {currentView === 'blog' && (
-          <BlogList onPostClick={handleBlogPostClick} />
-        )}
-
-        {currentView === 'blogPost' && currentBlogPostId && (
-          <BlogPost postId={currentBlogPostId} onBackClick={handleBackToBlog} />
-        )}
+        <Routes>
+          <Route path="/" element={<PortfolioPage />} />
+          <Route path="/blog" element={<BlogListPage />} />
+          <Route path="/blog/:postId" element={<BlogPostPage />} />
+        </Routes>
       </main>
 
       {/* Footer */}
@@ -349,5 +244,13 @@ export default function App() {
         </div>
       </motion.footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
