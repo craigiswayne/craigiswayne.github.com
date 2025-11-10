@@ -53,9 +53,10 @@
   "devDependencies": {
     "@types/node": "^20.10.0",
     "@vitejs/plugin-react-swc": "^3.10.2",
-    "vite": "7.1.11",
     "cypress": "^15.3.0",
-    "extract-zip": "^2.0.1"
+    "extract-zip": "^2.0.1",
+    "ignore": "^7.0.5",
+    "vite": "7.1.11"
   },
   "scripts": {
     "dev": "vite",
