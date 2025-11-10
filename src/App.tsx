@@ -6,7 +6,7 @@ import { Experience } from "./components/Experience";
 import { Contact } from "./components/Contact";
 import { Button } from "./components/ui/button";
 import { Menu, X, Download } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { portfolioData } from "./data/portfolio";
 import GitHubCorner from './components/GitHubCorner/GitHubCorner';
@@ -39,15 +39,16 @@ export default function App() {
         behavior: "smooth"
       });
     }
-    // Close mobile menu if open
+    
     setIsMenuOpen(false);
   };
 
   // Scroll to top function
   const scrollToTop = () => {
+    window.location.hash = '';
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
     setIsMenuOpen(false);
   };
@@ -56,16 +57,16 @@ export default function App() {
   const sectionVariants = {
     hidden: {
       opacity: 0,
-      y: 50
+      y: 50,
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const staggerVariants = {
@@ -74,15 +75,14 @@ export default function App() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   return (
     <div className="min-h-screen">
       <GitHubCorner url={portfolioData.personal.socialLinks.github} />
-
       {/* Navigation Header */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b"
@@ -110,10 +110,7 @@ export default function App() {
                   {item.label}
                 </button>
               ))}
-              <Button
-                size="sm"
-                asChild
-              >
+              <Button size="sm" asChild>
                 <a
                   href={portfolioData.personal.cvPath}
                   download={portfolioData.personal.cvFileName}
@@ -133,7 +130,11 @@ export default function App() {
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </Button>
           </div>
 
@@ -152,14 +153,14 @@ export default function App() {
                 animate="visible"
                 variants={staggerVariants}
               >
-                {navItems.map((item) => (
+                {navItems.map((item, index) => (
                   <motion.button
                     key={item.label}
                     onClick={() => scrollToSection(item.target)}
                     className="text-sm hover:text-primary transition-colors text-left cursor-pointer"
                     variants={{
                       hidden: { opacity: 0, x: -20 },
-                      visible: { opacity: 1, x: 0 }
+                      visible: { opacity: 1, x: 0 },
                     }}
                   >
                     {item.label}
@@ -168,17 +169,15 @@ export default function App() {
                 <motion.div
                   variants={{
                     hidden: { opacity: 0, x: -20 },
-                    visible: { opacity: 1, x: 0 }
+                    visible: { opacity: 1, x: 0 },
                   }}
                 >
-                  <Button
-                    size="sm"
-                    className="w-fit"
-                    asChild
-                  >
+                  <Button size="sm" className="w-fit" asChild>
                     <a
                       href={portfolioData.personal.cvPath}
-                      download={portfolioData.personal.cvFileName}
+                      download={
+                        portfolioData.personal.cvFileName
+                      }
                       className="flex items-center gap-1"
                       onClick={() => trackDownloadCV()}
                     >

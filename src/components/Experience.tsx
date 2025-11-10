@@ -2,7 +2,7 @@ import {Badge} from "./ui/badge";
 import {motion} from "motion/react";
 import {ImageWithFallback} from "./figma/ImageWithFallback";
 
-interface Experience {
+interface Position {
     company: string;
     company_url: string;
     companyLogo: string;
@@ -14,18 +14,21 @@ interface Experience {
     achievements: string[];
     technologies: string[];
 }
+
 interface ExperienceProps {
     data: {
         subtitle: string;
         description: string;
-        positions: Array<Experience>;
-    };
+        positions: Array<Position>;
+    }
 }
 
 
-function formatTimelineDate(experience: Experience): { year: number; month: string } {
-    const start_date_obj = new Date(experience.date_start);
+// Function to extract and format start date from duration string
+function formatTimelineDate(position: Position): { year: number; month: string } {
+    const start_date_obj = new Date(position.date_start);
     const month_index = start_date_obj.getMonth();
+
     const month_lists = [
         'Jan',
         'Feb',
@@ -40,7 +43,9 @@ function formatTimelineDate(experience: Experience): { year: number; month: stri
         'Nov',
         'Dec'
     ];
+
     const month = month_lists[month_index];
+
     return {year: start_date_obj.getFullYear(), month};
 }
 
@@ -196,11 +201,11 @@ export function Experience({data}: ExperienceProps) {
                                     >
                                         <div
                                             className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-xs font-medium shadow-md mb-1">
-                                            {timelineDate.month}
+                                            {timelineDate.year}
                                         </div>
                                         <div
                                             className="text-sm font-semibold text-foreground bg-background px-2 py-1 rounded">
-                                            {timelineDate.year}
+                                            {timelineDate.month}
                                         </div>
                                         {/* Connection dot */}
                                         <div
@@ -249,7 +254,7 @@ export function Experience({data}: ExperienceProps) {
                                                 </h3>
                                                 <p className="text-lg text-primary font-medium mb-2">
                                                     <a href={exp.company_url} target="_blank">
-                                                        {exp.company}
+                                                    {exp.company}
                                                     </a>
                                                 </p>
                                             </div>
