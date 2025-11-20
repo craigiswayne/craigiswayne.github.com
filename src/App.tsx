@@ -1,53 +1,96 @@
-import { Hero } from "./components/Hero";
-import { About } from "./components/About";
-import { Skills } from "./components/Skills";
-import { Projects } from "./components/Projects";
-import { Experience } from "./components/Experience";
-import { Contact } from "./components/Contact";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { Button } from "./components/ui/button";
 import { Menu, X, Download } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { portfolioData } from "./data/portfolio";
-import GitHubCorner from './components/GitHubCorner/GitHubCorner';
+import GitHubCorner from "./components/GitHubCorner/GitHubCorner";
+import Footer from "./components/Footer";
+import { PortfolioPage } from "./pages/PortfolioPage";
+import { BlogListPage } from "./pages/BlogListPage";
+import { BlogPostPage } from "./pages/BlogPostPage";
 
-export default function App() {
+function AppContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = portfolioData.navigation;
 
   const trackDownloadCV = () => {
-      if(window['gta'] !== undefined) {
-          window['gtag']('event', 'button_click', {
-              'event_category': 'Engagement',
-              'event_label': 'Download CV',
-              'value': 1
-          });
-      }
-  }
+    if (window["gtag"] !== undefined) {
+      window["gtag"]("event", "button_click", {
+        event_category: "Engagement",
+        event_label: "Download CV",
+        value: 1,
+      });
+    }
+  };
+
+  // Determine if we're on a blog page
+  const isBlogPage = location.pathname.startsWith("/blog");
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   // Smooth scroll function
   const scrollToSection = (targetId: string) => {
-    const element = document.getElementById(targetId);
-    if (element) {
-      const headerOffset = 80; // Account for fixed header height + padding
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+    // Handle blog navigation
+    if (targetId === "blog") {
+      navigate("/blog");
+      setIsMenuOpen(false);
+      return;
     }
-    // Close mobile menu if open
+
+    // If we're on blog page, navigate to home first
+    if (isBlogPage) {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition =
+            element.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition =
+          element.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+
     setIsMenuOpen(false);
   };
 
   // Scroll to top function
   const scrollToTop = () => {
+    navigate("/");
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
     setIsMenuOpen(false);
   };
@@ -56,16 +99,16 @@ export default function App() {
   const sectionVariants = {
     hidden: {
       opacity: 0,
-      y: 50
+      y: 50,
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const staggerVariants = {
@@ -74,15 +117,16 @@ export default function App() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   return (
     <div className="min-h-screen">
-      <GitHubCorner url={portfolioData.personal.socialLinks.github} />
-
+      <GitHubCorner
+        url={portfolioData.personal.socialLinks.github}
+      />
       {/* Navigation Header */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b"
@@ -110,10 +154,7 @@ export default function App() {
                   {item.label}
                 </button>
               ))}
-              <Button
-                size="sm"
-                asChild
-              >
+              <Button size="sm" asChild>
                 <a
                   href={portfolioData.personal.cvPath}
                   download={portfolioData.personal.cvFileName}
@@ -133,7 +174,11 @@ export default function App() {
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </Button>
           </div>
 
@@ -152,14 +197,14 @@ export default function App() {
                 animate="visible"
                 variants={staggerVariants}
               >
-                {navItems.map((item) => (
+                {navItems.map((item, index) => (
                   <motion.button
                     key={item.label}
                     onClick={() => scrollToSection(item.target)}
                     className="text-sm hover:text-primary transition-colors text-left cursor-pointer"
                     variants={{
                       hidden: { opacity: 0, x: -20 },
-                      visible: { opacity: 1, x: 0 }
+                      visible: { opacity: 1, x: 0 },
                     }}
                   >
                     {item.label}
@@ -168,17 +213,15 @@ export default function App() {
                 <motion.div
                   variants={{
                     hidden: { opacity: 0, x: -20 },
-                    visible: { opacity: 1, x: 0 }
+                    visible: { opacity: 1, x: 0 },
                   }}
                 >
-                  <Button
-                    size="sm"
-                    className="w-fit"
-                    asChild
-                  >
+                  <Button size="sm" className="w-fit" asChild>
                     <a
                       href={portfolioData.personal.cvPath}
-                      download={portfolioData.personal.cvFileName}
+                      download={
+                        portfolioData.personal.cvFileName
+                      }
                       className="flex items-center gap-1"
                       onClick={() => trackDownloadCV()}
                     >
@@ -195,84 +238,27 @@ export default function App() {
 
       {/* Main Content */}
       <main>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerVariants}
-        >
-          <Hero data={portfolioData.personal} />
-        </motion.div>
-
-        <motion.section
-          id="about"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <About data={portfolioData.about} />
-        </motion.section>
-
-        <motion.section
-          id="skills"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <Skills data={portfolioData.skills} />
-        </motion.section>
-
-        <motion.section
-          id="projects"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <Projects data={portfolioData.projects} />
-        </motion.section>
-
-        <motion.section
-          id="experience"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <Experience data={portfolioData.experience} />
-        </motion.section>
-
-        <motion.section
-          id="contact"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <Contact data={portfolioData.contact} socialLinks={portfolioData.personal.socialLinks} cvData={{ path: portfolioData.personal.cvPath, fileName: portfolioData.personal.cvFileName }} />
-        </motion.section>
+        <Routes>
+          <Route path="/" element={<PortfolioPage />} />
+          <Route path="/blog" element={<BlogListPage />} />
+          <Route
+            path="/blog/:postId"
+            element={<BlogPostPage />}
+          />
+          <Route path="*" element={<PortfolioPage />} />
+        </Routes>
       </main>
 
       {/* Footer */}
-      <motion.footer
-        className="bg-primary text-primary-foreground py-8"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={sectionVariants}
-      >
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center space-y-4">
-            <p className="text-sm opacity-90">
-              {portfolioData.footer.copyright}
-            </p>
-            <p className="text-xs opacity-75">
-              {portfolioData.footer.tagline}
-            </p>
-          </div>
-        </div>
-      </motion.footer>
+      <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
