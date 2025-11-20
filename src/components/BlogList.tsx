@@ -37,10 +37,10 @@ export function BlogList({ onPostClick }: BlogListProps) {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
 
@@ -78,7 +78,7 @@ export function BlogList({ onPostClick }: BlogListProps) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <Badge 
+                  <Badge
                     className="absolute bottom-4 left-4 bg-primary/90 text-primary-foreground"
                   >
                     {post.category}
@@ -113,8 +113,8 @@ export function BlogList({ onPostClick }: BlogListProps) {
                         {post.tags.slice(0, 2).join(', ')}
                       </span>
                     </div>
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       size="sm"
                       className="gap-1 group/button"
                     >

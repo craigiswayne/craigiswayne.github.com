@@ -87,6 +87,11 @@ export function PortfolioPage() {
 
       <motion.section
         id="contact"
+        style={{
+          background: "white",
+          borderBottomLeftRadius: "4rem",
+          borderBottomRightRadius: "4rem",
+        }}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}

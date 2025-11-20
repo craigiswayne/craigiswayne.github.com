@@ -1,10 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { Button } from "./components/ui/button";
 import { Menu, X, Download } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { portfolioData } from "./data/portfolio";
-import GitHubCorner from './components/GitHubCorner/GitHubCorner';
+import GitHubCorner from "./components/GitHubCorner/GitHubCorner";
+import Footer from "./components/Footer";
 import { PortfolioPage } from "./pages/PortfolioPage";
 import { BlogListPage } from "./pages/BlogListPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
@@ -17,17 +24,17 @@ function AppContent() {
   const navItems = portfolioData.navigation;
 
   const trackDownloadCV = () => {
-    if (window['gtag'] !== undefined) {
-      window['gtag']('event', 'button_click', {
-        'event_category': 'Engagement',
-        'event_label': 'Download CV',
-        'value': 1
+    if (window["gtag"] !== undefined) {
+      window["gtag"]("event", "button_click", {
+        event_category: "Engagement",
+        event_label: "Download CV",
+        value: 1,
       });
     }
   };
 
   // Determine if we're on a blog page
-  const isBlogPage = location.pathname.startsWith('/blog');
+  const isBlogPage = location.pathname.startsWith("/blog");
 
   // Scroll to top on route change
   useEffect(() => {
@@ -37,31 +44,41 @@ function AppContent() {
   // Smooth scroll function
   const scrollToSection = (targetId: string) => {
     // Handle blog navigation
-    if (targetId === 'blog') {
-      navigate('/blog');
+    if (targetId === "blog") {
+      navigate("/blog");
       setIsMenuOpen(false);
       return;
     }
 
     // If we're on blog page, navigate to home first
     if (isBlogPage) {
-      navigate('/');
+      navigate("/");
       setTimeout(() => {
         const element = document.getElementById(targetId);
         if (element) {
           const headerOffset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+          const elementPosition =
+            element.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
         }
       }, 100);
     } else {
       const element = document.getElementById(targetId);
       if (element) {
         const headerOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        const elementPosition =
+          element.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
       }
     }
 
@@ -70,7 +87,7 @@ function AppContent() {
 
   // Scroll to top function
   const scrollToTop = () => {
-    navigate('/');
+    navigate("/");
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -107,7 +124,9 @@ function AppContent() {
 
   return (
     <div className="min-h-screen">
-      <GitHubCorner url={portfolioData.personal.socialLinks.github} />
+      <GitHubCorner
+        url={portfolioData.personal.socialLinks.github}
+      />
       {/* Navigation Header */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b"
@@ -200,7 +219,9 @@ function AppContent() {
                   <Button size="sm" className="w-fit" asChild>
                     <a
                       href={portfolioData.personal.cvPath}
-                      download={portfolioData.personal.cvFileName}
+                      download={
+                        portfolioData.personal.cvFileName
+                      }
                       className="flex items-center gap-1"
                       onClick={() => trackDownloadCV()}
                     >
@@ -220,29 +241,16 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<PortfolioPage />} />
           <Route path="/blog" element={<BlogListPage />} />
-          <Route path="/blog/:postId" element={<BlogPostPage />} />
+          <Route
+            path="/blog/:postId"
+            element={<BlogPostPage />}
+          />
+          <Route path="*" element={<PortfolioPage />} />
         </Routes>
       </main>
 
       {/* Footer */}
-      <motion.footer
-        className="bg-primary text-primary-foreground py-8"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={sectionVariants}
-      >
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center space-y-4">
-            <p className="text-sm opacity-90">
-              {portfolioData.footer.copyright}
-            </p>
-            <p className="text-xs opacity-75">
-              {portfolioData.footer.tagline}
-            </p>
-          </div>
-        </div>
-      </motion.footer>
+      <Footer />
     </div>
   );
 }
