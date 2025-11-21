@@ -60,10 +60,11 @@ export function About({ data }: AboutProps) {
         setIsLoading(true);
         setError(null);
 
+        const url_last_30_days = `https://wakatime.com/share/@craigiswayne/32ef8fda-0d1f-4d50-8323-6b4f30ffe335.json`
         const url_last_year =
           "https://wakatime.com/share/@craigiswayne/b62296b8-3cd1-42bc-8288-cbbe4e25f00e.json";
         // const url_all_time = 'https://wakatime.com/share/@craigiswayne/593b87c6-38f5-40a0-9db0-420e856f13d3.json';
-        const response = await fetch(url_last_year);
+        const response = await fetch(url_last_30_days);
 
         if (!response.ok) {
           throw new Error(
@@ -316,7 +317,7 @@ export function About({ data }: AboutProps) {
                   <p className="text-sm text-muted-foreground">
                     {error
                       ? "Language statistics (cached)"
-                      : "Live coding statistics from WakaTime"}
+                      : "provided by WakaTime"}
                   </p>
                   {error && (
                     <p className="text-xs text-destructive mt-1">
