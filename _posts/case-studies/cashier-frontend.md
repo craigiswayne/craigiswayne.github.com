@@ -26,7 +26,6 @@ This project should include:
   [ ] Needs to log to logger service in the event of an error
   [ ] Needs http interceptor for this error
   [ ] redirect to single error screen -> maybe this is where the logger will kick in?
-[ ] SSR to maybe pre-render the initial app load? (https://www.youtube.com/watch?v=4tTxrQ2YiFA)
 [ ] Should load theme before showing anything in the cashier
 [ ] Load time should be really quick
 [ ] Should show the player if they're offline or not
