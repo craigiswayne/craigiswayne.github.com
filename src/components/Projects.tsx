@@ -112,7 +112,7 @@ export function Projects({data}: ProjectsProps) {
                                             project.liveUrl ?
                                                 <Button size="sm" variant="secondary" className="gap-1">
                                                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                                                       class="flex items-center gap-1">
+                                                       className="flex items-center gap-1">
                                                         <ExternalLink/>
                                                         Live
                                                     </a>
@@ -122,7 +122,7 @@ export function Projects({data}: ProjectsProps) {
                                             project.githubUrl ?
                                                 <Button size="sm" variant="secondary" className="gap-1">
                                                     <a href={project.githubUrl} target="_blank"
-                                                       rel="noopener noreferrer" class="flex items-center gap-1">
+                                                       rel="noopener noreferrer" className="flex items-center gap-1">
                                                         <Github className="w-3 h-3"/>
                                                         Code
                                                     </a>
