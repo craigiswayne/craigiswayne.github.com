@@ -236,7 +236,7 @@ export const portfolioData = {
         position: "Senior Frontend Developer",
         date_start: "2022-10",
         date_end: "2024-10",
-        location: "Cape Town, South Africa",
+        location: "Douglas, Isle of Man",
         description:
           "Creating and maintaining in-house solutions to improve business processes",
         achievements: [
