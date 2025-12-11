@@ -53,10 +53,13 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
+    "@types/pug": "^2.0.10",
     "@vitejs/plugin-react-swc": "^3.10.2",
     "cypress": "^15.3.0",
     "extract-zip": "^2.0.1",
     "ignore": "^7.0.5",
+    "pug": "^3.0.3",
+    "puppeteer": "^24.32.1",
     "vite": "7.1.11"
   },
   "scripts": {
