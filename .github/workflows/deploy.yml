@@ -30,13 +30,17 @@ jobs:
       - name: Build CV
         run: node resume-generator/compile.js
 
-      - name: Generate Resume PDF
-        run: node resume-generator/create_pdf_from_html.js
-
       - name: Build Project 🏗️
         run: npm run build
         env:
           PUBLIC_URL: 'craigiswayne.com'
+
+      - name: List files
+        run: ls -laGh ./build
+
+      - name: Generate Resume PDF
+        run: node resume-generator/create_pdf_from_html.js
+
 
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v4
