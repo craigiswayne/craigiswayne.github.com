@@ -65,10 +65,10 @@ const __dirname = path.dirname(__filename);
 /**
  * @type {string}
  */
-const input_html_file = path.resolve(__dirname, '..', 'build', 'resume', 'index.html');
+const input_html_file = path.resolve(__dirname, 'build', 'index.html');
 /**
  * @type {string}
  */
-const output_pdf_file = path.resolve(__dirname, '../build/resume.pdf');
+const output_pdf_file = path.resolve(__dirname, '..', 'public', 'resume.pdf');
 
 create_pdf_from_html(input_html_file, output_pdf_file);
