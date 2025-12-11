@@ -146,7 +146,7 @@ export function Contact({data, socialLinks, cvData}: ContactProps) {
 
                 <div className="text-center space-y-8">
                     <motion.div
-                        className="flex justify-center gap-6"
+                        className="flex flex-wrap justify-center gap-6"
                         variants={socialContainerVariants}
                         initial="hidden"
                         whileInView="visible"
@@ -172,7 +172,7 @@ export function Contact({data, socialLinks, cvData}: ContactProps) {
                             <Button variant="outline" size="lg" className="gap-2" asChild>
                                 <a href={cvData.path} download={cvData.fileName}>
                                     <Download className="w-5 h-5"/>
-                                    Download CV
+                                    Download Resume
                                 </a>
                             </Button>
                         </motion.div>
