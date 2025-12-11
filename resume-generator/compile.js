@@ -11,7 +11,6 @@ import pug from 'pug';
 // TODO: tools section
 // https://resumeworded.com/assets/images/resume-guides/software-product-manager.png
 const file_contents = fs.readFileSync('./src/public/data.json', 'utf-8');
-console.log('file_data', file_contents);
 const raw_data = JSON.parse(file_contents);
 
 const data = {
@@ -22,6 +21,6 @@ const data = {
     },
     ...raw_data,
 }
-const html = pug.renderFile('./src/public/cv-generator/template.pug', data);
+const html = pug.renderFile('./resume-generator/template.pug', data);
 
-fs.writeFileSync('./src/public/cv-generator/CV-CraigWayneGovender.html', html);
+fs.writeFileSync('./src/public/resume.html', html);

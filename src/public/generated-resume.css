@@ -1,6 +1,4 @@
 :root {
-    --color-primary: #537d8d;
-    --color-primary-light: #8bbdc9;
     --color-primary: #4468b1;
     --color-primary-light: #5d7cbc;
     --color-muted: #666;
@@ -20,11 +18,12 @@ body {
 .a4-page {
     background-color: #ffffff;
     width: 100%;
-    max-width: 800px;
+    max-width: 21.167cm;
     margin: 0 auto;
     padding: 50px 60px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+    position: relative;
 }
 
 h1, h2, h3, h4, p {
@@ -98,8 +97,8 @@ section > .title {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
     unicode-bidi: isolate;
 }
 
@@ -124,6 +123,7 @@ section > .title {
     font-size: 14px;
     font-weight: 400;
     color: #000;
+    text-align: end;
 }
 
 .subtitle {
@@ -200,6 +200,70 @@ ul li::marker {
     color: var(--color-muted)
 }
 
+.action-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, 50%);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 3px rgba(0,0,0,0.15);
+    border-radius: 41px;
+    overflow: hidden;
+}
+
+.action-bar button {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 10px 8px;
+    cursor: pointer;
+}
+
+.action-bar button svg {
+    fill: var(--color-primary);
+    stroke: var(--color-primary);
+}
+
+.action-bar button:first-child:last-child {
+    min-height: 64px;
+}
+
+.action-bar button:hover {
+    background-color: rgba(11, 87, 208, .08);
+}
+
+@media screen and (max-width: 900px) {
+    .action-bar {
+        top: unset;
+        bottom: 0;
+        right: 0;
+        transform: translate(-50%, -50%);
+        position: fixed;
+    }
+
+    .action-bar button:first-child:last-child{
+        min-height: unset;
+        min-width: 64px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .a4-page {
+        padding: 25px 30px;
+    }
+}
+
 @media print {
     body {
         background-color: white;
@@ -214,7 +278,7 @@ ul li::marker {
         padding: 0;
     }
 
-    body > *:not(.a4-page) {
+    .no-print {
         display: none;
     }
 }
