@@ -60,6 +60,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const input_html_file = path.resolve(__dirname, '..', 'build/resume', 'index.html');
-const output_pdf_file = path.resolve(__dirname, '..', 'build/public', 'resume.pdf');
+const output_pdf_file = path.resolve(__dirname, '..', 'build', 'resume.pdf');
 
 create_pdf_from_html(input_html_file, output_pdf_file);
