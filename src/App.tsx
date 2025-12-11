@@ -27,7 +27,7 @@ function AppContent() {
     if (window["gtag"] !== undefined) {
       window["gtag"]("event", "button_click", {
         event_category: "Engagement",
-        event_label: "Download CV",
+        event_label: "Download Resume",
         value: 1,
       });
     }
@@ -162,7 +162,7 @@ function AppContent() {
                   onClick={() => trackDownloadCV()}
                 >
                   <Download className="w-3 h-3" />
-                  Download CV
+                  Download Resume
                 </a>
               </Button>
             </div>
@@ -226,7 +226,7 @@ function AppContent() {
                       onClick={() => trackDownloadCV()}
                     >
                       <Download className="w-3 h-3" />
-                      Download CV
+                      Download Resume
                     </a>
                   </Button>
                 </motion.div>

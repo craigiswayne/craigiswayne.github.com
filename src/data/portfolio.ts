@@ -13,8 +13,8 @@ export const portfolioData = {
       "Crafting exceptional digital experiences with modern web technologies. Specializing in TypeScript stacks, and creating scalable architectures that drive business growth.",
     yearsOfExperience: 8,
     email: abstracted_data.email,
-    cvPath: "/CV-CraigWayne.pdf",
-    cvFileName: "CV-CraigWayne.pdf",
+    cvPath: "/Resume-CraigWayneGovender.pdf",
+    cvFileName: "Resume-CraigWayneGovender.pdf",
     profileImage: "/profile.png",
     socialLinks: {
       github: "https://github.com/craigiswayne",
