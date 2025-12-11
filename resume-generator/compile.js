@@ -1,12 +1,7 @@
 import fs from 'fs';
 import pug from 'pug';
 
-// TODO: schema for this data
-// TODO: contact phone needs to be in this regex format
-// TODO: latest role description
-// TODO: location is optional, add a description that it will read from your latest work_experience
 // TODO: remove ats-cv on prototype
-// TODO: favicon on the generated html
 // TODO: skills to be associated to experience and then a total combined list of skills
 // TODO: tools section
 // https://resumeworded.com/assets/images/resume-guides/software-product-manager.png

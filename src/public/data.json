@@ -1,4 +1,5 @@
 {
+  "$schema": "./schema-portfolio.json",
   "first_names": "Craig Wayne",
   "last_name": "Govender",
   "latest_role": "Senior Frontend Developer",

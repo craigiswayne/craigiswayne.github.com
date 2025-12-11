@@ -1,0 +1,55 @@
+{
+  "title": "Portfolio Data Schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": 1,
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "JSON schema URI for schema-portfolio.json.",
+      "type": "string"
+    },
+    "first_names": {
+      "description": "All first names, including middle names",
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "latest_role": {
+      "description": "Optional. If this property is not set, the role at your most recent employment will be used",
+      "type": "string"
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "linkedin_username": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number in E.164 format (e.g., +447624401629)",
+          "pattern": "^\\+[1-9]\\d{1,14}$"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "email",
+        "linkedin_username",
+        "phone"
+      ]
+    },
+    "location": {
+      "description": "Optional. If this property is not set, the location at your most recent employment will be used",
+      "type": "string"
+    }
+  },
+  "required": [
+    "first_names",
+    "last_name"
+  ],
+  "additionalProperties": false
+}
