@@ -54,6 +54,7 @@ h2 {
     display: flex;
     align-items: center;
     gap: var(--gap-large);
+    flex-wrap: wrap;
 }
 
 .contact-info a {
@@ -85,7 +86,7 @@ section {
     margin-bottom: 25px;
 }
 
-section>.title {
+section > .title {
     color: var(--color-primary-light);
     font-size: 12px;
     font-weight: 700;
@@ -175,13 +176,28 @@ ul li::marker {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    column-gap: 24px;
+    row-gap: 10px;
     padding: 20px 0;
+    flex-wrap: wrap;
+}
+
+.supported-brands .title {
+    width: 100%;
+    text-align: center;
 }
 
 .supported-brands svg {
     height: 24px;
     width: auto;
+}
+
+.supported-brands svg:not(.active) path {
+    fill: gray;
+}
+
+.muted {
+    color: var(--color-muted)
 }
 
 @media print {
@@ -198,7 +214,7 @@ ul li::marker {
         padding: 0;
     }
 
-    body>*:not(.a4-page){
+    body > *:not(.a4-page) {
         display: none;
     }
 }
