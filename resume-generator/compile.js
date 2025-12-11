@@ -18,4 +18,4 @@ const data = {
 }
 const html = pug.renderFile('./resume-generator/template.pug', data);
 
-fs.writeFileSync('./src/public/resume.html', html);
+fs.writeFileSync('./src/public/resume/index.html', html);

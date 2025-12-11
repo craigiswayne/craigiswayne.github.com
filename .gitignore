@@ -2,4 +2,4 @@ build/
 .idea/
 node_modules/
 /*.zip
-src/public/resume.html
+src/public/resume/index.html
