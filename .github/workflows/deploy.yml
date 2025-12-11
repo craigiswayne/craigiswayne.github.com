@@ -30,6 +30,9 @@ jobs:
       - name: Build CV
         run: node resume-generator/compile.js
 
+      - name: Generate Resume PDF
+        run: node resume-generator/create_pdf_from_html.js
+
       - name: Build Project 🏗️
         run: npm run build
         env:
