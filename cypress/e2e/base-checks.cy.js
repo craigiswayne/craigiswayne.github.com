@@ -38,7 +38,7 @@ describe('Base Checks', () => {
         cy.get('nav a[download]')
             .should('be.visible')
             .should('contain.text', 'Download CV')
-            .should('have.attr', 'download', 'CV-CraigWayne.pdf');
+            .should('have.attr', 'download', 'Resume-CraigWayneGovender.pdf');
 
     })
 
