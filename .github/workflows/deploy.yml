@@ -16,10 +16,10 @@ jobs:
       contents: write
     steps:
       - name: Checkout 🛒
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '24'
           cache: 'npm'
@@ -27,7 +27,7 @@ jobs:
       - name: Install Dependencies 📦
         run: npm ci
 
-      - name: Build CV
+      - name: Build Resume as HTML
         run: node resume-generator/compile.js
 
       - name: Build Project 🏗️
@@ -41,7 +41,7 @@ jobs:
       - name: Install Puppeteer Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -yq libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2
+          sudo apt-get install -yq libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2t64 libnss3 libxss1 libxtst6
 
       - name: Generate Resume PDF
         run: node resume-generator/create_pdf_from_html.js
@@ -67,7 +67,7 @@ jobs:
 
     steps:
       - name: 'Checkout repository'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: 'API requests'
         id: 'http-client'
@@ -93,4 +93,3 @@ jobs:
       run_build: false
       run_lint: false
       test_command: 'cy:run'
-
