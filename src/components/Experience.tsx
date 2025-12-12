@@ -1,17 +1,23 @@
-import {Badge} from "./ui/badge";
 import {motion} from "motion/react";
 import {ImageWithFallback} from "./figma/ImageWithFallback";
 
 interface Position {
-    company: string;
-    company_url: string;
-    companyLogo: string;
+    organization: {
+        name: string,
+        url: string,
+        logo: string
+    },
     position: string;
-    date_start: string;
-    date_end?: string;
-    location: string;
+    period: {
+        start: string,
+        end?: string
+    }
+    location: {
+        city: string
+        country: string
+    }
     description: string;
-    achievements: string[];
+    responsibilities: string[];
     technologies: string[];
 }
 
@@ -23,10 +29,8 @@ interface ExperienceProps {
     }
 }
 
-
-// Function to extract and format start date from duration string
 function formatTimelineDate(position: Position): { year: number; month: string } {
-    const start_date_obj = new Date(position.date_start);
+    const start_date_obj = new Date(position.period.start);
     const month_index = start_date_obj.getMonth();
 
     const month_lists = [
@@ -157,16 +161,13 @@ export function Experience({data}: ExperienceProps) {
                     viewport={{once: true}}
                     transition={{duration: 0.6}}
                 >
-                    <Badge variant="outline" className="mb-4">Experience</Badge>
                     <h2 className="mb-6">{data.subtitle}</h2>
                     <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                         {data.description}
                     </p>
                 </motion.div>
 
-                {/* Timeline Container */}
                 <div className="relative">
-                    {/* Vertical Timeline Line - Hidden on mobile */}
                     <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border overflow-hidden hidden md:block">
                         <motion.div
                             className="w-full bg-gradient-to-b from-primary via-primary to-primary/60"
@@ -177,7 +178,6 @@ export function Experience({data}: ExperienceProps) {
                         />
                     </div>
 
-                    {/* Timeline Items */}
                     <motion.div
                         className="space-y-8"
                         variants={containerVariants}
@@ -194,7 +194,6 @@ export function Experience({data}: ExperienceProps) {
                                     variants={cardVariants}
                                     className="relative pl-0 md:pl-24"
                                 >
-                                    {/* Timeline Date - Hidden on mobile */}
                                     <motion.div
                                         className="absolute left-0 top-6 flex flex-col items-center text-center min-w-16 hidden md:flex"
                                         variants={timelineDotVariants}
@@ -207,19 +206,13 @@ export function Experience({data}: ExperienceProps) {
                                             className="text-sm font-semibold text-foreground bg-background px-2 py-1 rounded">
                                             {timelineDate.month}
                                         </div>
-                                        {/* Connection dot */}
-                                        <div
-                                            className="w-3 h-3 bg-primary rounded-full border-2 border-background shadow-sm mt-2"/>
                                     </motion.div>
 
-                                    {/* Experience Card */}
                                     <div
                                         className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 relative">
-                                        {/* Card Connector Line */}
                                         <div
                                             className="absolute left-0 top-9 w-6 h-0.5 bg-border -translate-x-full hidden md:block"></div>
 
-                                        {/* Location in top right */}
                                         <motion.div
                                             className="absolute top-4 right-4"
                                             initial={{opacity: 0, x: 20}}
@@ -228,12 +221,11 @@ export function Experience({data}: ExperienceProps) {
                                             transition={{duration: 0.4, delay: 0.3}}
                                         >
                                             <p className="text-xs text-gray-500 bg-gray-50 px-2 py-1 rounded-md">
-                                                {exp.location}
+                                                {exp.location.city}, {exp.location.country}
                                             </p>
                                         </motion.div>
 
-                                        {/* Header with company logo and title */}
-                                        <div className="flex items-start gap-4 mb-4 pr-20">
+                                        <div className="flex items-start gap-4 pr-20">
                                             <motion.div
                                                 className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 border-2 border-gray-200 overflow-hidden bg-white"
                                                 initial={{opacity: 0, scale: 0.5, rotate: -10}}
@@ -242,8 +234,8 @@ export function Experience({data}: ExperienceProps) {
                                                 transition={{duration: 0.4, delay: 0.2}}
                                             >
                                                 <ImageWithFallback
-                                                    src={exp.companyLogo}
-                                                    alt={`${exp.company} logo`}
+                                                    src={exp.organization.logo}
+                                                    alt={`${exp.organization.name} logo`}
                                                     className="w-full h-full object-cover"
                                                 />
                                             </motion.div>
@@ -253,14 +245,13 @@ export function Experience({data}: ExperienceProps) {
                                                     {exp.position}
                                                 </h3>
                                                 <p className="text-lg text-primary font-medium mb-2">
-                                                    <a href={exp.company_url} target="_blank">
-                                                    {exp.company}
+                                                    <a href={exp.organization.url} target="_blank">
+                                                        {exp.organization.name}
                                                     </a>
                                                 </p>
                                             </div>
                                         </div>
 
-                                        {/* Description and achievements as bullet points */}
                                         <motion.div
                                             className="space-y-3 mb-6"
                                             variants={bulletsContainerVariants}
@@ -268,31 +259,25 @@ export function Experience({data}: ExperienceProps) {
                                             whileInView="visible"
                                             viewport={{once: true}}
                                         >
-                                            {/* Main description as first bullet */}
                                             <motion.div
                                                 className="flex items-start gap-3"
                                                 variants={bulletVariants}
                                             >
-                                                <div
-                                                    className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                                                <p className="text-gray-700 leading-relaxed">{exp.description}</p>
                                             </motion.div>
 
-                                            {/* Achievements as additional bullets */}
-                                            {exp.achievements.map((achievement, achIndex) => (
+                                            {exp.responsibilities.map((responsibility, responsibility_index) => (
                                                 <motion.div
-                                                    key={achIndex}
+                                                    key={responsibility_index}
                                                     className="flex items-start gap-3"
                                                     variants={bulletVariants}
                                                 >
                                                     <div
                                                         className="w-2 h-2 bg-primary/70 rounded-full mt-2 flex-shrink-0"></div>
-                                                    <p className="text-gray-700 leading-relaxed">{achievement}</p>
+                                                    <p className="text-gray-700 leading-relaxed">{responsibility}</p>
                                                 </motion.div>
                                             ))}
                                         </motion.div>
 
-                                        {/* Technology badges */}
                                         <motion.div
                                             className="flex flex-wrap gap-2"
                                             variants={badgeContainerVariants}
@@ -315,15 +300,6 @@ export function Experience({data}: ExperienceProps) {
                             );
                         })}
                     </motion.div>
-
-                    {/* Timeline End Marker - Hidden on mobile */}
-                    <motion.div
-                        className="absolute left-6 -bottom-2 w-4 h-4 bg-gradient-to-br from-primary/60 to-primary/30 rounded-full border-4 border-background shadow-sm hidden md:block"
-                        initial={{scale: 0, opacity: 0}}
-                        whileInView={{scale: 1, opacity: 1}}
-                        viewport={{once: true}}
-                        transition={{duration: 0.4, delay: 1.5}}
-                    />
                 </div>
             </div>
         </section>

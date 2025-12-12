@@ -4,16 +4,19 @@
   "last_name": "Govender",
   "latest_role": "Senior Frontend Developer",
   "location": "Douglas, Isle of Man",
-  "summary": "Senior Full Stack JavaScript Engineer with 10+ years of experience in TypeScript, Angular, React, Next.js, and Node.js. Proven technical leadership in architecting scalable cloud solutions (AWS/Azure) and high-traffic systems (payment gateways, WebGL games). Dedicated to clean code, performance, and translating business goals into robust software.",
+  "summary": "Senior Frontend Developer with 10+ years of experience in Javascript / TypeScript, CSS, HTML5 and WebGL. Proven technical leadership in architecting scalable cloud solutions (AWS/Azure) and high-traffic systems (payment gateways, WebGL games). Dedicated to clean code, performance, and translating business goals into robust software.",
   "contact": {
     "email": "craigiswayne@gmail.com",
-    "linkedin_username": "craigiswayne",
     "phone": "+447624401629"
   },
   "work_experience": [
     {
+      "organization": {
+        "name": "UROC Studios",
+        "url": "https://uroc.com",
+        "logo": "/logo_uroc_studios.jpeg"
+      },
       "position": "Senior Frontend Developer",
-      "organization": "UROC Studios",
       "location": {
         "city": "Douglas",
         "country": "Isle of Man"
@@ -30,11 +33,25 @@
         "Automation wrt deployments, builds, testing",
         "Build custom in house tools to facilitate with development of our games",
         "Maintenance and development of the corporate website"
+      ],
+      "technologies": [
+        "PixiJS",
+        "Unity",
+        "WebGL",
+        "2D/3D",
+        "Angular",
+        "Three.JS",
+        "Typescript",
+        "Game Development"
       ]
     },
     {
       "position": "Senior Frontend Developer",
-      "organization": "Microgaming",
+      "organization": {
+        "name": "Microgaming",
+        "url": "https://www.microgaming.co.uk",
+        "logo": "/logo_microgaming.png"
+      },
       "location": {
         "city": "Douglas",
         "country": "Isle of Man"
@@ -54,18 +71,34 @@
         "Maintenance of Customer Facing Applications",
         "Studio Website Development and Maintenance",
         "Project Management"
+      ],
+      "technologies": [
+        ".NET",
+        "PHP",
+        "TypeScript",
+        "Angular",
+        "React",
+        "Typescript",
+        "Docker",
+        "Azure DevOps",
+        "Shell Scripting",
+        "Back Office"
       ]
     },
     {
       "position": "Senior Frontend Developer",
-      "organization": "Rank Interactive",
+      "organization": {
+        "name": "Rank Interactive",
+        "url": "https://www.rank.com",
+        "logo": "/rank_interactive_logo.jpeg"
+      },
       "location": {
         "city": "Cape Town",
         "country": "South Africa"
       },
       "period": {
         "start": "Sep 2020",
-        "end": " Aug 2022"
+        "end": "Aug 2022"
       },
       "responsibilities": [
         "Development and maintenance of the in-house cashier services on several Casinos and Bingo operators in the UK.",
@@ -73,18 +106,31 @@
         "Our cashier systems also handle promoting bonuses and promotions to the player which they could redeem through the app",
         "Our cashier app is built to withstand large amounts of traffic whilst implementing UI and UX best practices. On any given day, it handles approximately 80,000 transactions",
         "Maintaining unit tests coupled with continuous integration pipelines"
+      ],
+      "technologies": [
+        "Angular",
+        "Typescript",
+        "Elastic Stack (ELK)",
+        "Docker",
+        "Node.js",
+        "CI/CD",
+        "Docker"
       ]
     },
     {
       "position": "Intermediate Web Developer",
-      "organization": "Digioutsource",
+      "organization": {
+        "name": "Digioutsource",
+        "url": "https://supergroup.com/companies/digi-outsource",
+        "logo": "/logo_digioutsource.webp"
+      },
       "location": {
         "city": "Cape Town",
         "country": "South Africa"
       },
       "period": {
         "start": "Feb 2019",
-        "end": " Aug 2020"
+        "end": "Aug 2020"
       },
       "responsibilities": [
         "Updating and maintaining an in house CMS that serves a multinational casino base.",
@@ -92,6 +138,48 @@
         "Rotational After hours support and Tech assistance.",
         "2IC to the Team Lead and responsible for mentoring the junior / intermediate colleagues.",
         "The CI/CD process leverages GitLabs Pipelines integrating tightly with Kubernetes"
+      ],
+      "technologies": [
+        ".NET",
+        "MongoDB",
+        "Elastic Stack (ELK)",
+        "Angular",
+        "Typescript"
+      ]
+    },
+    {
+      "position": "Senior WordPress Developer",
+      "organization": {
+        "name": "Media24",
+        "url": "https://www.media24.com",
+        "logo": "/logo_media24.png"
+      },
+      "location": {
+        "city": "Cape Town",
+        "country": "South Africa"
+      },
+      "period": {
+        "start": "2015-03",
+        "end": "2018-12"
+      },
+      "responsibilities": [
+        "Design and Develop WordPress Sites to promote the various media brands under the Media24 umbrella",
+        "Design and Develop WordPress Websites",
+        "Develop bespoke Themes and Plugins",
+        "Collaborate with Designers to bring their ideas to fruition",
+        "Mentoring Juniors and upskilling team members",
+        "Evaluate and provide solutions to security concerns",
+        "Manage the infrastructure and deployment of over 20 brands"
+      ],
+      "technologies": [
+        "PHP",
+        "WordPress",
+        "React",
+        "SCSS",
+        "Typescript",
+        "Javascript",
+        "CI/CD",
+        "Docker"
       ]
     }
   ],
@@ -153,5 +241,9 @@
     "WebGL Slot Game Development",
     "Website Development",
     "WordPress"
-  ]
+  ],
+  "social": {
+    "linkedin": "craigiswayne",
+    "github": "craigiswayne"
+  }
 }
