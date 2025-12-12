@@ -52,7 +52,8 @@ h2 {
     margin-bottom: var(--gap-large);
     display: flex;
     align-items: center;
-    gap: var(--gap-large);
+    column-gap: var(--gap-large);
+    row-gap: var(--gap-small);
     flex-wrap: wrap;
 }
 
@@ -216,39 +217,41 @@ ul li::marker {
     overflow: hidden;
 }
 
-.action-bar button {
+.action-bar > * {
     background: none;
     border: none;
     margin: 0;
     padding: 10px 8px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.action-bar button svg {
+.action-bar svg {
     fill: var(--color-primary);
     stroke: var(--color-primary);
+    user-select: none;
 }
 
-.action-bar button:first-child:last-child {
-    min-height: 64px;
-}
-
-.action-bar button:hover {
+.action-bar > *:hover {
     background-color: rgba(11, 87, 208, .08);
 }
 
 @media screen and (max-width: 900px) {
+    body {
+        margin-bottom: 64px;
+    }
     .action-bar {
         top: unset;
         bottom: 0;
-        right: 0;
-        transform: translate(-50%, -50%);
+        right: 50%;
+        transform: translate(50%, -50%);
         position: fixed;
+        flex-direction: row;
     }
-
-    .action-bar button:first-child:last-child{
-        min-height: unset;
-        min-width: 64px;
+    .action-bar > * {
+        padding: 8px 10px;
     }
 }
 
@@ -268,6 +271,7 @@ ul li::marker {
     body {
         background-color: white;
         padding: 0;
+        margin: 0;
     }
 
     .a4-page {

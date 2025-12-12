@@ -7,8 +7,7 @@ import HeroProfileImage from './HeroProfileImage/HeroProfileImage';
 interface HeroProps {
   data: {
     title: string;
-    availabilityStatus: string;
-    description: string;
+    summary: string;
     profileImage: string;
     socialLinks: {
       github: string;
@@ -59,10 +58,7 @@ export function Hero({ data }: HeroProps) {
             animate="visible"
           >
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Badge variant="secondary" className="mb-4 mt-8 md:mt-0">
-                {data.availabilityStatus}
-              </Badge>
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl tracking-tight">
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl tracking-tight mb-4 mt-8 md:mt-0">
                 {data.title.split(' ').slice(0, 2).join(' ')}
                 <span className="block text-primary">{data.title.split(' ').slice(2).join(' ')}</span>
               </h1>
@@ -72,7 +68,7 @@ export function Hero({ data }: HeroProps) {
               className="text-lg text-muted-foreground max-w-lg"
               variants={itemVariants}
             >
-              {data.description}
+              {data.summary}
             </motion.p>
             
             <motion.div 

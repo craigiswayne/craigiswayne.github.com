@@ -15,6 +15,9 @@
     "last_name": {
       "type": "string"
     },
+    "summary": {
+      "type": "string"
+    },
     "latest_role": {
       "description": "Optional. If this property is not set, the role at your most recent employment will be used",
       "type": "string"
@@ -26,9 +29,6 @@
           "type": "string",
           "format": "email"
         },
-        "linkedin_username": {
-          "type": "string"
-        },
         "phone": {
           "type": "string",
           "description": "Phone number in E.164 format (e.g., +447624401629)",
@@ -38,18 +38,105 @@
       "additionalProperties": false,
       "required": [
         "email",
-        "linkedin_username",
         "phone"
       ]
     },
     "location": {
       "description": "Optional. If this property is not set, the location at your most recent employment will be used",
       "type": "string"
+    },
+    "social": {
+      "description": "Just the usernames for the social media entries",
+      "type": "object",
+      "properties": {
+        "linkedin": {
+          "type": "string"
+        },
+        "github": {
+          "type": "string"
+        }
+      },
+      "required": ["linkedin"]
+    },
+    "work_experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organization": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "logo": {
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "required": [
+              "name",
+              "url",
+              "logo"
+            ]
+          },
+          "location": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            }
+          },
+          "period": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string"
+              },
+              "end": {
+                "type": "string"
+              }
+            },
+            "required": ["start"]
+          },
+          "responsibilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "technologies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "organization",
+          "location",
+          "period",
+          "responsibilities",
+          "technologies"
+        ]
+      }
     }
   },
   "required": [
     "first_names",
-    "last_name"
+    "last_name",
+    "summary",
+    "work_experience"
   ],
   "additionalProperties": false
 }

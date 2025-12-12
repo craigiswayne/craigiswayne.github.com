@@ -1,24 +1,18 @@
-const abstracted_data = {
-  name: "Craig Wayne",
-  username: "craigiswayne",
-  email: "craigiswayne@gmail.com",
-};
+import jsonData from '@/public/data.json'
 
 export const portfolioData = {
   personal: {
-    name: abstracted_data.name,
-    title: "Full Stack Javascript Engineer",
-    availabilityStatus: "Available for new opportunities",
-    description:
-      "Crafting exceptional digital experiences with modern web technologies. Specializing in TypeScript stacks, and creating scalable architectures that drive business growth.",
+    name: jsonData.first_names,
+    title: jsonData.latest_role,
+    summary: jsonData.summary,
     yearsOfExperience: 8,
-    email: abstracted_data.email,
+    email: jsonData.contact.email,
     cvPath: "/Resume-CraigWayneGovender.pdf",
     cvFileName: "Resume-CraigWayneGovender.pdf",
     profileImage: "/profile.png",
     socialLinks: {
-      github: "https://github.com/craigiswayne",
-      linkedin: "https://www.linkedin.com/in/craigiswayne",
+      github: `https://github.com/${jsonData.social.github}`,
+      linkedin: `https://www.linkedin.com/in/${jsonData.social.linkedin}`,
     },
   },
   about: {
@@ -70,6 +64,10 @@ export const portfolioData = {
       },
       {
         skill: "API Design",
+        level: "Expert",
+      },
+      {
+        skill: "Angular",
         level: "Expert",
       },
       {
@@ -197,154 +195,10 @@ export const portfolioData = {
     ],
   },
   experience: {
-    subtitle: "Professional Journey",
+    subtitle: "Work Experience",
     description:
       "Over 10 years of experience building exceptional web applications, leading teams, and driving technical innovation.",
-    positions: [
-      {
-        company: "UROC Studios",
-        company_url: "https://uroc.com/",
-        companyLogo: "/logo_uroc_studios.jpeg",
-        position: "Full Stack Javascript Engineer",
-        date_start: "2024-11",
-        location: "Douglas, Isle of Man",
-        description:
-          "Design and Develop Slot, Scratch and Crash Games",
-        achievements: [
-          "Maintain and Deploy our various games",
-          "Work closely with the design and qa team to ensure that the games are according to spec",
-          "Develop and maintain unit tests",
-          "Automation wrt deployments, builds, testing",
-          "Build bespoke tools to facilitate with development of our games",
-          "Maintenance and development of the corporate website",
-        ],
-        technologies: [
-          "PixiJS",
-          "Unity",
-          "WebGL",
-          "2D/3D",
-          "Angular",
-          "Three.JS",
-          "Typescript",
-          "Game Development",
-        ],
-      },
-      {
-        company: "Microgaming",
-        company_url: "https://www.microgaming.co.uk/",
-        companyLogo: "/logo_microgaming.png",
-        position: "Senior Frontend Developer",
-        date_start: "2022-10",
-        date_end: "2024-10",
-        location: "Douglas, Isle of Man",
-        description:
-          "Creating and maintaining in-house solutions to improve business processes",
-        achievements: [
-          "2IC to the Tech Lead. Providing insights into architecting several micro-services to improve performance, delivery and disaster recovery",
-          "Mentoring of juniors in tech and business acumen.",
-          "Service Desk Support",
-          "Desktop Support",
-          "Software Installation for Games Global Employees",
-          "Maintaining Power Automate Workflows",
-          "Maintenance of Customer Facing Applications",
-          "Studio Website Development and Maintenance",
-          "Project Management",
-        ],
-        technologies: [
-          ".NET",
-          "PHP",
-          "TypeScript",
-          "Angular",
-          "React",
-          "Typescript",
-          "Docker",
-          "Azure DevOps",
-          "Shell Scripting",
-          "Back Office",
-        ],
-      },
-      {
-        company: "Rank Interactive",
-        company_url: "https://www.rank.com/",
-        companyLogo: "/rank_interactive_logo.jpeg",
-        position: "Senior Frontend Engineer",
-        date_start: "2020-09",
-        date_end: "2022-08",
-        location: "Cape Town, South Africa",
-        description:
-          "Development and maintenance of the in-house cashier services on several Casinos and Bingo operators in the UK.",
-        achievements: [
-          "Responsible for capturing Player Card Details and integrating with payment systems such as VISA, PayPal and Barclays.",
-          "Our cashier systems also handle promoting bonuses and promotions to the player which they could redeem through the app.",
-          "Our cashier app is built to withstand large amounts of traffic whilst implementing UI and UX best practices. On any given day, it handles approximately 80,000 transactions.",
-          "Maintaining unit tests coupled with continuous integration pipelines",
-        ],
-        technologies: [
-          "Angular",
-          "Typescript",
-          "Elastic Stack (ELK)",
-          "Docker",
-          "Node.js",
-          "CI/CD",
-          "Docker",
-        ],
-      },
-      {
-        company: "Digioutsource",
-        company_url:
-          "https://supergroup.com/companies/digi-outsource/",
-        companyLogo: "/logo_digioutsource.webp",
-        position: "Intermediate Web Developer",
-        date_start: "2019-02",
-        date_end: "2020-08",
-        location: "Cape Town, South Africa",
-        description:
-          "Primarily responsible for updating and maintaining an in house CMS that serves a multinational casino base",
-        achievements: [
-          "Mentoring colleagues and trainees on the business landscape as well as current best practices within our industry.",
-          "Rotational After hours support and Tech assistance.",
-          "2IC to the Team Lead and responsible for mentoring the junior / intermediate colleagues.",
-          "The CI/CD process leverages GitLabs Pipelines integrating tightly with Kubernetes",
-        ],
-        technologies: [
-          ".NET",
-          "MongoDB",
-          "Elastic Stack (ELK)",
-          "Angular",
-          "Typescript",
-          "Typescript",
-        ],
-      },
-      {
-        company: "Media24",
-        company_url: "https://www.media24.com/",
-        companyLogo: "/logo_media24.png",
-        position: "Senior WordPress Developer",
-        date_start: "2015-03",
-        date_end: "2018-12",
-        location: "Cape Town, South Africa",
-        description:
-          "Design and Develop WordPress Sites to promote the various media brands under the Media24 umbrella",
-        achievements: [
-          "Design and Develop WordPress Websites",
-          "Develop bespoke Themes and Plugins",
-          "Collaborate with Designers to bring their ideas to fruition",
-          "Mentoring Juniors and upskilling team members",
-          "Evaluate and provide solutions to security concerns",
-          "Manage the infrastructure and deployment of over 20 brands",
-        ],
-        technologies: [
-          "PHP",
-          "WordPress",
-          "React",
-          "SCSS",
-          "Typescript",
-          "Javascript",
-          "CI/CD",
-          "Docker",
-        ],
-      },
-    ],
+    positions: jsonData.work_experience
   },
   contact: {
     subtitle: "Let's Work Together",
@@ -357,7 +211,7 @@ export const portfolioData = {
         title: "Email Me",
         description:
           "For project inquiries and collaboration opportunities",
-        action: abstracted_data.email,
+        action: jsonData.contact.email,
         actionType: "email",
       },
     ],
@@ -387,7 +241,7 @@ export const portfolioData = {
     { label: "Contact", target: "contact" },
   ],
   footer: {
-    copyright: `© 2025 ${abstracted_data.name}. Built with React, TypeScript, and Tailwind CSS.`,
+    copyright: `© 2011 - ${new Date().getFullYear()} ${jsonData.first_names}. Built with React, TypeScript, and Tailwind CSS.`,
     tagline:
       "Open to new opportunities • Available for freelance projects",
   },
