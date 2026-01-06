@@ -1,3 +1,18 @@
+mixin experienceItem(experience)
+  .item&attributes(attributes)
+    header
+      h4.title #{experience.position}
+        .date
+          | #{experience.period.start} - #{experience.period.end}
+      .subtitle
+        span.organization #{experience.organization.name}
+        span.location #{experience.location.country}
+    ul
+      each responsibility in experience.responsibilities
+        li= responsibility
+    .tech-stack
+      each tech in experience.technologies
+        span.badge= tech
 doctype html
 html(lang="en")
   head
@@ -63,22 +78,10 @@ html(lang="en")
 
       section.experience
         .title PROFESSIONAL EXPERIENCE
-        // last 4 experience
-        each experience in (work_experience.slice(0,5))
-          .item
-            header
-              h4.title #{experience.position}
-                .date
-                 | #{experience.period.start} - #{experience.period.end}
-              .subtitle
-                span.organization #{experience.organization.name}
-                span.location #{experience.location.country}
-            ul
-              each responsibility in experience.responsibilities
-                li= responsibility
-            .tech-stack
-              each tech in experience.technologies
-                span.badge= tech
+        each experience in (work_experience.slice(0,4))
+          +experienceItem(experience)
+        each experience in (work_experience.slice(4))
+          +experienceItem(experience)(class="no-print")
 
       section.education
         .title EDUCATION
