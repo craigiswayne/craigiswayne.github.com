@@ -172,6 +172,25 @@ ul li::marker {
     color: #537d8d;
 }
 
+.tech-stack {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-left: 30px;
+}
+
+.tech-stack .badge {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-primary);
+    background-color: rgba(68, 104, 177, 0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
 .skills .content {
     font-size: 13px;
     color: var(--color-muted);
@@ -293,6 +312,13 @@ ul li::marker {
         width: 100%;
         max-width: 100%;
         padding: 0;
+    }
+
+    .tech-stack .badge {
+        border: 1px solid #ccc;
+        background-color: transparent !important;
+        color: #333 !important;
+        -webkit-print-color-adjust: exact;
     }
 
     .no-print {

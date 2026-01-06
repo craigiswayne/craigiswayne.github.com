@@ -28,7 +28,7 @@ jobs:
         run: npm ci
 
       - name: Build Resume as HTML
-        run: node resume-generator/compile.js
+        run: node resume-generator/compile-template.js
 
       - name: Build Project 🏗️
         run: npm run build

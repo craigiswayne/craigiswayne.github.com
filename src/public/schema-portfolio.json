@@ -130,13 +130,39 @@
           "technologies"
         ]
       }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+
+        }
+      }
+    },
+    "extra_skills_and_technologies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minItems": 1
+      }
+    },
+    "skills_from_work_experience_and_extra_skills": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minItems": 1
+      }
     }
   },
   "required": [
     "first_names",
     "last_name",
     "summary",
-    "work_experience"
+    "work_experience",
+    "education",
+    "extra_skills_and_technologies",
+    "skills_from_work_experience_and_extra_skills"
   ],
   "additionalProperties": false
 }

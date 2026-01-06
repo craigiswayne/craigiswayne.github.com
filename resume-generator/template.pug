@@ -62,9 +62,9 @@ html(lang="en")
         p.summary #{summary}
 
       section.experience
-        .title EMPLOYMENT
+        .title PROFESSIONAL EXPERIENCE
         // last 4 experience
-        each experience in (work_experience.slice(0,4))
+        each experience in (work_experience.slice(0,5))
           .item
             header
               h4.title #{experience.position}
@@ -76,6 +76,9 @@ html(lang="en")
             ul
               each responsibility in experience.responsibilities
                 li= responsibility
+            .tech-stack
+              each tech in experience.technologies
+                span.badge= tech
 
       section.education
         .title EDUCATION
@@ -92,7 +95,7 @@ html(lang="en")
       section.skills
         .title SKILLS
         .content
-          - const sorted_skills = skills.sort()
+          - const sorted_skills = skills_from_work_experience_and_extra_skills.sort()
           each skill, index in sorted_skills
             span= skill
               if index < sorted_skills.length - 1
