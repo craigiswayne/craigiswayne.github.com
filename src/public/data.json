@@ -35,14 +35,18 @@
         "Maintenance and development of the corporate website"
       ],
       "technologies": [
-        "PixiJS",
-        "Unity",
+        "Typescript",
+        "SCSS",
+        ".NET",
+        "Angular",
         "WebGL",
         "2D/3D",
-        "Angular",
-        "Three.JS",
-        "Typescript",
-        "Game Development"
+        "Unity",
+        "PixiJS",
+        "ThreeJS",
+        "Game Development",
+        "Figma",
+        "Cypress"
       ]
     },
     {
@@ -75,14 +79,16 @@
       "technologies": [
         ".NET",
         "PHP",
+        "SQL",
+        "Microsoft SQL Server",
         "TypeScript",
         "Angular",
         "React",
-        "Typescript",
         "Docker",
         "Azure DevOps",
         "Shell Scripting",
-        "Back Office"
+        "Back Office",
+        "IIS"
       ]
     },
     {
@@ -114,7 +120,10 @@
         "Docker",
         "Node.js",
         "CI/CD",
-        "Docker"
+        "Docker",
+        "Load testing",
+        "Nginx",
+        "E-Commerce"
       ]
     },
     {
@@ -144,7 +153,13 @@
         "MongoDB",
         "Elastic Stack (ELK)",
         "Angular",
-        "Typescript"
+        "Typescript",
+        "Postman",
+        "CI/CD",
+        "Docker",
+        "Node.js",
+        "Shell Script",
+        "Bash"
       ]
     },
     {
@@ -179,7 +194,10 @@
         "Typescript",
         "Javascript",
         "CI/CD",
-        "Docker"
+        "Docker",
+        "MYSQL",
+        "Full Stack Web Development",
+        "SEO"
       ]
     }
   ],
@@ -199,49 +217,26 @@
       }
     }
   ],
-  "skills": [
+  "extra_skills_and_technologies": [
     "Agile Development",
-    "Angular",
     "Apache",
-    "Bash",
     "CSS",
-    "Cypress",
-    "Docker",
-    "Dot Net Core",
-    "E-Commerce",
-    "Figma",
-    "Full Stack Web Development",
     "Git",
     "HTML5",
-    "IIS",
     "Jest",
     "Laravel",
-    "Load testing",
-    "NodeJS",
-    "PHP",
     "Mocha",
-    "Microsoft SQL Server",
-    "Mongo",
-    "MYSQL",
-    "Nginx",
-    "PixiJS",
-    "Postman",
-    "React",
     "REST",
     "Miro",
     "SAAS",
-    "ThreeJS",
-    "Typescript",
     "Scrum",
-    "SEO",
-    "Shell Script",
-    "SQL",
+    "Storybook",
     "System Design & Architecture",
     "Vue",
     "WebGL Slot Game Development",
-    "Website Development",
-    "WordPress"
+    "Website Development"
   ],
+  "skills_from_work_experience_and_extra_skills": ["this gets generated, see compile-template.js"],
   "social": {
     "linkedin": "craigiswayne",
     "github": "craigiswayne"
