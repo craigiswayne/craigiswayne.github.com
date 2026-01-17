@@ -28,9 +28,9 @@
       "responsibilities": [
         "Design and Develop Slot, Scratch and Crash Games",
         "Maintain and Deploy our various games",
-        "Work closely with the design and qa team to ensure that the games are according to spec",
+        "Work closely with the design and QA team to ensure that the games are according to spec",
         "Develop and maintain unit tests",
-        "Automation wrt deployments, builds, testing",
+        "Automated deployments, builds, testing",
         "Build custom in house tools to facilitate with development of our games",
         "Maintenance and development of the corporate website"
       ],
