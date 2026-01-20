@@ -2,7 +2,10 @@
 * Use css variables where possible
 * components should be in a components folder
 * pages should be in a pages folder
-
+* Create a single source of truth for data, where applicable
+* Use a Don't Repeat Yourself (DRY) approach
+* Prefer typescript
+* Guard clauses in logic code (javascript or typescript)
 <!--
 
 System Guidelines
