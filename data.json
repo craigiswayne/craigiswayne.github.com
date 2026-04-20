@@ -2,9 +2,9 @@
   "$schema": "./schema-portfolio.json",
   "first_names": "Craig Wayne",
   "last_name": "Govender",
-  "latest_role": "Senior Frontend Developer",
+  "latest_role": "Senior Full Stack Engineer",
   "location": "Douglas, Isle of Man",
-  "summary": "Senior Frontend Developer with 10+ years of experience in Javascript / TypeScript, CSS, HTML5 and WebGL. Proven technical leadership in architecting scalable cloud solutions (AWS/Azure) and high-traffic systems (payment gateways, WebGL games). Dedicated to clean code, performance, and translating business goals into robust software.",
+  "summary": "Senior Full Stack Engineer with 10+ years of experience in .Net, Javascript / TypeScript, WebGL. Proven technical leadership in architecting scalable cloud solutions (AWS/Azure) and high-traffic systems (payment gateways, WebGL games). Dedicated to clean code, performance, security and translating business goals into robust software.",
   "contact": {
     "email": "craigiswayne@gmail.com",
     "phone": "+447624401629"
@@ -16,7 +16,7 @@
         "url": "https://uroc.com",
         "logo": "/logo_uroc_studios.jpeg"
       },
-      "position": "Senior Frontend Developer",
+      "position": "Senior Full Stack Engineer",
       "location": {
         "city": "Douglas",
         "country": "Isle of Man"
@@ -35,22 +35,23 @@
         "Maintenance and development of the corporate website"
       ],
       "technologies": [
-        "Typescript",
-        "SCSS",
         ".NET",
-        "Angular",
-        "WebGL",
-        "2D/3D",
         "Unity",
+        "REST APIs",
+        "WebGL",
         "PixiJS",
+        "Typescript",
+        "AWS",
+        "SCSS",
+        "Angular",
+        "2D/3D",
         "ThreeJS",
-        "Game Development",
         "Figma",
         "Cypress"
       ]
     },
     {
-      "position": "Senior Frontend Developer",
+      "position": "Senior Full Stack Engineer",
       "organization": {
         "name": "Microgaming",
         "url": "https://www.microgaming.co.uk",
@@ -78,7 +79,6 @@
       ],
       "technologies": [
         ".NET",
-        "PHP",
         "SQL",
         "Microsoft SQL Server",
         "TypeScript",
@@ -87,12 +87,13 @@
         "Docker",
         "Azure DevOps",
         "Shell Scripting",
+        "PHP",
         "Back Office",
         "IIS"
       ]
     },
     {
-      "position": "Senior Frontend Developer",
+      "position": "Senior Full Stack Engineer",
       "organization": {
         "name": "Rank Interactive",
         "url": "https://www.rank.com",
@@ -114,9 +115,11 @@
         "Maintaining unit tests coupled with continuous integration pipelines"
       ],
       "technologies": [
+        ".NET",
         "Angular",
         "Typescript",
         "Elastic Stack (ELK)",
+        "PHP",
         "Docker",
         "Node.js",
         "CI/CD",
@@ -163,7 +166,7 @@
       ]
     },
     {
-      "position": "Senior WordPress Developer",
+      "position": "Senior Full Stack Engineer",
       "organization": {
         "name": "Media24",
         "url": "https://www.media24.com",
@@ -178,8 +181,8 @@
         "end": "Dec 2018"
       },
       "responsibilities": [
+        "Develop and Maintain existing .Net MVC websites for the various media brands under the Media24 umbrella",
         "Design and Develop WordPress Sites to promote the various media brands under the Media24 umbrella",
-        "Design and Develop WordPress Websites",
         "Develop bespoke Themes and Plugins",
         "Collaborate with Designers to bring their ideas to fruition",
         "Mentoring Juniors and upskilling team members",
@@ -187,16 +190,16 @@
         "Manage the infrastructure and deployment of over 20 brands"
       ],
       "technologies": [
-        "PHP",
+        ".NET",
+        "MongoDB",
+        "API Design",
         "WordPress",
         "React",
-        "SCSS",
         "Typescript",
         "Javascript",
         "CI/CD",
         "Docker",
-        "MYSQL",
-        "Full Stack Web Development",
+        "MySQL",
         "SEO"
       ]
     }
