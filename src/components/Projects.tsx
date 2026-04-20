@@ -81,8 +81,7 @@ export function Projects({data}: ProjectsProps) {
                     viewport={{once: true}}
                     transition={{duration: 0.6}}
                 >
-                    <Badge variant="outline" className="mb-4">Featured Projects</Badge>
-                    <h2 className="mb-6">{data.subtitle}</h2>
+                    <Badge variant="outline" className="mb-4">{data.subtitle}</Badge>
                     <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                         {data.description}
                     </p>

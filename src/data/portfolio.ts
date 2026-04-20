@@ -18,9 +18,9 @@ export const portfolioData = {
   about: {
     subtitle: "Building the Future of Web",
     description:
-      "With over 10 years of experience in javascript development, I've helped startups and enterprise companies create digital products that users love. My passion lies in crafting intuitive interfaces and scalable architectures.",
+      "With over 10 years of experience in development, I've helped startups and enterprise companies create digital products that users love. My passion lies in crafting secure, scalable architecture and intuitive interfaces.",
     journey: [
-      "I started my career as a curious developer fascinated by the intersection of design and technology. Over the years, I've evolved from writing my first HTML page to architecting complex applications used by millions.",
+      "I started my career as a curious developer fascinated by the intersection of design and technology",
       "Today, I focus on building scalable full stack systems, mentoring teams, and staying at the forefront of web technology. I believe great software is not just about code—it's about solving real problems for real people.",
     ],
     highlights: [
@@ -51,7 +51,15 @@ export const portfolioData = {
     ],
     expertise: [
       {
-        skill: "JavaScript/TypeScript",
+        skill: ".Net / C#",
+        level: "Expert",
+      },
+      {
+        skill: "JavaScript / TypeScript",
+        level: "Expert",
+      },
+      {
+        skill: "SQL / NoSQL",
         level: "Expert",
       },
       {
@@ -59,20 +67,12 @@ export const portfolioData = {
         level: "Expert",
       },
       {
-        skill: "Cloud Architecture",
+        skill: "DevOps",
         level: "Expert",
       },
       {
         skill: "API Design",
         level: "Expert",
-      },
-      {
-        skill: "Angular",
-        level: "Expert",
-      },
-      {
-        skill: "React/Vue/Next.js",
-        level: "Advanced",
       },
       {
         skill: "Team Leadership",
@@ -85,6 +85,23 @@ export const portfolioData = {
     description:
       "A comprehensive toolkit built over years of experience, constantly evolving with the latest industry trends and best practices.",
     categories: [
+      {
+        title: "Backend & Cloud",
+        skills: [
+          ".NET",
+          "C#",
+          "Entity Framework",
+          "SQL Server",
+          "Node.js",
+          "REST APIs",
+          "Firebase",
+          "AWS",
+          "Netlify",
+          "Docker",
+          "Azure DevOps",
+          "PHP",
+        ],
+      },
       {
         title: "Frontend Technologies",
         skills: [
@@ -104,22 +121,6 @@ export const portfolioData = {
         ],
       },
       {
-        title: "Development Tools",
-        skills: [
-          "Git",
-          "Webpack",
-          "Vite",
-          "npm/yarn",
-          "ESLint",
-          "Prettier",
-          "Jest",
-          "Cypress",
-          "Storybook",
-          "Figma",
-          "Adobe XD",
-        ],
-      },
-      {
         title: "Architecture & Best Practices",
         skills: [
           "Component Architecture",
@@ -133,17 +134,14 @@ export const portfolioData = {
         ],
       },
       {
-        title: "Backend & Cloud",
+        title: "Development Tools",
         skills: [
-          "Node.js",
-          "REST APIs",
-          "Firebase",
-          "PHP",
-          ".NET",
-          "AWS",
-          "Netlify",
-          "Docker",
-          "Azure DevOps",
+          "Webpack",
+          "Vite",
+          "npm/yarn",
+          "Storybook",
+          "Figma",
+          "Adobe XD",
         ],
       },
     ],
@@ -241,7 +239,7 @@ export const portfolioData = {
     { label: "Contact", target: "contact" },
   ],
   footer: {
-    copyright: `© 2011 - ${new Date().getFullYear()} ${jsonData.first_names}. Built with React, TypeScript, and Tailwind CSS.`,
+    copyright: `© 2011 - ${new Date().getFullYear()}`,
     tagline:
       "Open to new opportunities • Available for freelance projects",
   },

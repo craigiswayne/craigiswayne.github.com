@@ -29,12 +29,12 @@ export function Skills({ data }: SkillsProps) {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 30, rotateX: -15 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       rotateX: 0,
-      transition: { 
-        duration: 0.6, 
+      transition: {
+        duration: 0.6,
         ease: "easeOut"
       }
     }
@@ -53,12 +53,12 @@ export function Skills({ data }: SkillsProps) {
 
   const skillBadgeVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 10 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
+    visible: {
+      opacity: 1,
+      scale: 1,
       y: 0,
-      transition: { 
-        duration: 0.3, 
+      transition: {
+        duration: 0.3,
         ease: "easeOut"
       }
     }
@@ -67,21 +67,20 @@ export function Skills({ data }: SkillsProps) {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4 max-w-6xl">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <Badge variant="outline" className="mb-4">Technical Skills</Badge>
-          <h2 className="mb-6">{data.subtitle}</h2>
+          <Badge variant="outline" className="mb-4">{data.subtitle}</Badge>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             {data.description}
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
           variants={containerVariants}
           initial="hidden"
@@ -97,7 +96,7 @@ export function Skills({ data }: SkillsProps) {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <motion.div 
+                  <motion.div
                     className="flex flex-wrap gap-2"
                     variants={skillsContainerVariants}
                     initial="hidden"
@@ -106,8 +105,8 @@ export function Skills({ data }: SkillsProps) {
                   >
                     {category.skills.map((skill, skillIndex) => (
                       <motion.div key={skillIndex} variants={skillBadgeVariants}>
-                        <Badge 
-                          variant="secondary" 
+                        <Badge
+                          variant="secondary"
                           className="hover:bg-primary hover:text-primary-foreground transition-colors cursor-default"
                         >
                           {skill}
