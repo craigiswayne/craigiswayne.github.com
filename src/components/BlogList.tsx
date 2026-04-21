@@ -56,7 +56,7 @@ export function BlogList({ onPostClick }: BlogListProps) {
           <Badge variant="outline" className="mb-4">Blog</Badge>
           <h1 className="mb-6">Thoughts & Insights</h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Exploring web development, best practices, and the ever-evolving world of frontend engineering.
+            Exploring web development, best practices, and the ever-evolving world of engineering.
           </p>
         </motion.div>
 

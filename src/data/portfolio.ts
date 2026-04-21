@@ -34,7 +34,7 @@ export const portfolioData = {
         icon: "Users",
         title: "Team Leadership",
         description:
-          "Leading frontend teams and mentoring junior developers to achieve collective success.",
+          "Leading development teams and mentoring junior developers to achieve collective success.",
       },
       {
         icon: "Zap",

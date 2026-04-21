@@ -2,9 +2,9 @@
   "$schema": "./schema-portfolio.json",
   "first_names": "Craig Wayne",
   "last_name": "Govender",
-  "latest_role": "Senior Full Stack Engineer",
+  "latest_role": "Senior Full Stack Developer",
   "location": "Douglas, Isle of Man",
-  "summary": "Senior Full Stack Engineer with 10+ years of experience in .Net, Javascript / TypeScript, WebGL. Proven technical leadership in architecting scalable cloud solutions (AWS/Azure) and high-traffic systems (payment gateways, WebGL games). Dedicated to clean code, performance, security and translating business goals into robust software.",
+  "summary": "Senior Full Stack Developer with 10+ years of experience in .Net, Javascript / TypeScript, WebGL. Proven technical leadership in architecting scalable cloud solutions (AWS/Azure) and high-traffic systems (payment gateways, WebGL games). Dedicated to clean code, performance, security and translating business goals into robust software.",
   "contact": {
     "email": "craigiswayne@gmail.com",
     "phone": "+447624401629"
@@ -16,7 +16,7 @@
         "url": "https://uroc.com",
         "logo": "/logo_uroc_studios.jpeg"
       },
-      "position": "Senior Full Stack Engineer",
+      "position": "Senior Full Stack Developer",
       "location": {
         "city": "Douglas",
         "country": "Isle of Man"
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "position": "Senior Full Stack Engineer",
+      "position": "Senior Full Stack Developer",
       "organization": {
         "name": "Microgaming",
         "url": "https://www.microgaming.co.uk",
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "position": "Senior Full Stack Engineer",
+      "position": "Senior Full Stack Developer",
       "organization": {
         "name": "Rank Interactive",
         "url": "https://www.rank.com",
@@ -166,7 +166,7 @@
       ]
     },
     {
-      "position": "Senior Full Stack Engineer",
+      "position": "Senior Full Stack Developer",
       "organization": {
         "name": "Media24",
         "url": "https://www.media24.com",
