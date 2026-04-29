@@ -1,0 +1,247 @@
+{
+  "$schema": "./schema-portfolio.json",
+  "first_names": "Craig Wayne",
+  "last_name": "Govender",
+  "latest_role": "Senior Javascript Developer",
+  "location": "Douglas, Isle of Man",
+  "summary": "Senior Javascript Developer with 10+ years of experience in Javascript / TypeScript, WebGL. Proven technical leadership in architecting scalable cloud solutions (AWS/Azure) and high-traffic systems (payment gateways, WebGL games). Dedicated to clean code, performance, security and translating business goals into robust software.",
+  "contact": {
+    "email": "craigiswayne@gmail.com",
+    "phone": "+447624401629"
+  },
+  "work_experience": [
+    {
+      "organization": {
+        "name": "UROC Studios",
+        "url": "https://uroc.com",
+        "logo": "/logo_uroc_studios.jpeg"
+      },
+      "position": "Senior Javascript Developer",
+      "location": {
+        "city": "Douglas",
+        "country": "Isle of Man"
+      },
+      "period": {
+        "start": "Nov 2024",
+        "end": "Present"
+      },
+      "responsibilities": [
+        "Design and Develop Slot, Scratch and Crash Games",
+        "Maintain and Deploy our various games",
+        "Work closely with the design and QA team to ensure that the games are according to spec",
+        "Develop and maintain unit tests",
+        "Automated deployments, builds, testing",
+        "Build custom in house tools to facilitate with development of our games",
+        "Maintenance and development of the corporate website"
+      ],
+      "technologies": [
+        ".NET",
+        "Unity",
+        "REST APIs",
+        "WebGL",
+        "PixiJS",
+        "Typescript",
+        "AWS",
+        "SCSS",
+        "Angular",
+        "2D/3D",
+        "ThreeJS",
+        "Figma",
+        "Cypress"
+      ]
+    },
+    {
+      "position": "Senior Javascript Developer",
+      "organization": {
+        "name": "Microgaming",
+        "url": "https://www.microgaming.co.uk",
+        "logo": "/logo_microgaming.png"
+      },
+      "location": {
+        "city": "Douglas",
+        "country": "Isle of Man"
+      },
+      "period": {
+        "start": "Oct 2022",
+        "end": "Nov 2024"
+      },
+      "responsibilities": [
+        "Creating and maintaining in-house solutions to improve business processes",
+        "2IC to the Tech Lead. Providing insights into architecting several micro-services to improve performance, delivery and disaster recovery",
+        "Mentoring of juniors in tech and business acumen.",
+        "Service Desk Support",
+        "Desktop Support",
+        "Software Installation for Games Global Employees",
+        "Maintaining Power Automate Workflows",
+        "Maintenance of Customer Facing Applications",
+        "Studio Website Development and Maintenance",
+        "Project Management"
+      ],
+      "technologies": [
+        ".NET",
+        "SQL",
+        "Microsoft SQL Server",
+        "TypeScript",
+        "Angular",
+        "React",
+        "Docker",
+        "Azure DevOps",
+        "Shell Scripting",
+        "PHP",
+        "Back Office",
+        "IIS"
+      ]
+    },
+    {
+      "position": "Senior Javascript Developer",
+      "organization": {
+        "name": "Rank Interactive",
+        "url": "https://www.rank.com",
+        "logo": "/rank_interactive_logo.jpeg"
+      },
+      "location": {
+        "city": "Cape Town",
+        "country": "South Africa"
+      },
+      "period": {
+        "start": "Sep 2020",
+        "end": "Aug 2022"
+      },
+      "responsibilities": [
+        "Development and maintenance of the in-house cashier services on several Casinos and Bingo operators in the UK.",
+        "Responsible for capturing Player Card Details and integrating with payment systems such as VISA, PayPal and Barclays.",
+        "Our cashier systems also handle promoting bonuses and promotions to the player which they could redeem through the app",
+        "Our cashier app is built to withstand large amounts of traffic whilst implementing UI and UX best practices. On any given day, it handles approximately 80,000 transactions",
+        "Maintaining unit tests coupled with continuous integration pipelines"
+      ],
+      "technologies": [
+        ".NET",
+        "Angular",
+        "Typescript",
+        "Elastic Stack (ELK)",
+        "PHP",
+        "Docker",
+        "Node.js",
+        "CI/CD",
+        "Docker",
+        "Load testing",
+        "Nginx",
+        "E-Commerce"
+      ]
+    },
+    {
+      "position": "Intermediate Web Developer",
+      "organization": {
+        "name": "Digioutsource",
+        "url": "https://supergroup.com/companies/digi-outsource",
+        "logo": "/logo_digioutsource.webp"
+      },
+      "location": {
+        "city": "Cape Town",
+        "country": "South Africa"
+      },
+      "period": {
+        "start": "Feb 2019",
+        "end": "Aug 2020"
+      },
+      "responsibilities": [
+        "Updating and maintaining an in house CMS that serves a multinational casino base.",
+        "Mentoring colleagues and trainees on the business landscape as well as current best practices within our industry.",
+        "Rotational After hours support and Tech assistance.",
+        "2IC to the Team Lead and responsible for mentoring the junior / intermediate colleagues.",
+        "The CI/CD process leverages GitLabs Pipelines integrating tightly with Kubernetes"
+      ],
+      "technologies": [
+        ".NET",
+        "MongoDB",
+        "Elastic Stack (ELK)",
+        "Angular",
+        "Typescript",
+        "Postman",
+        "CI/CD",
+        "Docker",
+        "Node.js",
+        "Shell Script",
+        "Bash"
+      ]
+    },
+    {
+      "position": "Senior Web Developer",
+      "organization": {
+        "name": "Media24",
+        "url": "https://www.media24.com",
+        "logo": "/logo_media24.png"
+      },
+      "location": {
+        "city": "Cape Town",
+        "country": "South Africa"
+      },
+      "period": {
+        "start": "Mar 2015",
+        "end": "Dec 2018"
+      },
+      "responsibilities": [
+        "Develop and Maintain existing .Net MVC websites for the various media brands under the Media24 umbrella",
+        "Design and Develop WordPress Sites to promote the various media brands under the Media24 umbrella",
+        "Develop bespoke Themes and Plugins",
+        "Collaborate with Designers to bring their ideas to fruition",
+        "Mentoring Juniors and upskilling team members",
+        "Evaluate and provide solutions to security concerns",
+        "Manage the infrastructure and deployment of over 20 brands"
+      ],
+      "technologies": [
+        ".NET",
+        "MongoDB",
+        "API Design",
+        "WordPress",
+        "React",
+        "Typescript",
+        "Javascript",
+        "CI/CD",
+        "Docker",
+        "MySQL",
+        "SEO"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree_level": "Bachelor's",
+      "discipline": "Commerce",
+      "majors": "Information Systems",
+      "institution_name": "University of KwaZulu-Natal",
+      "location": {
+        "province": "KwaZulu-Natal",
+        "country": "South Africa"
+      },
+      "period": {
+        "start": "Jan 2008",
+        "end": "Dec 2012"
+      }
+    }
+  ],
+  "extra_skills_and_technologies": [
+    "Agile Development",
+    "Apache",
+    "CSS",
+    "Git",
+    "HTML5",
+    "Jest",
+    "Laravel",
+    "Mocha",
+    "REST",
+    "Miro",
+    "SAAS",
+    "Scrum",
+    "Storybook",
+    "System Design & Architecture",
+    "Vue",
+    "WebGL Slot Game Development",
+    "Website Development"
+  ],
+  "skills_from_work_experience_and_extra_skills": ["this gets generated, see compile-template.js"],
+  "social": {
+    "linkedin": "craigiswayne",
+    "github": "craigiswayne"
+  }
+}
