@@ -4,17 +4,17 @@ import {
   Route,
   useNavigate,
   useLocation,
-} from "react-router-dom";
-import { Button } from "./components/ui/button";
-import { Menu, X, Download } from "lucide-react";
-import { useState, useEffect } from "react";
-import { motion } from "motion/react";
-import { portfolioData } from "./data/portfolio";
-import GitHubCorner from "./components/GitHubCorner/GitHubCorner";
-import Footer from "./components/Footer";
-import { PortfolioPage } from "./pages/PortfolioPage";
-import { BlogListPage } from "./pages/BlogListPage";
-import { BlogPostPage } from "./pages/BlogPostPage";
+} from 'react-router-dom';
+import { Button } from './components/ui/button';
+import { Menu, X, Download } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
+import { portfolioData } from './data/portfolio';
+import GitHubCorner from './components/GitHubCorner/GitHubCorner';
+import Footer from './components/Footer';
+import { PortfolioPage } from './pages/PortfolioPage';
+import { BlogListPage } from './pages/BlogListPage';
+import { BlogPostPage } from './pages/BlogPostPage';
 
 function AppContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,17 +24,17 @@ function AppContent() {
   const navItems = portfolioData.navigation;
 
   const trackDownloadCV = () => {
-    if (window["gtag"] !== undefined) {
-      window["gtag"]("event", "button_click", {
-        event_category: "Engagement",
-        event_label: "Download Resume",
+    if (window['gtag'] !== undefined) {
+      window['gtag']('event', 'download_resume', {
+        event_category: 'Engagement',
+        event_label: 'Download Resume',
         value: 1,
       });
     }
   };
 
   // Determine if we're on a blog page
-  const isBlogPage = location.pathname.startsWith("/blog");
+  const isBlogPage = location.pathname.startsWith('/blog');
 
   // Scroll to top on route change
   useEffect(() => {
@@ -44,15 +44,15 @@ function AppContent() {
   // Smooth scroll function
   const scrollToSection = (targetId: string) => {
     // Handle blog navigation
-    if (targetId === "blog") {
-      navigate("/blog");
+    if (targetId === 'blog') {
+      navigate('/blog');
       setIsMenuOpen(false);
       return;
     }
 
     // If we're on blog page, navigate to home first
     if (isBlogPage) {
-      navigate("/");
+      navigate('/');
       setTimeout(() => {
         const element = document.getElementById(targetId);
         if (element) {
@@ -63,7 +63,7 @@ function AppContent() {
             elementPosition + window.pageYOffset - headerOffset;
           window.scrollTo({
             top: offsetPosition,
-            behavior: "smooth",
+            behavior: 'smooth',
           });
         }
       }, 100);
@@ -77,7 +77,7 @@ function AppContent() {
           elementPosition + window.pageYOffset - headerOffset;
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth",
+          behavior: 'smooth',
         });
       }
     }
@@ -87,10 +87,10 @@ function AppContent() {
 
   // Scroll to top function
   const scrollToTop = () => {
-    navigate("/");
+    navigate('/');
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
     setIsMenuOpen(false);
   };
@@ -106,7 +106,7 @@ function AppContent() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: 'easeOut',
       },
     },
   };
@@ -123,45 +123,45 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className='min-h-screen'>
       <GitHubCorner
         url={portfolioData.personal.socialLinks.github}
       />
       {/* Navigation Header */}
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b"
+        className='fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b'
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="flex items-center justify-between h-16">
+        <div className='container mx-auto px-4 max-w-6xl'>
+          <div className='flex items-center justify-between h-16'>
             <button
               onClick={scrollToTop}
-              className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
+              className='text-lg font-medium hover:text-primary transition-colors cursor-pointer'
             >
               {portfolioData.personal.name}
             </button>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className='hidden md:flex items-center gap-8'>
               {navItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.target)}
-                  className="text-sm hover:text-primary transition-colors cursor-pointer"
+                  className='text-sm hover:text-primary transition-colors cursor-pointer'
                 >
                   {item.label}
                 </button>
               ))}
-              <Button size="sm" asChild>
+              <Button size='sm' asChild>
                 <a
                   href={portfolioData.personal.cvPath}
                   download={portfolioData.personal.cvFileName}
-                  className="flex items-center gap-1"
+                  className='flex items-center gap-1'
                   onClick={() => trackDownloadCV()}
                 >
-                  <Download className="w-3 h-3" />
+                  <Download className='w-3 h-3' />
                   Download Resume
                 </a>
               </Button>
@@ -169,15 +169,15 @@ function AppContent() {
 
             {/* Mobile Menu Button */}
             <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
+              variant='ghost'
+              size='icon'
+              className='md:hidden'
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className="w-5 h-5" />
+                <X className='w-5 h-5' />
               ) : (
-                <Menu className="w-5 h-5" />
+                <Menu className='w-5 h-5' />
               )}
             </Button>
           </div>
@@ -185,23 +185,23 @@ function AppContent() {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <motion.div
-              className="md:hidden py-4 border-t"
+              className='md:hidden py-4 border-t'
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
+              animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
             >
               <motion.div
-                className="flex flex-col gap-4"
-                initial="hidden"
-                animate="visible"
+                className='flex flex-col gap-4'
+                initial='hidden'
+                animate='visible'
                 variants={staggerVariants}
               >
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.label}
                     onClick={() => scrollToSection(item.target)}
-                    className="text-sm hover:text-primary transition-colors text-left cursor-pointer"
+                    className='text-sm hover:text-primary transition-colors text-left cursor-pointer'
                     variants={{
                       hidden: { opacity: 0, x: -20 },
                       visible: { opacity: 1, x: 0 },
@@ -216,16 +216,16 @@ function AppContent() {
                     visible: { opacity: 1, x: 0 },
                   }}
                 >
-                  <Button size="sm" className="w-fit" asChild>
+                  <Button size='sm' className='w-fit' asChild>
                     <a
                       href={portfolioData.personal.cvPath}
                       download={
                         portfolioData.personal.cvFileName
                       }
-                      className="flex items-center gap-1"
+                      className='flex items-center gap-1'
                       onClick={() => trackDownloadCV()}
                     >
-                      <Download className="w-3 h-3" />
+                      <Download className='w-3 h-3' />
                       Download Resume
                     </a>
                   </Button>
@@ -239,13 +239,13 @@ function AppContent() {
       {/* Main Content */}
       <main>
         <Routes>
-          <Route path="/" element={<PortfolioPage />} />
-          <Route path="/blog" element={<BlogListPage />} />
+          <Route path='/' element={<PortfolioPage />} />
+          <Route path='/blog' element={<BlogListPage />} />
           <Route
-            path="/blog/:postId"
+            path='/blog/:postId'
             element={<BlogPostPage />}
           />
-          <Route path="*" element={<PortfolioPage />} />
+          <Route path='*' element={<PortfolioPage />} />
         </Routes>
       </main>
 
